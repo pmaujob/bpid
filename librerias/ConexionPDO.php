@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../bpid_conf/configuracion.php';
+require_once '/../bpid_conf/configuracion.php';
 
 class ConexionPDO
 {

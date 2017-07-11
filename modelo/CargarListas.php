@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../librerias/ConexionPDO.php';
+require_once '/../librerias/ConexionPDO.php';
 
 class CargarListas{
     
