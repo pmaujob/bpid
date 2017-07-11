@@ -1,0 +1,224 @@
+body {
+  background-color: #E6E6E7;
+}
+
+
+/*
+importando fuente para los menus
+*/
+
+
+/*@font-face {
+  font-family: "Gill Sans Mt";
+  src: url("../fonts/gill-sans-mt.ttf");
+  }*/
+
+.menuizquierda {
+  margin-left: -10px;
+  background-image: url('../img/menu_izquierdo.png');
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 760px;
+}
+
+#ulizquierdo {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 200px;
+}
+
+.opciones {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.opciones:hover {
+  transition-duration: 0.5s;
+  opacity: 0.5;
+}
+
+.row {
+  margin-bottom: 0px !important;
+}
+
+.opciones {
+  width: 168px;
+  height: 35px;
+  background-image: url("../img/opciones.png");
+  /*background-size: 165px auto;*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.opcionesli {
+  background-image: url("../img/opcionesli.png");
+}
+
+.imgul {
+  color: #FFFFFF;
+  font-family: 'Gill Sans MT';
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  font-size: 13px;
+  top: 5px;
+}
+
+.imgusuario {
+  height: 70px;
+  background-image: url("../img/usuario.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* para la imagen inferior del menu de lado izquierdo*/
+
+#nombresesion {
+  position: relative;
+  color: #FFFFFF;
+  text-align: center;
+  top: 100%;
+}
+
+
+/*para el nombre de usuario de la parte superior*/
+
+#nombresesionsup {
+  color: white;
+  position: relative;
+  float: left;
+}
+
+#fechasupederecha {
+  color: white;
+  float: right;
+}
+
+.barra {
+  line-height: 3.0;
+  background-color: #008643;
+  /*#86b440;*/
+  color: white;
+}
+
+.etiquetafrm {
+  width: 168px;
+  height: 35px;
+  background-image: url("../img/opcion2.png");
+  background-size: 165px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.textofrm {
+  position: relative;
+  font-family: 'Gill Sans MT';
+  text-align: center;
+  font-size: 13px;
+  top: 5px;
+}
+.side-nav
+{
+  background-color: #E6E6E7;
+}
+
+@media only screen and (max-width: 600px) {
+  .imgul {
+    position: relative;
+    top: -9px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 992px) {
+  .bajar {
+    position: relative;
+    margin-left: 2rem;
+    margin-top: 15px;
+  }
+  .opcionesbtn {
+    position: relative;
+    margin-left: 7rem;
+  }
+  .imgul {
+    position: relative;
+    top: -9px;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .bajar {
+    position: relative;
+    margin-left: 2rem;
+    margin-top: 1rem;
+  }
+   .bajarimagen {
+    position: relative;
+    margin-left: 20rem;
+    margin-top: 8rem;
+  }
+  .opcionesbtn {
+    position: relative;
+    margin-left: 4rem;
+  }
+}
+
+
+/*
+*
+* DISEÑO PARA EL FOOTER
+* 
+*/
+
+#footer {
+  position: relative;
+  margin-top: 2rem;
+  font-family: 'Gill Sans MT';
+  font-style: italic;
+  font-weight: bold;
+}
+
+
+/*titulo del formulario*/
+
+.titulofrm {
+  font-family: 'Gill Sans MT';
+  font-size: 22px;
+  
+   margin-top: 2px;
+  /*font-style: italic;
+  font-weight: bold;*/
+}
+
+.amarilla {
+  position: relative;
+  width: 210px;
+  height: 30px;
+  background-color: #FFCA04;
+  -webkit-transform: translate(0px, 0px) rotate(0deg) skew(-16deg, 0deg) scale(1, 1);
+  -moz-transform: translate(0px, 0px) rotate(0deg) skew(-16deg, 0deg) scale(1, 1);
+  -o-transform: translate(0px, 0px) rotate(0deg) skew(-16deg, 0deg) scale(1, 1);
+  -ms-transform: translate(0px, 0px) rotate(0deg) skew(-16deg, 0deg) scale(1, 1);
+  transform: translate(0px, 0px) rotate(0deg) skew(-16deg, 0deg) scale(1, 1);
+}
+
+#lblamarilla {
+  font-family: 'Gill Sans MT';
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  margin-top: -25px;
+  margin-left: 3px;
+  text-align: center;
+}
+
+#inicio, #radicacion, #viabilidad, #controlposterior, #actualizacion, #ejecucion, #consultas,#configuraciones {
+  display: none;
+}
+
+#inicioOculto, #radicacionOculto, #viabilidadOculto, #controlposteriorOculto, #actualizacionOculto, #ejecucionOculto, #consultasOculto ,#configuracionesOculto{
+  display: none;
+}
