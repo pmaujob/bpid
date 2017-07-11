@@ -84,20 +84,20 @@ function archivo_xml()
  		bloquear_pantalla();
  	var formData=new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
 										$.ajax({
-						  url:'../../modelo/consultas/consultar_existencia_xml.php',
+						  url:'../../modelo/consultar_existencia_xml.php',
 										type: "POST",
 										data: formData,
 										contentType:false,
 										processData:false,
 										success: function(existe)
 										{
-											//alert(existe)
+											alert(existe)
 											quitar_pantalla();
 									if(existe==0)//si el archivo existe
 									{
 
 											$.ajax({
-													 url:'../../modelo/consultas/consultar_basico_xml.php',
+													 url:'../../modelo/consultar_basico_xml.php',
 													type: "POST",
 													data: formData,
 													contentType:false,
