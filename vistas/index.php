@@ -19,6 +19,7 @@
 
 
 </head>
+<!-- comentaro prueba -->
 <body>
 	<div class="container-fluid">
 		<?php require_once "menu.php";?>
