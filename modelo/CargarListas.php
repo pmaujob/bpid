@@ -1,6 +1,6 @@
 <?php
 
-require_once 'ConexionPDO.php';
+require_once '../../librerias/ConexionPDO.php';
 
 class CargarListas{
     
@@ -8,7 +8,8 @@ class CargarListas{
         
         $consulta = 'select cod, des, tipo from get_lista_general() as ("cod" integer, "des" varchar, "tipo" varchar);';
         
-        $con = new ConexionPDO();
+       $con = new ConexionPDO();
+        $con->conectar("PG");
         $res = $con->consultar($consulta);
         $con->cerrarConexion();
         
@@ -21,6 +22,7 @@ class CargarListas{
         $consulta = 'select id, cod, des, estado from get_requisitos('.$fil.','.$cod.') as ("id" varchar, "cod" integer, "des" varchar, "estado" varchar);';
     
         $con = new ConexionPDO();
+        $con->conectar("PG");
         $res = $con->consultar($consulta);
         $con->cerrarConexion();
         
@@ -33,6 +35,7 @@ class CargarListas{
         $consulta = 'select id, cod, des, estado from get_sub_requisitos('.$fil.','.$cod.') as ("id" varchar, "cod" integer, "des" varchar, "estado" varchar);';
         
         $con = new ConexionPDO();
+        $con->conectar("PG");
         $res = $con->consultar($consulta);
         $con->cerrarConexion();
         

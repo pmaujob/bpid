@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('location:http://localhost/bpid/');
-} else {
+//if (!isset($_SESSION['usuario'])) {
+  //  header('location:http://localhost/bpid/');
+//} else {
     //  echo "Existe una sesion";
 
     ?>
@@ -238,5 +238,5 @@ echo strtoupper($_SESSION['usuario']); ?>
 			</div>
 		</div>
 
-<?php }
+<?php// }
 ?>
