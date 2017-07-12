@@ -10,23 +10,25 @@ spl_autoload_register('autoload');
 
 class ControladorArchivos{
 
-    private $ruta_proyecto;
-    private $nombre_archivo;
-    private $nombre_real;
-    private $numero_programa;
-    private $numero_proyecto;
+    private $rutaProyecto;
+    private $nombreArchivo;
+    private $nombreReal;
+    private $numeroPrograma;
+    private $numeroProyecto;
     private $mArchivos;
-    private $archivo_tempo;
+    private $archivoTempo;
+    private $codigoControl;
 
 
-    public function asignar($num_programa,$num_proyecto,$archivo_tempo)
+    public function asignar($num_programa,$num_proyecto,$archivoTempo)
     {
-       $this->ruta_proyecto="../archivos/proyectos/$num_proyecto";//carpeta 
-       $this->nombre_archivo=tildes($archivo_tempo['name']);
-       $this->nombre_real=$archivo_tempo['name'];
-       $this->numero_programa=$num_programa;
-       $this->numero_proyecto=$num_proyecto;
-       $this->archivo_tempo=$archivo_tempo;
+       $this->rutaProyecto="../archivos/proyectos/$num_proyecto";//carpeta 
+       $this->nombreArchivo=tildes($archivoTempo['name']);
+       $this->nombreReal=$archivoTempo['name'];
+       $this->numeroPrograma=$num_programa;
+       $this->numeroProyecto=$num_proyecto;
+       $this->archivoTempo=$archivoTempo;
+       $this->codigoControl=hash_file('md5',$archivoTempo['name']);
              
 
     }
@@ -36,11 +38,12 @@ class ControladorArchivos{
     
                     $this->mArchivos=new MArchivos();
                     return $this->mArchivos->ingresarArchivos(
-                                                    $this->ruta_proyecto,
-                                                    $this->nombre_archivo,
-                                                    $this->nombre_real,
-                                                    $this->numero_programa,
-                                                    $this->numero_proyecto);
+                                                    $this->rutaProyecto,
+                                                    $this->nombreArchivo,
+                                                    $this->nombreReal,
+                                                    $this->numeroPrograma,
+                                                    $this->numeroProyecto,
+                                                    $this->codigoControl);
                 
     
   }
@@ -50,13 +53,13 @@ public function moverArchivos()
 {
   try 
   {
-  if(!file_exists("$this->ruta_proyecto"))//si la carpeta del proceso no existe
+  if(!file_exists("$this->rutaProyecto"))//si la carpeta del proceso no existe
           {
-            mkdir($this->ruta_proyecto, 0777, true);
+            mkdir($this->rutaProyecto, 0777, true);
            }  //crea ruta_procso     
-          // echo  $this->ruta_proyecto;
-           $this->ruta_proyecto=$this->ruta_proyecto."/".$this->archivo_tempo['name'];
-            move_uploaded_file($this->archivo_tempo['tmp_name'],$this->ruta_proyecto);
+          // echo  $this->rutaProyecto;
+           $this->rutaProyecto=$this->rutaProyecto."/".$this->archivoTempo['name'];
+            move_uploaded_file($this->archivoTempo['tmp_name'],$this->rutaProyecto);
 
 
    }
@@ -74,9 +77,9 @@ public function moverArchivos()
 
         $num_programa=$_POST['frm_num_programa'];
         $num_proyecto=$_POST['frm_num_proyecto'];//numero de proyecto del XML
-        $archivo_tempo=$_FILES['frm_archivo'];//es la variable de archivos temporales
+        $archivoTempo=$_FILES['frm_archivo'];//es la variable de archivos temporales
         $archivos= new ControladorArchivos();
-        $archivos->asignar($num_programa,$num_proyecto,$archivo_tempo);
+        $archivos->asignar($num_programa,$num_proyecto,$archivoTempo);
         $archivos->moverArchivos();
         echo $archivos->insertarArchivos();
         

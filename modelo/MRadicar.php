@@ -5,14 +5,14 @@
 class MRadicar
 {
 
-    public con;
+    public $con;
     public $pdo=null;
    
    
     
 
     public function __construc(){
-        $this-con = new ConexionPDO();
+        $this->con = new ConexionPDO();
         $this->con = $this->conectar("PG");
       
         

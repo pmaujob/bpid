@@ -72,7 +72,7 @@ function archivo_xml()
 	var formData=new FormData($("#frm_radicar")[0]);  
  	var nombre_archivo=document.getElementById('frm_archivo').value;
  	var extension = (nombre_archivo.substring(nombre_archivo.lastIndexOf("."))).toLowerCase();
- 	if (extension!='.xml') { 
+ 	if (extension!=='.xml') { 
 					document.getElementById('d_error').innerHTML='<p>EL ARCHIVO DEBE TENER EXTENCION XML<p>';
 					$("#d_error").dialog("open");
 					//alert("DEBE SELECCIONAR UN ARCHIVO XML ANTES");
@@ -91,9 +91,9 @@ function archivo_xml()
 										processData:false,
 										success: function(existe)
 										{
-											alert(existe)
+											//alert(existe)
 											quitar_pantalla();
-									if(existe==0)//si el archivo existe
+									if(existe===0)//si el archivo existe
 									{
 
 											$.ajax({
@@ -177,14 +177,14 @@ function almacenar()
  	var cargo_responsable=document.getElementById('frm_cargo_responsable').value;
  	var direccion_responsable=document.getElementById('frm_dir_responsable').value;
  	var telefono_responsable=document.getElementById('frm_tel_responsable').value;
- 	if(telefono_responsable==""){telefono_responsable=-1}
+ 	if(telefono_responsable===""){telefono_responsable=-1;}
  	var cel_responsable=document.getElementById('frm_cel_responsable').value;
  	var correo_responsable=document.getElementById('frm_correo').value;
  	var id_usuario=document.getElementById('frm_id_usuario').value;
  	var nombre_usuario=document.getElementById('frm_nom_usuario').value;
  	var observaciones=document.getElementById('frm_observaciones').value;
  	observaciones=observaciones.trim();
- 	if(observaciones==""){observaciones=-1}
+ 	if(observaciones===""){observaciones=-1;}
  	var formData=new FormData($("#frm_radicar")[0]);  
  	var nombre_archivo=document.getElementById('frm_archivo').value;
  	
@@ -203,7 +203,7 @@ function almacenar()
             success:function(respuesta){
 				//alert(respuesta)
 				
-			if(respuesta==1){ 
+			if(respuesta===1){ 
 				var formData=new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
 										$.ajax({
 						  url:'../../controlador/CArchivos.php',

@@ -33,7 +33,7 @@ require_once '../librerias/ConexionPDO.php';
                 if($res->rowCount()){
                     while($res2 = $res->fetch(PDO::FETCH_OBJ)){
 
-                        echo '<tr><td>'.$res2->cod.'</td><td>'.$res2->num.'</td><td title="'.$res2->nombre.'">'.$res2->abr.'</td><td><a href="#" title="Ver Más"><div onclick="vercertificado('.$res2->cod.');"><img src="../../vistas/img/anadir.png"></div></a></td></tr>';
+                        echo '<tr><td>'.$res2->cod.'</td><t.d>'.$res2->num.'</td><td title="'.$res2->nombre.'">'.$res2->abr.'</td><td><a href="#" title="Ver Más"><div onclick="vercertificado('.$res2->cod.');"><img src="../../vistas/img/anadir.png"></div></a></td></tr>';
 
                     }
                 }else{

@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/wamp/www/bpid/librerias/ConexionPDO.php</file>
             <file>file:/C:/wamp/www/bpid/modelo/consultar_existencia_xml.php</file>
+            <file>file:/C:/wamp/www/bpid/vistas/formulariosDinamicos/frmListas.php</file>
+            <file>file:/C:/wamp/www/bpid/modelo/CargarListas.php</file>
         </group>
     </open-files>
 </project-private>

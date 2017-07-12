@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../bpid_conf/configuracion.php';
+
 
 class ConexionPDO
 {
@@ -14,21 +14,23 @@ class ConexionPDO
     
     private function conectarMySQL(){
 
-        $this->motor = MYS_MOTOR;
-        $this->user = MYS_USER;
-        $this->pass = MYS_PASS;
-        $this->host = MYS_HOST;
-        $this->db = MYS_DB;
+        $this->motor = 'mysql';
+        $this->user = 'postgres';
+        $this->pass = 'bpid2017';
+        $this->host = '181.225.96.71';
+        $this->db = 'bpid';
+
 
     }
 
     private function conectarPostgreSQL(){
 
-        $this->motor = PG_MOTOR;
-        $this->user = PG_USER;
-        $this->pass = PG_PASS;
-        $this->host = PG_HOST;
-        $this->db = PG_DB;
+        $this->motor ='pgsql';
+        $this->user = 'postgres';
+        $this->pass = 'bpid2017';
+        $this->host = '181.225.96.71';
+        $this->db = 'bpid';
+       
 
     }
 
