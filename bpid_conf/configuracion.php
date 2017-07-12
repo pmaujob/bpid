@@ -1,5 +1,5 @@
 <?php
-
+    
     define('PG_MOTOR','pgsql');
     define('PG_USER','postgres');
     define('PG_PASS','bpid2017');
@@ -11,5 +11,6 @@
     define('MYS_PASS','bpid2017');
     define('MYS_HOST','181.225.96.71');
     define('MYS_DB','bpid');
+    
     
 ?>

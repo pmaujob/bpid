@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 
+=======
+require_once '/../bpid_conf/configuracion.php';
+>>>>>>> c020899f14dabc3f01e9aee60766f21f070ab33b
 
 class ConexionPDO
 {

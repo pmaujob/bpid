@@ -1,7 +1,7 @@
 <?php
 
 require_once '../../librerias/ConexionPDO.php';
-    
+  
 class CargarRadicados{
 
     public static function getRadicados($datos){
