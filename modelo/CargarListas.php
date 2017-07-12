@@ -1,14 +1,14 @@
 <?php
 
-require_once '/../librerias/ConexionPDO.php';
+require_once '../../librerias/ConexionPDO.php';
 
 class CargarListas{
     
-    public static function getListaGeneral(){
+    public static function getListaGeneral($requerido){
         
-        $consulta = 'select cod, des, tipo from get_lista_general() as ("cod" integer, "des" varchar, "tipo" varchar);';
+        $consulta = 'select cod, des, tipo from get_lista_general('.$requerido.') as ("cod" integer, "des" varchar, "tipo" varchar);';
         
-       $con = new ConexionPDO();
+        $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
         $con->cerrarConexion();
