@@ -11,7 +11,7 @@
 
         <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
     </head>
-
+    
     <body onload="onLoadBody();">
 
         <div id="modal1" class="modal modal-fixed-footer">
