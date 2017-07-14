@@ -49,11 +49,29 @@ if($extension=="xml" or $extension=="XML")
 					
 				}	
 	$total= number_format($total, 0, '', '.'); 
-	$datos=$nombre_proyecto."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto;
+
+	//INFORMACION DE LOS OBJETIVOS ESPECIFICOS
+
+			$ob_especificos=array();
+			$jsonespecifico=array();
+			$deta=array();
+			$val1=0;
+			foreach ($datos->CentralProblem->Causes->Cause as $causa) 
+			{
+			$ob_especificos[]=utf8_encode((string)$causa->SpecificObjective->SpecificObjective);
+			$jsonespecifico[$val1]=array("Objetivo"=>$ob_especificos[$val1]);
+			$val1++;
+			}	
+		$json=json_encode($jsonespecifico);	
+		$items='{ "Items" :';
+		$json="'".$items.$json."}'";
+
+	$datos=$nombre_proyecto."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto."/".$json;
 	echo $datos;
 }
 else
 {
 	echo "EL ARCHIVO DEBE TENER EXTENCION XML";
 }
+//echo hash_file('md5',$_FILES['frm_archivo']['name']);
 ?>

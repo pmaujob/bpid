@@ -71,7 +71,10 @@ function archivo_xml()
 	var subprograma= document.getElementById('frm_subprograma');
 	var formData=new FormData($("#frm_radicar")[0]);  
  	var nombre_archivo=document.getElementById('frm_archivo').value;
+ 	var objetivos=document.getElementById('objetivos').value;
+// 	alert (objetivos);
  	var extension = (nombre_archivo.substring(nombre_archivo.lastIndexOf("."))).toLowerCase();
+
  	if (extension!=='.xml') { 
 					document.getElementById('d_error').innerHTML='<p>EL ARCHIVO DEBE TENER EXTENCION XML<p>';
 					$("#d_error").dialog("open");
@@ -91,9 +94,9 @@ function archivo_xml()
 										processData:false,
 										success: function(existe)
 										{
-											//alert(existe)
+											alert(existe)
 											quitar_pantalla();
-									if(existe===0)//si el archivo existe
+									if(existe==0)//si el archivo existe
 									{
 
 											$.ajax({
@@ -128,6 +131,8 @@ function archivo_xml()
 													valor.focus();
 													valor.value='';
 													valor.value=cadena[7];
+													document.getElementById('objetivos').value=cadena[9];
+													
 													}
 													});	
 
@@ -187,13 +192,16 @@ function almacenar()
  	if(observaciones===""){observaciones=-1;}
  	var formData=new FormData($("#frm_radicar")[0]);  
  	var nombre_archivo=document.getElementById('frm_archivo').value;
+ 	var objetivos=document.getElementById('objetivos').value;
  	
  	var value=numero_proyecto+'//'+nombre_proyecto +'//'+sector+'//'+localizacion+'//'+valor+'//'+eje+'//'+programa+'//'+subprograma+'//'+poai+'//'+
  	entidad_proponente+'//'+entidad_ejecutante+'//'+num_id_responsable+'//'+nom_responsable+'//'+cargo_responsable+'//'+
  	direccion_responsable+'//'+telefono_responsable+'//'+cel_responsable+'//'+correo_responsable+'//'+id_usuario+'//'+nombre_usuario+'//'+
- 	observaciones;
+ 	observaciones+'//'+objetivos;
+ 	alert(objetivos);
+ 	
  	 $('#modal1').modal('close');
- 	bloquear_pantalla();
+ //	bloquear_pantalla();
  	jQuery.ajax({	
 		    type: "POST",
               url:'../../controlador/c_radicar.php',
@@ -201,9 +209,9 @@ function almacenar()
 			data:{value:value},
 			
             success:function(respuesta){
-				//alert(respuesta)
+				alert(respuesta)
 				
-			if(respuesta===1){ 
+			if(respuesta==1){ 
 				var formData=new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
 										$.ajax({
 						  url:'../../controlador/CArchivos.php',
@@ -213,8 +221,8 @@ function almacenar()
 										processData:false,
 										success: function(datos)
 										{
-										quitar_pantalla();	
-										//alert(datos);
+										//quitar_pantalla();	
+										alert(datos);
 			 $('#modal1').modal('close');							
 			document.getElementById('d_ingreso').innerHTML='<p>EL NUMERO BPID ASIGNADO ES :'+ datos + '</p>';
 			$("#d_ingreso").dialog("open");
@@ -238,4 +246,5 @@ function almacenar()
 				  window.top.location ="../index.html";	
 			}
         });
+        
 }	

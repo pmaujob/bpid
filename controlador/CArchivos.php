@@ -73,6 +73,7 @@ public function moverArchivos()
 
 
 }
+
  if(!empty($_POST['frm_num_programa']) && !empty($_POST['frm_num_proyecto']) && !empty($_FILES['frm_archivo'])){
 
         $num_programa=$_POST['frm_num_programa'];
@@ -82,7 +83,7 @@ public function moverArchivos()
         $archivos->asignar($num_programa,$num_proyecto,$archivoTempo);
         $archivos->moverArchivos();
         echo $archivos->insertarArchivos();
-        
+       
         
   }
 
