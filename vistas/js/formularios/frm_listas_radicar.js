@@ -9,9 +9,7 @@ function onLoadBody() {
 
 }
 
-function buscarViabilidades() {
-
-    var datos;
+function buscarProyectos() {
 
     value = document.getElementById("input_buscar").value;
 
@@ -47,13 +45,71 @@ function mas(cod) {
         async: true,
         data: {value: value},
         success: function (respuesta) {
-            
+
             document.getElementById('collapsible').innerHTML = respuesta;
 
             $(document).ready(function () {
                 $('.collapsible').collapsible();
             });
 
+        },
+
+        error: function () {
+            alert("Error inesperado")
+            window.top.location = "../index.html";
+        }
+    });
+
+}
+
+function validar() {
+
+    if (document.getElementById('nOpcionesReq') == null) {
+        return;
+    }
+
+    var idRad = document.getElementById('idRad').value;
+    var nOpcionesReq = document.getElementById('nOpcionesReq').value;
+    var nOpcionesSub = document.getElementById('nOpcionesSub').value;
+
+    var reqData = new Array();
+    var subData = new Array();
+
+    for (var i = 1; i <= nOpcionesReq; i++) {
+        var opcionSeleccionada = document.getElementById('REQ' + i).value;
+        if (opcionSeleccionada != "NA") {            
+            var reqRow = new Array(3);
+            reqRow[0] = document.getElementById('REQH' + i).value;//id requisito
+            reqRow[1] = document.getElementById('REQ' + i).value;//opción seleccionada        
+            reqRow[2] = document.getElementById('REQOBS' + i).value;//observación
+            reqData.push(reqRow);
+        }
+    }
+
+    for (var i = 1; i <= nOpcionesSub; i++) {
+        var opcionSeleccionada = document.getElementById('SUB' + i).value;
+        if (opcionSeleccionada != "NA") {
+            var subRow = new Array(3);
+            subRow[0] = document.getElementById('SUBH' + i);//id subequisito
+            subRow[1] = document.getElementById('SUB' + i);//opcion seleccionada
+            subRow[2] = document.getElementById('SUBOBS' + i);//observacion
+            subData.push(subRow);
+        }
+    }
+
+    if (reqData.length == 0) {
+        return;
+    }
+        
+    jQuery.ajax({
+        type: 'POST',
+        url: '../../controlador/RegistrarListasChequeo.php',
+        async: true,
+        data: {idRad: idRad, reqData: reqData, subData: (subData.length > 0) ? subData : null},
+        success: function (respuesta) {
+
+            alert(respuesta);
+            
         },
 
         error: function () {
