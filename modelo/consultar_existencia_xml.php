@@ -9,7 +9,7 @@ require_once '../librerias/ConexionPDO.php';
 		public $rutaProyecto;
 		public $nombreArchivo;
 		public $extension;
-                public $codigoControl;
+         public $codigoControl;
         
         function __construct() {
             
@@ -24,7 +24,7 @@ require_once '../librerias/ConexionPDO.php';
 	       $this->rutaProyecto=$ruta_tmp;//carpeta 
 	       $this->nombreArchivo=$nombreArchivo;
 	       $this->extension=$extension;
-               $this->codigoControl=hash_file('md5',$ruta_tmp);
+           $this->codigoControl=sha1_file($ruta_tmp);
             
         }
         public function getXml(){
@@ -64,11 +64,14 @@ require_once '../librerias/ConexionPDO.php';
 		$trozos = explode(".",$nombreArchivo); 
 		$extension = end($trozos);
 		$consultaxml->asignar($ruta_tmp,$nombreArchivo,$extension);
-        echo $consultaxml->getXml();
+		echo $consultaxml->getXml();
+
+		//echo sha1_file($_FILES['frm_archivo']['tmp_name']);
        
-        
+      
+    
     }
 
- 
+   
     
     ?>

@@ -1,6 +1,6 @@
 <?php
 
-require_once '/../bpid_conf/configuracion.php';
+
 
 class ConexionPDO
 {
@@ -63,7 +63,7 @@ class ConexionPDO
             $query = $this->pdo->prepare($sql);
             $query->execute();
             if($res = $query->fetch(PDO::FETCH_OBJ))
-                $rt=$rt.$res->numero_completo;
+                $rt=$res->numero_completo;
                     
         }catch(PDOException $e){
             error_log( $e->getMessage() ); 
