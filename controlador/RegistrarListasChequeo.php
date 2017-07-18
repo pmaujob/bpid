@@ -66,7 +66,7 @@ if (!empty($_POST['idRad'])) {
     $registrar->setIdRad($_POST['idRad']);
     $registrar->setRequisitos($_POST['reqData']);
     $registrar->setSubRequisitos($_POST['subData']);
+
     echo $registrar->registrar();
-    
 }
 ?>

@@ -11,7 +11,7 @@
 
         <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
     </head>
-    
+
     <body onload="onLoadBody();">
 
         <div id="modal1" class="modal modal-fixed-footer">
@@ -23,7 +23,7 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <a id="modalg" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " onclick="validar();">Guardar cambios</a>
+                <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar();">Guardar cambios</a>
             </div>
         </div>
 
@@ -72,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </form>
 
     </body>

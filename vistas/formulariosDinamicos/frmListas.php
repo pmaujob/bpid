@@ -1,5 +1,4 @@
 <?php
-
 const req = 'REQ'; // id de la opción de la pregunta seleccionada
 const sub = 'SUB';
 const reqh = 'REQH'; // id de la pregunta
@@ -35,7 +34,6 @@ foreach ($listasRequeridas as $filar) {
                 $nOpcionesReq++;
                 ?>
                 <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
-                    <label><?php echo req . $filar1[1]; ?></label>
                     <span>
                         <?php echo $filar1[2]; ?>
                     </span>
@@ -47,7 +45,7 @@ foreach ($listasRequeridas as $filar) {
                             <option value="NO" <?php if ($filar1[3] == "NO") echo "selected"; ?>>No</option>
                             <option value="NA" <?php if ($filar1[3] == "NA") echo "selected"; ?>>No aplica</option>
                         </select>
-                    </p>
+                    </p>                   
                     <div class="row">
                         <form class="col s12">
                             <div class="row">
@@ -58,7 +56,13 @@ foreach ($listasRequeridas as $filar) {
                                 </div>
                             </div>
                         </form>
-                    </div>                
+                    </div>
+                    <p>
+                        <label>Elige un adjunto</label>
+                        <br>
+                        <input type="hidden" name="MAX_FILE_SIZE"/>
+                        <input id="<?php echo "reqArchivo" . $nOpcionesReq++; ?>" type="file" />
+                    </p>                     
                 </div>
                 <?php
             }
@@ -90,7 +94,6 @@ if (count($listasEspecificas) == 0) {
                                 $nOpcionesReq++;
                                 ?>
                                 <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
-                                    <label><?php echo req . $filae1[1]; ?></label>
                                     <span>
                                         <?php echo $filae1[2]; ?>
                                     </span>
@@ -132,7 +135,6 @@ if (count($listasEspecificas) == 0) {
                                                 $nOpcionesSub++;
                                                 ?>
                                                 <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
-                                                    <label><?php echo req . $filas[1]; ?></label>
                                                     <span>
                                                         <?php echo $filas[2]; ?>
                                                     </span>
@@ -178,4 +180,4 @@ if (count($listasEspecificas) == 0) {
 </li>
 <input type="hidden" id="nOpcionesReq" value="<?php echo $nOpcionesReq; ?>">
 <input type="hidden" id="nOpcionesSub" value="<?php echo $nOpcionesSub; ?>">
-<input type="hidden" id="idRad" value="<?php echo $fil;?>">
+<input type="hidden" id="idRad" value="<?php echo $fil; ?>">
