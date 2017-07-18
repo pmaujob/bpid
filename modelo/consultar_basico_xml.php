@@ -59,8 +59,8 @@ if($extension=="xml" or $extension=="XML")
 			$val1++;
 			}	
 			$jsonEs = CambiarFormatos::convertirAJsonItems($jsonespecifico);
-
-	$datos=$nombrep."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto."/".$jsonEs;
+			$jsonFu  = CambiarFormatos::convertirAJsonItems($informacion);
+	$datos=$nombrep."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto."/".$jsonEs."/".$jsonFu;
 	echo $datos;
 }
 else
