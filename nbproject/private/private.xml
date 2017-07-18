@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/bpid/vistas/js/formularios/frm_radicar.js</file>
-            <file>file:/C:/wamp/www/bpid/librerias/ConexionPDO.php</file>
-            <file>file:/C:/wamp/www/bpid/modelo/MRadicar.php</file>
-            <file>file:/C:/wamp/www/bpid/librerias/CambiarFormatos.php</file>
-            <file>file:/C:/wamp/www/bpid/modelo/consultar_basico_xml.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/controlador/RegistrarListasChequeo.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/formulariosDinamicos/frmListas.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/formularios/frm_listas_radicar.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/js/formularios/frm_listas_radicar.js</file>
         </group>
     </open-files>
 </project-private>

@@ -1,4 +1,5 @@
 <?php
+
 const req = 'REQ'; // id de la opción de la pregunta seleccionada
 const sub = 'SUB';
 const reqh = 'REQH'; // id de la pregunta
@@ -177,4 +178,4 @@ if (count($listasEspecificas) == 0) {
 </li>
 <input type="hidden" id="nOpcionesReq" value="<?php echo $nOpcionesReq; ?>">
 <input type="hidden" id="nOpcionesSub" value="<?php echo $nOpcionesSub; ?>">
-<input type="hidden" id="idRad" value="<?php echo $fil;?>" >
+<input type="hidden" id="idRad" value="<?php echo $fil;?>">

@@ -60,7 +60,7 @@ class MRadicar
    $resultado=$con->afectar($sql);
    $con->cerrarConexion();  
       
-        return $sql;
+        return $resultado;
       
    }
 }
