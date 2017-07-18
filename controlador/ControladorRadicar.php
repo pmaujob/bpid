@@ -42,7 +42,7 @@ class ControladorRadicar{
 	public function iniciar($valores)
 	{
 		
-		            if($this->validar_vacios($valores)){
+		            if($this->validarVacios($valores)){
                     $this->asignar ($valores);
                     if($this->validar())
                         $this->radicar=new MRadicar();
@@ -105,7 +105,7 @@ class ControladorRadicar{
 		$this->cod_secretaria=1;
 	}
         
-	public function validar_vacios($valores)
+	public function validarVacios($valores)
 	{
 		$cont=0;
 		foreach($valores as $campo)

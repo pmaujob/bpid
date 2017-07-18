@@ -94,7 +94,7 @@ function archivo_xml()
 										processData:false,
 										success: function(existe)
 										{
-											alert(existe)
+											//alert(existe)
 											quitar_pantalla();
 									if(existe==0)//si el archivo existe
 									{
@@ -107,6 +107,7 @@ function archivo_xml()
 													processData:false,
 													success: function(datos)
 													{
+													alert(datos)	
 													var cadena=datos.split("/");
 													nombre_proyecto.focus();
 													nombre_proyecto.value='';
@@ -204,7 +205,7 @@ function almacenar()
  //	bloquear_pantalla();
  	jQuery.ajax({	
 		    type: "POST",
-              url:'../../controlador/c_radicar.php',
+              url:'../../controlador/ControladorRadicar.php',
 			async: false,
 			data:{value:value},
 			
@@ -214,7 +215,7 @@ function almacenar()
 			if(respuesta==1){ 
 				var formData=new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
 										$.ajax({
-						  url:'../../controlador/CArchivos.php',
+						  url:'../../controlador/ControladorArchivos.php',
 										type: "POST",
 										data: formData,
 										contentType:false,
