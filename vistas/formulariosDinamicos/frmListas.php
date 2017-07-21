@@ -1,4 +1,14 @@
 <?php
+
+const req = 'REQ'; // id de la opción de la pregunta seleccionada
+const sub = 'SUB';
+const reqh = 'REQH'; // id de la pregunta
+const subh = 'SUBH';
+const rlista = 'RLIS'; // id de la lista
+const slista = 'SLIS';
+const reqObs = 'REQOBS'; // id de la observación
+const subObs = 'SUBOBS';
+
 require_once '../../modelo/CargarListas.php';
 
 $fil = $_POST['value'];
@@ -6,38 +16,50 @@ $fil = $_POST['value'];
 $listasRequeridas = CargarListas::getListaGeneral(1);
 $listasEspecificas = CargarListas::getListaGeneral(0);
 
-foreach ($listasRequeridas as $fila) {
+$nOpcionesReq = 0;
+$nOpcionesSub = 0;
+
+if (count($listasRequeridas) == 0) {
+    echo 'No hay listas requeridas registradas.';
+    return;
+}
+
+foreach ($listasRequeridas as $filar) {
     ?>
     <li>
-        <div class="collapsible-header" id="<?php echo $fila[0]; ?>" style="background: #ffca04"><?php echo ucwords($fila[1]); ?></div>
-        <div class="collapsible-body">
+        <div class="collapsible-header" style="background: #008643; color: #FFFFFF"><?php echo ucwords($filar[1]); ?></div>
+        <div id="<?php echo rlista . $filar[0]; ?>" class="collapsible-body">
             <?php
-            $requisitosListaGeneral = CargarListas::getRequisitos($fil, $fila[0]);
-            foreach ($requisitosListaGeneral as $fila2) {
+            $requisitosListaGeneral = CargarListas::getRequisitos($fil, $filar[0]);
+            foreach ($requisitosListaGeneral as $filar1) {
+                $nOpcionesReq++;
                 ?>
-                <span>
-                    <?php echo $fila2[2]; ?>
-                </span>
-                <p>
-                    <label>Elige una opción</label>
-                    <select id="<?php echo $fila2[0] . $fila2[1]; ?>" class="<?php echo $fila2[0]; ?> browser-default">
-                        <option value="SI" <?php if ($fila2[3] == "SI") echo "selected disabled"; ?>>Si</option>
-                        <option value="NO" <?php if ($fila2[3] == "NO") echo "selected"; ?>>No</option>
-                        <option value="NA" <?php if ($fila2[3] == "NA") echo "selected"; ?>>No aplica</option>
-                    </select>
-                </p>
-                <div class="row">
-                    <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">mode_edit</i>
-                                <label for="REQOBS<?php echo $fila2[1]; ?>">Observaciones:</label>
-                                <textarea id="REQOBS<?php echo $fila2[1]; ?>" class="REQOBS materialize-textarea"></textarea>
+                <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
+                    <label><?php echo req . $filar1[1]; ?></label>
+                    <span>
+                        <?php echo $filar1[2]; ?>
+                    </span>
+                    <p>
+                        <label>Elige una opción</label>
+                        <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filar1[1]; ?>">
+                        <select id="<?php echo req . $nOpcionesReq; ?>" class="browser-default">
+                            <option value="SI" <?php if ($filar1[3] == "SI") echo "selected disabled"; ?>>Si</option>
+                            <option value="NO" <?php if ($filar1[3] == "NO") echo "selected"; ?>>No</option>
+                            <option value="NA" <?php if ($filar1[3] == "NA") echo "selected"; ?>>No aplica</option>
+                        </select>
+                    </p>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">mode_edit</i>
+                                    <label for="<?php echo reqObs . $nOpcionesReq; ?>">Observaciones:</label>
+                                    <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea"></textarea>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>                
-
+                        </form>
+                    </div>                
+                </div>
                 <?php
             }
             ?>
@@ -45,87 +67,104 @@ foreach ($listasRequeridas as $fila) {
     </li>
     <?php
 }
-?>
+if (count($listasEspecificas) == 0) {
+    echo 'No hay listas específicas registradas.';
+    return;
+}
+?>    
 <li>
-    <div class="collapsible-header" id="2000" style="background: #4caf50"><?php echo "Lista Específica"; ?></div>
+    <div class="collapsible-header"><?php echo "Diligencie una Lista Específica"; ?></div>
     <div class="collapsible-body">
         <ul id="collapsible2" class="collapsible" data-collapsible="accordion">
             <?php
             foreach ($listasEspecificas as $filae) {
-
                 $op = $filae[2];
                 ?>
                 <li>
-                    <div class="collapsible-header" id="<?php echo $filae[0]; ?>"><?php echo ucwords($filae[1]); ?></div>
+                    <div class="collapsible-header" id="<?php echo rlista . $filae[0]; ?>"><?php echo ucwords($filae[1]); ?></div>
                     <div class="collapsible-body">                      
                         <?php
+                        $lista_requisitos = CargarListas::getRequisitos($fil, $filae[0]);
                         if ($op == "principal") {
-                            $lista_requisitos = CargarListas::getRequisitos($fil, $filae[0]);
-                            foreach ($lista_requisitos as $fila2) {
+                            foreach ($lista_requisitos as $filae1) {
+                                $nOpcionesReq++;
                                 ?>
-                                <span>
-                                    <?php echo $fila2[2]; ?>
-                                </span>
-                                <p>
-                                    <label>Elige una opción</label>
-                                    <select id="<?php echo $fila2[0] . $fila2[1]; ?>" class="<?php echo $fila2[0]; ?> browser-default">
-                                        <option value="SI" <?php if ($fila2[3] == "SI") echo "selected disabled"; ?>>Si</option>
-                                        <option value="NO" <?php if ($fila2[3] == "NO") echo "selected"; ?>>No</option>
-                                        <option value="NA" <?php if ($fila2[3] == "NA") echo "selected"; ?>>No aplica</option>
-                                    </select>
-                                </p>
-                                <div class="row">
-                                    <form class="col s12">
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <i class="material-icons prefix">mode_edit</i>
-                                                <label for="REQOBS<?php echo $fila2[1]; ?>">Observaciones:</label>
-                                                <textarea id="REQOBS<?php echo $fila2[1]; ?>" class="REQOBS materialize-textarea"></textarea>
+                                <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
+                                    <label><?php echo req . $filae1[1]; ?></label>
+                                    <span>
+                                        <?php echo $filae1[2]; ?>
+                                    </span>
+                                    <p>
+                                        <label>Elige una opción</label>
+                                        <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filae1[1]; ?>">
+                                        <select id="<?php echo req . $nOpcionesReq; ?>" class="<?php echo req; ?> browser-default">
+                                            <option value="SI" <?php if ($filae1[3] == "SI") echo "selected disabled"; ?>>Si</option>
+                                            <option value="NO" <?php if ($filae1[3] == "NO") echo "selected"; ?>>No</option>
+                                            <option value="NA" <?php if ($filae1[3] == "NA") echo "selected"; ?>>No aplica</option>
+                                        </select>
+                                    </p>
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <i class="material-icons prefix">mode_edit</i>
+                                                    <label for="<?php echo reqObs . $nOpcionesReq; ?>">Observaciones:</label>
+                                                    <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea"></textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                                 <?php
                             }
                         } else if ($op == "sub") {
-                            $lista_subrequisitos = CargarListas::getSubRequisitos($fil, $filae[0]);
                             ?>
                             <ul id="collapsible4" class="collapsible" data-collapsible="accordion">
-
                                 <?php
-                                foreach ($lista_subrequisitos as $fila3) {
+                                foreach ($lista_requisitos as $filae2) {
+                                    $lista_subrequisitos = CargarListas::getSubRequisitos($fil, $filae2[1]);
                                     ?>
-                                    <li>
-                                        <div class="collapsible-header" id="<?php echo $fila2[0]; ?>"><?php echo $fila2[2]; ?></div>
+                                    <li>                                    
+                                        <div class="collapsible-header" id="<?php echo slista . $filae2[1]; ?>"><?php echo $filae2[2]; ?></div>
                                         <div class="collapsible-body">
-                                            <span>
-                                                <?php echo $fila3[2]; ?>
-                                            </span>
-                                            <p>
-                                                <label>Elige una opción</label>
-                                                <select id="<?php echo $fila3[0] . $fila3[1]; ?>" class="<?php echo $fila3[0]; ?> browser-default">
-                                                    <option value="SI" <?php if ($fila3[3] == "SI") echo "selected disabled"; ?>>Si</option>
-                                                    <option value="NO" <?php if ($fila3[3] == "NO") echo "selected"; ?>>No</option>
-                                                    <option value="NA" <?php if ($fila3[3] == "NA") echo "selected"; ?>>No aplica</option>
-                                                </select>
-                                            </p>
-                                            <div class="row">
-                                                <form class="col s12">
+                                            <?php
+                                            foreach ($lista_subrequisitos as $filas) {
+                                                $nOpcionesSub++;
+                                                ?>
+                                                <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
+                                                    <label><?php echo req . $filas[1]; ?></label>
+                                                    <span>
+                                                        <?php echo $filas[2]; ?>
+                                                    </span>
+                                                    <p>
+                                                        <label>Elige una opción</label>
+                                                        <input id="<?php echo subh . $nOpcionesSub; ?>" type="hidden" value="<?php echo $filas[1]; ?>">
+                                                        <select id="<?php echo sub . $nOpcionesSub; ?>" class="<?php echo sub; ?> browser-default">
+                                                            <option value="SI" <?php if ($filas[3] == "SI") echo "selected disabled"; ?>>Si</option>
+                                                            <option value="NO" <?php if ($filas[3] == "NO") echo "selected"; ?>>No</option>
+                                                            <option value="NA" <?php if ($filas[3] == "NA") echo "selected"; ?>>No aplica</option>
+                                                        </select>
+                                                    </p>
                                                     <div class="row">
-                                                        <div class="input-field col s12">
-                                                            <i class="material-icons prefix">mode_edit</i>
-                                                            <label for="SUBOBS<?php echo $fila3[1]; ?>">Observaciones:</label>
-                                                            <textarea id="SUBOBS<?php echo $fila3[1]; ?>" class="SUBOBS materialize-textarea"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>                
+                                                        <form class="col s12">
+                                                            <div class="row">
+                                                                <div class="input-field col s12">
+                                                                    <i class="material-icons prefix">mode_edit</i>
+                                                                    <label for="<?php echo subObs . $nOpcionesSub; ?>">Observaciones:</label>
+                                                                    <textarea id="<?php echo subObs . $nOpcionesSub; ?>" class="<?php echo subObs; ?> materialize-textarea"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>                
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
                                     </li>
-                                    <?php
-                                }
-                                ?>
-                            </ul>
+                                <?php }
+                                ?>                            
+                            </ul> 
                             <?php
                         }
                         ?>   
@@ -133,7 +172,10 @@ foreach ($listasRequeridas as $fila) {
                 </li>
                 <?php
             }
-            ?> 
+            ?>
         </ul>       
     </div>
 </li>
+<input type="hidden" id="nOpcionesReq" value="<?php echo $nOpcionesReq; ?>">
+<input type="hidden" id="nOpcionesSub" value="<?php echo $nOpcionesSub; ?>">
+<input type="hidden" id="idRad" value="<?php echo $fil;?>">

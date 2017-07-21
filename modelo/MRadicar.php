@@ -6,7 +6,7 @@ class MRadicar
 {
 
     public $con;
-    public $pdo=null;
+   
    
    
     
@@ -45,16 +45,20 @@ class MRadicar
                                     $observaciones,
                                     $cod_usuario_ingreso,
                                     $cod_secretaria,
-                                    $cod_activacion)
+                                    $cod_activacion,
+                                    $objetivosEspecificos)
    {
 
     $sql="select from ing_radicacion($cod_activacion,$cod_usuario_ingreso,'$numero_proyecto','$sector','$localizacion','$valor',
                                     '$programa','$subprograma',$poai,'$entidad_proponente','$entidad_ejecutante','$num_id_responsable',
-                                    '$nom_responsable','$cargo_responsable','$direccion_responsable','$telefono_responsable','$cel_responsable','$correo_responsable','$id_usuario','$nombre_usuario','$observaciones',$cod_usuario_ingreso,'$nombre_proyecto','$eje',$cod_secretaria)";
+                                    '$nom_responsable','$cargo_responsable','$direccion_responsable','$telefono_responsable','$cel_responsable','$correo_responsable','$id_usuario','$nombre_usuario','$observaciones',$cod_usuario_ingreso,'$nombre_proyecto','$eje',$cod_secretaria,$objetivosEspecificos)";
      
-   $con=new ConexionPDO();  
+   
+   
+   $con = new ConexionPDO();
+   $con->conectar("PG");
    $resultado=$con->afectar($sql);
-  $con->cerrarConexion();  
+   $con->cerrarConexion();  
       
         return $resultado;
       

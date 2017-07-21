@@ -23,7 +23,7 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Guardar cambios</a>
+                <a id="modalg" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " onclick="validar();">Guardar cambios</a>
             </div>
         </div>
 
@@ -49,11 +49,11 @@
                                     <div class="input-field col s12 m12 l12">
                                         <div class="opcionesbtn">
                                             <div class="file-field input-field">
-                                                <div class="btn" onclick="buscarViabilidades('1');">
+                                                <div class="btn" onclick="buscarProyectos();">
                                                     <span>Buscar proyecto</span>
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarViabilidades();">
+                                                    <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos();">
                                                 </div>
                                             </div>
                                             <div class="descripcion">&nbsp;&nbsp;&nbsp;Realiza la búsqueda por numero o nombre del proyecto</div>
@@ -62,8 +62,6 @@
                                 </div>
 
                                 <div id="resultado" class="row">
-
-
 
                                 </div>
 

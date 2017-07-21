@@ -18,6 +18,8 @@
         <div id="d_ingreso" title="INFORMACION"></div>
         <?php require_once '../menu.php'; ?>
         <form id='frm_radicar' name='frm_radicar' onSubmit="return false"  enctype="multipart/form-data">
+          
+             <input id="objetivos" name="objetivos" type="hidden" value="" />
             <div class="col s12 m11 l9">
                 <div class="bajar">
                     <div class="container-fluid">
