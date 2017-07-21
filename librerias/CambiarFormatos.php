@@ -1,6 +1,4 @@
-
 <?php
-
 class CambiarFormatos {
 
     public static function cambiarFecha($fecha) {

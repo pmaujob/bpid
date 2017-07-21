@@ -1,5 +1,6 @@
 <?php
-$ruta_tmp=	  $_FILES['frm_archivo']['tmp_name'];//ruta temporal del archivo
+require '../librerias/CambiarFormatos.php';
+$ruta_tmp=$_FILES['frm_archivo']['tmp_name'];//ruta temporal del archivo
 $nombre=  $_FILES['frm_archivo']['name'];//verificar si el nombre esta bn escrito
 $ruta=$ruta_tmp;
 $trozos = explode(".", $nombre); 
@@ -7,21 +8,21 @@ $extension = end($trozos); //obtener la extencion del archivo
 if($extension=="xml" or $extension=="XML")
 {
 	$datos=simplexml_load_file($ruta);
-	$nombre_proyecto=(string)utf8_decode($datos->Name);
-	$nombre_proyecto=strtoupper(utf8_encode($nombre_proyecto));
+	$nombrep=(string)utf8_decode($datos->Name);
+	$nombrep=ltrim(utf8_encode($nombrep));
 	$numero_proyecto=utf8_decode($datos->Id);
 	$sector=(string)utf8_decode($datos->Sector->Description);
-	$sector=strtoupper(utf8_encode($sector));
+	$sector=utf8_encode($sector);
 	$departamento=(string)utf8_decode($datos->Localizations->Localization[1]->Department->Name);
-	$departamento=strtoupper(utf8_encode($departamento));
+	$departamento=utf8_encode($departamento);
 	$municipio=(string)utf8_decode($datos->Localizations->Localization[1]->SpecificLocalization);
-	$municipio=strtoupper(utf8_encode($municipio));
+	$municipio=utf8_encode($municipio);
 	$eje=(string)utf8_decode($datos->PublicationContribution->Strategy);
-	$eje=strtoupper(utf8_encode($eje));
+	$eje=utf8_encode($eje);
 	$programa=(string)utf8_decode($datos->PublicationContribution->ProgramDescription);
-	$programa=strtoupper(utf8_encode($programa));
+	$programa=utf8_encode($programa);
 	$subprograma=(string)utf8_decode($datos->FundingSource->ExpenseType->Description);
-	$subprograma=strtoupper(utf8_encode($subprograma));
+	$subprograma=utf8_encode($subprograma);
 	//OBTENER VALOR DEL PROYECTO SUMANDO LAS ACTIVIDADES
 	$monto=array();
 	$detalle=array();
@@ -29,14 +30,11 @@ if($extension=="xml" or $extension=="XML")
 	$indice=0;
 	$val=0;
 	foreach ($datos->FundingSource->Sources->Source as $tipo) 
-				{
-					
+			{
 				$detalle[]=utf8_decode((string)$tipo->ResourceType->Description);
 				//echo $a;
-				
 				foreach ($datos->FundingSource->Sources->Source[$indice]->SourceProgrammings->SourceProgramming as $valores)
 				{
-					
 					$monto[]=(string)$valores->Amount;
 					$total=$total + $monto[$val];
 					$periodo[]=(string)$valores->Period;
@@ -45,9 +43,7 @@ if($extension=="xml" or $extension=="XML")
 				$val++;
 				}
 				$indice++;	
-			
-					
-				}	
+			}	
 	$total= number_format($total, 0, '', '.'); 
 
 	//INFORMACION DE LOS OBJETIVOS ESPECIFICOS
@@ -62,11 +58,9 @@ if($extension=="xml" or $extension=="XML")
 			$jsonespecifico[$val1]=array("Objetivo"=>$ob_especificos[$val1]);
 			$val1++;
 			}	
-		$json=json_encode($jsonespecifico);	
-		$items='{ "Items" :';
-		$json="'".$items.$json."}'";
-
-	$datos=$nombre_proyecto."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto."/".$json;
+			$jsonEs = CambiarFormatos::convertirAJsonItems($jsonespecifico);
+			$jsonFu  = CambiarFormatos::convertirAJsonItems($informacion);
+	$datos=$nombrep."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto."/".$jsonEs."/".$jsonFu;
 	echo $datos;
 }
 else
