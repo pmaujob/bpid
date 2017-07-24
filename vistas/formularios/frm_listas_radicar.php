@@ -14,18 +14,20 @@
 
     <body onload="onLoadBody();">
 
-        <div id="modal1" class="modal modal-fixed-footer">
-            <div class="modal-content">
-                <h4>Lista de opciones</h4>
-                <p>Selecciona los items y agregue observaciones si asi lo desea.</p>
-                <ul id="collapsible" class="collapsible" data-collapsible="accordion">
+        <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
+            <div id="modal1" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Lista de opciones</h4>
+                    <p>Seleccione los items y agregue observaciones si así lo desea.</p>
+                    <ul id="collapsible" class="collapsible" data-collapsible="accordion">
 
-                </ul>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar();">Guardar cambios</a>
+                </div>
             </div>
-            <div class="modal-footer">
-                <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar();">Guardar cambios</a>
-            </div>
-        </div>
+        </form>
 
         <div id="d_error" title="ALERTA"></div>
         <div id="d_ingreso" title="INFORMACION"></div>
@@ -56,7 +58,7 @@
                                                     <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos();">
                                                 </div>
                                             </div>
-                                            <div class="descripcion">&nbsp;&nbsp;&nbsp;Realiza la búsqueda por numero o nombre del proyecto</div>
+                                            <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por numero o nombre del proyecto</div>
                                         </div>
                                     </div>
                                 </div>

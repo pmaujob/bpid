@@ -7,10 +7,18 @@ const rlista = 'RLIS'; // id de la lista
 const slista = 'SLIS';
 const reqObs = 'REQOBS'; // id de la observación
 const subObs = 'SUBOBS';
+const reqFile = 'REQFILE'; //id de los archivos adjuntos
+const subFile = 'SUBFILE';
+const reqFilePre = 'REQFILEPRE'; //id del hidden perteneciente a los archivos para guardar id pregunta
+const subFilePre = 'SUBFILEPRE';
+const reqFileOb = 'REQFILEOB'; //id del hidden perteneciente a los archivos para validar si son obligatorios o no
+const subFileOb = 'SUBFILEOB';
 
 require_once '../../modelo/CargarListas.php';
 
 $fil = $_POST['value'];
+$bpid = $_POST['bpid'];
+$numProyecto = $_POST['numProyecto'];
 
 $listasRequeridas = CargarListas::getListaGeneral(1);
 $listasEspecificas = CargarListas::getListaGeneral(0);
@@ -35,15 +43,15 @@ foreach ($listasRequeridas as $filar) {
                 ?>
                 <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
                     <span>
-                        <?php echo $filar1[2]; ?>
+                        <?php echo $filar1[1]; ?>
                     </span>
                     <p>
-                        <label>Elige una opción</label>
-                        <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filar1[1]; ?>">
+                        <label>Elija una opción</label>
+                        <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filar1[0]; ?>">
                         <select id="<?php echo req . $nOpcionesReq; ?>" class="browser-default">
-                            <option value="SI" <?php if ($filar1[3] == "SI") echo "selected disabled"; ?>>Si</option>
-                            <option value="NO" <?php if ($filar1[3] == "NO") echo "selected"; ?>>No</option>
-                            <option value="NA" <?php if ($filar1[3] == "NA") echo "selected"; ?>>No aplica</option>
+                            <option value="SI" <?php if ($filar1[2] == "SI") echo "selected disabled"; ?>>Si</option>
+                            <option value="NO" <?php if ($filar1[2] == "NO") echo "selected"; ?>>No</option>
+                            <option value="NA" <?php if ($filar1[2] == "NA") echo "selected"; ?>>No aplica</option>
                         </select>
                     </p>                   
                     <div class="row">
@@ -58,10 +66,11 @@ foreach ($listasRequeridas as $filar) {
                         </form>
                     </div>
                     <p>
-                        <label>Elige un adjunto</label>
+                        <label>Elija un adjunto</label>
                         <br>
-                        <input type="hidden" name="MAX_FILE_SIZE"/>
-                        <input id="<?php echo "reqArchivo" . $nOpcionesReq++; ?>" type="file" />
+                        <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
+                        <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filar1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
+                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
                     </p>                     
                 </div>
                 <?php
@@ -95,15 +104,15 @@ if (count($listasEspecificas) == 0) {
                                 ?>
                                 <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
                                     <span>
-                                        <?php echo $filae1[2]; ?>
+                                        <?php echo $filae1[1]; ?>
                                     </span>
                                     <p>
-                                        <label>Elige una opción</label>
-                                        <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filae1[1]; ?>">
+                                        <label>Elija una opción</label>
+                                        <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filae1[0]; ?>">
                                         <select id="<?php echo req . $nOpcionesReq; ?>" class="<?php echo req; ?> browser-default">
-                                            <option value="SI" <?php if ($filae1[3] == "SI") echo "selected disabled"; ?>>Si</option>
-                                            <option value="NO" <?php if ($filae1[3] == "NO") echo "selected"; ?>>No</option>
-                                            <option value="NA" <?php if ($filae1[3] == "NA") echo "selected"; ?>>No aplica</option>
+                                            <option value="SI" <?php if ($filae1[2] == "SI") echo "selected disabled"; ?>>Si</option>
+                                            <option value="NO" <?php if ($filae1[2] == "NO") echo "selected"; ?>>No</option>
+                                            <option value="NA" <?php if ($filae1[2] == "NA") echo "selected"; ?>>No aplica</option>
                                         </select>
                                     </p>
                                     <div class="row">
@@ -117,6 +126,13 @@ if (count($listasEspecificas) == 0) {
                                             </div>
                                         </form>
                                     </div>
+                                    <p>
+                                        <label>Elija un adjunto</label>
+                                        <br>
+                                        <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filae1[0]; ?>" />
+                                        <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filae1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
+                                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
+                                    </p>
                                 </div>
                                 <?php
                             }
@@ -125,10 +141,10 @@ if (count($listasEspecificas) == 0) {
                             <ul id="collapsible4" class="collapsible" data-collapsible="accordion">
                                 <?php
                                 foreach ($lista_requisitos as $filae2) {
-                                    $lista_subrequisitos = CargarListas::getSubRequisitos($fil, $filae2[1]);
+                                    $lista_subrequisitos = CargarListas::getSubRequisitos($fil, $filae2[0]);
                                     ?>
                                     <li>                                    
-                                        <div class="collapsible-header" id="<?php echo slista . $filae2[1]; ?>"><?php echo $filae2[2]; ?></div>
+                                        <div class="collapsible-header" id="<?php echo slista . $filae2[0]; ?>"><?php echo $filae2[1]; ?></div>
                                         <div class="collapsible-body">
                                             <?php
                                             foreach ($lista_subrequisitos as $filas) {
@@ -136,15 +152,15 @@ if (count($listasEspecificas) == 0) {
                                                 ?>
                                                 <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
                                                     <span>
-                                                        <?php echo $filas[2]; ?>
+                                                        <?php echo $filas[1]; ?>
                                                     </span>
                                                     <p>
-                                                        <label>Elige una opción</label>
-                                                        <input id="<?php echo subh . $nOpcionesSub; ?>" type="hidden" value="<?php echo $filas[1]; ?>">
+                                                        <label>Elija una opción</label>
+                                                        <input id="<?php echo subh . $nOpcionesSub; ?>" type="hidden" value="<?php echo $filas[0]; ?>">
                                                         <select id="<?php echo sub . $nOpcionesSub; ?>" class="<?php echo sub; ?> browser-default">
-                                                            <option value="SI" <?php if ($filas[3] == "SI") echo "selected disabled"; ?>>Si</option>
-                                                            <option value="NO" <?php if ($filas[3] == "NO") echo "selected"; ?>>No</option>
-                                                            <option value="NA" <?php if ($filas[3] == "NA") echo "selected"; ?>>No aplica</option>
+                                                            <option value="SI" <?php if ($filas[2] == "SI") echo "selected disabled"; ?>>Si</option>
+                                                            <option value="NO" <?php if ($filas[2] == "NO") echo "selected"; ?>>No</option>
+                                                            <option value="NA" <?php if ($filas[2] == "NA") echo "selected"; ?>>No aplica</option>
                                                         </select>
                                                     </p>
                                                     <div class="row">
@@ -157,7 +173,14 @@ if (count($listasEspecificas) == 0) {
                                                                 </div>
                                                             </div>
                                                         </form>
-                                                    </div>                
+                                                    </div>
+                                                    <p>
+                                                        <label>Elija un adjunto</label>
+                                                        <br>
+                                                        <input type="hidden" id="<?php echo subFilePre . $nOpcionesSub; ?>" value="<?php echo $filas[0]; ?>" />
+                                                        <input type="hidden" id="<?php echo subFileOb . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>" /><!--saber si el adjunto es obligatorio-->
+                                                        <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
+                                                    </p>
                                                 </div>
                                                 <?php
                                             }
@@ -181,3 +204,5 @@ if (count($listasEspecificas) == 0) {
 <input type="hidden" id="nOpcionesReq" value="<?php echo $nOpcionesReq; ?>">
 <input type="hidden" id="nOpcionesSub" value="<?php echo $nOpcionesSub; ?>">
 <input type="hidden" id="idRad" value="<?php echo $fil; ?>">
+<input type="hidden" id="bpid" value="<?php echo $bpid; ?>">
+<input type="hidden" id="numProyecto" value="<?php echo $numProyecto;?>">

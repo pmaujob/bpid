@@ -8,7 +8,13 @@ class CargarRadicados{
         
         $datos = "'".$datos."'";
 
-        $consulta = 'select cod, num, nombre, abr, id from get_radicados('.$datos.') as ("cod" integer, "num" varchar, "nombre" varchar, "abr" varchar, "id" varchar);';
+        $consulta = 'select cod, '//0
+                . 'num, '//1
+                . 'nombre, '//2
+                . 'abr, '//3
+                . 'id, '//4
+                . 'nump '//5
+                . 'from get_radicados('.$datos.') as ("cod" integer, "num" varchar, "nombre" varchar, "abr" varchar, "id" varchar, "nump" varchar);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");
