@@ -1,6 +1,7 @@
 <?php
 
-require_once './ConexionPDO.php';
+
+require_once '../librerias/ConexionPDO.php'
 
     //session_start();
     
@@ -11,6 +12,7 @@ require_once './ConexionPDO.php';
         function __construct() {
             
             $this->con = new ConexionPDO();
+            $this->con->conectar("PG");
             
         }
         

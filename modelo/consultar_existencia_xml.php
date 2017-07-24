@@ -1,5 +1,10 @@
 <?php
 require_once '../librerias/ConexionPDO.php';
+include_once '../librerias/SessionVars.php';
+$sess=new SessionVars();
+$sess->init();
+if($sess->exist() && $sess->varExist('cedula'))
+{
 
     //session_start();
     
@@ -9,7 +14,7 @@ require_once '../librerias/ConexionPDO.php';
 		public $rutaProyecto;
 		public $nombreArchivo;
 		public $extension;
-         public $codigoControl;
+        public $codigoControl;
         
         function __construct() {
             
@@ -32,7 +37,8 @@ require_once '../librerias/ConexionPDO.php';
 			{	
 				$datos=simplexml_load_file($this->rutaProyecto);
 				$numero_proyecto=utf8_decode($datos->Id);
-				$consulta="select cod_radicacion as numero from radicacion where num_proyecto='$numero_proyecto' and cod_activacion=1";
+				$this->codigoControl=sha1_file($this->rutaProyecto);
+				 $consulta="select hash_num as numero from archivos where hash_num='$this->codigoControl'";
 				    	try{
 					$res=$this->con->consultar($consulta);
                                       
@@ -68,10 +74,13 @@ require_once '../librerias/ConexionPDO.php';
 
 		//echo sha1_file($_FILES['frm_archivo']['tmp_name']);
        
-      
-    
-    }
-
+     }
    
-    
     ?>
+
+    <?php
+}
+else {
+    header('http://'.$_SERVER['SERVER_NAME']);
+}
+?>

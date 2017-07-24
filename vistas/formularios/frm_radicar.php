@@ -1,4 +1,10 @@
-
+<?php
+require_once '../../librerias/SessionVars.php';
+$sess=new SessionVars();
+$sess->init();
+if($sess->exist() && $sess->varExist('cedula'))
+{
+?>
 
 <!DOCTYPE html>
 
@@ -321,3 +327,10 @@
 
     </body>
 </html>
+
+<?php
+}
+else {
+    header('http://'.$_SERVER['SERVER_NAME']);
+}
+?>

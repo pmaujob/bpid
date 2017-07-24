@@ -106,7 +106,7 @@ function archivo_xml()
 													processData:false,
 													success: function(datos)
 													{
-												//	alert(datos)	
+													//alert(datos)	
 													var cadena=datos.split("/");
 													nombre_proyecto.focus();
 													nombre_proyecto.value='';
@@ -222,10 +222,10 @@ function almacenar()
 										processData:false,
 										success: function(datos)
 										{
-										//quitar_pantalla();	
-										alert(datos);
+										quitar_pantalla();	
+										//alert(datos);
 			 $('#modal1').modal('close');							
-			document.getElementById('d_ingreso').innerHTML='<p>EL NUMERO BPID ASIGNADO ES :'+ datos + '</p>';
+			document.getElementById('d_ingreso').innerHTML='<p>EL NUMERO BPID ASIGNADO ES '+ datos + '</p>';
 			$("#d_ingreso").dialog("open");
 
 																}

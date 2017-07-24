@@ -1,6 +1,12 @@
 <?php
 
 require_once "funciones.php";
+include_once '../librerias/SessionVars.php';
+
+$sess=new SessionVars();
+$sess->init();
+if($sess->exist() && $sess->varExist('cedula'))
+{
 function autoload($clase)
 {
    require_once "../modelo/" . $clase . ".php";
@@ -28,7 +34,7 @@ class ControladorArchivos{
        $this->numeroPrograma=$num_programa;
        $this->numeroProyecto=$num_proyecto;
        $this->archivoTempo=$archivoTempo;
-       $this->codigoControl=hash_file('md5',$archivoTempo['tmp_name']);
+       $this->codigoControl=sha1_file($archivoTempo['tmp_name']);
              
 
     }
@@ -84,9 +90,12 @@ public function moverArchivos()
         $archivos->moverArchivos();
         echo $archivos->insertarArchivos();
        
-        
-  }
+      }
 
-
-
+?>
+ <?php
+}
+else {
+    header('http://'.$_SERVER['SERVER_NAME']);
+}
 ?>

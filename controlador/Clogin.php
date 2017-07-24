@@ -47,6 +47,7 @@ class CLogin {
     public function setSession(){
         
         $sess = new SessionVars();
+        $sess->init();
         $sess->setValue('usuario', $this->usuario);
         $sess->setValue('cedula', $this->cedula);
         $sess->setValue('correo', $this->correo);
@@ -67,7 +68,7 @@ if ((isset($_POST['correo']) && isset($_POST['contrasena']) && isset($_POST['ip'
         $login->setSession();
     
     echo $usuario;
-    
+ 
 }
 
 ?>
