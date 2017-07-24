@@ -28,7 +28,7 @@ class ControladorArchivos{
        $this->numeroPrograma=$num_programa;
        $this->numeroProyecto=$num_proyecto;
        $this->archivoTempo=$archivoTempo;
-       $this->codigoControl=hash_file('md5',$archivoTempo['name']);
+       $this->codigoControl=hash_file('md5',$archivoTempo['tmp_name']);
              
 
     }

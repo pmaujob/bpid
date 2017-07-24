@@ -38,7 +38,7 @@ if($extension=="xml" or $extension=="XML")
 					$monto[]=(string)$valores->Amount;
 					$total=$total + $monto[$val];
 					$periodo[]=(string)$valores->Period;
-					$informacion[$val] = array($detalle[$indice] => $monto[$val],"Periodo"=>$periodo[$val]); 
+					$informacion[$val] = array("Origen" =>$detalle[$indice],"Valor" =>$monto[$val],"Periodo"=>$periodo[$val]);
 					//echo $b."<br>";
 				$val++;
 				}
@@ -59,8 +59,8 @@ if($extension=="xml" or $extension=="XML")
 			$val1++;
 			}	
 			$jsonEs = CambiarFormatos::convertirAJsonItems($jsonespecifico);
-
-	$datos=$nombrep."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto."/".$jsonEs;
+			$jsonFu  = CambiarFormatos::convertirAJsonItems($informacion);
+	$datos=$nombrep."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto."/".$jsonEs."/".$jsonFu;
 	echo $datos;
 }
 else

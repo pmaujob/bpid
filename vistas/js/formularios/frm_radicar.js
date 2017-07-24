@@ -72,7 +72,6 @@ function archivo_xml()
 	var formData=new FormData($("#frm_radicar")[0]);  
  	var nombre_archivo=document.getElementById('frm_archivo').value;
  	var objetivos=document.getElementById('objetivos').value;
-// 	alert (objetivos);
  	var extension = (nombre_archivo.substring(nombre_archivo.lastIndexOf("."))).toLowerCase();
 
  	if (extension!=='.xml') { 
@@ -107,7 +106,7 @@ function archivo_xml()
 													processData:false,
 													success: function(datos)
 													{
-													alert(datos)	
+												//	alert(datos)	
 													var cadena=datos.split("/");
 													nombre_proyecto.focus();
 													nombre_proyecto.value='';
@@ -133,7 +132,7 @@ function archivo_xml()
 													valor.value='';
 													valor.value=cadena[7];
 													document.getElementById('objetivos').value=cadena[9];
-													
+													document.getElementById('fuentes').value=cadena[10];
 													}
 													});	
 
@@ -194,12 +193,13 @@ function almacenar()
  	var formData=new FormData($("#frm_radicar")[0]);  
  	var nombre_archivo=document.getElementById('frm_archivo').value;
  	var objetivos=document.getElementById('objetivos').value;
+ 	var fuentes=document.getElementById('fuentes').value;
  	
  	var value=numero_proyecto+'//'+nombre_proyecto +'//'+sector+'//'+localizacion+'//'+valor+'//'+eje+'//'+programa+'//'+subprograma+'//'+poai+'//'+
  	entidad_proponente+'//'+entidad_ejecutante+'//'+num_id_responsable+'//'+nom_responsable+'//'+cargo_responsable+'//'+
  	direccion_responsable+'//'+telefono_responsable+'//'+cel_responsable+'//'+correo_responsable+'//'+id_usuario+'//'+nombre_usuario+'//'+
- 	observaciones+'//'+objetivos;
- 	alert(objetivos);
+ 	observaciones+'//'+objetivos+'//'+fuentes;
+ 	
  	
  	 $('#modal1').modal('close');
  //	bloquear_pantalla();
@@ -210,7 +210,7 @@ function almacenar()
 			data:{value:value},
 			
             success:function(respuesta){
-				alert(respuesta)
+				//alert(respuesta)
 				
 			if(respuesta==1){ 
 				var formData=new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
