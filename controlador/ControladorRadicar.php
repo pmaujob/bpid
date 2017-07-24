@@ -37,6 +37,7 @@ class ControladorRadicar{
 	private $cod_activacion;
 	private $cod_secretaria;
 	private $objetivosEspecificos;
+	private $fuentesFinanciamiento;
 	
 		
 	public function iniciar($valores)
@@ -71,7 +72,8 @@ class ControladorRadicar{
                                                     $this->cod_usuario_ingreso,
                                                     $this->cod_secretaria,
                                                     $this->cod_activacion,
-                                                    $this->objetivosEspecificos);
+                                                    $this->objetivosEspecificos,
+                                                    $this->fuentesFinanciamiento);
                 }
 		
 	}
@@ -100,6 +102,7 @@ class ControladorRadicar{
 		$this->nombre_usuario=$valores[19];
 		$this->observaciones=$valores[20];
 		$this->objetivosEspecificos=$valores[21];
+		$this->fuentesFinanciamiento=$valores[22];
 		$this->cod_usuario_ingreso=1;//variable de sesion
 		$this->cod_activacion=1;
 		$this->cod_secretaria=1;
