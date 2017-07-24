@@ -38,7 +38,7 @@ if($extension=="xml" or $extension=="XML")
 					$monto[]=(string)$valores->Amount;
 					$total=$total + $monto[$val];
 					$periodo[]=(string)$valores->Period;
-					$informacion[$val] = array($detalle[$indice] => $monto[$val],"Periodo"=>$periodo[$val]); 
+					$informacion[$val] = array("Origen" =>$detalle[$indice],"Valor" =>$monto[$val],"Periodo"=>$periodo[$val]);
 					//echo $b."<br>";
 				$val++;
 				}
