@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="vistas/css/cssbpid/login.css" type="text/css">
         <script type="text/javascript" src="vistas/js/formularios/frm_login.js"></script>
         <script type="text/javascript" src="vistas/js/IpAddress.js"></script>
+        <script type="text/javascript" src="vistas/js/formularios/frm_login.js"></script>
     </head>
     <body>
         <div id="contenedor">

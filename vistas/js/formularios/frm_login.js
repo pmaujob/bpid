@@ -14,12 +14,15 @@ function ingresar() {
         data: {ip: ip,correo: correo, contrasena: contrasena},
         success: function (respuesta) {
             
-            alert(respuesta);
-
-//            if(respuesta=="Ok")
-//                alert("inicio de sesion correcto");
-//            else
-//                alert("inicio de sesion incorrecto");
+            if(respuesta === "Ok"){
+                
+                location.href = "vistas/index.php";
+                
+            }else{
+                
+                alert("El usuario o la contraseña son incorrectos intentelo de nuevo.");
+                
+            }
 
         },
 

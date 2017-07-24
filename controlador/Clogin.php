@@ -6,12 +6,17 @@ require_once '../librerias/SessionVars.php';
 class CLogin {
 
     private $correo;
+    private $correoFilter;
+    private $usuario;
+    private $cedula;
+    private $idLog;
     private $contrasena;
     private $ip;
     
     public function setCorreo($correo) {
-
-        $this->correo = "'".$correo."'";
+        
+        $this->correo = $correo;
+        $this->correoFilter = "'".$correo."'";
         
     }
 
@@ -28,17 +33,24 @@ class CLogin {
     }
 
     public function logIn() {
+        
+        $mLogin = new MLogin();
+        $mLogin->logIn($this->correoFilter, $this->contrasena, $this->ip);
+        $this->usuario = $mLogin->getUsuario();
+        $this->cedula = $mLogin->getCedula();
+        $this->idLog = $mLogin->getIdLog();
 
-        return MLogin::logIn($this->correo, $this->contrasena, $this->ip);
+        return $mLogin->getRespuesta();
         
     }
     
-    public function setSession($usuario,$cedula){
+    public function setSession(){
         
         $sess = new SessionVars();
-        $sess->setValue('usuario', $usuario);
-        $sess->setValue('cedula', $cedula);
+        $sess->setValue('usuario', $this->usuario);
+        $sess->setValue('cedula', $this->cedula);
         $sess->setValue('correo', $this->correo);
+        $sess->setValue('idLog', $this->idLog);
         
     }
 
