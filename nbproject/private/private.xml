@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/bpid/librerias/ConexionPDO.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/controlador/RegistrarListasChequeo.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/js/IpAddress.js</file>
+            <file>file:/C:/xampp/htdocs/bpid/controlador/Clogin.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/modelo/MLogin.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/index.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/bpid_conf/configuracion.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/index.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/js/formularios/frm_listas_radicar.js</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/menu.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/js/formularios/frm_login.js</file>
+        </group>
     </open-files>
 </project-private>
