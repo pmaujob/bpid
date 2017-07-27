@@ -12,8 +12,8 @@ $totalArchivosSub = ($_POST['totalArchivosSub'] != '' ? explode(',', $_POST['tot
 $dirSubidaReq = "../archivos/proyectos/$numProyecto/requisitos/";
 $dirSubidaSub = "../archivos/proyectos/$numProyecto/subrequisitos/";
 
-$fallidosReq = array();
-$fallidosSub = array();
+$fallidosReq = "";
+$fallidosSub = "";
 
 if (!file_exists("$dirSubidaReq")) {
     mkdir($dirSubidaReq, 0777, true);
@@ -43,7 +43,7 @@ for ($i = 0; $i < count($totalArchivosReq); $i += 2) {//incremento en +2 ya que 
         $objetoArchivoReq->setCodRadicacion($idRad);
         Archivos::guardarDatosArchivo($objetoArchivoReq);
     } else {
-        $fallidosReq[] = array("requisito" => $totalArchivosReq[$i], "nPreguntaReq" => $totalArchivosReq[$i + 1]);
+        $fallidosReq .= ($fallidosReq == "" ? "" : ",") . $totalArchivosReq[$i];
     }
 }
 
@@ -67,11 +67,10 @@ for ($i = 0; $i < count($totalArchivosSub); $i += 2) {//incremento en +2 ya que 
         $objetoArchivoSub->setCodRadicacion($idRad);
         Archivos::guardarDatosArchivo($objetoArchivoSub);
     } else {
-        $fallidosSub[] = array("subRequisito" => $totalArchivosSub[$i], "nPreguntaSub" => $totalArchivosSub[$i + 1]);
+        $fallidosSub .= ($fallidosSub == "" ? "" : ",") . $totalArchivosSub[$i];
     }
 }
 
-echo json_encode($fallidosReq) . "|" . json_encode($fallidosSub);
-
+echo $fallidosReq . "|" . $fallidosSub;
 ?>
 

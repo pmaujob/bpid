@@ -5,11 +5,9 @@ function onLoadBody() {
         $('.modal').modal();
     });
 
-    $('.REQOBS').trigger('autoresize');
-
 }
 
-function buscarProyectos() {
+function buscarProyectos(op) {
 
     value = document.getElementById("input_buscar").value;
 
@@ -17,7 +15,7 @@ function buscarProyectos() {
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
-        data: {value: value},
+        data: {value: value, op: op},
         success: function (respuesta) {
 
             document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
@@ -104,7 +102,7 @@ function validar() {
             var reqRow = new Array(3);
             reqRow[0] = document.getElementById('REQH' + i).value;//id requisito
             reqRow[1] = document.getElementById('REQ' + i).value;//opción seleccionada        
-            reqRow[2] = document.getElementById('REQOBS' + i).value;//observación
+            reqRow[2] = document.getElementById('REQOBS' + i).value.trim();//observación
 
             reqData.push(reqRow);
         }
@@ -139,7 +137,7 @@ function validar() {
             var subRow = new Array(3);
             subRow[0] = document.getElementById('SUBH' + i).value;//id subequisito
             subRow[1] = document.getElementById('SUB' + i).value;//opcion seleccionada
-            subRow[2] = document.getElementById('SUBOBS' + i).value;//observacion
+            subRow[2] = document.getElementById('SUBOBS' + i).value.trim();//observacion
             subData.push(subRow);
         }
     }
@@ -164,10 +162,26 @@ function validar() {
                     processData: false,
                     success: function (datos)
                     {
-                        var fallidosReq = JSON.parse(datos.split('|')[0]);
-                        var fallidosSub = JSON.parse(datos.split('|')[1]);
+                        var fallidosReq = datos.split('|')[0];
+                        var fallidosSub = datos.split('|')[1];
+
                         console.log("fallidosReq: " + fallidosReq + ", fallidosSub: " + fallidosSub);
-                        alert("Se actualizaron las listas con éxito.");
+
+                        var alerta = "";
+
+                        if (fallidosReq.trim() != "") {
+                            alerta += "Los archivos fueron subidos con éxito.\n"
+                                    + "Excepto los pertenecientes a los requisitos con los códigos: " + fallidosReq;
+                        }
+                        
+                        if (fallidosSub.trim() != "" && alerta == "") {
+                            alerta += "Los archivos fueron subidos con éxito.\n"
+                                    + "Excepto los pertenecientes a los subrequisitos con los códigos: "+fallidosSub;
+                        } else if(fallidosSub.trim() != "" && alerta != ""){
+                            alerta += "\nY los pertenecientes a los subrequisitos con los coódigos: "+fallidosSub;
+                        }
+
+                        alert("Se actualizaron las listas con éxito.\n"+alerta);
 
                     }
                 });
@@ -199,13 +213,19 @@ function validarExtension(fileNombre) {
 }
 
 function focusear(nOpcionesReq, nOpcionesSub) {
-    
-//    console.log(document.getElementById('REQOBS9').value);
-//    
-//    //for (var i = 1; i <= nOpcionesReq; i++) {
-//        var text = document.getElementById('REQOBS9').value;
-//        document.getElementById('REQOBS9').value = '';
-//        document.getElementById('REQOBS9').value = text+"asdasdasd";
-//        document.getElementById('REQOBS9').click();
-//    //}
+
+    for (var i = 1; i <= nOpcionesReq; i++) {
+        if (document.getElementById('REQOBSLBL' + i) != null && document.getElementById('REQOBS' + i).value != "") {
+            document.getElementById('REQOBS' + i).focus();
+            document.getElementById('REQOBSLBL' + i).setAttribute("class", "active");
+        }
+    }
+
+    for (var i = 1; i <= nOpcionesSub; i++) {
+        if (document.getElementById('SUBOBSLBL' + i) != null && document.getElementById('SUBOBS' + i).value != "") {
+            document.getElementById('SUBOBS' + i).focus();
+            document.getElementById('SUBOBSLBL' + i).setAttribute("class", "active");
+        }
+    }
+
 }
