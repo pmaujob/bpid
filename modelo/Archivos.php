@@ -15,6 +15,7 @@ class Archivos {
     private $hashNum;
     private $codEtapa;
     private $tipoEtapa;
+    private $codRadicacion;
     //MGA
     public static $ETAPA_BPID = 1;
     //Radicación
@@ -73,6 +74,10 @@ class Archivos {
         return $this->tipoEtapa;
     }
 
+    public function getCodRadicacion() {
+        return $this->codRadicacion;
+    }
+
     public function setCodArchivo($codArchivo) {
         $this->codArchivo = $codArchivo;
     }
@@ -113,8 +118,8 @@ class Archivos {
         $this->codActivacion = $codActivacion;
     }
 
-    public function setHashNum($hastNum) {
-        $this->hashNum = $hastNum;
+    public function setHashNum($hashNum) {
+        $this->hashNum = $hashNum;
     }
 
     public function setCodEtapa($codEtapa) {
@@ -123,6 +128,10 @@ class Archivos {
 
     public function setTipoEtapa($tipoEtapa) {
         $this->tipoEtapa = $tipoEtapa;
+    }
+
+    public function setCodRadicacion($codRadicacion) {
+        $this->codRadicacion = $codRadicacion;
     }
 
     public static function guardarDatosArchivo($objetoArchivo) {
@@ -136,14 +145,13 @@ class Archivos {
                 . "," . $objetoArchivo->getCodBpid() . ""
                 . ",'" . $objetoArchivo->getHashNum() . "'"
                 . "," . $objetoArchivo->getCodEtapa()
-                . "," . $objetoArchivo->getTipoEtapa() . ");";
+                . "," . $objetoArchivo->getTipoEtapa()
+                . "," . $objetoArchivo->getCodRadicacion() . ");";
 
-        
         $con = new ConexionPDO();
-        $con->conectar("PG");        
+        $con->conectar("PG");
         $resultado = $con->consultar($sql);
         $con->cerrarConexion();
-        
     }
 
 }

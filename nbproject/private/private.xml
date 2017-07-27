@@ -4,9 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/bpid/modelo/Archivos.php</file>
-            <file>file:/C:/xampp/htdocs/bpid/vistas/formulariosDinamicos/frmListas.php</file>
             <file>file:/C:/xampp/htdocs/bpid/controlador/ControladorArchivosRadicacion.php</file>
-            <file>file:/C:/xampp/htdocs/bpid/vistas/formularios/frm_listas_radicar.php</file>
+            <file>file:/C:/xampp/htdocs/bpid/vistas/formulariosDinamicos/frmListas.php</file>
             <file>file:/C:/xampp/htdocs/bpid/vistas/js/formularios/frm_listas_radicar.js</file>
             <file>file:/C:/xampp/htdocs/bpid/modelo/CargarListas.php</file>
         </group>

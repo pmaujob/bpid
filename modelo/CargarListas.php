@@ -18,7 +18,13 @@ class CargarListas {
 
     public static function getRequisitos($fil, $cod) {
 
-        $consulta = 'select cod, des, estado, a from get_requisitos(' . $fil . ',' . $cod . ') as ("cod" integer, "des" varchar, "estado" varchar, "a" integer) order by cod;';
+        $consulta = 'select cod, '//0
+                . 'des, '//1
+                . 'estado, '//2
+                . 'a, '//3
+                . 'nomarc, '//4
+                . 'obs '//5
+                . 'from get_requisitos(' . $fil . ',' . $cod . ') as ("cod" integer, "des" varchar, "estado" varchar, "a" integer, "nomarc" varchar, "obs" varchar) order by cod;';
 
         $con = new ConexionPDO();
         $con->conectar("PG");
@@ -30,7 +36,14 @@ class CargarListas {
 
     public static function getSubRequisitos($fil, $cod) {
 
-        $consulta = 'select cod, des, estado, a from get_sub_requisitos('.$fil.','.$cod.') as ("cod" integer, "des" varchar, "estado" varchar, "a" integer) order by cod;';
+        $consulta = 'select cod, '//0
+                . 'des, '//1
+                . 'estado, '//2
+                . 'a, '//3
+                . 'nomarc, '//4
+                . 'obs '//5
+                . 'from get_sub_requisitos('.$fil.','.$cod.') as ("cod" integer, "des" varchar, "estado" varchar, "a" integer, "nomarc" varchar, "obs" varchar) order by cod;';
+        
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
