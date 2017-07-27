@@ -3,13 +3,13 @@
 function bloquear_pantalla()
 {
    
-    document.getElementById("mas").style.display = "block";
+    document.getElementById("cargando").style.display = "block";
     document.body.style.overflow = "hidden";
 }
 function quitar_pantalla()
 {
    
-    document.getElementById("mas").style.display = "none";
+    document.getElementById("cargando").style.display = "none";
     document.body.style.overflow = "scroll";
 }
 $(document).ready(function() {
@@ -94,7 +94,7 @@ function archivo_xml()
 										success: function(existe)
 										{
 											//alert(existe)
-											quitar_pantalla();
+										//	quitar_pantalla();
 									if(existe==0)//si el archivo existe
 									{
 
@@ -133,6 +133,7 @@ function archivo_xml()
 													valor.value=cadena[7];
 													document.getElementById('objetivos').value=cadena[9];
 													document.getElementById('fuentes').value=cadena[10];
+													quitar_pantalla();
 													}
 													});	
 
