@@ -30,24 +30,6 @@ function a(cod){
 
     direccion='../certificados/certificadoRadicar.php';
     window.open(direccion+'?value='+value);
-    /*
-    jQuery.ajax({   
-        type: 'POST',
-        url:'../../certificados/certificadoRadicar.php',
-        async: true,
-        data:{value:value},
-        success:function(respuesta){
-            
-          alert(respuesta)
-
-        },
-
-        error: function () {
-            alert("Error inesperado")
-            window.top.location ="../index.html";   
-        }
-        
-    });
-    */
+   
 }
 

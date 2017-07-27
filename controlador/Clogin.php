@@ -68,7 +68,7 @@ if ((isset($_POST['correo']) && isset($_POST['contrasena']) && isset($_POST['ip'
         $login->setSession();
     
     echo $usuario;
-    
+ 
 }
 
 ?>

@@ -1,4 +1,14 @@
+<?php
+session_start();
+require_once '../../librerias/SessionVars.php';
+require_once '../../modelo/MPermisos.php';
 
+const idFormulario=1;
+$sess=new SessionVars();
+$sess->init();
+if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'),idFormulario))
+{
+?>
 
 <!DOCTYPE html>
 
@@ -13,7 +23,7 @@
 
     <body>
         <div id="dario"></div>
-        <div id="mas" class="frm_externo"><img src="../css/ajax-loader.gif"></div>
+        <div id="cargando" class="frm_externo"><img src="../css/cargar.gif"></div>
         <div id="d_error" title="ALERTA"></div>
         <div id="d_ingreso" title="INFORMACION"></div>
         <?php require_once '../menu.php'; ?>
@@ -58,7 +68,7 @@
                                 <div class="row">
                                     <div class="opcionesbtn">
                                         <div class="input-field col s12 m12 l12">
-                                     <textarea class="materialize-textarea" id="frm_nom_proyecto" name="frm_nom_proyecto" ></textarea>
+                                     <textarea class="materialize-textarea" id="frm_nom_proyecto" name="frm_nom_proyecto" readonly></textarea>
                                             <label for="textarea1">Nombre Proyecto</label>
 
                                             <div class="descripcion"></div>
@@ -321,3 +331,15 @@
 
     </body>
 </html>
+
+<?php
+}
+else {
+    $ruta=$_SESSION['raiz'];
+    //$ruta='https://www.google.com.co';
+    $ruta='../index.php';
+   header("location: $ruta");
+   
+    echo $ruta;
+}
+?>

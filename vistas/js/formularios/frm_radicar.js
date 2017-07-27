@@ -3,13 +3,13 @@
 function bloquear_pantalla()
 {
    
-    document.getElementById("mas").style.display = "block";
+    document.getElementById("cargando").style.display = "block";
     document.body.style.overflow = "hidden";
 }
 function quitar_pantalla()
 {
    
-    document.getElementById("mas").style.display = "none";
+    document.getElementById("cargando").style.display = "none";
     document.body.style.overflow = "scroll";
 }
 $(document).ready(function() {
@@ -94,7 +94,7 @@ function archivo_xml()
 										success: function(existe)
 										{
 											//alert(existe)
-											quitar_pantalla();
+										//	quitar_pantalla();
 									if(existe==0)//si el archivo existe
 									{
 
@@ -106,7 +106,7 @@ function archivo_xml()
 													processData:false,
 													success: function(datos)
 													{
-												//	alert(datos)	
+													//alert(datos)	
 													var cadena=datos.split("/");
 													nombre_proyecto.focus();
 													nombre_proyecto.value='';
@@ -133,6 +133,7 @@ function archivo_xml()
 													valor.value=cadena[7];
 													document.getElementById('objetivos').value=cadena[9];
 													document.getElementById('fuentes').value=cadena[10];
+													quitar_pantalla();
 													}
 													});	
 
@@ -222,10 +223,10 @@ function almacenar()
 										processData:false,
 										success: function(datos)
 										{
-										//quitar_pantalla();	
-										alert(datos);
+										quitar_pantalla();	
+										//alert(datos);
 			 $('#modal1').modal('close');							
-			document.getElementById('d_ingreso').innerHTML='<p>EL NUMERO BPID ASIGNADO ES :'+ datos + '</p>';
+			document.getElementById('d_ingreso').innerHTML='<p>EL NUMERO BPID ASIGNADO ES '+ datos + '</p>';
 			$("#d_ingreso").dialog("open");
 
 																}

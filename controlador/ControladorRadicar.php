@@ -1,5 +1,9 @@
-
 <?php
+include_once '../librerias/SessionVars.php';
+$sess=new SessionVars();
+$sess->init();
+if($sess->exist() && $sess->varExist('cedula'))
+{
 require_once "../librerias/ValidarDatos.php";
 function autoload($clase)
 {
@@ -40,11 +44,11 @@ class ControladorRadicar{
 	private $fuentesFinanciamiento;
 	
 		
-	public function iniciar($valores)
+	public function iniciar($valores,$cedulaSession)
 	{
 		
 		            if($this->validarVacios($valores)){
-                    $this->asignar ($valores);
+                    $this->asignar ($valores,$cedulaSession);
                     if($this->validar())
                         $this->radicar=new MRadicar();
                      	return $this->radicar->ingresarRadicar(
@@ -78,7 +82,7 @@ class ControladorRadicar{
 		
 	}
 
-	public function asignar($valores)
+	public function asignar($valores,$cedulaSession)
 	{
 		$this->numero_proyecto=$valores[0];
 		$this->nombre_proyecto=$valores[1]; 
@@ -103,7 +107,7 @@ class ControladorRadicar{
 		$this->observaciones=$valores[20];
 		$this->objetivosEspecificos=$valores[21];
 		$this->fuentesFinanciamiento=$valores[22];
-		$this->cod_usuario_ingreso=1;//variable de sesion
+		$this->cod_usuario_ingreso=$cedulaSession;//variable de sesion
 		$this->cod_activacion=1;
 		$this->cod_secretaria=1;
 	}
@@ -132,8 +136,12 @@ class ControladorRadicar{
 $valores = trim(($_POST["value"]));
 $valores = explode("//", $valores);
 $radicar=new ControladorRadicar();
-echo $radicar->iniciar($valores);
-    
+echo $radicar->iniciar($valores,$sess->getValue('cedula'));
 
-
+ ?>
+ <?php
+}
+else {
+    header('http://'.$_SERVER['SERVER_NAME']);
+}
 ?>

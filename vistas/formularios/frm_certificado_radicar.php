@@ -1,5 +1,13 @@
 <?php 
 session_start();
+require_once '../../librerias/SessionVars.php';
+require_once '../../modelo/MPermisos.php';
+
+const idFormulario=3;
+$sess=new SessionVars();
+$sess->init();
+if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'),idFormulario))
+{
  ?>
 <!DOCTYPE html>
 
@@ -65,7 +73,7 @@ session_start();
                                 </div>
                             </div>
                             
-                            <div id="resultado" class="row">
+                            <div id="resultado" >
                                 
                                 
                                 
@@ -87,3 +95,14 @@ session_start();
     </form>
     
 </body>
+<?php
+}
+else {
+    $ruta=$_SESSION['raiz'];
+    //$ruta='https://www.google.com.co';
+    $ruta='../index.php';
+   header("location: $ruta");
+   
+    echo $ruta;
+}
+?>
