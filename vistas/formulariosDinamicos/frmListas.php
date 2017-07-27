@@ -15,6 +15,8 @@ const reqFileOb = 'REQFILEOB'; //id del hidden perteneciente a los archivos para
 const subFileOb = 'SUBFILEOB';
 const reqFileExist = 'REQFILEEXIST'; //id del hidden para validar si el requisito ya tiene un archivo subido
 const subFileExist = 'SUBFILEEXIST';
+const reqObsLbl = 'REQOBSLBL';
+const subObsLbl = 'SUBOBSLBL';
 
 require_once '../../modelo/CargarListas.php';
 
@@ -63,7 +65,7 @@ foreach ($listasRequeridas as $filar) {
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">mode_edit</i>
-                                        <label for="<?php echo reqObs . $nOpcionesReq; ?>">Observacioness:</label>
+                                        <label for="<?php echo reqObs . $nOpcionesReq; ?>" id="<?php echo reqObsLbl . $nOpcionesReq; ?>" >Observaciones:</label>
                                         <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea"><?php echo $filar1[5]; ?></textarea>
                                     </div>
                                 </div>
@@ -76,7 +78,6 @@ foreach ($listasRequeridas as $filar) {
                         <?php
                     }
                     ?>
-
                     <p>
                         <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filar1[4]; ?>">
                         <?php
@@ -146,8 +147,8 @@ if (count($listasEspecificas) == 0) {
                                                 <div class="row">
                                                     <div class="input-field col s12">
                                                         <i class="material-icons prefix">mode_edit</i>
-                                                        <label <?php if(reqObs.$nOpcionesReq=="REQOBS9") echo "id='jaja'"; ?> for="<?php echo reqObs . $nOpcionesReq; ?>">Observaciones:</label>
-                                                        <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea" <?php if ($filae1[2] == "NO") echo "autofocus"; ?> ><?php echo $filae1[5]; ?></textarea>
+                                                        <label id="<?php echo reqObsLbl . $nOpcionesReq; ?>" for="<?php echo reqObs . $nOpcionesReq; ?>">Observaciones:</label>
+                                                        <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea" ><?php echo $filae1[5]; ?></textarea>
                                                     </div>
                                                 </div>
                                             </form>
@@ -215,8 +216,8 @@ if (count($listasEspecificas) == 0) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <i class="material-icons prefix">mode_edit</i>
-                                                                        <label for="<?php echo subObs . $nOpcionesSub; ?>">Observacioness:</label>
-                                                                        <textarea id="<?php echo subObs . $nOpcionesSub; ?>" class="<?php echo subObs; ?> materialize-textarea" <?php if ($filar1[2] == "NO") echo "autofocus"; ?> ><?php echo $filas[5]; ?></textarea>
+                                                                        <label id="<?php echo subObsLbl . $nOpcionesSub; ?>" for="<?php echo subObs . $nOpcionesSub; ?>">Observaciones:</label>
+                                                                        <textarea id="<?php echo subObs . $nOpcionesSub; ?>" class="<?php echo subObs; ?> materialize-textarea"><?php echo $filas[5]; ?></textarea>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -229,8 +230,6 @@ if (count($listasEspecificas) == 0) {
                                                         <?php
                                                     }
                                                     ?>
-
-
                                                     <p>
                                                         <input type="hidden" id="<?php echo subFileExist . $nOpcionesSub; ?>" value="<?php echo $filas[4]; ?>">
                                                         <?php
@@ -276,9 +275,3 @@ if (count($listasEspecificas) == 0) {
 <input type="hidden" id="idRad" name="idRad" value="<?php echo $fil; ?>">
 <input type="hidden" id="bpid" name="bpid" value="<?php echo $bpid; ?>">
 <input type="hidden" id="numProyecto" name="numProyecto" value="<?php echo $numProyecto; ?>">
-
-<script>
-        var text = document.getElementById('REQOBS9').value;
-        document.getElementById('REQOBS9').focus();
-        document.getElementById('jaja').setAttribute("class","active");        
-</script>
