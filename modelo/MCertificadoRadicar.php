@@ -16,9 +16,9 @@ require_once '../librerias/ConexionPDO.php';
             
         }
         
-        public function getRadicados($datos){
+        public function getRadicados($datos,$op){
             
-            $consulta = "select r.cod_radicacion as cod, b.numero_completo as num, r.nombre_proyecto as nombre, substring(r.nombre_proyecto from 1 for 40) || '...' as abr, b.cod_numero_bpid as id from numero_bpid as b inner join radicacion as r on b.cod_numero_bpid=r.cod_bpid where (r.nombre_proyecto like '%".$datos."%' or b.numero_completo like '%".$datos."%')  and r.cod_activacion=1 and r.cod_secretaria=1  order by fecha_envio desc  limit 11;";
+            $consulta = "select r.cod_radicacion as cod, b.numero_completo as num, r.nombre_proyecto as nombre, substring(r.nombre_proyecto from 1 for 40) || '...' as abr, b.cod_numero_bpid as id from numero_bpid as b inner join radicacion as r on b.cod_numero_bpid=r.cod_bpid where (r.nombre_proyecto like '%".$datos."%' or b.numero_completo like '%".$datos."%')  and r.cod_activacion=".$op." and r.cod_secretaria=1  order by fecha_envio desc  limit 11;";
             
             try{
                 
