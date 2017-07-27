@@ -21,7 +21,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
         <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
 </head>
 
-<body>
+<body onload="buscarCertificaciones(2)">
     
 
     
@@ -56,16 +56,16 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                         <br><br>
                     </div>
                     <div class="row">
-                        <div class="col s12 m10 l10">
+                        <div class="col s12 m12 l12">
                             <div class="row">
                                 <div class="input-field col s12 m12 l12">
                                     <div class="opcionesbtn">
                                         <div class="file-field input-field">
-                                            <div class="btn" onclick="buscarCertificaciones();">
+                                            <div class="btn" onclick="buscarCertificaciones(2);">
                                                 <span>Buscar proyecto</span>
                                             </div>
                                             <div class="file-path-wrapper">
-                                                <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeypress="buscarViabilidades();">
+                                                <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeypress="buscarCertificaciones();">
                                             </div>
                                         </div>
                                         <div class="descripcion">&nbsp;&nbsp;&nbsp;Realiza la búsqueda por numero o nombre del proyecto</div>
@@ -98,9 +98,8 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
 <?php
 }
 else {
-    $ruta=$_SESSION['raiz'];
-    //$ruta='https://www.google.com.co';
-    $ruta='../index.php';
+   $ruta=$_SESSION['raiz'];
+   $ruta='../index.php';
    header("location: $ruta");
    
     echo $ruta;

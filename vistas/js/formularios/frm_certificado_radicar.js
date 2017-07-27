@@ -1,33 +1,30 @@
-function buscarCertificaciones(){
+function buscarCertificaciones(estado){
     
-    var datos;
-
+    
     value = document.getElementById("input_buscar").value;
-    
-    jQuery.ajax({	
+    jQuery.ajax({
         type: 'POST',
-        url:'../../modelo/CargarCertificadosRadicar.php',
+        url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
-        data:{value:value},
-        success:function(respuesta){
-            
-            document.getElementById('resultado').innerHTML='<p>'+ respuesta + '</p>';
+        data: {value: value,op:estado},
+        success: function (respuesta) {
+
+            document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
 
         },
 
         error: function () {
             alert("Error inesperado")
-            window.top.location ="../index.html";	
+            window.top.location = "../index.html";
         }
-        
+
     });
     
 }
 
-function a(cod){
+function mas(codRadicacion,b,c){
     
-    value = cod;
-
+    value = codRadicacion;
     direccion='../certificados/certificadoRadicar.php';
     window.open(direccion+'?value='+value);
    
