@@ -4,7 +4,7 @@ require_once '../../librerias/ConexionPDO.php';
   
 class CargarRadicados{
 
-    public static function getRadicados($datos){
+    public static function getRadicados($datos,$op){
         
         $datos = "'".$datos."'";
 
@@ -14,7 +14,7 @@ class CargarRadicados{
                 . 'abr, '//3
                 . 'id, '//4
                 . 'nump '//5
-                . 'from get_radicados('.$datos.') as ("cod" integer, "num" varchar, "nombre" varchar, "abr" varchar, "id" varchar, "nump" varchar);';
+                . 'from get_radicados('.$datos.','.$op.') as ("cod" integer, "num" varchar, "nombre" varchar, "abr" varchar, "id" varchar, "nump" varchar);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");
