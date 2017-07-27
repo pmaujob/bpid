@@ -4,14 +4,15 @@ require_once '../../modelo/CargarRadicados.php';
 if (!empty($_POST['value'])) {
 
     $datos = $_POST['value'];
+    $op = $_POST['op'];
 
-    $res = CargarRadicados::getRadicados($datos);
+    $res = CargarRadicados::getRadicados($datos,$op);
     ?>
 
 
     <table>
         <thead>
-            <tr><th>Código de radicación</th><th>Número</th><th>Nombre del proyecto</th><th>Más</th></tr>
+            <tr><th>Numero de Proyecto</th><th>Número</th><th>Nombre del proyecto</th><th>Más</th></tr>
         </thead>
         <tbody>
             <?php
