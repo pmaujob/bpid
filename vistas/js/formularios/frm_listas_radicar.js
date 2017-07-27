@@ -48,6 +48,7 @@ function mas(cod, bpid, numProyecto) {
         success: function (respuesta) {
 
             document.getElementById('collapsible').innerHTML = respuesta;
+            focusear(document.getElementById('nOpcionesReq').value, document.getElementById('nOpcionesSub').value);
 
             $(document).ready(function () {
                 $('.collapsible').collapsible();
@@ -66,14 +67,15 @@ function mas(cod, bpid, numProyecto) {
 function validar() {
 
     if (document.getElementById('nOpcionesReq') == null) {
+        console.log("No se han cargado los complementos");
         return;
     }
 
     var idRad = document.getElementById('idRad').value;
-    var bpid = document.getElementById('bpid').value;
-    var numProyecto = document.getElementById('numProyecto').value;        
     var nOpcionesReq = document.getElementById('nOpcionesReq').value;
     var nOpcionesSub = document.getElementById('nOpcionesSub').value;
+    var totalArchivosReq = document.getElementById('totalArchivosReq');
+    var totalArchivosSub = document.getElementById('totalArchivosSub');
 
     var reqData = new Array();
     var subData = new Array();
@@ -84,16 +86,19 @@ function validar() {
         var opcionSeleccionada = document.getElementById('REQ' + i).value;
         if (opcionSeleccionada != "NA") {
 
-            var reqArchivo = document.getElementById('REQFILE' + i);
-            if (document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {
-                alert('Se debe adjuntar un archivo en esta pregunta.');
-                reqArchivo.focus();
-                return;
-            } else if (reqArchivo.value != '') {
-                var archivoReqRow = new Array(2);
-                archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
-                archivoReqRow[1] = i;//posicion del contador para recorrer archivos más adelante
-                archivosReq.push(archivoReqRow);
+            var reqArchivoExist = document.getElementById('REQFILEEXIST' + i).value;
+            if (reqArchivoExist == "") {//para evitar error de elemento para subir archivos
+                var reqArchivo = document.getElementById('REQFILE' + i);
+                if (document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {
+                    alert('Se debe adjuntar un archivo en esta pregunta.');
+                    reqArchivo.focus();
+                    return;
+                } else if (reqArchivo.value != '') {
+                    var archivoReqRow = new Array(2);
+                    archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
+                    archivoReqRow[1] = i;//posicion del contador para recorrer archivos más adelante
+                    archivosReq.push(archivoReqRow);
+                }
             }
 
             var reqRow = new Array(3);
@@ -114,16 +119,21 @@ function validar() {
         var opcionSeleccionada = document.getElementById('SUB' + i).value;
         if (opcionSeleccionada != "NA") {
 
-            var subArchivo = document.getElementById('SUBFILE' + i);
-            if (document.getElementById('SUBFILEOB' + i).value == 1 && subArchivo.value == '') {
-                alert('Se debe adjuntar un archivo en esta pregunta.');
-                subArchivo.focus();
-                return;
-            } else if (subArchivo.value != '') {
-                var archivoSubRow = new Array(2);
-                archivoSubRow[0] = document.getElementById('SUBH' + i).value;//id requisito
-                archivoSubRow[1] = i;//posicion del contador para recorrer archivos más adelante
-                archivosSub.push(archivoSubRow);
+            var subArchivoExist = document.getElementById('SUBFILEEXIST' + i).value;
+            if (subArchivoExist == "") {//para evitar error de elemento para subir archivos
+
+                var subArchivo = document.getElementById('SUBFILE' + i);
+                if (document.getElementById('SUBFILEOB' + i).value == 1 && subArchivo.value == '') {
+                    alert('Se debe adjuntar un archivo en esta pregunta.');
+                    subArchivo.focus();
+                    return;
+                } else if (subArchivo.value != '') {
+                    var archivoSubRow = new Array(2);
+                    archivoSubRow[0] = document.getElementById('SUBH' + i).value;//id requisito
+                    archivoSubRow[1] = i;//posicion del contador para recorrer archivos más adelante
+                    archivosSub.push(archivoSubRow);
+                }
+
             }
 
             var subRow = new Array(3);
@@ -134,6 +144,9 @@ function validar() {
         }
     }
 
+    totalArchivosReq.value = archivosReq;
+    totalArchivosSub.value = archivosSub;
+
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
@@ -141,46 +154,28 @@ function validar() {
         data: {idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null)},
         success: function (respuesta) {
 
-            var frmListas = document.getElementById('frm_listas');
-
-            var indicesArchivosReq = document.createElement("input");
-            indicesArchivosReq.setAttribute("type", "hidden");
-            indicesArchivosReq.setAttribute("name", "indicesArchivosReq");
-            indicesArchivosReq.setAttribute("value", archivosReq);
-
-            var indicesArchivosSub = document.createElement("input");
-            indicesArchivosSub.setAttribute("type", "hidden");
-            indicesArchivosSub.setAttribute("name", "indicesArchivosSub");
-            indicesArchivosSub.setAttribute("value", archivosSub);
-
-            var enviarBpid = document.createElement("input");
-            enviarBpid.setAttribute("type", "hidden");
-            enviarBpid.setAttribute("name", "bpid");
-            enviarBpid.setAttribute("value", bpid);
-            
-            var enviarNumProyecto = document.createElement("input");
-            enviarNumProyecto.setAttribute("type", "hidden");
-            enviarNumProyecto.setAttribute("name", "numProyecto");
-            enviarNumProyecto.setAttribute("value", numProyecto);
-
-            frmListas.appendChild(indicesArchivosReq);
-            frmListas.appendChild(indicesArchivosSub);
-            frmListas.appendChild(enviarBpid);
-            frmListas.appendChild(enviarNumProyecto);
-
-            frmListas.submit();
-
             if (respuesta == 1) {
+                var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
+                $.ajax({
+                    url: '../../controlador/ControladorArchivosRadicacion.php',
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (datos)
+                    {
+                        var fallidosReq = JSON.parse(datos.split('|')[0]);
+                        var fallidosSub = JSON.parse(datos.split('|')[1]);
+                        console.log("fallidosReq: " + fallidosReq + ", fallidosSub: " + fallidosSub);
+                        alert("Se actualizaron las listas con éxito.");
 
-                alert("Las listas de chequeo se han actualizado con éxito.");
+                    }
+                });
 
             } else {
-
                 alert("No se pudo realizar la actualización, vuelva a intentarlo.");
-
             }
         },
-
         error: function () {
             alert("Error inesperado")
             window.top.location = "../index.html";
@@ -201,4 +196,16 @@ function validarExtension(fileNombre) {
         return;
     }
 
+}
+
+function focusear(nOpcionesReq, nOpcionesSub) {
+    
+//    console.log(document.getElementById('REQOBS9').value);
+//    
+//    //for (var i = 1; i <= nOpcionesReq; i++) {
+//        var text = document.getElementById('REQOBS9').value;
+//        document.getElementById('REQOBS9').value = '';
+//        document.getElementById('REQOBS9').value = text+"asdasdasd";
+//        document.getElementById('REQOBS9').click();
+//    //}
 }

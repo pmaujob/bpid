@@ -12,10 +12,11 @@ class ConexionPDO {
     private function conectarMySQL() {
 
         $this->motor = 'mysql';
-        $this->user = 'postgres';
-        $this->pass = 'bpid2017';
-        $this->host = '181.225.96.71';
-        $this->db = 'bpid';
+        $this->user = 'linux';
+        $this->pass = 'mundolinux';
+        $this->host = '190.14.247.68';
+        $this->db = 'Narino_personas';
+        
     }
 
     private function conectarPostgreSQL() {
