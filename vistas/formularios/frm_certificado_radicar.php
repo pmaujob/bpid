@@ -23,8 +23,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
 
 <body onload="buscarCertificaciones(2)">
     
-
-    
+  
     <div id="mas" class="frm_externo">
         <div class="cerrar" onclick="cerrarFrmExterno('mas');"></div>
         <div class="form_ext">
