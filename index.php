@@ -1,3 +1,7 @@
+<?php
+session_start();
+$_SESSION['raiz'] =dirname(__FILE__) ;
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

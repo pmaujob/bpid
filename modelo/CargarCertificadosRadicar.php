@@ -1,16 +1,15 @@
 <?php
 
-require_once './ConexionPDO.php';
-
-    //session_start();
+require_once '../librerias/ConexionPDO.php';
     
-    class CargarRadicados{
+    class cargarCertificadosrRadicar{
         
         private $con;
         
         function __construct() {
             
             $this->con = new ConexionPDO();
+            $this->con->conectar("PG");
             
         }
         
@@ -22,7 +21,7 @@ require_once './ConexionPDO.php';
                 
                 $res = $this->con->consultar($consulta);
                 
-                echo '<table>';
+                echo "<table class='centered'>";
                 echo '<thead>';
                 echo '<tr><th>Código de radicación</th><th>Número</th><th>Nombre del proyecto</th><th>Más</th></tr>';
                 echo '</thead>';
@@ -52,7 +51,7 @@ require_once './ConexionPDO.php';
     if(!empty($_POST['value'])){
 
         $datos = $_POST['value'];
-        $radicados = new CargarRadicados();
+        $radicados = new cargarCertificadosrRadicar();
         $radicados->getRadicados($datos);
         
     }

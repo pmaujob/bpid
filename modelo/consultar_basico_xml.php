@@ -1,5 +1,10 @@
 <?php
 require '../librerias/CambiarFormatos.php';
+include_once '../librerias/SessionVars.php';
+$sess=new SessionVars();
+$sess->init();
+if($sess->exist() && $sess->varExist('cedula'))
+{
 $ruta_tmp=$_FILES['frm_archivo']['tmp_name'];//ruta temporal del archivo
 $nombre=  $_FILES['frm_archivo']['name'];//verificar si el nombre esta bn escrito
 $ruta=$ruta_tmp;
@@ -68,4 +73,10 @@ else
 	echo "EL ARCHIVO DEBE TENER EXTENCION XML";
 }
 //echo hash_file('md5',$_FILES['frm_archivo']['name']);
+?>
+ <?php
+}
+else {
+    header('http://'.$_SERVER['SERVER_NAME']);
+}
 ?>

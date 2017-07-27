@@ -14,9 +14,9 @@
 .frm_externo img{
     margin-left:50%;
 	transform:translateX(-50%);
-	margin-top:50%;
-	transform:translateY(-50%);
-    
+	margin-top:30%;
+	/*transform:translateY(-50%);*/
+     position: fixed;
 }
 .form_ext{
     
