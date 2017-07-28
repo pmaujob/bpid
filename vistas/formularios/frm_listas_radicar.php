@@ -30,7 +30,7 @@
         </form>
 
         <div id="d_error" title="ALERTA"></div>
-        <div id="d_ingreso" title="INFORMACION"></div>
+        <div id="d_ingreso" title="INFORMACIÓN"></div>
 
 
         <?php require_once '../menu.php'; ?>
@@ -42,7 +42,7 @@
                     <div class="container-fluid">
 
                         <div class="row">
-                            <div class="col s12 m12 l12 center-align"><div class="titulofrm">LISTA GENERAL</div></div>
+                            <div class="col s12 m12 l12 center-align"><div class="titulofrm">LISTA DE CHECKEO</div></div>
                             <br><br>
                         </div>
                         <div class="row">
@@ -55,10 +55,10 @@
                                                     <span>Buscar proyecto</span>
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos();">
+                                                    <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos(1);">
                                                 </div>
                                             </div>
-                                            <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por numero o nombre del proyecto</div>
+                                            <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
                                         </div>
                                     </div>
                                 </div>
