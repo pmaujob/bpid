@@ -12,7 +12,7 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
 
     <table>
         <thead>
-            <tr><th>Código de radicación</th><th>Número</th><th>Nombre del proyecto</th><th>Más</th></tr>
+            <tr><th>Numero de Proyecto</th><th>Número Bpid</th><th>Nombre del proyecto</th><th>Certificado</th></tr>
         </thead>
         <tbody>
             <?php
@@ -21,7 +21,7 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
                     ?>
 
                     <tr>
-                        <td><?php echo $fila[0]; ?></td>
+                        <td><?php echo $fila[5]; ?></td>
                         <td><?php echo $fila[1]; ?></td>
                         <td title="<?php echo $fila[2]; ?>"><?php echo $fila[3]; ?></td>
                         <td>
