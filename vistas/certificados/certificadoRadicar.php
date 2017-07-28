@@ -1,8 +1,5 @@
 <?php 
 session_start();
- ?>
-
- <?php
 require_once '../../modelo/ObtenerDatosCertificadoRadicar.php';
 require_once '../../librerias/fpdf/fpdf.php';
 require_once '../../librerias/fpdf/PDF.php';

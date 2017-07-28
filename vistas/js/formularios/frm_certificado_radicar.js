@@ -1,7 +1,8 @@
 function buscarCertificaciones(estado){
-    
+   
     
     value = document.getElementById("input_buscar").value;
+
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
@@ -22,9 +23,10 @@ function buscarCertificaciones(estado){
     
 }
 
-function mas(codRadicacion,b,c){
+function mas(codRadicacion,codBpid,c){
     
-    value = codRadicacion;
+    alert(codBpid);
+    value = codBpid;
     direccion='../certificados/certificadoRadicar.php';
     window.open(direccion+'?value='+value);
    
