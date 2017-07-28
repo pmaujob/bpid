@@ -10,7 +10,7 @@ class CGetDatosUsuario{
         
         if($usuario->existeUsuarioEnBpid($cedula))
             return 'EBPID';
-        else if(!$usuario->existeUsuarioEnGovernacion($cedula))
+        else if(!$usuario->existeUsuarioEnGobernacion($cedula))
             return 'NEG';
         else{
             
