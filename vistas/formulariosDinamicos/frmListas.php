@@ -38,14 +38,14 @@ if (count($listasRequeridas) == 0) {
 foreach ($listasRequeridas as $filar) {
     ?>
     <li>
-        <div class="collapsible-header" style="background: #008643; color: #FFFFFF"><?php echo ucwords($filar[1]); ?></div>
+        <div class="collapsible-header item_lista_obligatoria" ><?php echo ucwords($filar[1]); ?></div>
         <div id="<?php echo rlista . $filar[0]; ?>" class="collapsible-body">
             <?php
             $requisitosListaGeneral = CargarListas::getRequisitos($fil, $filar[0]);
             foreach ($requisitosListaGeneral as $filar1) {
                 $nOpcionesReq++;
                 ?>
-                <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
+                <div class="cardview_checklist">
                     <span>
                         <?php echo $filar1[1]; ?>
                     </span>
@@ -111,7 +111,7 @@ if (count($listasEspecificas) == 0) {
 }
 ?>    
 <li>
-    <div class="collapsible-header"><?php echo "Diligencie una Lista Específica"; ?></div>
+    <div class="collapsible-header item_lista_especifica" ><?php echo "Diligencie una Lista Específica"; ?></div>
     <div class="collapsible-body">
         <ul id="collapsible2" class="collapsible" data-collapsible="accordion">
             <?php
@@ -119,7 +119,7 @@ if (count($listasEspecificas) == 0) {
                 $op = $filae[2];
                 ?>
                 <li>
-                    <div class="collapsible-header" id="<?php echo rlista . $filae[0]; ?>"><?php echo ucwords($filae[1]); ?></div>
+                    <div class="collapsible-header item_lista_especifica" id="<?php echo rlista . $filae[0]; ?>"><?php echo ucwords($filae[1]); ?></div>
                     <div class="collapsible-body">                      
                         <?php
                         $lista_requisitos = CargarListas::getRequisitos($fil, $filae[0]);
@@ -127,7 +127,7 @@ if (count($listasEspecificas) == 0) {
                             foreach ($lista_requisitos as $filae1) {
                                 $nOpcionesReq++;
                                 ?>
-                                <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
+                                <div class="cardview_checklist">
                                     <span>
                                         <?php echo $filae1[1]; ?>
                                     </span>
@@ -189,13 +189,13 @@ if (count($listasEspecificas) == 0) {
                                     $lista_subrequisitos = CargarListas::getSubRequisitos($fil, $filae2[0]);
                                     ?>
                                     <li>                                    
-                                        <div class="collapsible-header" id="<?php echo slista . $filae2[0]; ?>"><?php echo $filae2[1]; ?></div>
+                                        <div class="collapsible-header item_lista_especifica" id="<?php echo slista . $filae2[0]; ?>"><?php echo $filae2[1]; ?></div>
                                         <div class="collapsible-body">
                                             <?php
                                             foreach ($lista_subrequisitos as $filas) {
                                                 $nOpcionesSub++;
                                                 ?>
-                                                <div style="border: 1px solid #000000; padding: 20px; margin: 15px">
+                                                <div class="cardview_checklist">
                                                     <span>
                                                         <?php echo $filas[1]; ?>
                                                     </span>
