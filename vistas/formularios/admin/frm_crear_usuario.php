@@ -21,7 +21,7 @@
             <div class="modal-content">
                 <h4>Permisos a funciones del sistema</h4>
                 <p>Asigne permisos al usuario.</p>
-                <div id="funciones" style="margin: 16px; border: 1px solid #66ffff; padding: 16px;">
+                <div id="funciones" class="contenedor_tabla">
                     
                 </div>
             </div>
