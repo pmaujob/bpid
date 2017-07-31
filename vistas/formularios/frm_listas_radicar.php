@@ -21,7 +21,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         </head>
 
         <body onload="onLoadBody();">
-
+             <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
+             <div id="d_error" title="ALERTA"></div>
+             <div id="d_ingreso" title="INFORMACION"></div>
             <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
                 <div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">

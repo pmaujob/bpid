@@ -4,13 +4,43 @@ function onLoadBody() {
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
+     $("#d_error").dialog({
+                        autoOpen: false,
+                        modal: true,
+                        buttons: {
+                        "Cerrar": function () {
+                        $(this).dialog("close");
+                                              }
+                                }
+                        });
+     $("#d_ingreso").dialog({
+                        autoOpen: false,
+                        modal: true,
+                        buttons: {
+                        "Aceptar": function () {
+                        $(this).dialog("close");
+                        window.self.location="../formularios/frm_radicar.php";
+                                              }
+                                }
+                        });
 
 }
-
+function bloquear_pantalla()
+{
+   
+    document.getElementById("cargando").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+function quitar_pantalla()
+{
+   
+    document.getElementById("cargando").style.display = "none";
+    document.body.style.overflow = "scroll";
+}
 function buscarProyectos(op) {
 
     value = document.getElementById("input_buscar").value;
-
+    bloquear_pantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
@@ -19,7 +49,7 @@ function buscarProyectos(op) {
         success: function (respuesta) {
 
             document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
-
+            quitar_pantalla();    
         },
 
         error: function () {
@@ -37,14 +67,14 @@ function mas(cod, bpid, numProyecto) {
 
     value = cod;
     var bpid = bpid;
-
+    bloquear_pantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmListas.php',
         async: true,
         data: {value: value, bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
-
+            quitar_pantalla();
             document.getElementById('collapsible').innerHTML = respuesta;
             focusear(document.getElementById('nOpcionesReq').value, document.getElementById('nOpcionesSub').value);
 
@@ -181,7 +211,9 @@ function validar() {
                             alerta += "\nY los pertenecientes a los subrequisitos con los coódigos: "+fallidosSub;
                         }
 
-                        alert("Se actualizaron las listas con éxito.\n"+alerta);
+                       // alert("Se actualizaron las listas con éxito.\n"+alerta);
+                        document.getElementById('d_ingreso').innerHTML='<p>Se actualizaron las listas con éxito '+ alerta + '</p>';
+                         $("#d_ingreso").dialog("open");
 
                     }
                 });

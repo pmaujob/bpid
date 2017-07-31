@@ -23,7 +23,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
 
     <body>
         <div id="dario"></div>
-        <div id="cargando" class="frm_externo"><img src="../css/cargar.gif"></div>
+        <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
         <div id="d_error" title="ALERTA"></div>
         <div id="d_ingreso" title="INFORMACION"></div>
         <?php require_once '../menu.php'; ?>
