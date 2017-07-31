@@ -1,10 +1,9 @@
-function onLoadBody() {
-
-    $(document).ready(function () {
-        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-        $('.modal').modal();
-    });
-     $("#d_error").dialog({
+$(document).ready(function() {
+    
+   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+   $('.modal').modal();
+    $('select').material_select();
+    $("#d_error").dialog({
                         autoOpen: false,
                         modal: true,
                         buttons: {
@@ -19,12 +18,22 @@ function onLoadBody() {
                         buttons: {
                         "Aceptar": function () {
                         $(this).dialog("close");
-                        window.self.location="../formularios/frm_radicar.php";
+                        window.self.location="../formularios/frm_listas_radicar.php";
                                               }
                                 }
                         });
+});
 
-}
+/*/
+function onLoadBody() {
+
+    $(document).ready(function () {
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+    });
+
+
+}*/
 function bloquear_pantalla()
 {
    
@@ -67,7 +76,7 @@ function mas(cod, bpid, numProyecto) {
 
     value = cod;
     var bpid = bpid;
-    bloquear_pantalla();
+    
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmListas.php',
@@ -219,11 +228,15 @@ function validar() {
                 });
 
             } else {
-                alert("No se pudo realizar la actualización, vuelva a intentarlo.");
+               // alert("No se pudo realizar la actualización, vuelva a intentarlo.");
+                     document.getElementById('d_error').innerHTML='<p>No se pudo realizar la actualización, vuelva a intentarlo</p>';
+                       $("#d_error").dialog("open");
             }
         },
         error: function () {
-            alert("Error inesperado")
+            //alert("Error inesperado")
+            document.getElementById('d_error').innerHTML='<p>Eror inesperado</p>';
+             $("#d_error").dialog("open");
             window.top.location = "../index.html";
         }
     });

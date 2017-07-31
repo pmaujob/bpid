@@ -20,7 +20,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
-        <body onload="onLoadBody();">
+        <body>
              <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
              <div id="d_error" title="ALERTA"></div>
              <div id="d_ingreso" title="INFORMACION"></div>
@@ -39,8 +39,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 </div>
             </form>
 
-            <div id="d_error" title="ALERTA"></div>
-            <div id="d_ingreso" title="INFORMACIÓN"></div>
+           
 
             <?php require_once '../menu.php'; ?>
             <form id='frm_radicar_listas' name='frm_radicar_listas' onSubmit="return false"  enctype="multipart/form-data">
@@ -51,7 +50,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         <div class="container-fluid">
 
                             <div class="row">
-                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">LISTA DE CHECKEO</div></div>
+                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">LISTA DE CHEQUEO</div></div>
                                 <br><br>
                             </div>
                             <div class="row">
