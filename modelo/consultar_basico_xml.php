@@ -59,14 +59,15 @@ if($extension=="xml" or $extension=="XML")
 			$val1=0;
 			foreach ($datos->CentralProblem->Causes->Cause as $causa) 
 			{
-			$ob_especificos[]=utf8_encode((string)$causa->SpecificObjective->SpecificObjective);
+			$ob_especificos[]=tildes($causa->SpecificObjective->SpecificObjective);
 			$jsonespecifico[$val1]=array("Objetivo"=>$ob_especificos[$val1]);
 			$val1++;
 			}	
 			$jsonEs = CambiarFormatos::convertirAJsonItems($jsonespecifico);
 			$jsonFu  = CambiarFormatos::convertirAJsonItems($informacion);
-	$datos=$nombrep."/".$sector."/".$departamento."/".$municipio."/".$eje."/".$programa."/".$subprograma."/".$total."/".$numero_proyecto."/".$jsonEs."/".$jsonFu;
+	$datos=$nombrep."*/".$sector."*/".$departamento."*/".$municipio."*/".$eje."*/".$programa."*/".$subprograma."*/".$total."*/".$numero_proyecto."*/".$jsonEs."*/".$jsonFu;
 	echo $datos;
+	//print_r($jsonespecifico);
 }
 else
 {

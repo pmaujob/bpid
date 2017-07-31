@@ -107,7 +107,7 @@ function archivo_xml()
 													success: function(datos)
 													{
 													//alert(datos)	
-													var cadena=datos.split("/");
+													var cadena=datos.split("*/");
 													nombre_proyecto.focus();
 													nombre_proyecto.value='';
 													nombre_proyecto.value=cadena[0];
@@ -203,14 +203,13 @@ function almacenar()
  	
  	
  	 $('#modal1').modal('close');
- //	bloquear_pantalla();
+ 	bloquear_pantalla();
  	jQuery.ajax({	
 		    type: "POST",
               url:'../../controlador/ControladorRadicar.php',
 			async: false,
 			data:{value:value},
-			
-            success:function(respuesta){
+			success:function(respuesta){
 				//alert(respuesta)
 				
 			if(respuesta==1){ 
