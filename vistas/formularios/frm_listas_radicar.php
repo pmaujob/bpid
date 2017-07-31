@@ -45,9 +45,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 </div>
             </form>
 
-            <div id="d_error" title="ALERTA"></div>
-            <div id="d_ingreso" title="INFORMACIÓN"></div>
-
             <?php require_once '../menu.php'; ?>
             <form id='frm_radicar_listas' name='frm_radicar_listas' onSubmit="return false"  enctype="multipart/form-data">
 
