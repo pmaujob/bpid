@@ -21,16 +21,22 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         </head>
 
         <body onload="onLoadBody();">
-             <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
-             <div id="d_error" title="ALERTA"></div>
-             <div id="d_ingreso" title="INFORMACION"></div>
+            <div id="d_error" title="ALERTA"></div>
+            <div id="d_ingreso" title="INFORMACION"></div>
             <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
+                <!--
+                <div id="dialogCargando" class="frm_externo">
+                    <img src="../css/wait.gif">
+                </div>
+                -->
                 <div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
                         <h4>Lista de opciones</h4>
                         <p>Seleccione los items y agregue observaciones si así lo desea.</p>
                         <ul id="collapsible" class="collapsible" data-collapsible="accordion">
-
+                            <div style="text-align: center; margin-left: auto; margin-right: auto;">
+                                <img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
+                            </div>
                         </ul>
                     </div>
                     <div class="modal-footer">
@@ -49,10 +55,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 <div class="col s12 m11 l9">
                     <div class="bajar">
                         <div class="container-fluid">
-
                             <div class="row">
-                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">LISTA DE CHECKEO</div></div>
-                                <br><br>
+                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">LISTA DE CHEQUEO</div></div>
+                                <br>
+                                <br>
                             </div>
                             <div class="row">
                                 <div class="col s12 m10 l10">
@@ -75,7 +81,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                     <div id="resultado" class="row">
 
                                     </div>
-
                                     <!--div class="col s12 m12 l12">
                                     <?php require_once "footer.php"; ?>
                                     </div-->
