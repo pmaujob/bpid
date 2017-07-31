@@ -11,12 +11,24 @@
         <link type="text/css" rel="stylesheet" href="../../css/cssbpid/styles.css">
     </head>
 
-    <body>
+    <body onload="onLoadBody();">
         <div id="mas" class="frm_externo"><img src="../../css/ajax-loader.gif"></div>
         <div id="d_error" title="ALERTA"></div>
         <div id="d_ingreso" title="INFORMACION"></div>
         <?php require_once '../../menu.php'; ?>
-        <form id='frm_crear' name='frm_crear_usuario'>
+
+        <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Permisos a funciones del sistema</h4>
+                <p>Asigne permisos al usuario.</p>
+                <div id="funciones" class="contenedor_tabla">
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="modalg" class="modal-action waves-effect waves-green btn-flat ">Guardar cambios</a>
+            </div>
+        </div>
 
             <div class="col s12 m11 l9">
                 <div class="bajar">
@@ -100,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <br><br>
                         <div class="row">
                             <div class="col s12 m12 l12">
@@ -114,7 +126,10 @@
                             <div class="col s2 m2 l2"></div>
                             <div class="col s8 m8 l12 center-align">
                                 <br>
-                                <button class="btn waves-effect waves-light" onclick="validar()">
+                                <button id="btn_permisos" class="btn waves-effect waves-light" onclick="permisos();">
+                                    Asignar permisos <i class="material-icons right">send</i>
+                                </button>
+                                <button class="btn waves-effect waves-light" onclick="registrarUsuario();">
                                     Crear <i class="material-icons right">send</i>
                                 </button>
                             </div>
@@ -124,7 +139,6 @@
                     <?php //require_once "../../footer.php"; ?>
                 </div>
             </div>
-        </form>
 
     </body>
 </html>

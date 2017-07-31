@@ -126,3 +126,13 @@
     background: #FFFFFF; 
     color: #000000;
 }
+
+/* estilos para contenedor de tabla */
+
+.contenedor_tabla{
+    
+    margin: 16px;
+    padding: 16px;
+    border: 1px solid #BDBDBD;
+    
+}

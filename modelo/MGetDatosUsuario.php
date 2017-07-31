@@ -41,7 +41,7 @@ class MGetDatosUsuario{
         return $this->dependencia;
     }
     
-    public function existeUsuarioEnGovernacion($cedula){
+    public function existeUsuarioEnGobernacion($cedula){
         
         $sql = "select (case when count(identificacion)>0 then 'Ok' else 'No' end) as cedula from servidorespublicosycontratistas where identificacion='".$cedula."';";
         
