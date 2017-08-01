@@ -11,6 +11,16 @@ function onLoadBody() {
         $('.modal').modal();
     });
 
+    $("#d_error").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            "Cerrar": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+
 }
 
 function validar() {
@@ -62,6 +72,8 @@ function validar() {
 
                 document.getElementById('frm_cedula').focus();
 
+                //limpiarPermisos();
+
             }
 
         },
@@ -94,54 +106,67 @@ function permisos() {
 
     });
 
+    limpiarPermisos();
+
     $('#modal1').modal('open');
 
 }
 
 function registrarUsuario() {
 
-    jQuery.ajax({
-        type: 'POST',
-        url: '../../../controlador/CGetDatosUsuario.php',
-        async: true,
-        data: {cedula: cedula, nombre: nombre, apellido: apellido, correo: correo, dependencia: dependencia},
-        success: function (respuesta) {
+    var cont = document.getElementById('cont').value;
+    var permisosRow = new Array();
+    var j = 0;
 
-            if (respuesta == "EBPID")
-                document.getElementById('respuesta').innerHTML = "El usuario con la cédula numero " + cedula + " ya existe en la base de datos de bpid.";
-            else if (respuesta == "NEG")
-                document.getElementById('respuesta').innerHTML = "El usuario con la cédula numero " + cedula + " no existe en la base de datos de la gobernación.";
-            else {
-                var content = JSON.parse(respuesta);
-                document.getElementById('frm_correo').value = content.correo;
-                document.getElementById('frm_correo').focus();
-                document.getElementById('frm_nombre').value = content.nombres;
-                document.getElementById('frm_nombre').focus();
-                document.getElementById('frm_apellido').value = content.apellidos;
-                document.getElementById('frm_apellido').focus();
-                document.getElementById('frm_dependencia').value = content.dependencia;
-                document.getElementById('frm_dependencia').focus();
+    for (var i = 0; i < cont; i++) {
+        if (document.getElementById('FUN' + i).checked) {
+            var idPermiso = document.getElementById('IDFUN' + i).value;
+            permisosRow[j] = idPermiso;
+            j++;
+        }
+    }
 
-                document.getElementById('respuesta').innerHTML = "Debe asignarle permisos";
+    if (permisosRow.length > 0) {
 
-                nombre = document.getElementById('frm_nombre').value;
-                apellido = document.getElementById('frm_apellido').value;
-                correo = document.getElementById('frm_correo').value;
-                dependencia = document.getElementById('frm_dependencia').value;
+        jQuery.ajax({
+            type: 'POST',
+            url: '../../../controlador/CCrearUsuario.php',
+            async: true,
+            data: {cedula: cedula, nombre: nombre, apellido: apellido, correo: correo, dependencia: dependencia, permisos: permisosRow},
+            success: function (respuesta) {
 
-                document.getElementById('btn_permisos').disabled = false;
+                if (respuesta == "1") {
+                    document.getElementById('d_error').innerHTML = "El usuario ha sido creado con éxito";
+                    $('#d_error').dialog("open");
+                } else {
+                    document.getElementById('d_error').innerHTML = "El usuario no ha podido crear intentelo de nuevo.";
+                    $('#d_error').dialog("open");
+                }
 
-                document.getElementById('frm_cedula').focus();
+                limpiarPermisos();
 
+            },
+
+            error: function () {
+                alert("Error inesperado");
+                window.top.location = "../index.html";
             }
 
-        },
+        });
 
-        error: function () {
-            alert("Error inesperado");
-            window.top.location = "../index.html";
-        }
+    } else {
+        document.getElementById('d_error').innerHTML = "El usuario no tiene permisos, debe asignar por lo menos un permiso.";
+        $('#d_error').dialog("open");
+    }
 
-    });
+}
+
+function limpiarPermisos() {
+
+    var cont = document.getElementById('cont').value;
+
+    for (var i = 0; i < cont; i++) {
+        document.getElementById('FUN' + i).checked = 0;
+    }
 
 }

@@ -4,17 +4,19 @@
 
 $raiz = $_SESSION['raiz'];
 
-require_once $raiz.'librerias/ConexionPDO.php';
+require_once $raiz.'/librerias/ConexionPDO.php';
 
 class MCrearUsuario{
     
-    public static function crearUsuario($cedula,$nombre,$apellido,$correo,$dependencia){
+    public static function crearUsuario($cedula,$nombre,$apellido,$correo,$dependencia,$clave,$permisos){
         
-        $sql = "";
+        $sql = "select from seguridad.crear_usuario('$cedula','$nombre','$apellido','$correo','$dependencia','$clave',$permisos);";
         
         $con = new ConexionPDO();
         $con->conectar("PG");
-        $res = $con->consultar($sql);
+        $res = $con->afectar($sql);
+        
+        return $res;
         
     }
     

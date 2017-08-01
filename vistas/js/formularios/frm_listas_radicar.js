@@ -173,15 +173,15 @@ function validar() {
                             alerta += "Los archivos fueron subidos con éxito.\n"
                                     + "Excepto los pertenecientes a los requisitos con los códigos: " + fallidosReq;
                         }
-                        
+
                         if (fallidosSub.trim() != "" && alerta == "") {
                             alerta += "Los archivos fueron subidos con éxito.\n"
-                                    + "Excepto los pertenecientes a los subrequisitos con los códigos: "+fallidosSub;
-                        } else if(fallidosSub.trim() != "" && alerta != ""){
-                            alerta += "\nY los pertenecientes a los subrequisitos con los coódigos: "+fallidosSub;
+                                    + "Excepto los pertenecientes a los subrequisitos con los códigos: " + fallidosSub;
+                        } else if (fallidosSub.trim() != "" && alerta != "") {
+                            alerta += "\nY los pertenecientes a los subrequisitos con los coódigos: " + fallidosSub;
                         }
 
-                        alert("Se actualizaron las listas con éxito.\n"+alerta);
+                        alert("Se actualizaron las listas con éxito.\n" + alerta);
 
                     }
                 });

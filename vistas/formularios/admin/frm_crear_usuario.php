@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a id="modalg" class="modal-action waves-effect waves-green btn-flat ">Guardar cambios</a>
+                <a id="modalg" class="modal-action modal-close waves-effect waves-green btn-flat ">Ok</a>
             </div>
         </div>
 
@@ -126,7 +126,7 @@
                             <div class="col s2 m2 l2"></div>
                             <div class="col s8 m8 l12 center-align">
                                 <br>
-                                <button id="btn_permisos" class="btn waves-effect waves-light" onclick="permisos();">
+                                <button id="btn_permisos" class="btn waves-effect waves-light" disabled onclick="permisos();">
                                     Asignar permisos <i class="material-icons right">send</i>
                                 </button>
                                 <button class="btn waves-effect waves-light" onclick="registrarUsuario();">

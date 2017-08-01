@@ -2,6 +2,7 @@
 require_once '../../../modelo/MModuloConFunciones.php';
 
 const funciones = "FUN";
+const idFunciones = "IDFUN";
 ?>
 
 <table class="striped">
@@ -17,6 +18,7 @@ const funciones = "FUN";
         <?php
         
         $res = MModuloConFunciones::getFunciones();
+        $cont = 0;
         
         while ($resultado = $res->fetch(PDO::FETCH_OBJ)) {
             ?>
@@ -27,15 +29,18 @@ const funciones = "FUN";
                     <div class="switch">
                         <label>
                             No
-                            <input id="<?php echo funciones.$resultado->id; ?>" type="checkbox">
+                            <input id="<?php echo funciones.$cont; ?>" type="checkbox">
                             <span class="lever"></span>
                             Si
                         </label>
+                        <input id="<?php echo idFunciones.$cont; ?>" type="hidden" value="<?php echo $resultado->id; ?>">
                     </div>
                 </td>
             </tr>
             <?php
+            $cont++;
         }
         ?>
     </tbody>
+    <input id="cont" type="hidden" value="<?php echo $cont; ?>">
 </table>
