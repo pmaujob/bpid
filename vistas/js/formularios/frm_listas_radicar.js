@@ -99,7 +99,11 @@ function mas(cod, bpid, numProyecto) {
 
 }
 
-function validar() {
+function focusearTituloLista(idBodyLista) {
+    $('#'+idBodyLista).focus();
+}
+
+function validar(enviarInfo) {
 
     if (document.getElementById('nOpcionesReq') == null) {
         console.log("No se han cargado los complementos");
@@ -123,12 +127,14 @@ function validar() {
 
             var reqArchivoExist = document.getElementById('REQFILEEXIST' + i).value;
             if (reqArchivoExist == "") {//para evitar error de elemento para subir archivos
+
                 var reqArchivo = document.getElementById('REQFILE' + i);
-                if (document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {
+
+                if (opcionSeleccionada == "SI" && document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
                     alert('Se debe adjuntar un archivo en esta pregunta.');
                     reqArchivo.focus();
                     return;
-                } else if (reqArchivo.value != '') {
+                } else if (opcionSeleccionada == "SI" && reqArchivo.value != '') {
                     var archivoReqRow = new Array(2);
                     archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
                     archivoReqRow[1] = i;//posicion del contador para recorrer archivos más adelante
@@ -143,6 +149,7 @@ function validar() {
 
             reqData.push(reqRow);
         }
+
     }
 
     if (reqData.length == 0) {
@@ -158,11 +165,11 @@ function validar() {
             if (subArchivoExist == "") {//para evitar error de elemento para subir archivos
 
                 var subArchivo = document.getElementById('SUBFILE' + i);
-                if (document.getElementById('SUBFILEOB' + i).value == 1 && subArchivo.value == '') {
+                if (opcionSeleccionada == "SI" && document.getElementById('SUBFILEOB' + i).value == 1 && subArchivo.value == '') {
                     alert('Se debe adjuntar un archivo en esta pregunta.');
                     subArchivo.focus();
                     return;
-                } else if (subArchivo.value != '') {
+                } else if (opcionSeleccionada == "SI" && subArchivo.value != '') {
                     var archivoSubRow = new Array(2);
                     archivoSubRow[0] = document.getElementById('SUBH' + i).value;//id requisito
                     archivoSubRow[1] = i;//posicion del contador para recorrer archivos más adelante
@@ -218,7 +225,7 @@ function validar() {
                             alerta += "\nY los pertenecientes a los subrequisitos con los coódigos: " + fallidosSub;
                         }
 
-                        document.getElementById('d_ingreso').innerHTML = '<p>Se actualizaron las listas con éxito. ' + alerta + '</p>';
+                        document.getElementById('d_ingreso').innerHTML = '<p>Se actualizaron las listas con éxito.' + alerta + '</p>';
                         $("#d_ingreso").dialog("open");
 
                     }
@@ -236,6 +243,10 @@ function validar() {
         }
     });
 
+    if (enviarInfo) {
+
+    }
+
     $('#modal1').modal('close');
 
 }
@@ -244,7 +255,7 @@ function validarExtension(fileNombre) {
 
     var adjunto = document.getElementById(fileNombre);
     var extension = (adjunto.value.substring(adjunto.value.lastIndexOf("."))).toLowerCase();
-    if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat') {
+    if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat' || extension === '.css') {
         alert("El formato del archivo adjunto no es válido.");
         adjunto.value = null;
         return;

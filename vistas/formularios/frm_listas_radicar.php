@@ -40,7 +40,8 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar();">Guardar cambios</a>
+                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar(true);">Guardar y Envíar</a>
+                        <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar(false);">Guardar Progreso</a>
                     </div>
                 </div>
             </form>
