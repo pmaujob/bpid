@@ -19,7 +19,7 @@ function onLoadBody() {
         buttons: {
             "Aceptar": function () {
                 $(this).dialog("close");
-                window.self.location = "../formularios/frm_radicar.php";
+                window.self.location = "../formularios/frm_listas_radicar.php";
             }
         }
     });

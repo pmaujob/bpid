@@ -38,7 +38,7 @@ if($sess->exist() && $sess->varExist('cedula'))
 				$datos=simplexml_load_file($this->rutaProyecto);
 				$numero_proyecto=utf8_decode($datos->Id);
 				$this->codigoControl=sha1_file($this->rutaProyecto);
-				 $consulta="select hash_num as numero from archivos where hash_num='$this->codigoControl'";
+				$consulta="select hash_num as numero from archivos where hash_num='$this->codigoControl'";
 				    	try{
 					$res=$this->con->consultar($consulta);
                                       

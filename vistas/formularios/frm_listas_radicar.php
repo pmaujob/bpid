@@ -32,7 +32,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 <div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
                         <h4>Lista de opciones</h4>
-                        <p>Seleccione los items y agregue observaciones si así lo desea.</p>
+                        <p>Seleccione los items y agregue observaciones si es necesario.</p>
                         <ul id="collapsible" class="collapsible" data-collapsible="accordion">
                             <div style="text-align: center; margin-left: auto; margin-right: auto;">
                                 <img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
@@ -58,7 +58,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <br>
                             </div>
                             <div class="row">
-                                <div class="col s12 m10 l10">
+                                <div class="col s12 m12 l12">
                                     <div class="row">
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">

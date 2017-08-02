@@ -1,12 +1,12 @@
 <?php
-require_once '../../modelo/CargarRadicados.php';
+require_once '../../modelo/CargarViabilizados.php';
 
 if (!empty($_POST['value']) && !empty($_POST['op'])) {
 
     $datos = $_POST['value'];
     $op = $_POST['op'];
 
-    $res = CargarRadicados::getRadicados($datos,$op);
+    $res = CargarViabilizados::getViabilizados($datos,$op);
     
     ?>
 
