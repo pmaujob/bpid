@@ -55,7 +55,7 @@ session_start();
 				case 2.3:
 				case 2.33:$( "#radicacion" ).toggle("slow");window.location.href="http://localhost/bpid/vistas/formularios/frm_certificado_radicar.php";break;
 				case 3.1:
-				case 3.11:$( "#viabilidad" ).toggle("slow");window.location.href="http://localhost/bpid/vistas/index.php";break;
+				case 3.11:$( "#viabilidad" ).toggle("slow");window.location.href="http://localhost/bpid/vistas/formularios/frm_viabilidad.php";break;
 				case 3.2:
 				case 3.22:$( "#viabilidad" ).toggle("slow");window.location.href="http://localhost/bpid/vistas/index.php";break;
 				case 3.3:

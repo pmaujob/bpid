@@ -30,7 +30,11 @@ for ($i = 0; $i < count($totalArchivosReq); $i += 2) {//incremento en +2 ya que 
     $ar = $_FILES['REQFILE' . $totalArchivosReq[$i + 1]];
     $nombreArchivoReq = basename($ar['name']);
     $archivoReq = $dirSubidaReq . $nombreArchivoReq;
+    if($ar['tmp_name'] == ""){
+        
     $shareq = sha1_file($ar['tmp_name']);
+    }
+
 
     if (move_uploaded_file($ar['tmp_name'], $archivoReq)) {
 
@@ -38,7 +42,7 @@ for ($i = 0; $i < count($totalArchivosReq); $i += 2) {//incremento en +2 ya que 
         $objetoArchivoReq->setRuta($archivoReq);
         $objetoArchivoReq->setNombreArchivo($nombreArchivoReq);
         $objetoArchivoReq->setNombreRealArchivo($nombreArchivoReq);
-        $objetoArchivoReq->setNumeroProyecto($numProyecto);
+        $objetoArchivoReq->setNumersoProyecto($numProyecto);
         $objetoArchivoReq->setCodBpid($bpid);
         $objetoArchivoReq->setHashNum($shareq);
         $objetoArchivoReq->setCodEtapa($totalArchivosReq[$i]);

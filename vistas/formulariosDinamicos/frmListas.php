@@ -92,7 +92,7 @@ foreach ($listasRequeridas as $filar) {
                             <?php
                         } else {
                             ?>
-                            <label>Elija un adjunto</label>
+                            <label>Seleccione Archivo</label>
                             <br>
                             <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
                             <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filar1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
@@ -174,7 +174,7 @@ if (count($listasEspecificas) == 0) {
                                             <?php
                                         } else {
                                             ?>
-                                            <label>Elija un adjunto</label>
+                                            <label>Seleccione Archivo</label>
                                             <br>
                                             <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filae1[0]; ?>" />
                                             <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filae1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
@@ -245,7 +245,7 @@ if (count($listasEspecificas) == 0) {
                                                             <?php
                                                         } else {
                                                             ?>
-                                                            <label>Elija un adjunto</label>
+                                                            <label>Seleccione Archivo</label>
                                                             <br>
                                                             <input type="hidden" id="<?php echo subFilePre . $nOpcionesSub; ?>" value="<?php echo $filas[0]; ?>" />
                                                             <input type="hidden" id="<?php echo subFileOb . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>" /><!--saber si el adjunto es obligatorio-->

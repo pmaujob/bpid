@@ -18,10 +18,12 @@ if($extension=="xml" or $extension=="XML")
 	$numero_proyecto=utf8_decode($datos->Id);
 	$sector=(string)utf8_decode($datos->Sector->Description);
 	$sector=utf8_encode($sector);
+	$problema=utf8_decode($datos->CentralProblem->CentralProblem);
 	$departamento=(string)utf8_decode($datos->Localizations->Localization[1]->Department->Name);
 	$departamento=utf8_encode($departamento);
 	$municipio=(string)utf8_decode($datos->Localizations->Localization[1]->SpecificLocalization);
 	$municipio=utf8_encode($municipio);
+	$poblacion=utf8_decode($datos->ObjectivePeople);
 	$eje=(string)utf8_decode($datos->PublicationContribution->Strategy);
 	$eje=utf8_encode($eje);
 	$programa=(string)utf8_decode($datos->PublicationContribution->ProgramDescription);
@@ -65,7 +67,7 @@ if($extension=="xml" or $extension=="XML")
 			}	
 			$jsonEs = CambiarFormatos::convertirAJsonItems($jsonespecifico);
 			$jsonFu  = CambiarFormatos::convertirAJsonItems($informacion);
-	$datos=$nombrep."*/".$sector."*/".$departamento."*/".$municipio."*/".$eje."*/".$programa."*/".$subprograma."*/".$total."*/".$numero_proyecto."*/".$jsonEs."*/".$jsonFu;
+	$datos=$nombrep."*/".$sector."*/".$departamento."*/".$municipio."*/".$eje."*/".$programa."*/".$subprograma."*/".$total."*/".$numero_proyecto."*/".$jsonEs."*/".$jsonFu."*/".$problema."*/".$poblacion;
 	echo $datos;
 	//print_r($jsonespecifico);
 }
