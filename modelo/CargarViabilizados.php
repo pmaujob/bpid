@@ -4,18 +4,39 @@ require_once '../../librerias/ConexionPDO.php';
   
 class CargarViabilizados{
 
-    public static function getViabilizados($datos,$op){
+    public static function getViabilizados($numBpid,$op){
         
-        $datos = "'".$datos."'";
+        switch ($op) {
+            case 1:
+                 $consulta='select pro,'//0
+                   .'problema,'//1
+                   .'obj,'//2
+                   .'numben,'//3
+                   .'eje,'//4
+                   .'spro,'//5
+                   .'sec,'//6
+                   .'val,'//7
+                   .'localizacion '//8
+                   .'from get_datos_viabilidad('.$numBpid.','.$op.') as ("pro" varchar, "problema" varchar, "obj" varchar, "numben" integer, "eje" varchar, "spro" varchar, "sec" varchar, "val" varchar, "localizacion" varchar);';
+                break;
+             case 2:
+                 $consulta='select obj '
+                   .'from get_datos_viabilidad('.$numBpid.','.$op.') as ("obj" varchar);';
+                break;
+              case 3:
+                 $consulta='select origen,'//0
+                   .'valor,'//1
+                   .'periodo '//8
+                   .'from get_datos_viabilidad('.$numBpid.','.$op.') as ("origen" varchar, "valor" numeric, "periodo" integer);';
+                break;       
+            
+            default:
+                # code...
+                break;
+        }
+       
 
-        $consulta = 'select cod, '//0
-                . 'num, '//1
-                . 'nombre, '//2
-                . 'abr, '//3
-                . 'id, '//4
-                . 'nump '//5
-                . 'from get_radicados('.$datos.','.$op.') as ("cod" integer, "num" varchar, "nombre" varchar, "abr" varchar, "id" varchar, "nump" varchar);';
-
+                
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);

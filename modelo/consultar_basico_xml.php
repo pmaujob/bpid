@@ -18,7 +18,7 @@ if($extension=="xml" or $extension=="XML")
 	$numero_proyecto=utf8_decode($datos->Id);
 	$sector=(string)utf8_decode($datos->Sector->Description);
 	$sector=utf8_encode($sector);
-	$problema=utf8_decode($datos->CentralProblem->CentralProblem);
+	$problema=tildes($datos->CentralProblem->CentralProblem);
 	$departamento=(string)utf8_decode($datos->Localizations->Localization[1]->Department->Name);
 	$departamento=utf8_encode($departamento);
 	$municipio=(string)utf8_decode($datos->Localizations->Localization[1]->SpecificLocalization);
@@ -30,6 +30,7 @@ if($extension=="xml" or $extension=="XML")
 	$programa=utf8_encode($programa);
 	$subprograma=(string)utf8_decode($datos->FundingSource->ExpenseType->Description);
 	$subprograma=utf8_encode($subprograma);
+	$objetivo=tildes($datos->GeneralObjective->GeneralObjective);
 	//OBTENER VALOR DEL PROYECTO SUMANDO LAS ACTIVIDADES
 	$monto=array();
 	$detalle=array();
@@ -38,7 +39,7 @@ if($extension=="xml" or $extension=="XML")
 	$val=0;
 	foreach ($datos->FundingSource->Sources->Source as $tipo) 
 			{
-				$detalle[]=utf8_decode((string)$tipo->ResourceType->Description);
+				$detalle[]=tildes((string)$tipo->ResourceType->Description);
 				//echo $a;
 				foreach ($datos->FundingSource->Sources->Source[$indice]->SourceProgrammings->SourceProgramming as $valores)
 				{
@@ -52,6 +53,29 @@ if($extension=="xml" or $extension=="XML")
 				$indice++;	
 			}	
 	$total= number_format($total, 0, '', '.'); 
+//	INFORMACION DE LAS ACTIVIDADES DEL PROYECTO
+	$actividades=array();
+	$numpro=0;
+	$numact=0;
+
+foreach ($datos->Alternatives->Alternative->Products->Product as $producto) 
+			{
+			$actividades[]=tildes((string)$producto->ProductName);
+			$informacionProductos[$numpro]=array("id_producto"=>$numpro,"producto"=>$actividades[$numpro]);
+			foreach ($datos->Alternatives->Alternative->Products->Product[$numpro]->Activities->Activity as $actividad)
+			{
+				//echo $numact;
+				$nombreact[]=tildes((string)$actividad->Name);
+				$costo[]=(string)$actividad->Cost;
+				$informacion_act[$numact] = array("id_producto"=>$numpro,"Actividad"=> $nombreact[$numact],"Costo"=>$costo[$numact]); 
+				
+				
+			$numact++;
+			}
+						
+			$numpro++;
+			}	
+
 
 	//INFORMACION DE LOS OBJETIVOS ESPECIFICOS
 
@@ -65,9 +89,14 @@ if($extension=="xml" or $extension=="XML")
 			$jsonespecifico[$val1]=array("Objetivo"=>$ob_especificos[$val1]);
 			$val1++;
 			}	
-			$jsonEs = CambiarFormatos::convertirAJsonItems($jsonespecifico);
+			$jsonEs = CambiarFormatos::convertirAJsonItems($jsonespecifico);			
 			$jsonFu  = CambiarFormatos::convertirAJsonItems($informacion);
-	$datos=$nombrep."*/".$sector."*/".$departamento."*/".$municipio."*/".$eje."*/".$programa."*/".$subprograma."*/".$total."*/".$numero_proyecto."*/".$jsonEs."*/".$jsonFu."*/".$problema."*/".$poblacion;
+			$jsonPro  = CambiarFormatos::convertirAJsonItems($informacionProductos);
+			$jsonAct  = CambiarFormatos::convertirAJsonItems($informacion_act);
+			
+
+	$datos=$nombrep."*/".$sector."*/".$departamento."*/".$municipio."*/".$eje."*/".$programa."*/".$subprograma."*/".$total."*/".$numero_proyecto."*/".$jsonEs."*/".($jsonFu != null ? $jsonFu : "'null'" )."*/".$problema."*/".$poblacion."*/".$objetivo
+	."*/".$jsonPro."*/".$jsonAct;
 	echo $datos;
 	//print_r($jsonespecifico);
 }

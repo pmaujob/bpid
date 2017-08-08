@@ -25,6 +25,7 @@ if($extension=="xml" or $extension=="XML")
 	$programa=strtoupper(utf8_encode($programa));
 	$subprograma=(string)utf8_decode($datos->FundingSource->ExpenseType->Description);
 	$subprograma=strtoupper(utf8_encode($subprograma));
+	$objetivo=utf8_decode($datos->GeneralObjective->GeneralObjective);
 	//OBTENER VALOR DEL PROYECTO SUMANDO LAS ACTIVIDADES
 	$monto=array();
 	$detalle=array();
