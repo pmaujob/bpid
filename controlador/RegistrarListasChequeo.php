@@ -1,4 +1,5 @@
 <?php
+
 @session_start();
 
 $raiz = $_SESSION['raiz'];
@@ -62,38 +63,37 @@ class RegistrarListasChequeo {
         $resInsert = MRegistrarListasChequeo::registrarListasChequeo($this->getIdRad(), $reqJson, $subJson);
 
         if (isset($_POST['noCont']) && $_POST['noCont'] > 0 && $resInsert == 1) {//enviar correo proyecto con items desaprobados
+            enviarDummy();
+            /*
+              $correo = new phpmailer();
 
-            $correo = new phpmailer();
+              $correo->PluginDir = "../librerias/PHPMailer/";
+              $correo->Mailer = "smtp";
+              $correo->Host = "smtp.gmail.com";
+              $correo->SMTPAuth = false;
+              $correo->Username = "planeacionbpid@gmail.com";
+              $correo->Password = "bpid2017";
 
-            $correo->PluginDir = "../librerias/PHPMailer/";
-            $correo->Mailer = "smtp";
-            $correo->Host = "smtp.gmail.com";
-            $correo->SMTPAuth = false;
-            $correo->Username = "planeacionbpid@gmail.com";
-            $correo->Password = "bpid2017";
+              $correo->From = "planeacionbpid@gmail.com";
+              $correo->FromName = "Planeación BPID";
+              $correo->Timeout = 0;
 
-            $correo->From = "planeacionbpid@gmail.com";
-            $correo->FromName = "Planeación BPID";
-            $correo->Timeout = 0;
+              $correo->AddAddress("danielernestodaza@hotmail.com");
+              $correo->Subject = "Información de Radicación Proyecto - Bpid";
+              $correo->Body = "<b>Mensaje de prueba mandado con phpmailer en formato html</b>";
+              $correo->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
 
-            $correo->AddAddress("danielernestodaza@hotmail.com");
-            $correo->Subject = "Información de Radicación Proyecto - Bpid";
-            $correo->Body = "<b>Mensaje de prueba mandado con phpmailer en formato html</b>";
-            $correo->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
+              //$correoEnviado = $correo->send();
+              //return var_dump($correo->send());
 
-            //$correoEnviado = $correo->send();
-
-            return var_dump($correo->send());
-            
-            /*$intentos = 1;
-            while ((!$correoEnviado) && ($intentos < 3)) {
-                sleep(5);
-                $correoEnviado = $correo->send();
-                $intentos++;
-            }*/            
-            
+              $intentos = 1;
+              while ((!$correoEnviado) && ($intentos < 3)) {
+              sleep(5);
+              $correoEnviado = $correo->send();
+              $intentos++;
+              } */
         }
-        
+
         //return $resInsert;
     }
 
@@ -107,9 +107,7 @@ if (!empty($_POST['idRad']) && !isset($_POST['guardarEnviar'])) {
     $registrar->setSubRequisitos($_POST['subData']);
 
     echo $registrar->registrar();
-    
 } else if (!empty($_POST['idRad']) && !isset($_POST['guardarEnviar'])) {//enviar correo proyecto radicado
-
     $res = MRegistrarListasChequeo::guardarEnviarListas($_POST['idRad']);
 
     if ($res == 1) {
@@ -144,4 +142,30 @@ if (!empty($_POST['idRad']) && !isset($_POST['guardarEnviar'])) {
 
     echo $res;
 }
+
+function enviarDummy() {
+    $mail = new PHPMailer();
+    //Luego tenemos que iniciar la validación por SMTP:
+    $mail->IsSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Host = "smtp.gmail.com"; // A RELLENAR. Aquí pondremos el SMTP a utilizar. Por ej. mail.midominio.com
+    $mail->Username = "planeacionbpid@gmail.com"; // A RELLENAR. Email de la cuenta de correo. ej.info@midominio.com La cuenta de correo debe ser creada previamente. 
+    $mail->Password = "bpid2017"; // A RELLENAR. Aqui pondremos la contraseña de la cuenta de correo
+    $mail->Port = 465; // Puerto de conexión al servidor de envio. 
+    $mail->From = "planeacionbpid@gmail.com"; // A RELLENARDesde donde enviamos (Para mostrar). Puede ser el mismo que el email creado previamente.
+    $mail->FromName = "BPID"; //A RELLENAR Nombre a mostrar del remitente. 
+    $mail->AddAddress("danielernestodaza@hotmail.com"); // Esta es la dirección a donde enviamos 
+    $mail->IsHTML(true); // El correo se envía como HTML 
+    $mail->Subject = "Prueba correo"; // Este es el titulo del email. 
+    $body = "Hola mundo";
+    $body .= "Cuerpo del mensaje";
+    $mail->Body = $body; // Mensaje a enviar. 
+    $exito = $mail->Send(); // Envía el correo.
+    if ($exito) {
+        echo 'El correo fue enviado correctamente.';
+    } else {
+        echo 'Hubo un problema. Contacta a un administrador.';
+    }
+}
+
 ?>
