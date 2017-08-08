@@ -144,28 +144,14 @@ if (!empty($_POST['idRad']) && !isset($_POST['guardarEnviar'])) {
 }
 
 function enviarDummy() {
-    $mail = new PHPMailer();
-    //Luego tenemos que iniciar la validación por SMTP:
-    $mail->IsSMTP();
-    $mail->SMTPAuth = true;
-    $mail->Host = "smtp.gmail.com"; // A RELLENAR. Aquí pondremos el SMTP a utilizar. Por ej. mail.midominio.com
-    $mail->Username = "planeacionbpid@gmail.com"; // A RELLENAR. Email de la cuenta de correo. ej.info@midominio.com La cuenta de correo debe ser creada previamente. 
-    $mail->Password = "bpid2017"; // A RELLENAR. Aqui pondremos la contraseña de la cuenta de correo
-    $mail->Port = 465; // Puerto de conexión al servidor de envio. 
-    $mail->From = "planeacionbpid@gmail.com"; // A RELLENARDesde donde enviamos (Para mostrar). Puede ser el mismo que el email creado previamente.
-    $mail->FromName = "BPID"; //A RELLENAR Nombre a mostrar del remitente. 
-    $mail->AddAddress("danielernestodaza@hotmail.com"); // Esta es la dirección a donde enviamos 
-    $mail->IsHTML(true); // El correo se envía como HTML 
-    $mail->Subject = "Prueba correo"; // Este es el titulo del email. 
-    $body = "Hola mundo";
-    $body .= "Cuerpo del mensaje";
-    $mail->Body = $body; // Mensaje a enviar. 
-    $exito = $mail->Send(); // Envía el correo.
-    if ($exito) {
-        echo 'El correo fue enviado correctamente.';
-    } else {
-        echo 'Hubo un problema. Contacta a un administrador.';
-    }
+    // El mensaje
+    $mensaje = "Línea 1\r\nLínea 2\r\nLínea 3";
+
+// Si cualquier línea es más larga de 70 caracteres, se debería usar wordwrap()
+    $mensaje = wordwrap($mensaje, 70, "\r\n");
+
+// Enviar
+    echo var_dump(mail('danielernestodaza@hotmail.com', 'Prueba maldición', $mensaje));
 }
 
 ?>
