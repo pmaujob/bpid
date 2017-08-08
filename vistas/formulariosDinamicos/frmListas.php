@@ -23,6 +23,8 @@ const subFileExist = 'SUBFILEEXIST';
 const reqObsLbl = 'REQOBSLBL';
 const subObsLbl = 'SUBOBSLBL';
 
+$noCont = 0;
+
 require_once $raiz . '/modelo/CargarListas.php';
 
 $fil = $_POST['value'];
@@ -49,6 +51,9 @@ foreach ($listasRequeridas as $filar) {
             $requisitosListaGeneral = CargarListas::getRequisitos($fil, $filar[0]);
             foreach ($requisitosListaGeneral as $filar1) {
                 $nOpcionesReq++;
+                if ($filar1[2] == "NO") {
+                    $noCont++;
+                }
                 ?>
                 <div class="cardview_checklist">
                     <span>
@@ -56,13 +61,14 @@ foreach ($listasRequeridas as $filar) {
                     </span>
                     <p>
                         <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filar1[0]; ?>">
-                        <select id="<?php echo req . $nOpcionesReq; ?>" class="browser-default" <?php if ($filar1[2] == "SI") echo "disabled"; ?> >
+                        <select id="<?php echo req . $nOpcionesReq; ?>" class="browser-default" <?php if ($filar1[2] == "SI") echo "disabled"; ?> onchange="validarNo('<?php echo req . $nOpcionesReq; ?>');" >
                             <option value="SI" <?php if ($filar1[2] == "SI") echo "selected"; ?>>Si</option>
                             <option value="NO" <?php if ($filar1[2] == "NO") echo "selected"; ?>>No</option>
                             <option value="NA" <?php if ($filar1[2] == "NA") echo "selected"; ?>>No aplica</option>
                         </select>
                     </p>
-                    <?php if ($filar1[2] != "SI") {
+                    <?php
+                    if ($filar1[2] != "SI") {
                         ?>
                         <div class="row">
                             <form class="col s12">
@@ -130,6 +136,9 @@ if (count($listasEspecificas) == 0) {
                         if ($op == "principal") {
                             foreach ($lista_requisitos as $filae1) {
                                 $nOpcionesReq++;
+                                if ($filae1[2] == "NO") {
+                                    $noCont++;
+                                }
                                 ?>
                                 <div class="cardview_checklist">
                                     <span>
@@ -138,8 +147,8 @@ if (count($listasEspecificas) == 0) {
                                     <p>
                                         <label>Elija una opción</label>
                                         <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filae1[0]; ?>">
-                                        <select id="<?php echo req . $nOpcionesReq; ?>" class="<?php echo req; ?> browser-default">
-                                            <option value="SI" <?php if ($filae1[2] == "SI") echo "selected disabled"; ?>>Si</option>
+                                        <select id="<?php echo req . $nOpcionesReq; ?>" class="<?php echo req; ?> browser-default" onchange="validarNo('<?php echo req . $nOpcionesReq; ?>');">
+                                            <option value="SI" <?php if ($filae1[2] == "SI") echo "selected"; ?>>Si</option>
                                             <option value="NO" <?php if ($filae1[2] == "NO") echo "selected"; ?>>No</option>
                                             <option value="NA" <?php if ($filae1[2] == "NA") echo "selected"; ?>>No aplica</option>
                                         </select>
@@ -199,6 +208,9 @@ if (count($listasEspecificas) == 0) {
                                             <?php
                                             foreach ($lista_subrequisitos as $filas) {
                                                 $nOpcionesSub++;
+                                                if ($filas[2] == "NO") {
+                                                    $noCont++;
+                                                }
                                                 ?>
                                                 <div class="cardview_checklist">
                                                     <span>
@@ -207,8 +219,8 @@ if (count($listasEspecificas) == 0) {
                                                     <p>
                                                         <label>Elija una opción</label>
                                                         <input id="<?php echo subh . $nOpcionesSub; ?>" type="hidden" value="<?php echo $filas[0]; ?>">
-                                                        <select id="<?php echo sub . $nOpcionesSub; ?>" class="<?php echo sub; ?> browser-default">
-                                                            <option value="SI" <?php if ($filas[2] == "SI") echo "selected disabled"; ?>>Si</option>
+                                                        <select id="<?php echo sub . $nOpcionesSub; ?>" class="<?php echo sub; ?> browser-default" onchange="validarNo('<?php echo sub . $nOpcionesSub; ?>');">
+                                                            <option value="SI" <?php if ($filas[2] == "SI") echo "selected"; ?>>Si</option>
                                                             <option value="NO" <?php if ($filas[2] == "NO") echo "selected"; ?>>No</option>
                                                             <option value="NA" <?php if ($filas[2] == "NA") echo "selected"; ?>>No aplica</option>
                                                         </select>
@@ -281,3 +293,4 @@ if (count($listasEspecificas) == 0) {
 <input type="hidden" id="idRad" name="idRad" value="<?php echo $fil; ?>">
 <input type="hidden" id="bpid" name="bpid" value="<?php echo $bpid; ?>">
 <input type="hidden" id="numProyecto" name="numProyecto" value="<?php echo $numProyecto; ?>">
+<input type="hidden" id="noCont" name="noCont" value="<?php echo $noCont; ?>">
