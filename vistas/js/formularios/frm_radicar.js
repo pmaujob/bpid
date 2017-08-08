@@ -135,6 +135,9 @@ function archivo_xml()
 													document.getElementById('fuentes').value=cadena[10];
 													document.getElementById('problema').value=cadena[11];
 													document.getElementById('poblacion').value=cadena[12];
+													document.getElementById('objetivog').value=cadena[13];
+													document.getElementById('productos').value=cadena[14];
+													document.getElementById('actividades').value=cadena[15];
 													quitar_pantalla();
 													}
 													});	
@@ -199,11 +202,14 @@ function almacenar()
  	var fuentes=document.getElementById('fuentes').value;
  	var problema=document.getElementById('problema').value;
  	var poblacion=document.getElementById('poblacion').value;
+ 	var objetivog=document.getElementById('objetivog').value;
+ 	var productos=document.getElementById('productos').value;
+ 	var actividades=document.getElementById('actividades').value;
  	
  	var value=numero_proyecto+'//'+nombre_proyecto +'//'+sector+'//'+localizacion+'//'+valor+'//'+eje+'//'+programa+'//'+subprograma+'//'+poai+'//'+
  	entidad_proponente+'//'+entidad_ejecutante+'//'+num_id_responsable+'//'+nom_responsable+'//'+cargo_responsable+'//'+
  	direccion_responsable+'//'+telefono_responsable+'//'+cel_responsable+'//'+correo_responsable+'//'+id_usuario+'//'+nombre_usuario+'//'+
- 	observaciones+'//'+objetivos+'//'+fuentes+'//'+problema+'//'+poblacion;
+ 	observaciones+'//'+objetivos+'//'+fuentes+'//'+problema+'//'+poblacion+'//'+objetivog+'//'+productos+'//'+actividades;
  	
  	
  	 $('#modal1').modal('close');
@@ -214,7 +220,7 @@ function almacenar()
 			async: false,
 			data:{value:value},
 			success:function(respuesta){
-			//	alert(respuesta)
+				alert(respuesta)
 				
 			if(respuesta==1){ 
 				var formData=new FormData($("#frm_radicar")[0]);  //lo hago por la validacion

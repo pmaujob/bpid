@@ -75,12 +75,21 @@ class CambiarFormatos {
 
     public static function convertirAJsonItems($array) {
 
+if($array != null && count($array) > 0){
+
+
         $json = json_encode($array);
         $items = '{ "Items" :';
         $json = "'" . $items . $json . "}'";
+
         return $json;
+    } else {
+return null;
+    }
+
         
     }
+    
 
 }
 

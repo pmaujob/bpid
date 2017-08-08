@@ -69,18 +69,16 @@ function buscarProyectos(op) {
     });
 
 }
-function mas(cod, bpid, numProyecto) {
+function mas(cod, bpid,numProyecto) {
 
 
-    value = cod;
-    var bpid = bpid;
-
-    jQuery.ajax({
+        jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmViabilizados.php',
         async: true,
-        data: {value: value, bpid: bpid, numProyecto: numProyecto},
+        data: {bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
+            //alert(respuesta);
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
           

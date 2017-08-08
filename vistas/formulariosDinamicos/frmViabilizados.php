@@ -1,38 +1,57 @@
 <?php
 require_once '../../modelo/CargarViabilizados.php';
 
-if (!empty($_POST['value']) && !empty($_POST['op'])) {
+if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
-    $datos = $_POST['value'];
-    $op = $_POST['op'];
+    $numBpid = $_POST['bpid'];
+    $numProyecto = $_POST['numProyecto'];
 
-    $res = CargarViabilizados::getViabilizados($datos,$op);
+    $datosViabilizados = CargarViabilizados::getViabilizados($numBpid,1);
+    $datosObjetivos = CargarViabilizados::getViabilizados($numBpid,2);
+    $datosFinanciacion = CargarViabilizados::getViabilizados($numBpid,3);
     
     ?>
-
-    <table>
+<div class="contenedor_tabla">  
+  <table class="striped">
         <thead>
-            <tr><th>ID MGA</th><th>Código Bpid</th><th>Nombre del Proyecto</th><th>Editar</th></tr>
+            <tr><th colspan="2" >DATOS INICIALES DEL PROYECTO:<?php echo $numProyecto;?></th></tr>
         </thead>
         <tbody>
             <?php
-            if (count($res) > 0) {
-                foreach ($res as $fila) {
+            if (count($datosViabilizados) > 0) {
+                foreach ($datosViabilizados as $fila) {
                     ?>
 
                     <tr>
-                        <td><?php echo $fila[5]; ?></td>
-                        <td><?php echo $fila[1]; ?></td>
-                        <td title="<?php echo $fila[2]; ?>"><?php echo $fila[3]; ?></td>
-                        <td>
-                            <a href="#" title="Ver Más">
-                                <div onclick="mas(<?php echo $fila[0]; ?>,<?php echo $fila[4]; ?>,<?php echo $fila[5]; ?>);">
-                                    <img src="../../vistas/img/anadir.png">
-                                </div>
-                            </a>
-                        </td>
+                        <th>Nombre del Proyecto</th><td><?php echo $fila[2]; ?></td>
                     </tr>
-
+                    <tr>
+                        <th>Problema o Necesidad</th><td><?php echo $fila[1]; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Numero de Beneficiarios</th><td><?php echo number_format($fila[3], 0,'', '.'); ?></td>
+                    </tr>
+                     <tr>
+                        <th>Eje</th><td><?php echo $fila[4]; ?></td>
+                    </tr>
+                     <tr>
+                        <th>Programa</th><td><?php echo $fila[0]; ?></td>
+                    </tr>
+                     <tr>
+                        <th>Subprograma</th><td><?php echo $fila[5]; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Sector</th><td><?php echo $fila[6]; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Valor Proyecto</th><td><?php echo $fila[7]; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Localizacion</th><td><?php echo $fila[8]; ?></td>
+                    </tr>
+                    <tr> <th>Objetivo General</th> <td><?php echo $fila[2]; ?></td>
+                    </tr>
+                    
                     <?php
                 }
             } else {
@@ -44,8 +63,69 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
             }
             ?>
         </tbody>
-    </table>    
+    </table>  
+    <table class="striped">
+     <tr><th colspan="2" style="text-align:center;">OBJETIVOS ESPECIFICOS PROYECTO </th></tr>
+        </thead>
+        <tbody>
+            <?php
 
+            if (count($datosObjetivos) > 0) {
+                foreach ($datosObjetivos as $obj) {
+                    ?>
+
+                    <tr>
+                         <td><?php echo $obj[0]; ?></td>
+                    </tr>
+                    
+                    <?php
+                }
+            } else {
+                ?>
+
+                <tr><td>No se encontraron resultados para la búsqueda.</td></tr>
+
+                <?php
+            }
+            ?>
+        </tbody>
+        </table>       
+     <table class="striped">
+     <tr><th colspan="3" style="text-align:center;">FUENTES DE FINANCIACIÓN </th></tr>
+     <tr>
+     <th>Origen Financiación</th><th>Valor Financiación</th><th>Periodo Financiación</th>
+    </tr>
+        </thead>
+        <tbody>
+            <?php
+
+            if (count($datosFinanciacion) > 0) {
+                foreach ($datosFinanciacion as $fin) {
+                    ?>
+
+                    <tr>
+                         <td><?php echo $fin[0]; ?></td>
+                         <td><?php echo number_format($fin[1]) ?></td>
+                         <td><?php echo $fin[2]; ?></td>
+                    </tr>
+                    
+                    <?php
+                }
+            } else {
+                ?>
+
+                <tr><td>No se encontraron resultados para la búsqueda.</td></tr>
+
+                <?php
+            }
+            ?>
+        </tbody>
+        </table>       
     <?php
 }
+
+
+
+
 ?>
+</div>
