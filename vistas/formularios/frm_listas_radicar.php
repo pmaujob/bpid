@@ -1,9 +1,10 @@
 <?php
-session_start();
+@session_start();
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
 const idFormulario = 2; //id 2 pertenece a lista de checkeo
+const idEtapa = 1; //id 1 etapa para buscar proyectos ingresados para radicar
 $sess = new SessionVars();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
@@ -24,11 +25,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <div id="d_error" title="ALERTA"></div>
             <div id="d_ingreso" title="INFORMACION"></div>
             <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
-                <!--
-                <div id="dialogCargando" class="frm_externo">
-                    <img src="../css/wait.gif">
-                </div>
-                -->
                 <div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
                         <h4>Lista de opciones</h4>
@@ -39,15 +35,18 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             </div>
                         </ul>
                     </div>
-                    <div class="modal-footer">
-                        <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar();">Guardar cambios</a>
+                    <div class="modal-footer">          
+                        <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
+                        <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
+
+                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar(true);">Guardar y Envíar</a>
+                        <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="validar(false);">Guardar Progreso</a>
                     </div>
                 </div>
             </form>
 
             <?php require_once '../menu.php'; ?>
             <form id='frm_radicar_listas' name='frm_radicar_listas' onSubmit="return false"  enctype="multipart/form-data">
-
 
                 <div class="col s12 m11 l9">
                     <div class="bajar">
@@ -63,11 +62,11 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">
                                                 <div class="file-field input-field">
-                                                    <div class="btn" onclick="buscarProyectos();">
+                                                    <div class="btn" onclick="buscarProyectos('<?php echo idEtapa; ?>');">
                                                         <span>Buscar proyecto</span>
                                                     </div>
                                                     <div class="file-path-wrapper">
-                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos(1);">
+                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos('<?php echo idEtapa; ?>');">
                                                     </div>
                                                 </div>
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
@@ -78,9 +77,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                     <div id="resultado" class="row">
 
                                     </div>
-                                    <!--div class="col s12 m12 l12">
-                                    <?php require_once "footer.php"; ?>
-                                    </div-->
                                 </div>
                             </div>
                         </div>

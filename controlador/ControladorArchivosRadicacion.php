@@ -1,12 +1,15 @@
 <?php
 
-require_once '../modelo/Archivos.php';
-require_once '../librerias/ConexionPDO.php';
+@session_start();
+$raiz = $_SESSION['raiz'];
+
+require_once $raiz . '/modelo/Archivos.php';
+require_once $raiz . '/librerias/ConexionPDO.php';
 
 $numProyecto = $_POST['numProyecto'];
 $bpid = $_POST['bpid'];
 $idRad = $_POST['idRad'];
-$totalArchivosReq = explode(',', $_POST['totalArchivosReq']);
+$totalArchivosReq = ($_POST['totalArchivosReq'] != '' ? explode(',', $_POST['totalArchivosReq']) : null);
 $totalArchivosSub = ($_POST['totalArchivosSub'] != '' ? explode(',', $_POST['totalArchivosSub']) : null);
 
 $dirSubidaReq = "../archivos/proyectos/$numProyecto/requisitos/";
@@ -27,11 +30,7 @@ for ($i = 0; $i < count($totalArchivosReq); $i += 2) {//incremento en +2 ya que 
     $ar = $_FILES['REQFILE' . $totalArchivosReq[$i + 1]];
     $nombreArchivoReq = basename($ar['name']);
     $archivoReq = $dirSubidaReq . $nombreArchivoReq;
-    if($ar['tmp_name'] == ""){
-        
     $shareq = sha1_file($ar['tmp_name']);
-    }
-
 
     if (move_uploaded_file($ar['tmp_name'], $archivoReq)) {
 
@@ -39,7 +38,7 @@ for ($i = 0; $i < count($totalArchivosReq); $i += 2) {//incremento en +2 ya que 
         $objetoArchivoReq->setRuta($archivoReq);
         $objetoArchivoReq->setNombreArchivo($nombreArchivoReq);
         $objetoArchivoReq->setNombreRealArchivo($nombreArchivoReq);
-        $objetoArchivoReq->setNumersoProyecto($numProyecto);
+        $objetoArchivoReq->setNumeroProyecto($numProyecto);
         $objetoArchivoReq->setCodBpid($bpid);
         $objetoArchivoReq->setHashNum($shareq);
         $objetoArchivoReq->setCodEtapa($totalArchivosReq[$i]);
