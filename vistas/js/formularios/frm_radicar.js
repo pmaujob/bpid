@@ -233,7 +233,7 @@ function almacenar()
 										success: function(datos)
 										{
 										quitar_pantalla();	
-										//alert(datos);
+										alert(datos);
 			 $('#modal1').modal('close');							
 			document.getElementById('d_ingreso').innerHTML='<p>EL NUMERO BPID ASIGNADO ES '+ datos + '</p>';
 			$("#d_ingreso").dialog("open");
