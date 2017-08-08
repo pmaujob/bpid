@@ -79,17 +79,17 @@ function mas(cod, bpid, numProyecto) {
         data: {value: value, bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
             document.getElementById('collapsible').innerHTML = respuesta;
-            
+
             noCont = document.getElementById('noCont').value;
             focusear(document.getElementById('nOpcionesReq').value, document.getElementById('nOpcionesSub').value);
 
             $(document).ready(function () {
                 $('.collapsible').collapsible();
             });
-        },error: function () {
+        }, error: function () {
             alert("Error inesperado")
             window.top.location = "../index.html";
-        }        
+        }
     });
 
 }
@@ -194,7 +194,7 @@ function validar(enviarInfo) {
         data: {idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: noCont},
         success: function (respuesta) {
 
-            console.log("respuesta: "+respuesta);
+            console.log("respuesta: " + respuesta);
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
@@ -271,7 +271,15 @@ function validar(enviarInfo) {
                 });
 
             } else {
-                mostrarMensaje('No se pudo guardar el progreso, vuelva a intentarlo.', false);
+
+                waitGuardarProgreso.style.display = "none";
+
+                var msjInfo = document.getElementById('msjInfo');
+                msjInfo.innerHTML = "No se pudo guardar el progreso, vuelva a intentarlo.";
+                msjInfo.style.color = "#e53935";
+                msjInfo.style.wordBreak = "break-all";
+                msjInfo.style.display = "";
+
             }
         },
         error: function () {
