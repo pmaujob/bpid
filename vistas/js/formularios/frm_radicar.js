@@ -220,7 +220,7 @@ function almacenar()
 			async: false,
 			data:{value:value},
 			success:function(respuesta){
-				alert(respuesta)
+				//alert(respuesta)
 				
 			if(respuesta==1){ 
 				var formData=new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
@@ -233,7 +233,7 @@ function almacenar()
 										success: function(datos)
 										{
 										quitar_pantalla();	
-										alert(datos);
+										//alert(datos);
 			 $('#modal1').modal('close');							
 			document.getElementById('d_ingreso').innerHTML='<p>EL NUMERO BPID ASIGNADO ES '+ datos + '</p>';
 			$("#d_ingreso").dialog("open");

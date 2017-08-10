@@ -12,6 +12,7 @@ if($extension=="xml" or $extension=="XML")
 	$datos=simplexml_load_file($ruta);
 	$nombre_proyecto=(string)utf8_decode($datos->Name);
 	$nombre_proyecto=strtoupper(utf8_encode($nombre_proyecto));
+	$nombre_proyecto = htmlentities($nombre_proyecto);
 	$numero_proyecto=utf8_decode($datos->Id);
 	$sector=(string)utf8_decode($datos->Sector->Description);
 	$sector=strtoupper(utf8_encode($sector));
