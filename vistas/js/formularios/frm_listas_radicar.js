@@ -191,10 +191,8 @@ function validar(enviarInfo) {
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
         async: true,
-        data: {idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: noCont},
+        data: {idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
-
-            console.log("respuesta: " + respuesta);
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
@@ -218,7 +216,7 @@ function validar(enviarInfo) {
                             alerta += "Los archivos fueron subidos con éxito.\n"
                                     + "Excepto los pertenecientes a los subrequisitos con los códigos: " + fallidosSub;
                         } else if (fallidosSub.trim() != "" && alerta != "") {
-                            alerta += "\nY los pertenecientes a los subrequisitos con los coódigos: " + fallidosSub;
+                            alerta += "\nY los pertenecientes a los subrequisitos con los códigos: " + fallidosSub;
                         }
 
                         if (!enviarInfo) {
@@ -236,8 +234,8 @@ function validar(enviarInfo) {
                             noCont = 0;
                             $("#modal1").modal("close");
 
-                            mostrarMensaje('Se ha guardado el progreso con éxito. Sin embargo, hay items sin aprobar,'
-                                    + 'por ende se enviará un informe a su correo registrado en bpid.', true);
+                            mostrarMensaje('Se ha guardado el progreso con éxito. Sin embargo, hay items sin aprobar, '
+                                    + 'por lo tanto se enviará un informe a su correo registrado en bpid.', true);
 
                         } else if (enviarInfo && noCont == 0) {
 

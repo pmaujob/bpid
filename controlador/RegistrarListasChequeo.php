@@ -6,7 +6,7 @@ $raiz = $_SESSION['raiz'];
 
 require_once '../librerias/CambiarFormatos.php';
 require_once '../modelo/MRegistrarListasChequeo.php';
-require_once '../librerias/PHPMailer/PHPMailerAutoload.php';
+require_once '../librerias/Correos.php';
 
 class RegistrarListasChequeo {
 
@@ -62,44 +62,22 @@ class RegistrarListasChequeo {
 
         $resInsert = MRegistrarListasChequeo::registrarListasChequeo($this->getIdRad(), $reqJson, $subJson);
 
-        if (isset($_POST['noCont']) && $_POST['noCont'] > 0 && $resInsert == 1) {//enviar correo proyecto con items desaprobados
-            enviarDummy();
-            /*
-              $correo = new phpmailer();
+        if ($_POST['noCont'] != null) {
+            if ($_POST['noCont'] > 0 && $resInsert == 1) {//enviar correo proyecto con items desaprobados
+                $destino = MRegistrarListasChequeo::getCorreoRad($this->getIdRad());
+                $asunto = "Radicación Proyecto - Bpid";
+                $cuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
+                $altCuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
 
-              $correo->PluginDir = "../librerias/PHPMailer/";
-              $correo->Mailer = "smtp";
-              $correo->Host = "smtp.gmail.com";
-              $correo->SMTPAuth = false;
-              $correo->Username = "planeacionbpid@gmail.com";
-              $correo->Password = "bpid2017";
-
-              $correo->From = "planeacionbpid@gmail.com";
-              $correo->FromName = "Planeación BPID";
-              $correo->Timeout = 0;
-
-              $correo->AddAddress("danielernestodaza@hotmail.com");
-              $correo->Subject = "Información de Radicación Proyecto - Bpid";
-              $correo->Body = "<b>Mensaje de prueba mandado con phpmailer en formato html</b>";
-              $correo->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
-
-              //$correoEnviado = $correo->send();
-              //return var_dump($correo->send());
-
-              $intentos = 1;
-              while ((!$correoEnviado) && ($intentos < 3)) {
-              sleep(5);
-              $correoEnviado = $correo->send();
-              $intentos++;
-              } */
+                enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
+            }
         }
-
-        //return $resInsert;
+        return $resInsert;
     }
 
 }
 
-if (!empty($_POST['idRad']) && !isset($_POST['guardarEnviar'])) {
+if (!isset($_POST['guardarEnviar'])) {
 
     $registrar = new RegistrarListasChequeo();
     $registrar->setIdRad($_POST['idRad']);
@@ -107,51 +85,41 @@ if (!empty($_POST['idRad']) && !isset($_POST['guardarEnviar'])) {
     $registrar->setSubRequisitos($_POST['subData']);
 
     echo $registrar->registrar();
-} else if (!empty($_POST['idRad']) && !isset($_POST['guardarEnviar'])) {//enviar correo proyecto radicado
-    $res = MRegistrarListasChequeo::guardarEnviarListas($_POST['idRad']);
+} else {//enviar correo proyecto radicado
+    $idRad = $_POST['idRad'];
+    $res = MRegistrarListasChequeo::guardarEnviarListas($idRad);
 
     if ($res == 1) {
 
-        $correo = new phpmailer();
+        $destino = MRegistrarListasChequeo::getCorreoRad($idRad);
+        $asunto = "Radicación Proyecto - Bpid";
+        $cuerpo = "Su proyecto ha sido radicado con éxito";
+        $altCuerpo = "Su proyecto ha sido radicado con éxito";
 
-        $mail->PluginDir = "../librerias/PHPMailer/";
-        $mail->Mailer = "smtp";
-        $mail->Host = "smtp.gmail.com";
-        $mail->SMTPAuth = true;
-        $mail->Username = "planeacionbpid@gmail.com";
-        $mail->Password = "bpid2017";
-
-        $mail->From = "planeacionbpid@gmail.com";
-        $mail->FromName = "Planeación BPID";
-        $mail->Timeout = 0;
-
-        $mail->AddAddress("danielernestodaza@hotmail.com");
-        $mail->Subject = "Información de Radicación Proyecto - Bpid";
-        $mail->Body = "<b>Mensaje de prueba mandado con phpmailer en formato html</b>";
-        $mail->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
-
-        $correoEnviado = $mail->Send();
-
-        $intentos = 1;
-        while ((!$exito) && ($intentos < 3)) {
-            sleep(5);
-            $exito = $mail->Send();
-            $intentos = $intentos + 1;
-        }
+        enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
     }
 
     echo $res;
 }
 
-function enviarDummy() {
-    // El mensaje
-    $mensaje = "Línea 1\r\nLínea 2\r\nLínea 3";
+function enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo) {
 
-// Si cualquier línea es más larga de 70 caracteres, se debería usar wordwrap()
-    $mensaje = wordwrap($mensaje, 70, "\r\n");
+    $correo = new Correos();
 
-// Enviar
-    echo var_dump(mail('danielernestodaza@hotmail.com', 'Prueba maldición', $mensaje));
+    $correo->inicializar();
+    $correo->setDestinatario($destino);
+    $correo->armarCorreo($asunto, $cuerpo, $altCuerpo);
+
+    $correoEnviado = $correo->enviar();
+
+    $intentos = 1;
+    while ((!$correoEnviado) && ($intentos < 3)) {
+        sleep(5);
+        $correoEnviado = $correo->enviar();
+        $intentos++;
+    }
+
+    return $correoEnviado;
 }
 
 ?>
