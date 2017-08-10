@@ -13,6 +13,7 @@
 <script type="text/javascript" src=<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/js/jquery-2.1.1.min.js' ?>></script>
 <script type="text/javascript" src=<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/js/jquery-ui.js' ?>></script>
 <script type="text/javascript" src=<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/js/materialize.min.js' ?>></script>
+<script type="text/javascript" src=<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/js/menu.js' ?>></script>
 
 <link rel="stylesheet" type="text/css" href=<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/css/menu.css' ?>>
 <link rel="stylesheet" type="text/css" href=<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/css/cssbpid/styles.css' ?>>

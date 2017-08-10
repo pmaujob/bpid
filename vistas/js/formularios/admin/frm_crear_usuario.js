@@ -163,10 +163,12 @@ function registrarUsuario() {
 
 function limpiarPermisos() {
 
-    var cont = document.getElementById('cont').value;
+    if (document.getElementById('cont')) {
+        var cont = document.getElementById('cont').value;
 
-    for (var i = 0; i < cont; i++) {
-        document.getElementById('FUN' + i).checked = 0;
+        for (var i = 0; i < cont; i++) {
+            document.getElementById('FUN' + i).checked = 0;
+        }
     }
 
 }

@@ -3,6 +3,12 @@ require_once '../../../modelo/MModuloConFunciones.php';
 
 const funciones = "FUN";
 const idFunciones = "IDFUN";
+
+$op;
+
+if(isset($_POST['op']) && !empty($_POST['op']))
+    $op = $_POST['op'];
+
 ?>
 
 <table class="striped">
@@ -17,7 +23,12 @@ const idFunciones = "IDFUN";
     <tbody>
         <?php
         
-        $res = MModuloConFunciones::getFunciones();
+        $res;
+        if($op=="1")
+            $res = MModuloConFunciones::getFunciones();
+        else
+            $res = MModuloConFunciones::
+                
         $cont = 0;
         
         while ($resultado = $res->fetch(PDO::FETCH_OBJ)) {
