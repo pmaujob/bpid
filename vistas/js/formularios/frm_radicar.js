@@ -107,7 +107,7 @@ function archivo_xml()
 													success: function(datos)
 													{
 													//alert(datos)	
-													var cadena=datos.split("/");
+													var cadena=datos.split("*/");
 													nombre_proyecto.focus();
 													nombre_proyecto.value='';
 													nombre_proyecto.value=cadena[0];
@@ -133,6 +133,11 @@ function archivo_xml()
 													valor.value=cadena[7];
 													document.getElementById('objetivos').value=cadena[9];
 													document.getElementById('fuentes').value=cadena[10];
+													document.getElementById('problema').value=cadena[11];
+													document.getElementById('poblacion').value=cadena[12];
+													document.getElementById('objetivog').value=cadena[13];
+													document.getElementById('productos').value=cadena[14];
+													document.getElementById('actividades').value=cadena[15];
 													quitar_pantalla();
 													}
 													});	
@@ -195,22 +200,26 @@ function almacenar()
  	var nombre_archivo=document.getElementById('frm_archivo').value;
  	var objetivos=document.getElementById('objetivos').value;
  	var fuentes=document.getElementById('fuentes').value;
+ 	var problema=document.getElementById('problema').value;
+ 	var poblacion=document.getElementById('poblacion').value;
+ 	var objetivog=document.getElementById('objetivog').value;
+ 	var productos=document.getElementById('productos').value;
+ 	var actividades=document.getElementById('actividades').value;
  	
  	var value=numero_proyecto+'//'+nombre_proyecto +'//'+sector+'//'+localizacion+'//'+valor+'//'+eje+'//'+programa+'//'+subprograma+'//'+poai+'//'+
  	entidad_proponente+'//'+entidad_ejecutante+'//'+num_id_responsable+'//'+nom_responsable+'//'+cargo_responsable+'//'+
  	direccion_responsable+'//'+telefono_responsable+'//'+cel_responsable+'//'+correo_responsable+'//'+id_usuario+'//'+nombre_usuario+'//'+
- 	observaciones+'//'+objetivos+'//'+fuentes;
+ 	observaciones+'//'+objetivos+'//'+fuentes+'//'+problema+'//'+poblacion+'//'+objetivog+'//'+productos+'//'+actividades;
  	
  	
  	 $('#modal1').modal('close');
- //	bloquear_pantalla();
+ 	bloquear_pantalla();
  	jQuery.ajax({	
 		    type: "POST",
               url:'../../controlador/ControladorRadicar.php',
 			async: false,
 			data:{value:value},
-			
-            success:function(respuesta){
+			success:function(respuesta){
 				//alert(respuesta)
 				
 			if(respuesta==1){ 
@@ -236,7 +245,7 @@ function almacenar()
 			}
 			else
 			{
-			
+			var mensaje="Error, Intentelo Nuevamente";
 			document.getElementById('d_error').innerHTML='<p>'+ mensaje + '</p>';
 			$("#d_error").dialog("open");
 			return false;

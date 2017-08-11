@@ -15,6 +15,30 @@ class MRegistrarListasChequeo {
         return $resultado;
     }
 
+    public static function guardarEnviarListas($idRad) {
+        $sql = "select from guardar_enviar_listas($idRad);";
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $resultado = $con->afectar($sql);
+        $con->cerrarConexion();
+
+        return $resultado;
+    }
+
+    public static function getCorreoRad($idRad) {
+
+        $sql = "SELECT correo_responsable FROM radicacion WHERE cod_radicacion = $idRad;";
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $resultado = $con->consultar($sql);
+        $con->cerrarConexion();
+
+        return $resultado;
+        
+    }
+
 }
 ?>
 

@@ -1,7 +1,12 @@
 <?php
 
+@session_start();
+
+$raiz = $_SESSION['raiz'];
+
 require_once '../librerias/CambiarFormatos.php';
 require_once '../modelo/MRegistrarListasChequeo.php';
+require_once '../librerias/Correos.php';
 
 class RegistrarListasChequeo {
 
@@ -55,12 +60,24 @@ class RegistrarListasChequeo {
             $subJson = CambiarFormatos::convertirAJsonItems($subArray);
         }
 
-        return MRegistrarListasChequeo::registrarListasChequeo($this->getIdRad(), $reqJson, $subJson);
+        $resInsert = MRegistrarListasChequeo::registrarListasChequeo($this->getIdRad(), $reqJson, $subJson);
+
+        if ($_POST['noCont'] != null) {
+            if ($_POST['noCont'] > 0 && $resInsert == 1) {//enviar correo proyecto con items desaprobados
+                $destino = MRegistrarListasChequeo::getCorreoRad($this->getIdRad());
+                $asunto = "Radicación Proyecto - Bpid";
+                $cuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
+                $altCuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
+
+                enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
+            }
+        }
+        return $resInsert;
     }
 
 }
 
-if (!empty($_POST['idRad'])) {
+if (!isset($_POST['guardarEnviar'])) {
 
     $registrar = new RegistrarListasChequeo();
     $registrar->setIdRad($_POST['idRad']);
@@ -68,5 +85,41 @@ if (!empty($_POST['idRad'])) {
     $registrar->setSubRequisitos($_POST['subData']);
 
     echo $registrar->registrar();
+} else {//enviar correo proyecto radicado
+    $idRad = $_POST['idRad'];
+    $res = MRegistrarListasChequeo::guardarEnviarListas($idRad);
+
+    if ($res == 1) {
+
+        $destino = MRegistrarListasChequeo::getCorreoRad($idRad);
+        $asunto = "Radicación Proyecto - Bpid";
+        $cuerpo = "Su proyecto ha sido radicado con éxito";
+        $altCuerpo = "Su proyecto ha sido radicado con éxito";
+
+        enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
+    }
+
+    echo $res;
 }
+
+function enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo) {
+
+    $correo = new Correos();
+
+    $correo->inicializar();
+    $correo->setDestinatario($destino);
+    $correo->armarCorreo($asunto, $cuerpo, $altCuerpo);
+
+    $correoEnviado = $correo->enviar();
+
+    $intentos = 1;
+    while ((!$correoEnviado) && ($intentos < 3)) {
+        sleep(5);
+        $correoEnviado = $correo->enviar();
+        $intentos++;
+    }
+
+    return $correoEnviado;
+}
+
 ?>

@@ -1,12 +1,15 @@
 <?php
 
-require_once '../modelo/Archivos.php';
-require_once '../librerias/ConexionPDO.php';
+@session_start();
+$raiz = $_SESSION['raiz'];
+
+require_once $raiz . '/modelo/Archivos.php';
+require_once $raiz . '/librerias/ConexionPDO.php';
 
 $numProyecto = $_POST['numProyecto'];
 $bpid = $_POST['bpid'];
 $idRad = $_POST['idRad'];
-$totalArchivosReq = explode(',', $_POST['totalArchivosReq']);
+$totalArchivosReq = ($_POST['totalArchivosReq'] != '' ? explode(',', $_POST['totalArchivosReq']) : null);
 $totalArchivosSub = ($_POST['totalArchivosSub'] != '' ? explode(',', $_POST['totalArchivosSub']) : null);
 
 $dirSubidaReq = "../archivos/proyectos/$numProyecto/requisitos/";

@@ -6,7 +6,9 @@ class CargarListas {
 
     public static function getListaGeneral($requerido) {
 
-        $consulta = 'select cod, des, tipo from get_lista_general(' . $requerido . ') as ("cod" integer, "des" varchar, "tipo" varchar);';
+        $consulta = 'select cod, '
+                . 'des, '
+                . 'tipo from get_lista_general(' . $requerido . ') as ("cod" integer, "des" varchar, "tipo" varchar);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");
@@ -16,7 +18,7 @@ class CargarListas {
         return $res;
     }
 
-    public static function getRequisitos($fil, $cod) {
+    public static function getRequisitos($fil, $cod) {// fil -> cod_radicacion
 
         $consulta = 'select cod, '//0
                 . 'des, '//1

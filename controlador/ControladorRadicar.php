@@ -42,6 +42,11 @@ class ControladorRadicar{
 	private $cod_secretaria;
 	private $objetivosEspecificos;
 	private $fuentesFinanciamiento;
+	private $problema;
+	private $poblacion;
+	private $objetivog;
+	private $productos;
+	private $actividades;
 	
 		
 	public function iniciar($valores,$cedulaSession)
@@ -77,7 +82,12 @@ class ControladorRadicar{
                                                     $this->cod_secretaria,
                                                     $this->cod_activacion,
                                                     $this->objetivosEspecificos,
-                                                    $this->fuentesFinanciamiento);
+                                                    $this->fuentesFinanciamiento,
+                                                    $this->problema,
+                                                    $this->poblacion,
+                                                    $this->objetivog,
+                                                    $this->productos,
+                                                    $this->actividades);
                 }
 		
 	}
@@ -107,6 +117,11 @@ class ControladorRadicar{
 		$this->observaciones=$valores[20];
 		$this->objetivosEspecificos=$valores[21];
 		$this->fuentesFinanciamiento=$valores[22];
+		$this->problema=$valores[23];
+		$this->poblacion=$valores[24];
+		$this->objetivog=$valores[25];
+		$this->productos=$valores[26];
+		$this->actividades=$valores[27];
 		$this->cod_usuario_ingreso=$cedulaSession;//variable de sesion
 		$this->cod_activacion=1;
 		$this->cod_secretaria=1;

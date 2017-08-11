@@ -23,7 +23,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
 
     <body>
         <div id="dario"></div>
-        <div id="cargando" class="frm_externo"><img src="../css/cargar.gif"></div>
+        <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
         <div id="d_error" title="ALERTA"></div>
         <div id="d_ingreso" title="INFORMACION"></div>
         <?php require_once '../menu.php'; ?>
@@ -31,6 +31,11 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
           
              <input id="objetivos" name="objetivos" type="hidden" value="" />
              <input id="fuentes" name="fuentes" type="hidden" value="" />
+             <input id="problema" name="problema" type="hidden" value="" />
+             <input id="poblacion" name="poblacion" type="hidden" value="" />
+             <input id="objetivog" name="objetivog" type="hidden" value="" />
+             <input id="productos" name="productos" type="hidden" value="" />
+             <input id="actividades" name="actividades" type="hidden" value="" />
             <div class="col s12 m11 l9">
                 <div class="bajar">
                     <div class="container-fluid">
@@ -40,19 +45,19 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                             <br><br>
                         </div>
                         <div class="row">
-                            <div class="col s12 m2 l2"><div class="amarilla"></div><label id="lblamarilla">SELECCIONAR MGA</label></div>
+                            <div class="col s12 m2 l2"><div class="amarilla"></div><label id="lblamarilla">SELECCIONAR MGA XML</label></div>
                             <div class="col s12 m10 l10">
                                 <div class="row">
                                     <div class="input-field col s12 m12 l12">
                                         <div class="opcionesbtn">
                                             <div class="file-field input-field">
                                                 <div class="btn">
-                                                    <span>Subir Archivo MGA</span>
+                                                    <span>Subir Archivo MGA XML</span>
                                                     <input type="file" id="frm_archivo" name="frm_archivo" onchange="archivo_xml()" multiple
                                                            alt="Cargar Archivo MGA WEB">
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                                                    <input class="file-path validate" type="text" placeholder="Seleccionar archivo XML">
                                                 </div>
                                             </div>
                                             <div class="descripcion"></div>

@@ -12,7 +12,7 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
 
     <table>
         <thead>
-            <tr><th>Numero de Proyecto</th><th>Número Bpid</th><th>Nombre del proyecto</th><th>Certificado</th></tr>
+            <tr><th>ID MGA</th><th>Código Bpid</th><th>Nombre del Proyecto</th><th>Editar</th></tr>
         </thead>
         <tbody>
             <?php

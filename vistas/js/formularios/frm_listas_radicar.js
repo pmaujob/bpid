@@ -1,34 +1,67 @@
+var noCont = 0;
+
 function onLoadBody() {
 
     $(document).ready(function () {
-        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
+    $("#d_error").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            "Cerrar": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+    $("#d_ingreso").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            "Aceptar": function () {
+                $(this).dialog("close");
+                window.self.location = "../formularios/frm_listas_radicar.php";
+            }
+        }
+    });
 
+}
+function bloquearPantalla() {
+    document.getElementById("dialogCargando").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function quitarPantalla() {
+    document.getElementById("dialogCargando").style.display = "none";
+    document.body.style.overflow = "scroll";
 }
 
 function buscarProyectos(op) {
 
-    value = document.getElementById("input_buscar").value;
+    var resultado = document.getElementById('resultado');
 
+    //temporalmente
+    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
+            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
+            + '</div>';
+
+    value = document.getElementById("input_buscar").value;
+    //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
         data: {value: value, op: op},
         success: function (respuesta) {
-
-            document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
-
+            //quitarPantalla();
+            resultado.innerHTML = '<p>' + respuesta + '</p>';
         },
-
         error: function () {
-            alert("Error inesperado")
+            //quitarPantalla();
+            alert("Error inesperado");
             window.top.location = "../index.html";
         }
-
     });
-
 }
 
 function mas(cod, bpid, numProyecto) {
@@ -42,19 +75,18 @@ function mas(cod, bpid, numProyecto) {
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmListas.php',
         async: true,
+        timeout: 0,
         data: {value: value, bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
-
             document.getElementById('collapsible').innerHTML = respuesta;
+
+            noCont = document.getElementById('noCont').value;
             focusear(document.getElementById('nOpcionesReq').value, document.getElementById('nOpcionesSub').value);
 
             $(document).ready(function () {
                 $('.collapsible').collapsible();
             });
-
-        },
-
-        error: function () {
+        }, error: function () {
             alert("Error inesperado")
             window.top.location = "../index.html";
         }
@@ -62,7 +94,11 @@ function mas(cod, bpid, numProyecto) {
 
 }
 
-function validar() {
+function focusearTituloLista(idBodyLista) {
+    $('#' + idBodyLista).focus();
+}
+
+function validar(enviarInfo) {
 
     if (document.getElementById('nOpcionesReq') == null) {
         console.log("No se han cargado los complementos");
@@ -86,12 +122,14 @@ function validar() {
 
             var reqArchivoExist = document.getElementById('REQFILEEXIST' + i).value;
             if (reqArchivoExist == "") {//para evitar error de elemento para subir archivos
+
                 var reqArchivo = document.getElementById('REQFILE' + i);
-                if (document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {
+
+                if (opcionSeleccionada == "SI" && document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
                     alert('Se debe adjuntar un archivo en esta pregunta.');
                     reqArchivo.focus();
                     return;
-                } else if (reqArchivo.value != '') {
+                } else if (opcionSeleccionada == "SI" && reqArchivo.value != '') {
                     var archivoReqRow = new Array(2);
                     archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
                     archivoReqRow[1] = i;//posicion del contador para recorrer archivos más adelante
@@ -106,6 +144,7 @@ function validar() {
 
             reqData.push(reqRow);
         }
+
     }
 
     if (reqData.length == 0) {
@@ -121,11 +160,11 @@ function validar() {
             if (subArchivoExist == "") {//para evitar error de elemento para subir archivos
 
                 var subArchivo = document.getElementById('SUBFILE' + i);
-                if (document.getElementById('SUBFILEOB' + i).value == 1 && subArchivo.value == '') {
+                if (opcionSeleccionada == "SI" && document.getElementById('SUBFILEOB' + i).value == 1 && subArchivo.value == '') {
                     alert('Se debe adjuntar un archivo en esta pregunta.');
                     subArchivo.focus();
                     return;
-                } else if (subArchivo.value != '') {
+                } else if (opcionSeleccionada == "SI" && subArchivo.value != '') {
                     var archivoSubRow = new Array(2);
                     archivoSubRow[0] = document.getElementById('SUBH' + i).value;//id requisito
                     archivoSubRow[1] = i;//posicion del contador para recorrer archivos más adelante
@@ -145,11 +184,14 @@ function validar() {
     totalArchivosReq.value = archivosReq;
     totalArchivosSub.value = archivosSub;
 
+    var waitGuardarProgreso = document.getElementById('waitGuardarProgreso');
+    waitGuardarProgreso.style.display = "";
+
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
         async: true,
-        data: {idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null)},
+        data: {idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
 
             if (respuesta == 1) {
@@ -160,13 +202,9 @@ function validar() {
                     data: formData,
                     contentType: false,
                     processData: false,
-                    success: function (datos)
-                    {
+                    success: function (datos) {
                         var fallidosReq = datos.split('|')[0];
                         var fallidosSub = datos.split('|')[1];
-
-                        console.log("fallidosReq: " + fallidosReq + ", fallidosSub: " + fallidosSub);
-
                         var alerta = "";
 
                         if (fallidosReq.trim() != "") {
@@ -178,25 +216,76 @@ function validar() {
                             alerta += "Los archivos fueron subidos con éxito.\n"
                                     + "Excepto los pertenecientes a los subrequisitos con los códigos: " + fallidosSub;
                         } else if (fallidosSub.trim() != "" && alerta != "") {
-                            alerta += "\nY los pertenecientes a los subrequisitos con los coódigos: " + fallidosSub;
+                            alerta += "\nY los pertenecientes a los subrequisitos con los códigos: " + fallidosSub;
                         }
 
-                        alert("Se actualizaron las listas con éxito.\n" + alerta);
+                        if (!enviarInfo) {
 
+                            waitGuardarProgreso.style.display = "none";
+
+                            var msjInfo = document.getElementById('msjInfo');
+                            msjInfo.innerHTML = "Se ha guardado el progreso con éxito.";
+                            msjInfo.style.display = "";
+
+                            setTimeout(quitarEtiqueta, 3000);
+
+                        } else if (enviarInfo && noCont > 0) {
+
+                            noCont = 0;
+                            $("#modal1").modal("close");
+
+                            mostrarMensaje('Se ha guardado el progreso con éxito. Sin embargo, hay items sin aprobar, '
+                                    + 'por lo tanto se enviará un informe a su correo registrado en bpid.', true);
+
+                        } else if (enviarInfo && noCont == 0) {
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '../../controlador/RegistrarListasChequeo.php',
+                                async: true,
+                                data: {idRad: idRad, guardarEnviar: true},
+                                success: function (respuesta2) {
+
+                                    if (respuesta2) {
+                                        mostrarMensaje('Su proyecto ha sido radicado con éxito.', true);
+                                    } else {
+                                        mostrarMensaje('No fue posible radicar el proyecto, sus cambios serán guardados.', false);
+                                    }
+
+                                }, error: function () {
+                                    mostrarMensaje('No fue posible radicar el proyecto, sus cambios serán guardados.', false);
+                                }
+                            });
+
+                            noCont = 0;
+                            $("#modal1").modal("close");
+
+                        }
+
+                    }, error: function () {
+                        mostrarMensaje('Se ha guardado el progreso con éxito, '
+                                + 'pero hubo un error en la subida de archivos, vuelta a intentarlo.', true);
                     }
                 });
 
             } else {
-                alert("No se pudo realizar la actualización, vuelva a intentarlo.");
+
+                waitGuardarProgreso.style.display = "none";
+
+                var msjInfo = document.getElementById('msjInfo');
+                msjInfo.innerHTML = "No se pudo guardar el progreso, vuelva a intentarlo.";
+                msjInfo.style.color = "#e53935";
+                msjInfo.style.wordBreak = "break-all";
+                msjInfo.style.display = "";
+
             }
         },
         error: function () {
-            alert("Error inesperado")
+            mostrarMensaje('Error Inesperado', false);
+            noCont = 0;
             window.top.location = "../index.html";
         }
     });
-
-    $('#modal1').modal('close');
 
 }
 
@@ -204,7 +293,7 @@ function validarExtension(fileNombre) {
 
     var adjunto = document.getElementById(fileNombre);
     var extension = (adjunto.value.substring(adjunto.value.lastIndexOf("."))).toLowerCase();
-    if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat') {
+    if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat' || extension === '.css') {
         alert("El formato del archivo adjunto no es válido.");
         adjunto.value = null;
         return;
@@ -228,4 +317,33 @@ function focusear(nOpcionesReq, nOpcionesSub) {
         }
     }
 
+}
+
+function validarNo(idSelection) {
+
+    var selection = document.getElementById(idSelection);
+
+    if (selection.value == "NO") {
+        noCont++;
+    } else if (selection.value != "NO" && noCont > 0) {
+        noCont--;
+    }
+
+    console.log("noCont: " + noCont);
+
+}
+
+
+function mostrarMensaje(mensaje, info) {
+    if (info) {
+        document.getElementById('d_ingreso').innerHTML = '<p>' + mensaje + '</p>';
+        $("#d_ingreso").dialog("open");
+    } else {
+        document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
+        $("#d_error").dialog("open");
+    }
+}
+
+function quitarEtiqueta() {
+    document.getElementById('msjInfo').style.display = "none";
 }

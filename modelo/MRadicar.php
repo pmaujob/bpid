@@ -40,12 +40,17 @@ class MRadicar
                                     $cod_secretaria,
                                     $cod_activacion,
                                     $objetivosEspecificos,
-                                    $fuentesFinanciamiento)
+                                    $fuentesFinanciamiento,
+                                    $problema,
+                                    $poblacion,
+                                    $objetivog,
+                                    $productos,
+                                    $actividades)
    {
 
     $sql="select from ing_radicacion($cod_activacion,$cod_usuario_ingreso,'$numero_proyecto','$sector','$localizacion','$valor',
                                     '$programa','$subprograma',$poai,'$entidad_proponente','$entidad_ejecutante','$num_id_responsable',
-                                    '$nom_responsable','$cargo_responsable','$direccion_responsable','$telefono_responsable','$cel_responsable','$correo_responsable','$id_usuario','$nombre_usuario','$observaciones',$cod_usuario_ingreso,'$nombre_proyecto','$eje',$cod_secretaria,$objetivosEspecificos,$fuentesFinanciamiento)";
+                                    '$nom_responsable','$cargo_responsable','$direccion_responsable','$telefono_responsable','$cel_responsable','$correo_responsable','$id_usuario','$nombre_usuario','$observaciones',$cod_usuario_ingreso,'$nombre_proyecto','$eje',$cod_secretaria,$objetivosEspecificos,$fuentesFinanciamiento,'$problema',$poblacion,'$objetivog',$productos,$actividades)";
      
    
    

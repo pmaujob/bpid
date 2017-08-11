@@ -1,5 +1,5 @@
 function buscarCertificaciones(estado){
-   
+   estado=1;
     
     value = document.getElementById("input_buscar").value;
 
@@ -25,7 +25,7 @@ function buscarCertificaciones(estado){
 
 function mas(codRadicacion,codBpid,c){
     
-    alert(codBpid);
+    
     value = codBpid;
     direccion='../certificados/certificadoRadicar.php';
     window.open(direccion+'?value='+value);
