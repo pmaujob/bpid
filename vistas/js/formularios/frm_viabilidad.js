@@ -13,9 +13,8 @@ function quitar_pantalla()
 $(document).ready(function() {
     
    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-   $('.modal').modal();
-    $('select').material_select();
-    $("#d_error").dialog({
+   
+   $("#d_error").dialog({
                         autoOpen: false,
                         modal: true,
                         buttons: {
@@ -34,6 +33,18 @@ $(document).ready(function() {
                                               }
                                 }
                         });
+
+     $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    }
+  );
 });
 
 function buscarProyectos(op) {
@@ -69,6 +80,7 @@ function buscarProyectos(op) {
     });
 
 }
+
 function mas(cod, bpid,numProyecto) {
 
 
@@ -81,7 +93,7 @@ function mas(cod, bpid,numProyecto) {
             //alert(respuesta);
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
-          
+            $('.modal').modal();
         },
 
         error: function () {
@@ -91,3 +103,31 @@ function mas(cod, bpid,numProyecto) {
     });
 
 }
+
+function editarActividades(codRadicacion,idProducto,idactividad)
+{
+    
+        jQuery.ajax({
+        type: 'POST',
+        url: '../../vistas/formulariosDinamicos/frmViabilizados.php',
+        async: true,
+        data: {codRadicacion: codRadicacion, idProducto: idProducto,idactividad:idactividad,},
+        success: function (respuesta) {
+            //alert(respuesta);
+            $('#modal1').modal('open');
+            document.getElementById('respuestaact').innerHTML = '';
+            document.getElementById('respuestaact').innerHTML = respuesta;
+            $('.modal').modal();
+        },
+
+        error: function () {
+            alert("Error inesperado")
+            window.top.location = "../index.html";
+        }
+    });
+
+   
+}
+
+
+
