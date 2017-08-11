@@ -1,15 +1,13 @@
 <?php
-require_once '../../modelo/CargarViabilizados.php';
+require_once '../../modelo/CargarRadicados.php';
 
 if (!empty($_POST['value']) && !empty($_POST['op'])) {
 
     $datos = $_POST['value'];
     $op = $_POST['op'];
 
-    $res = CargarViabilizados::getViabilizados($datos,$op);
-    
+    $res = CargarRadicados::getRadicados($datos, $op);
     ?>
-
     <table>
         <thead>
             <tr>
@@ -30,7 +28,7 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
                         <td title="<?php echo $fila[2]; ?>"><?php echo $fila[3]; ?></td>
                         <td>
                             <a href="#" title="Visualizar">
-                                <div onclick="listarDatosRadicacion(<?php echo $fila[0]; ?>,<?php echo $fila[4]; ?>,<?php echo $fila[5]; ?>);">
+                                <div onclick="listarDatosRadicacion(<?php echo $fila[0]; ?>,<?php echo $fila[5]; ?>);">
                                     <img src="../../vistas/img/ver.png" style="width: 32px; height: 32px;">
                                 </div>
                             </a>

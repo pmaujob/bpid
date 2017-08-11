@@ -18,7 +18,7 @@ class CargarListas {
         return $res;
     }
 
-    public static function getRequisitos($fil, $cod) {
+    public static function getRequisitos($fil, $cod) {// fil -> cod_radicacion
 
         $consulta = 'select cod, '//0
                 . 'des, '//1
