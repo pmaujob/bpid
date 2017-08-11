@@ -1,7 +1,7 @@
 <?php
 require_once '../../modelo/CargarViabilizados.php';
 
-if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
+if (!empty($_POST['bpid']) && !empty($_POST['idProducto']) ) {
 
     $numBpid = $_POST['bpid'];
     $numProyecto = $_POST['numProyecto'];
@@ -9,6 +9,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     $datosViabilizados = CargarViabilizados::getViabilizados($numBpid,1);
     $datosObjetivos = CargarViabilizados::getViabilizados($numBpid,2);
     $datosFinanciacion = CargarViabilizados::getViabilizados($numBpid,3);
+    $datosActividades=CargarViabilizados::getViabilizados($numBpid,4);
     
     ?>
 <div class="contenedor_tabla">  
@@ -93,7 +94,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
      <table class="striped">
      <tr><th colspan="3" style="text-align:center;">FUENTES DE FINANCIACIÓN </th></tr>
      <tr>
-     <th>Origen Financiación</th><th>Valor Financiación</th><th>Periodo Financiación</th>
+     <th>Tipo de Recursos</th><th>Valor Financiación</th><th>Periodo Financiación</th>
     </tr>
         </thead>
         <tbody>
@@ -120,12 +121,62 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
             }
             ?>
         </tbody>
+        </table>     
+        <br>
+        <table class="striped">
+     <tr><th colspan="3" style="text-align:center;">ACTIVIDADES DE PROYECTO</th></tr>
+     <tr>
+     <th>Actividad</th><th>Valor Actividad</th><th>Editar</th>
+    </tr>
+        </thead>
+        <tbody>
+            <?php
+
+            if (count($datosActividades) > 0) {
+                foreach ($datosActividades as $act) {
+                    ?>
+
+                    <tr>
+                         <td><?php echo $act[6]; ?></td>
+                         <td><?php echo $act[7]; ?></td>
+                         <td>
+                            <a class="waves-effect waves-light modal-trigger" href="#modal1" title="Ver Más">
+                                <div onclick="editarActividades(<?php echo $act[2]; ?>,<?php echo $act[0]; ?>,<?php echo $act[5]; ?>);">
+                                    <img src="../../vistas/img/anadir.png">
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    <?php
+                }
+            } else {
+                ?>
+
+                <tr><td>No se encontraron resultados para la búsqueda.</td></tr>
+
+                <?php
+            }
+            ?>
+        </tbody>
         </table>       
-    <?php
+    <?php  
+    
+
 }
-
-
-
-
 ?>
+
+
+
 </div>
+<!-- Modal Trigger -->
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content" id="titulo">
+      <h4>Detalle Valor</h4>
+      <p></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar</a>
+    </div>
+  </div>

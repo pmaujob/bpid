@@ -58,6 +58,10 @@ if($extension=="xml" or $extension=="XML")
 	$numpro=0;
 	$numact=0;
 
+$num_elementos=count($datos->Alternatives->Alternative->Products->Product);
+
+if($num_elementos !=0){
+
 foreach ($datos->Alternatives->Alternative->Products->Product as $producto) 
 			{
 			$actividades[]=tildes((string)$producto->ProductName);
@@ -67,7 +71,7 @@ foreach ($datos->Alternatives->Alternative->Products->Product as $producto)
 				//echo $numact;
 				$nombreact[]=tildes((string)$actividad->Name);
 				$costo[]=(string)$actividad->Cost;
-				$informacion_act[$numact] = array("id_producto"=>$numpro,"Actividad"=> $nombreact[$numact],"Costo"=>$costo[$numact]); 
+				$informacion_act[$numact] = array("id_pro"=>$numpro,"Actividad"=> $nombreact[$numact],"Costo"=>$costo[$numact]); 
 				
 				
 			$numact++;
@@ -75,7 +79,7 @@ foreach ($datos->Alternatives->Alternative->Products->Product as $producto)
 						
 			$numpro++;
 			}	
-
+}
 
 	//INFORMACION DE LOS OBJETIVOS ESPECIFICOS
 
@@ -96,7 +100,7 @@ foreach ($datos->Alternatives->Alternative->Products->Product as $producto)
 			
 
 	$datos=$nombrep."*/".$sector."*/".$departamento."*/".$municipio."*/".$eje."*/".$programa."*/".$subprograma."*/".$total."*/".$numero_proyecto."*/".$jsonEs."*/".($jsonFu != null ? $jsonFu : "'null'" )."*/".$problema."*/".$poblacion."*/".$objetivo
-	."*/".$jsonPro."*/".$jsonAct;
+	."*/".($jsonPro != null ? $jsonPro : "'null'" )."*/".($jsonAct != null ? $jsonAct : "'null'" );
 	echo $datos;
 	//print_r($jsonespecifico);
 }

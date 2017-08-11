@@ -21,11 +21,26 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         </head>
 
         <body>
+
+<!-- Modal Trigger -->
+  
+  <div id="modal1" class="modal">
+    <div class="modal-content" id="titulo">
+      <h4>Detalle Valor</h4>
+      <p></p>
+      <div id="respuestaact"></div>
+    </div>
+
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar</a>
+    </div>
+  </div>
+  <!-- Modal Structure -->
             <div id="d_error" title="ALERTA"></div>
             <div id="d_ingreso" title="INFORMACION"></div>
           
             <?php require_once '../menu.php'; ?>
-            <form id='frm_radicar_listas' name='frm_radicar_listas' onSubmit="return false"  enctype="multipart/form-data">
+            <form id='frm_viabilidad' name='frm_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
 
 
                 <div class="col s12 m11 l9">
