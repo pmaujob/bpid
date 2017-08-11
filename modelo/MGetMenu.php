@@ -17,7 +17,7 @@ class MGetMenu{
         $sql = "";
         
         if($op == 1)
-            $sql = 'select id, mod, fun from seguridad.get_menu('.$usuario.','.$op.') as ("id" integer, "mod" varchar, "fun" varchar);';
+            $sql = 'select id, mod, fun, url from seguridad.get_menu('.$usuario.','.$op.') as ("id" integer, "mod" varchar, "fun" varchar, "url" varchar);';
         else if($op == 2)
             $sql = 'select id, mod from seguridad.get_menu('.$usuario.','.$op.') as ("id" integer, "mod" varchar);';
         
