@@ -26,16 +26,17 @@ class MRegistrarListasChequeo {
         return $resultado;
     }
 
-    public static function enviarAViabilidad($idRad) {
+    public static function getCorreoRad($idRad) {
 
-        $sql = "UPDATE radicacion SET cod_activacion = 2 WHERE cod_radicacion = " . $idRad;
+        $sql = "SELECT correo_responsable FROM radicacion WHERE cod_radicacion = $idRad;";
 
         $con = new ConexionPDO();
         $con->conectar("PG");
-        $resultado = $con->afectar($sql);
+        $resultado = $con->consultar($sql);
         $con->cerrarConexion();
 
         return $resultado;
+        
     }
 
 }
