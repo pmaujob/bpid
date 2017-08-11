@@ -55,6 +55,24 @@ function buscarProyectosRadicados(op) {
 
 }
 
-function listarDatosRadicacion(){
+function listarDatosRadicacion(idRad,numProyecto){
+    
+    $('#modal1').modal('open');
+    
+    jQuery.ajax({
+        type: 'POST',
+        url: '../../vistas/formulariosDinamicos/frmListarConsultaRad.php',
+        async: true,
+        timeout: 0,
+        data: {idRad: idRad, numProyecto: numProyecto},
+        success: function (respuesta) {
+            
+            document.getElementById('collapsible').innerHTML = respuesta;
+            
+        }, error: function () {
+            alert("Error inesperado")
+            window.top.location = "../index.html";
+        }
+    });
     
 }

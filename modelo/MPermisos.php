@@ -1,6 +1,8 @@
 <?php
-session_start();
-require_once  $_SESSION['raiz'].'/librerias/ConexionPDO.php';
+@session_start();
+
+$raiz = $_SESSION['raiz'];
+require_once  $raiz.'/librerias/ConexionPDO.php';
 
 
 class MPermisos{
