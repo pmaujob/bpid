@@ -1,7 +1,7 @@
 <?php
 require_once '../../modelo/CargarViabilizados.php';
 
-if (!empty($_POST['bpid']) && !empty($_POST['idProducto']) ) {
+if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
     $numBpid = $_POST['bpid'];
     $numProyecto = $_POST['numProyecto'];
@@ -169,14 +169,3 @@ if (!empty($_POST['bpid']) && !empty($_POST['idProducto']) ) {
 
 
 </div>
-<!-- Modal Trigger -->
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content" id="titulo">
-      <h4>Detalle Valor</h4>
-      <p></p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar</a>
-    </div>
-  </div>

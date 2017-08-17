@@ -83,7 +83,7 @@ function buscarProyectos(op) {
 
 function mas(cod, bpid,numProyecto) {
 
-
+        bloquear_pantalla()
         jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmViabilizados.php',
@@ -91,6 +91,7 @@ function mas(cod, bpid,numProyecto) {
         data: {bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
             //alert(respuesta);
+            quitar_pantalla()
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
             $('.modal').modal();
@@ -104,14 +105,15 @@ function mas(cod, bpid,numProyecto) {
 
 }
 
-function editarActividades(codRadicacion,idProducto,idactividad)
+function editarActividades(codRadicacion,idProducto,idActividad)
 {
-    
+
+        alert(idActividad);
         jQuery.ajax({
         type: 'POST',
-        url: '../../vistas/formulariosDinamicos/frmViabilizados.php',
+        url: '../../vistas/formulariosDinamicos/frmActividadesValores.php',
         async: true,
-        data: {codRadicacion: codRadicacion, idProducto: idProducto,idactividad:idactividad,},
+        data: {codRadicacion:codRadicacion,idProducto:idProducto,idActividad:idActividad},
         success: function (respuesta) {
             //alert(respuesta);
             $('#modal1').modal('open');

@@ -30,7 +30,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
       <p></p>
       <div id="respuestaact"></div>
     </div>
-
+     <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar</a>
     </div>
