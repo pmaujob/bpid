@@ -12,6 +12,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     $datosActividades=CargarViabilizados::getViabilizados($numBpid,4);
     
     ?>
+    
 <div class="contenedor_tabla">  
   <table class="striped">
         <thead>
@@ -141,7 +142,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                          <td><?php echo $act[7]; ?></td>
                          <td>
                             <a class="waves-effect waves-light modal-trigger" href="#modal1" title="Ver Más">
-                                <div onclick="editarActividades(<?php echo $act[2]; ?>,<?php echo $act[0]; ?>,<?php echo $act[5]; ?>);">
+        <div onclick="editarActividades(<?php echo $act[2]; ?>,<?php echo $act[0]; ?>,<?php echo $act[5];?>,<?php echo $act[7];?>)">
                                     <img src="../../vistas/img/anadir.png">
                                 </div>
                             </a>
