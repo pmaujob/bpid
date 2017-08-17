@@ -76,3 +76,7 @@ function listarDatosRadicacion(idRad,numProyecto){
     });
     
 }
+
+function cerrar(){
+    $('#modal1').modal('close');
+}

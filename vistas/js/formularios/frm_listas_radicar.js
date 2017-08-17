@@ -193,7 +193,7 @@ function validar(enviarInfo) {
         async: true,
         data: {idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
-
+            
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
                 $.ajax({
@@ -269,6 +269,8 @@ function validar(enviarInfo) {
                 });
 
             } else {
+
+                console.log("no guardó nada: "+respuesta);
 
                 waitGuardarProgreso.style.display = "none";
 
