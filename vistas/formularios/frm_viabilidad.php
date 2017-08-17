@@ -26,19 +26,18 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
   
   <div id="modal1" class="modal">
     <div class="modal-content" id="titulo">
-      <h4>Detalle Valor</h4>
+      <h5>Discriminación de Montos por Fuente de Financiación</h5>
       <p></p>
       <div id="respuestaact"></div>
     </div>
      <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar</a>
+     <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
+      <a  class="modal-action waves-effect waves-green btn-flat " onclick="guardarActividades()">Enviar</a>
     </div>
   </div>
   <!-- Modal Structure -->
-            <div id="d_error" title="ALERTA"></div>
-            <div id="d_ingreso" title="INFORMACION"></div>
-          
+                     
             <?php require_once '../menu.php'; ?>
             <form id='frm_viabilidad' name='frm_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
 

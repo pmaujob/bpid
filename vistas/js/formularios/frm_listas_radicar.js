@@ -26,6 +26,7 @@ function onLoadBody() {
     });
 
 }
+
 function bloquearPantalla() {
     document.getElementById("dialogCargando").style.display = "block";
     document.body.style.overflow = "hidden";
