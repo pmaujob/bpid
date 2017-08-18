@@ -21,7 +21,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         <body onload="onLoadBody();">
 
             <div id="d_error" title="ALERTA"></div>
-            <div id="d_ingreso" title="INFORMACION"></div>
+            <div id="d_ingreso" title="INFORMACION"></div><
             <div id="modal1" class="modal modal-fixed-footer">
                 <div class="modal-content">
                     <h4>Información del Proyecto</h4>
@@ -33,9 +33,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                     </ul>
                 </div>
                 <div class="modal-footer">          
-                    <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
-                    <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
-
                     <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="cerrar();">Cerrar</a>
                 </div>
             </div>

@@ -61,51 +61,39 @@ foreach ($listasRequeridas as $filar) {
                     </span>
                     <p>
                         <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filar1[0]; ?>">
-                        <select id="<?php echo req . $nOpcionesReq; ?>" class="browser-default" <?php if ($filar1[2] == "SI") echo "disabled"; ?> onchange="validarNo('<?php echo req . $nOpcionesReq; ?>');" >
+                        <select id="<?php echo req . $nOpcionesReq; ?>" class="browser-default" onchange="validarNo('<?php echo req . $nOpcionesReq; ?>');" >
                             <option value="SI" <?php if ($filar1[2] == "SI") echo "selected"; ?>>Si</option>
                             <option value="NO" <?php if ($filar1[2] == "NO") echo "selected"; ?>>No</option>
                             <option value="NA" <?php if ($filar1[2] == "NA") echo "selected"; ?>>No aplica</option>
                         </select>
                     </p>
-                    <?php
-                    if ($filar1[2] != "SI") {
-                        ?>
-                        <div class="row">
-                            <form class="col s12">
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="material-icons prefix">mode_edit</i>
-                                        <label for="<?php echo reqObs . $nOpcionesReq; ?>" id="<?php echo reqObsLbl . $nOpcionesReq; ?>" >Observaciones:</label>
-                                        <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea"><?php echo $filar1[5]; ?></textarea>
-                                    </div>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">mode_edit</i>
+                                    <label for="<?php echo reqObs . $nOpcionesReq; ?>" id="<?php echo reqObsLbl . $nOpcionesReq; ?>" >Observaciones:</label>
+                                    <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea"><?php echo $filar1[5]; ?></textarea>
                                 </div>
-                            </form>
-                        </div>
-                    <?php } else {
-                        ?>    
-                        <label for="<?php echo reqObs . $nOpcionesReq; ?>">Observaciones:</label>
-                        <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea" <?php if ($filar1[2] == "SI") echo "disabled"; ?> style="color: #000000" ><?php echo $filar1[5]; ?></textarea>
-                        <?php
-                    }
-                    ?>
+                            </div>
+                        </form>
+                    </div>
                     <p>
                         <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filar1[4]; ?>">
                         <?php
-                        if ($filar1[2] == "SI" && $filar1[4] != "") {
+                        if ($filar1[4] != "") {
                             ?>
                             <label>Archivo adjunto: </label>
                             <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filar1[4]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filar1[4]; ?></a>
                             <?php
-                        } else {
-                            ?>
-                            <label>Seleccione Archivo</label>
-                            <br>
-                            <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
-                            <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filar1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
-                            <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
-                            <?php
                         }
-                        ?>    
+                        ?>
+                        <br>
+                        <label>Seleccione Archivo</label>
+                        <br>
+                        <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
+                        <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filar1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
+                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
                     </p>
                 </div>
                 <?php
@@ -153,44 +141,34 @@ if (count($listasEspecificas) == 0) {
                                             <option value="NA" <?php if ($filae1[2] == "NA") echo "selected"; ?>>No aplica</option>
                                         </select>
                                     </p>
-                                    <?php if ($filae1[2] != "SI") {
-                                        ?>
-                                        <div class="row">
-                                            <form class="col s12">
-                                                <div class="row">
-                                                    <div class="input-field col s12">
-                                                        <i class="material-icons prefix">mode_edit</i>
-                                                        <label id="<?php echo reqObsLbl . $nOpcionesReq; ?>" for="<?php echo reqObs . $nOpcionesReq; ?>">Observaciones:</label>
-                                                        <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea" ><?php echo $filae1[5]; ?></textarea>
-                                                    </div>
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <i class="material-icons prefix">mode_edit</i>
+                                                    <label id="<?php echo reqObsLbl . $nOpcionesReq; ?>" for="<?php echo reqObs . $nOpcionesReq; ?>">Observaciones:</label>
+                                                    <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea" ><?php echo $filae1[5]; ?></textarea>
                                                 </div>
-                                            </form>
-                                        </div>
-                                    <?php } else {
-                                        ?>
-                                        <label for="<?php echo reqObs . $nOpcionesReq; ?>">Observaciones:</label>
-                                        <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea" <?php if ($filae1[2] == "SI") echo "disabled"; ?> style="color: #000000"><?php echo $filae1[5]; ?></textarea>
-                                        <?php
-                                    }
-                                    ?>                                    
+                                            </div>
+                                        </form>
+                                    </div>                                   
                                     <p>
                                         <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filae1[4]; ?>">
                                         <?php
-                                        if ($filae1[2] == "SI" && $filae1[4] != "") {
+                                        if ($filae1[4] != "") {
                                             ?>
                                             <label>Archivo adjunto: </label>
                                             <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filae1[4]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filae1[4]; ?></a>
                                             <?php
-                                        } else {
-                                            ?>
-                                            <label>Seleccione Archivo</label>
-                                            <br>
-                                            <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filae1[0]; ?>" />
-                                            <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filae1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
-                                            <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
-                                            <?php
                                         }
-                                        ?>    
+                                        ?>
+                                        <br>
+                                        <label>Seleccione Archivo</label>
+                                        <br>
+                                        <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filae1[0]; ?>" />
+                                        <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filae1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
+                                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
+
                                     </p>
                                 </div>
                                 <?php
@@ -225,46 +203,34 @@ if (count($listasEspecificas) == 0) {
                                                             <option value="NA" <?php if ($filas[2] == "NA") echo "selected"; ?>>No aplica</option>
                                                         </select>
                                                     </p>
-
-                                                    <?php if ($filas[2] != "SI") {
-                                                        ?>
-                                                        <div class="row">
-                                                            <form class="col s12">
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <i class="material-icons prefix">mode_edit</i>
-                                                                        <label id="<?php echo subObsLbl . $nOpcionesSub; ?>" for="<?php echo subObs . $nOpcionesSub; ?>">Observaciones:</label>
-                                                                        <textarea id="<?php echo subObs . $nOpcionesSub; ?>" class="<?php echo subObs; ?> materialize-textarea"><?php echo $filas[5]; ?></textarea>
-                                                                    </div>
+                                                    <div class="row">
+                                                        <form class="col s12">
+                                                            <div class="row">
+                                                                <div class="input-field col s12">
+                                                                    <i class="material-icons prefix">mode_edit</i>
+                                                                    <label id="<?php echo subObsLbl . $nOpcionesSub; ?>" for="<?php echo subObs . $nOpcionesSub; ?>">Observaciones:</label>
+                                                                    <textarea id="<?php echo subObs . $nOpcionesSub; ?>" class="<?php echo subObs; ?> materialize-textarea"><?php echo $filas[5]; ?></textarea>
                                                                 </div>
-                                                            </form>
-                                                        </div>
-                                                        <?php
-                                                    } else {
-                                                        ?>
-                                                        <label for="<?php echo subObs . $nOpcionesSub; ?>">Observacioness:</label>
-                                                        <textarea id="<?php echo subObs . $nOpcionesSub; ?>" class="<?php echo subObs; ?> materialize-textarea" <?php if ($filas[2] == "SI") echo "disabled"; ?> style="color: #000000"><?php echo $filas[5]; ?></textarea>
-                                                        <?php
-                                                    }
-                                                    ?>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                     <p>
                                                         <input type="hidden" id="<?php echo subFileExist . $nOpcionesSub; ?>" value="<?php echo $filas[4]; ?>">
                                                         <?php
-                                                        if ($filas[2] == "SI" && $filas[4] != "") {
+                                                        if ($filas[4] != "") {
                                                             ?>
                                                             <label>Archivo adjunto: </label>
                                                             <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filas[4]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filas[4]; ?></a>
                                                             <?php
-                                                        } else {
-                                                            ?>
-                                                            <label>Seleccione Archivo</label>
-                                                            <br>
-                                                            <input type="hidden" id="<?php echo subFilePre . $nOpcionesSub; ?>" value="<?php echo $filas[0]; ?>" />
-                                                            <input type="hidden" id="<?php echo subFileOb . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>" /><!--saber si el adjunto es obligatorio-->
-                                                            <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
-                                                            <?php
                                                         }
                                                         ?>
+                                                        <br>
+                                                        <label>Seleccione Archivo</label>
+                                                        <br>
+                                                        <input type="hidden" id="<?php echo subFilePre . $nOpcionesSub; ?>" value="<?php echo $filas[0]; ?>" />
+                                                        <input type="hidden" id="<?php echo subFileOb . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>" /><!--saber si el adjunto es obligatorio-->
+                                                        <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
+
                                                     </p>
                                                 </div>
                                                 <?php

@@ -45,6 +45,7 @@ for ($i = 0; $i < count($totalArchivosReq); $i += 2) {//incremento en +2 ya que 
         $objetoArchivoReq->setTipoEtapa(Archivos::$ETAPA_REQUISITO);
         $objetoArchivoReq->setCodRadicacion($idRad);
         Archivos::guardarDatosArchivo($objetoArchivoReq);
+        
     } else {
         $fallidosReq .= ($fallidosReq == "" ? "" : ",") . $totalArchivosReq[$i];
     }

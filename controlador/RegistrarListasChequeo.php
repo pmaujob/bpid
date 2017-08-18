@@ -61,10 +61,13 @@ class RegistrarListasChequeo {
         }
 
         $resInsert = MRegistrarListasChequeo::registrarListasChequeo($this->getIdRad(), $reqJson, $subJson);
-
         if ($_POST['noCont'] != null) {
             if ($_POST['noCont'] > 0 && $resInsert == 1) {//enviar correo proyecto con items desaprobados
-                $destino = MRegistrarListasChequeo::getCorreoRad($this->getIdRad());
+                $resCorreo = MRegistrarListasChequeo::getCorreoRad($this->getIdRad());
+                $destino = "";
+                foreach ($resCorreo as $obj) {
+                    $destino = $obj[0];
+                }
                 $asunto = "Radicación Proyecto - Bpid";
                 $cuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
                 $altCuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
@@ -91,7 +94,11 @@ if (!isset($_POST['guardarEnviar'])) {
 
     if ($res == 1) {
 
-        $destino = MRegistrarListasChequeo::getCorreoRad($idRad);
+        $resCorreo = MRegistrarListasChequeo::getCorreoRad($idRad);
+        $destino = "";
+        foreach ($resCorreo as $obj) {
+            $destino = $obj[0];
+        }
         $asunto = "Radicación Proyecto - Bpid";
         $cuerpo = "Su proyecto ha sido radicado con éxito";
         $altCuerpo = "Su proyecto ha sido radicado con éxito";

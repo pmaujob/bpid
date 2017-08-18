@@ -28,7 +28,7 @@ class MRegistrarListasChequeo {
 
     public static function getCorreoRad($idRad) {
 
-        $sql = "SELECT correo_responsable FROM radicacion WHERE cod_radicacion = $idRad;";
+        $sql = 'select correo from get_correo_rad('.$idRad.') as ("correo" varchar);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");
