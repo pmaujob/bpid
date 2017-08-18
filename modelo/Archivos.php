@@ -152,6 +152,8 @@ class Archivos {
         $con->conectar("PG");
         $resultado = $con->consultar($sql);
         $con->cerrarConexion();
+        
+        return $resultado;
     }
 
 }

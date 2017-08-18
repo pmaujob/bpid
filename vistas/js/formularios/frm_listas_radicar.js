@@ -122,20 +122,17 @@ function validar(enviarInfo) {
         if (opcionSeleccionada != "NA") {
 
             var reqArchivoExist = document.getElementById('REQFILEEXIST' + i).value;
-            if (reqArchivoExist == "") {//para evitar error de elemento para subir archivos
+            var reqArchivo = document.getElementById('REQFILE' + i);
 
-                var reqArchivo = document.getElementById('REQFILE' + i);
-
-                if (opcionSeleccionada == "SI" && document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
-                    alert('Se debe adjuntar un archivo en esta pregunta.');
-                    reqArchivo.focus();
-                    return;
-                } else if (opcionSeleccionada == "SI" && reqArchivo.value != '') {
-                    var archivoReqRow = new Array(2);
-                    archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
-                    archivoReqRow[1] = i;//posicion del contador para recorrer archivos más adelante
-                    archivosReq.push(archivoReqRow);
-                }
+            if (opcionSeleccionada == "SI" && reqArchivoExist == "" && document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
+                alert('Se debe adjuntar un archivo en esta pregunta.');
+                reqArchivo.focus();
+                return;
+            } else if (opcionSeleccionada == "SI" && reqArchivo.value != '') {
+                var archivoReqRow = new Array(2);
+                archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
+                archivoReqRow[1] = i;//posicion del contador para recorrer archivos más adelante
+                archivosReq.push(archivoReqRow);
             }
 
             var reqRow = new Array(3);
@@ -204,6 +201,9 @@ function validar(enviarInfo) {
                     contentType: false,
                     processData: false,
                     success: function (datos) {
+
+                        console.log(datos);
+
                         var fallidosReq = datos.split('|')[0];
                         var fallidosSub = datos.split('|')[1];
                         var alerta = "";
@@ -270,6 +270,8 @@ function validar(enviarInfo) {
                 });
 
             } else {
+
+                console.log("no guardó nada: " + respuesta);
 
                 waitGuardarProgreso.style.display = "none";
 
