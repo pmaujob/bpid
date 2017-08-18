@@ -209,11 +209,13 @@ function insertarDatosPrograma() {
     var codRadicacion;
     var codPrograma = document.getElementById('selectProgramas');
 
-    var subprogramasChild = document.getElementById('divSubprogramas').getElementsByTagName("p");
+    var divSubProgramas = document.getElementById('divSubprogramas');
+    var subprogramasChild = divSubProgramas.getElementsByTagName("p");
+    
     var subprogramas = new Array();
     
     for (var i = 0; i < subprogramasChild.length; i++) {        
-        var subCheck = subprogramasChild.getElementsByTagName('input')[i];
+        var subCheck = subprogramasChild[i].getElementsByTagName('input');
         if (subCheck.checked) {
             subprogramas.push(subCheck.value);
         }
@@ -222,10 +224,11 @@ function insertarDatosPrograma() {
     var metas = new Array();
 
     for (var i = 0; i < subprogramas.length; i++) {
-        var metasChild = document.getElementById('divMeta' + subprogramas[i]).getElementsByTagName("p");
+        var divMetas = document.getElementById('divMeta' + subprogramas[i]);
+        var metasChild = divMetas.getElementsByTagName("p");
 
         for (var i = 0; i < metasChild.length; i++) {
-            var metaCheck = metasChild.getElementsByTagName('input')[i];
+            var metaCheck = metasChild[i].getElementsByTagName('input');
             if (metaCheck.checked) {
                 metas.push(metaCheck.value);
             }
