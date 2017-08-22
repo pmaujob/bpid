@@ -37,6 +37,7 @@ if($extension=="xml" or $extension=="XML")
 	$periodo=array();
 	$indice=0;
 	$val=0;
+        $total=0;
 	foreach ($datos->FundingSource->Sources->Source as $tipo) 
 			{
 				$detalle[]=tildes((string)$tipo->ResourceType->Description);

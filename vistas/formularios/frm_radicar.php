@@ -73,7 +73,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                 <div class="row">
                                     <div class="opcionesbtn">
                                         <div class="input-field col s12 m12 l12">
-                                     <textarea class="materialize-textarea" id="frm_nom_proyecto" name="frm_nom_proyecto" readonly></textarea>
+                                     <textarea class="materialize-textarea" id="frm_nom_proyecto" name="frm_nom_proyecto" ></textarea>
                                             <label for="textarea1">Nombre Proyecto</label>
 
                                             <div class="descripcion"></div>
