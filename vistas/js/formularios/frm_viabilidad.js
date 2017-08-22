@@ -181,6 +181,10 @@ function calcularValorActividad(idActividad)
     {
         Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); return    
     }
+     if(valorActividad == total)
+    {
+        Materialize.toast('VALOR CORRECTO', 4000); return    
+    }
 
 }
 
@@ -209,10 +213,29 @@ function guardarActividades()
     {
         Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); return    
     }
+    
     var datosact = new Array(3);
     datosact[0] = document.getElementById('frmUnidad_'+i).value;//unidad de medida
     datosact[1] = document.getElementById('frmCantidad_'+i).value;//cantidad de medida
     datosact[2] = document.getElementById('frmCosto_'+i).value;//costoactividad
     actividadDatos.push(datosact);
-    alert(actividadDatos);
+    alert(numeroActividad);
+
+    if(numeroActividad>0)
+    {
+        var datofuente = new Array(5);
+        for(j=1;j<=numeroActividad;j++){
+        datofuente[0]= i; //codigo de actividad  
+        datofuente[1]= document.getElementById('frmFuente_'+j).value;
+        datofuente[2] = document.getElementById('frmValorFuenteNacional_'+j).value;
+        datofuente[3]= document.getElementById('frmValorEfectivoNacional_'+j).value;
+        datofuente[4] = document.getElementById('frmValorEspecieNacional_'+j).value;
+        FuentesDatos.push(datofuente);
+
+                                        }
+
+    }
+    numeroActividad=0;
+    alert(FuentesDatos);
+    $('#modal1').modal('close');
 }
