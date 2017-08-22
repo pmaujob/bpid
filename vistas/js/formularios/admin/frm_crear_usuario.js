@@ -93,6 +93,7 @@ function permisos() {
         type: 'POST',
         url: '../../../vistas/formulariosDinamicos/admin/frmPermisos.php',
         async: true,
+        data: {op: 1},
         success: function (respuesta) {
 
             document.getElementById('funciones').innerHTML = respuesta;

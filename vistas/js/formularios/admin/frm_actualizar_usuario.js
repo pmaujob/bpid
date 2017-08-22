@@ -1,3 +1,5 @@
+var ced;
+
 function onLoadBody() {
 
     $(document).ready(function () {
@@ -42,10 +44,10 @@ function buscarUsuarios() {
 }
 
 function activar(cedula, id) {
-    
+
     var estado;
-    
-    if(document.getElementById(id).checked)
+
+    if (document.getElementById(id).checked)
         estado = true;
     else
         estado = false;
@@ -56,14 +58,14 @@ function activar(cedula, id) {
         async: true,
         data: {op: 1, cedula: cedula, estado: estado},
         success: function (respuesta) {
-            
-            if(estado == 0 && respuesta == 0)
+
+            if (estado == 0 && respuesta == 0)
                 alert("El usuario no ha sido desactivado.");
-            else if(estado == 1 && respuesta == 0)
+            else if (estado == 1 && respuesta == 0)
                 alert("El usuario no ha sido activado.");
-            else if(estado == 0 && respuesta == 1)
+            else if (estado == 0 && respuesta == 1)
                 alert("El usuario ha sido desactivado.");
-            else if(estado == 1 && respuesta == 1)
+            else if (estado == 1 && respuesta == 1)
                 alert("El usuario ha sido activado.");
 
         },
@@ -77,16 +79,20 @@ function activar(cedula, id) {
 
 }
 
-function permisos(cedula){
+function permisos(cedula) {
     
-        jQuery.ajax({
+    ced = cedula;
+
+    jQuery.ajax({
         type: 'POST',
         url: '../../../vistas/formulariosDinamicos/admin/frmPermisos.php',
         async: true,
-        data: {cedula: cedula},
+        data: {op: 2, cedula: cedula},
         success: function (respuesta) {
-            
+
             document.getElementById('funciones').innerHTML = respuesta;
+
+            $('#modal1').modal('open');
 
         },
 
@@ -96,5 +102,66 @@ function permisos(cedula){
         }
 
     });
-    
+
+}
+
+function actualizarPermisosUsuario() {
+
+    var cont = document.getElementById('cont').value;
+    var permisosRow = new Array();
+    var j = 0;
+
+    for (var i = 0; i < cont; i++) {
+        if (document.getElementById('FUN' + i).checked) {
+            var idPermiso = document.getElementById('IDFUN' + i).value;
+            permisosRow[j] = idPermiso;
+            j++;
+        }
+    }
+
+    if (permisosRow.length > 0) {
+
+        jQuery.ajax({
+            type: 'POST',
+            url: '../../../controlador/CActualizarUsuario.php',
+            async: true,
+            data: {op: 2,cedula: ced},
+            success: function (respuesta) {
+
+                if (respuesta == "1") {
+                    document.getElementById('d_error').innerHTML = "Los permisos del usuario se han creado con éxito";
+                    $('#d_error').dialog("open");
+                } else {
+                    document.getElementById('d_error').innerHTML = "Los permisos del usuario no se han podido registrar intentelo de nuevo.";
+                    $('#d_error').dialog("open");
+                }
+
+                limpiarPermisos();
+
+            },
+
+            error: function () {
+                alert("Error inesperado");
+                window.top.location = "../index.html";
+            }
+
+        });
+
+    } else {
+        document.getElementById('d_error').innerHTML = "El usuario no tiene permisos, debe asignar por lo menos un permiso.";
+        $('#d_error').dialog("open");
+    }
+
+}
+
+function limpiarPermisos() {
+
+    if (document.getElementById('cont')) {
+        var cont = document.getElementById('cont').value;
+
+        for (var i = 0; i < cont; i++) {
+            document.getElementById('FUN' + i).checked = 0;
+        }
+    }
+
 }
