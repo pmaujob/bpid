@@ -227,6 +227,7 @@ importando fuente para los menus
 
 .contenedor-menu{
     position: fixed;
+    margin-top: 60px;
     height: 100%;
     background-color: #ffffff;
     overflow: scroll;
@@ -250,6 +251,8 @@ importando fuente para los menus
 .head-usuario{
     background-color: #008643;
     height: 60px;
+    position: fixed;
+    z-index: 9999;
 }
 
 .contenedor-menu a{

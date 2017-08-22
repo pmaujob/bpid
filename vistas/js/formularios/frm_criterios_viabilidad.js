@@ -73,7 +73,7 @@ function mas(cod, bpid, numProyecto) {
         timeout: 0,
         data: {value: value, bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
-            
+
             document.getElementById('collapsible').innerHTML = respuesta;
 
         }, error: function () {
@@ -114,11 +114,14 @@ function registrarCriterios() {
         timeout: 0,
         data: {idRad: idRad, preguntas: criterios},
         success: function (respuesta) {
-            
-            if(respuesta==1)
-                alert("ok");
-            else
-                alert("error");
+
+            if (respuesta == "1") {
+                document.getElementById('d_error').innerHTML = "Los criterios de viabilidad se han registrado con exito.";
+                $('#d_error').dialog("open");
+            } else {
+                document.getElementById('d_error').innerHTML = "Los criterios de viabilidad no han podido ser registrados, por favor intentelo de nuevo mas tarde.";
+                $('#d_error').dialog("open");
+            }
 
         }, error: function () {
             alert("Error inesperado")
