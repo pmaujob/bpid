@@ -46,11 +46,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
             <?php require_once '../menu.php'; ?>
             <form id='frm_radicar_listas' name='frm_criterios_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
-
+                
                 <div class="col s12 m11 l9">
                     <div class="bajar">
                         <div class="container-fluid">
                             <div class="row">
+                                <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
                                 <div class="col s12 m12 l12 center-align"><div class="titulofrm">CRITERIOS DE VIABILIDAD</div></div>
                                 <br>
                                 <br>
