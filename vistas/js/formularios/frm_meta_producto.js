@@ -134,8 +134,8 @@ function displayControles(idLogo, idDivSelect, reiniciar) {
 }
 
 function buscarMetas(checkBox, subPrograma) {
-    
-    console.log("entró con el id: "+checkBox.id)
+
+    console.log("entró con el id: " + checkBox.id)
 
     if (checkBox.checked) {
 
@@ -206,16 +206,16 @@ function buscarMetas(checkBox, subPrograma) {
 
 function insertarDatosPrograma() {
 
-    var codRadicacion;
+    var codRadicacion = document.getElementById('idRad').value;
     var codPrograma = document.getElementById('selectProgramas');
 
     var divSubProgramas = document.getElementById('divSubprogramas');
-    var subprogramasChild = divSubProgramas.getElementsByTagName("p");
-    
+    var subprogramaChecks = divSubProgramas.getElementsByTagName("input");
+
     var subprogramas = new Array();
-    
-    for (var i = 0; i < subprogramasChild.length; i++) {        
-        var subCheck = subprogramasChild[i].getElementsByTagName('input');
+
+    for (var i = 0; i < subprogramaChecks.length; i++) {
+        var subCheck = subprogramaChecks[i];
         if (subCheck.checked) {
             subprogramas.push(subCheck.value);
         }
@@ -225,10 +225,10 @@ function insertarDatosPrograma() {
 
     for (var i = 0; i < subprogramas.length; i++) {
         var divMetas = document.getElementById('divMeta' + subprogramas[i]);
-        var metasChild = divMetas.getElementsByTagName("p");
+        var metasChecks = divMetas.getElementsByTagName("input");
 
-        for (var i = 0; i < metasChild.length; i++) {
-            var metaCheck = metasChild[i].getElementsByTagName('input');
+        for (var j = 0; j < metasChecks.length; j++) {
+            var metaCheck = metasChecks[j];
             if (metaCheck.checked) {
                 metas.push(metaCheck.value);
             }
@@ -236,9 +236,9 @@ function insertarDatosPrograma() {
 
     }
 
-    console.log("subprogramas: "+subprogramas.length+", metas: "+metas.length);
+    console.log("subprogramas: " + subprogramas.length + ", metas: " + metas.length);
 
-    /*jQuery.ajax({
+    jQuery.ajax({
         type: 'POST',
         url: '../../modelo/CargarMetas.php',
         async: true,
@@ -250,6 +250,6 @@ function insertarDatosPrograma() {
             alert("Error inesperado")
             window.top.location = "../index.html";
         }
-    });*/
+    });
 
 }

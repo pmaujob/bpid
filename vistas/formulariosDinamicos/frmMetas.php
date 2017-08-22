@@ -41,3 +41,4 @@ $programas = CargarMetas::getProgramas();
     <div id="divMetas" style="display: none;">       
     </div>
 </div>
+<input type="hidden" id="idRad" value="<?php echo $idRad; ?>" >
