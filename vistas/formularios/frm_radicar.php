@@ -36,6 +36,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
              <input id="objetivog" name="objetivog" type="hidden" value="" />
              <input id="productos" name="productos" type="hidden" value="" />
              <input id="actividades" name="actividades" type="hidden" value="" />
+             <input id="total" name="total" type="hidden" value="" />
             <div class="col s12 m11 l9">
                 <div class="bajar">
                     <div class="container-fluid">
