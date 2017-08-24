@@ -17,7 +17,7 @@ class MActualizarUsuario{
         $res = $con->afectar($sql);
         $con->cerrarConexion();
         
-        return $res;
+        return $sql;
         
     }
     

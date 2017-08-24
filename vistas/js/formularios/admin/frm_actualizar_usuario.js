@@ -125,15 +125,17 @@ function actualizarPermisosUsuario() {
             type: 'POST',
             url: '../../../controlador/CActualizarUsuario.php',
             async: true,
-            data: {op: 2,cedula: ced},
+            data: {op: 2 ,cedula: ced ,permisos: permisosRow},
             success: function (respuesta) {
 
                 if (respuesta == "1") {
                     document.getElementById('d_error').innerHTML = "Los permisos del usuario se han creado con éxito";
                     $('#d_error').dialog("open");
-                } else {
+                } else if(respuesta == "2"){
                     document.getElementById('d_error').innerHTML = "Los permisos del usuario no se han podido registrar intentelo de nuevo.";
                     $('#d_error').dialog("open");
+                }else{
+                    alert(respuesta);
                 }
 
                 limpiarPermisos();

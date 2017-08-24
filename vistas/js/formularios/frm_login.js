@@ -9,7 +9,7 @@ function ingresar() {
 
     jQuery.ajax({
         type: 'POST',
-        url: 'controlador/CLogin.php',
+        url: 'controlador/Clogin.php',
         async: true,
         data: {ip: ip,correo: correo, contrasena: contrasena},
         success: function (respuesta) {
@@ -18,9 +18,13 @@ function ingresar() {
                 
                 location.href = "vistas/index.php";
                 
-            }else{
+            }else if(respuesta === "No"){
                 
                 alert("El usuario o la contraseña son incorrectos intentelo de nuevo.");
+                
+            }else{
+                
+                alert(respuesta);
                 
             }
 

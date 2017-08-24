@@ -39,7 +39,7 @@ class CActualizarUsuario {
 
     public function actualizarPermisos($cedula) {
         
-        MActualizarUsuario::actualizarPermisos($cedula,$this->getPermisosJson());
+        return MActualizarUsuario::actualizarPermisos($cedula,$this->getPermisosJson());
         
     }
 
@@ -55,16 +55,20 @@ if (isset($_POST['op']) && !empty($_POST['op'])) {
         else
             echo "0";
     }else if ($_POST['op'] == 2) {
+
         if (isset($_POST['permisos']) && !empty($_POST['permisos']) && isset($_POST['cedula']) && !empty($_POST['cedula'])){
-            
+
             $act->setPermisos($_POST['permisos']);
             echo $act->actualizarPermisos($_POST['cedula']);
             
+        }else{
+            echo "0";
         }
             
     }else {
         echo "0";
     }
+    
 }
 ?>
 
