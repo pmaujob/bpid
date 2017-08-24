@@ -1,3 +1,4 @@
+
 numeroActividad=0;
 var actividadDatos = new Array();
 var FuentesDatos = new Array();
@@ -111,7 +112,7 @@ function mas(cod, bpid,numProyecto) {
 
 function editarActividades(codRadicacion,idProducto,idActividad,valorActividad)
 {
-
+        numeroActividad=0;
         jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmActividadesValores.php',
@@ -142,8 +143,18 @@ function agregarFuente(idActividad)
     var unidad= document.getElementById('frmUnidad__'+idActividad);
     var cantidad= document.getElementById('frmCantidad_'+idActividad);
     var unitario= document.getElementById('frmCosto_'+idActividad);
-    var total= document.getElementById('frmTotal_'+idActividad);
-    
+    var total= document.getElementById('frmTotal_'+idActividad).value;
+    var valorActividad= document.getElementById('valorActividad').value;
+
+     if(valorActividad != total)
+    {
+        Materialize.toast('Error, verifique los montos', 4000); 
+        document.getElementById('frmCantidad_'+idActividad).focus();
+        return  false ;
+    }
+    else
+    {
+
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmViabilizadosFuentes.php',
@@ -164,6 +175,7 @@ function agregarFuente(idActividad)
             window.top.location = "../index.html";
         }
     });
+    }
 }
 
 function calcularValorActividad(idActividad)
@@ -176,10 +188,12 @@ function calcularValorActividad(idActividad)
     if(cantidad=="") {Materialize.toast('Digite Cantidad', 4000); return }
     if(unitario=="") {Materialize.toast('Digite Valor unitario', 4000); return}
     var total=cantidad * unitario;
+
     document.getElementById('frmTotal_'+idActividad).value=total;
-    if(valorActividad > total)
+    if(valorActividad != total)
     {
-        Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); return    
+        Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); 
+        return   false 
     }
      if(valorActividad == total)
     {
@@ -195,10 +209,9 @@ function guardarActividades()
     var i=document.getElementById('codigoActividad').value;
 
     if(numeroActividad==0){
-        Materialize.toast('Debe Digitar Todos Los Datos', 4000); 
+        Materialize.toast('Debe Agregar Fuentes de Financiacion', 4000); 
         return false;
     }
-   
    
     //var fuente= document.getElementById('frmFuente_'+numeroActividad).value;
     var unidad= document.getElementById('frmUnidad_'+i).value;
@@ -209,9 +222,12 @@ function guardarActividades()
     if(unitario=="") {Materialize.toast('Digite Valor unitario', 4000); return}
     if(unidad=="") {Materialize.toast('Digite Unidad', 4000); return}
     total=document.getElementById('frmTotal_'+i).value
+
     if(valorActividad > total)
     {
-        Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); return    
+        Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); 
+        document.getElementById('frmCantidad_'+i).focus();
+        return  false ;
     }
     
     var datosact = new Array(3);
@@ -219,8 +235,7 @@ function guardarActividades()
     datosact[1] = document.getElementById('frmCantidad_'+i).value;//cantidad de medida
     datosact[2] = document.getElementById('frmCosto_'+i).value;//costoactividad
     actividadDatos.push(datosact);
-    alert(numeroActividad);
-
+    
     if(numeroActividad>0)
     {
         var datofuente = new Array(5);
