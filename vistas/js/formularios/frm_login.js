@@ -24,7 +24,8 @@ function ingresar() {
                 
             }else{
                 
-                alert(respuesta);
+                alert("Error inesperado");
+                console.log("Error en bpid: " + respuesta);
                 
             }
 
