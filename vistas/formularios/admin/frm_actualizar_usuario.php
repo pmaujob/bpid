@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a id="modalg" class="modal-action modal-close waves-effect waves-green btn-flat ">Ok</a>
+                <a id="modalg" class="modal-action modal-close waves-effect waves-green btn-flat " onclick="actualizarPermisosUsuario();">Ok</a>
             </div>
         </div>
 
@@ -34,6 +34,7 @@
             <div class="bajar">
                 <div class="container-fluid">
                     <div class="row">
+                        <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
                         <div class="col s12 m12 l12 center-align"><div class="titulofrm">ACTUALIZAR USUARIO</div></div>
                         <br><br>
                     </div>

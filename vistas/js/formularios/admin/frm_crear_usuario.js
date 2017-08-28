@@ -93,6 +93,7 @@ function permisos() {
         type: 'POST',
         url: '../../../vistas/formulariosDinamicos/admin/frmPermisos.php',
         async: true,
+        data: {op: 1},
         success: function (respuesta) {
 
             document.getElementById('funciones').innerHTML = respuesta;
@@ -134,14 +135,16 @@ function registrarUsuario() {
             async: true,
             data: {cedula: cedula, nombre: nombre, apellido: apellido, correo: correo, dependencia: dependencia, permisos: permisosRow},
             success: function (respuesta) {
+                
+                alert(respuesta);
 
-                if (respuesta == "1") {
-                    document.getElementById('d_error').innerHTML = "El usuario ha sido creado con éxito";
-                    $('#d_error').dialog("open");
-                } else {
-                    document.getElementById('d_error').innerHTML = "El usuario no ha podido crear intentelo de nuevo.";
-                    $('#d_error').dialog("open");
-                }
+//                if (respuesta == "1") {
+//                    document.getElementById('d_error').innerHTML = "El usuario ha sido creado con éxito";
+//                    $('#d_error').dialog("open");
+//                } else {
+//                    document.getElementById('d_error').innerHTML = "El usuario no ha podido crear intentelo de nuevo.";
+//                    $('#d_error').dialog("open");
+//                }
 
                 limpiarPermisos();
 

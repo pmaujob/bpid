@@ -31,16 +31,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                         <th>Problema o Necesidad</th><td><?php echo $fila[1]; ?></td>
                     </tr>
                     <tr>
-                        <th>Numero de Beneficiarios</th><td><?php echo number_format($fila[3], 0,'', '.'); ?></td>
-                    </tr>
-                     <tr>
-                        <th>Eje</th><td><?php echo $fila[4]; ?></td>
-                    </tr>
-                     <tr>
-                        <th>Programa</th><td><?php echo $fila[0]; ?></td>
-                    </tr>
-                     <tr>
-                        <th>Subprograma</th><td><?php echo $fila[5]; ?></td>
+                        <th>Numero de Beneficiarios</th><td><?php echo number_format($fila[3], 0,'', '.')."Poblacion Objetivo"; ?></td>
                     </tr>
                     <tr>
                         <th>Sector</th><td><?php echo $fila[6]; ?></td>
