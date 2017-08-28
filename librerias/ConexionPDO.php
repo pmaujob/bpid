@@ -53,7 +53,7 @@ class ConexionPDO {
             $this->pdo->query("SET NAMES 'utf8'");
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo 'Falló la conexión: ' . $e->getMessage();
+            return 'Falló la conexión: ' . $e->getMessage();
         }
     }
 
@@ -68,7 +68,7 @@ class ConexionPDO {
             if ($res = $query->fetch(PDO::FETCH_OBJ))
                 $rt = $res->numero_completo;
         } catch (PDOException $e) {
-            error_log($e->getMessage());
+            return $e->getMessage();
         }
 
         return $rt;
@@ -84,7 +84,7 @@ class ConexionPDO {
             $query->execute();
             $rt = $query;
         } catch (PDOException $e) {
-            error_log($e->getMessage());
+            return $e->getMessage();
         }
 
         return $rt;
@@ -99,7 +99,7 @@ class ConexionPDO {
             $this->pdo->exec($sql);
             $res = 1;
         } catch (PDOException $e) {
-            error_log($e->getMessage());
+            return $e->getMessage();
         }
 
         return $res;

@@ -17,6 +17,19 @@ class MActualizarUsuario{
         $res = $con->afectar($sql);
         $con->cerrarConexion();
         
+        return $sql;
+        
+    }
+    
+    public static function actualizarPermisos($cedula,$permisos){
+        
+        $sql = "select from seguridad.actualizar_permisos_usuarios('$cedula',$permisos);";
+        
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->consultar($sql);
+        $con->cerrarConexion();
+        
         return $res;
         
     }
