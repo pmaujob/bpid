@@ -59,8 +59,7 @@ function buscarProyectos(op) {
         },
         error: function () {
             //quitarPantalla();
-            alert("Error inesperado");
-            window.top.location = "../index.html";
+            mostrarMensaje('Error Inesperado', false);
         }
     });
 }
@@ -88,7 +87,7 @@ function mas(cod, bpid, numProyecto) {
                 $('.collapsible').collapsible();
             });
         }, error: function () {
-            alert("Error inesperado")
+            mostrarMensaje('Error Inesperado', false);
             window.top.location = "../index.html";
         }
     });
@@ -286,7 +285,6 @@ function validar(enviarInfo) {
         error: function () {
             mostrarMensaje('Error Inesperado', false);
             noCont = 0;
-            window.top.location = "../index.html";
         }
     });
 

@@ -8,18 +8,18 @@ require_once '../librerias/CambiarFormatos.php';
 require_once '../modelo/MRegistrarDatosPrograma.php';
 
 class RegistrarDatosPrograma {
-    
+
     private $codRadicacion;
-    private $progama;
+    private $programa;
     private $subprogramas;
     private $metas;
-    
+
     function getCodRadicacion() {
         return $this->codRadicacion;
     }
 
-    function getProgama() {
-        return $this->progama;
+    function getPrograma() {
+        return $this->programa;
     }
 
     function getSubprogramas() {
@@ -34,8 +34,8 @@ class RegistrarDatosPrograma {
         $this->codRadicacion = $codRadicacion;
     }
 
-    function setProgama($progama) {
-        $this->progama = $progama;
+    function setPrograma($programa) {
+        $this->programa = $programa;
     }
 
     function setSubprogramas($subprogramas) {
@@ -46,18 +46,27 @@ class RegistrarDatosPrograma {
         $this->metas = $metas;
     }
 
-    
     public function registrar() {
 
-
+        $resInsPrograma = MRegistrarDatosPrograma::registrarDatosPrograma($this->getCodRadicacion(), $this->getPrograma());
+        $resInsSubprogramas = MRegistrarDatosPrograma::registrarDatosSubprograma($this->getCodRadicacion(), $this->getSubprogramas());
+        $resInsMetas = MRegistrarDatosPrograma::registrarDatosMetas($this->getCodRadicacion(), $this->getMetas());
+     
+        return $resInsPrograma . "|" . $resInsSubprogramas . "|" . $resInsMetas; 
+        
     }
 
 }
 
-if (!isset($_POST['codRadicacion'])) {
+if (isset($_POST['codRadicacion'])) {
 
-    
-    
+    $datosPrograma = new RegistrarDatosPrograma();
+
+    $datosPrograma->setCodRadicacion($_POST['codRadicacion']);
+    $datosPrograma->setPrograma($_POST['codPrograma']);
+    $datosPrograma->setSubprogramas($_POST['subprogramas']);
+    $datosPrograma->setMetas($_POST['metas']);
+
+    echo $datosPrograma->registrar();
 }
-
 ?>

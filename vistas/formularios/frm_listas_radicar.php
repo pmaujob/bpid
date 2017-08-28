@@ -35,7 +35,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             </div>
                         </ul>
                     </div>
-                    <div class="modal-footer">          
+                    <div class="modal-footer">      
+                        
+                        <div style="position: fixed; float: right; margin-top: 15px;">
+                            <i class="material-icons">exit_to_app</i>
+                        </div>
+                        
                         <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
                         <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
 
