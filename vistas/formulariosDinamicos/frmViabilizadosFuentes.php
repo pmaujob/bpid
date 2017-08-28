@@ -16,7 +16,8 @@ if($correcto==1){
                    <option value="3">Municipal</option>
                    <option value="4">S.G Regalias</option>
                    <option value="5">Cooperacion Internacional</option>
-                   <option value="6">Otros</option>
+                   <option value="6">SGP</option>
+                   <option value="7">Otros</option>
     </select></div></td>
     
      <td>
