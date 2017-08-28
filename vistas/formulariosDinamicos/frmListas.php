@@ -55,7 +55,7 @@ foreach ($listasRequeridas as $filar) {
                     $noCont++;
                 }
                 ?>
-                <div class="cardview_checklist">
+                <div class="cardview_checklist row">
                     <span>
                         <?php echo $filar1[1]; ?>
                     </span>

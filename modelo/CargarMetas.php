@@ -7,9 +7,13 @@ require_once $raiz . '/librerias/ConexionPDO.php';
 
 class CargarMetas {
 
-    public static function getProgramas() {
+    public static function getProgramas($codRadicacion) {
 
-        $consulta = 'select cod, des, eje from get_programas() as ("cod" integer, "des" varchar, "eje" varchar);';
+        $consulta = 'select cod_programa, '//0
+                . 'descripcion, '//1
+                . 'eje, '//2
+                . 'cod_radicacion '//3
+                . 'from get_programas('.$codRadicacion.') as ("cod" integer, "des" varchar, "eje" varchar, "codRad" integer);';
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);

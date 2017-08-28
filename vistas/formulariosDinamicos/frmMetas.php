@@ -18,7 +18,7 @@ $programas = CargarMetas::getProgramas();
             <?php
             foreach ($programas as $programa) {
                 ?>
-                <option value="<?php echo $programa[0]; ?>"><?php echo $programa[1]; ?></option>
+                <option value="<?php echo $programa[0]; ?>" <?php if($programa[3] != "") echo "selected"; ?> ><?php echo $programa[1]; ?></option>
                 <?php
             }
             ?>
