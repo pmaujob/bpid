@@ -145,13 +145,37 @@ class ControladorRadicar{
 		$correo =new ValidarDatos();
 		return $correo->validarEmail($this->correo_responsable);
 	}
+
+	public function GetDatosUsuario($cedula)
+	{
+
+		$rDatos=new MRadicar();
+		return $rDatos->getDatosUsuario($cedula);
+	}
 	
 }
 
-$valores = trim(($_POST["value"]));
-$valores = explode("//", $valores);
-$radicar=new ControladorRadicar();
-echo $radicar->iniciar($valores,$sess->getValue('cedula'));
+
+if(isset($_POST['op']) && !empty($_POST['op'])
+{
+	if($_POST['op']==1)
+	{
+		$valores = trim(($_POST["value"]));
+		$valores = explode("//", $valores);
+		$radicar=new ControladorRadicar();
+		echo $radicar->iniciar($valores,$sess->getValue('cedula'));
+	}
+	elseif ({$_POST['op']==2}) {
+		# code...3
+		$cedula=$_POST['cedula'];
+		$radicar=new ControladorRadicar();
+		//echo $radicar->GetDatosUsuario($cedula);
+		echo "Dario";
+	}
+}
+
+
+
 
  ?>
  <?php

@@ -1,0 +1,34 @@
+2017-08-22 15:28:08 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-08-24 10:42:05 ERROR  : ERROR:  no existe la relación «radicacion_meta_producto»
+LINE 1: SELECT * FROM radicacion_meta_producto;
+                      ^
+2017-08-24 15:43:40 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-08-24 15:49:36 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 15:54:30 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:01:14 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:12:18 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:20:39 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:40:03 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:43:30 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 17:11:01 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-28 15:37:52 ERROR  : SSL SYSCALL error: Software caused connection abort (0x00002745/10053)

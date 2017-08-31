@@ -132,8 +132,6 @@ function displayControles(idLogo, idDivSelect, reiniciar) {
 
 function buscarMetas(checkBox, subPrograma) {
 
-    console.log("entró con el id: " + checkBox.id)
-
     if (checkBox.checked) {
 
         displayControles('esperarMetas', 'divMetas', true);
@@ -252,4 +250,8 @@ function insertarDatosPrograma() {
         }
     });
 
+}
+
+function cerrar(){
+    $('#modalm').modal('close');
 }

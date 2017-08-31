@@ -21,9 +21,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         <body onload="onLoadBody();">
 
             <div id="d_error" title="ALERTA"></div>
-            <div id="d_ingreso" title="INFORMACION"></div><
+            <div id="d_ingreso" title="INFORMACION"></div>
             <div id="modal1" class="modal modal-fixed-footer">
                 <div class="modal-content">
+                    <a href="#!" onclick="cerrar();" style="margin-left: 95%; color: black;">
+                        <i class="material-icons">close</i>                            
+                    </a>
                     <h4>Información del Proyecto</h4>
                     <p>A continuación se mostrará la información de radicación del proyecto</p>
                     <ul id="collapsible" class="collapsible" data-collapsible="accordion"> 

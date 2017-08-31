@@ -1,10 +1,33 @@
+var proyectoActual = 0;
+var collapsibleHtml = "";
 var noCont = 0;
+var tituloListaOld = "";
+var tituloSublistaOld = "";
+var $toastContent;
 
 function onLoadBody() {
 
+
     $(document).ready(function () {
-        $('.modal').modal();
+
+        $('.modal').modal({
+            complete: function () {
+
+                var toasts = new Array();
+
+                if (document.getElementById('toast-container') != null) {
+                    toasts = document.getElementById('toast-container').getElementsByTagName("div");
+                }
+
+                for (var i = toasts.length - 1; i >= 0; i--) {
+                    toasts[i].parentNode.removeChild(toasts[i]);
+                }
+
+            }
+        });
+
     });
+
     $("#d_error").dialog({
         autoOpen: false,
         modal: true,
@@ -67,6 +90,16 @@ function buscarProyectos(op) {
 function mas(cod, bpid, numProyecto) {
 
     $('#modal1').modal('open');
+    
+    if(collapsibleHtml == ""){
+        collapsibleHtml = document.getElementById("collapsible").innerHTML;
+    }
+    
+    if (proyectoActual == numProyecto) {
+        return;
+    } else {
+        document.getElementById("collapsible").innerHTML = collapsibleHtml;
+    }
 
     value = cod;
     var bpid = bpid;
@@ -86,6 +119,9 @@ function mas(cod, bpid, numProyecto) {
             $(document).ready(function () {
                 $('.collapsible').collapsible();
             });
+
+            proyectoActual = numProyecto;
+
         }, error: function () {
             mostrarMensaje('Error Inesperado', false);
             window.top.location = "../index.html";
@@ -334,7 +370,6 @@ function validarNo(idSelection) {
 
 }
 
-
 function mostrarMensaje(mensaje, info) {
     if (info) {
         document.getElementById('d_ingreso').innerHTML = '<p>' + mensaje + '</p>';
@@ -347,4 +382,71 @@ function mostrarMensaje(mensaje, info) {
 
 function quitarEtiqueta() {
     document.getElementById('msjInfo').style.display = "none";
+}
+
+function cerrarModal() {
+
+    $('#modal1').modal('close');
+    document.getElementById('toast-container').innerHTML = "";
+
+}
+
+function mostrarTitulo(tituloLista) {
+
+    var toasts = new Array();
+
+    if (document.getElementById('toast-container') != null) {
+        toasts = document.getElementById('toast-container').getElementsByTagName("div");
+    }
+
+    for (var i = toasts.length - 1; i >= 0; i--) {
+        toasts[i].parentNode.removeChild(toasts[i]);
+    }
+
+    if (tituloListaOld == tituloLista) {
+        tituloListaOld = "";
+        return;
+    }
+
+    var tituloCut = "";
+    if (tituloLista.length > 25) {
+        tituloCut = tituloLista.substring(0, 25) + '...';
+    }
+
+    Materialize.toast((tituloCut == "" ? tituloLista : tituloCut), 500000);
+    tituloListaOld = tituloLista;
+
+    var toast = document.getElementById('toast-container').getElementsByTagName("div")[0];
+    toast.style.background = "#008643";
+    toast.style.fontWeight = "400";
+
+}
+
+
+function mostrarSubtitulo(tituloSublista) {
+
+    var subToasts = document.getElementById('toast-container').getElementsByTagName("div");
+
+    if (subToasts.length == 2) {
+        subToasts[1].parentNode.removeChild(subToasts[1]);
+    }
+
+    if (tituloSublistaOld == tituloSublista) {
+        tituloSublistaOld = "";
+        return;
+    }
+
+    var subtituloCut = "";
+    if (tituloSublista.length > 25) {
+        subtituloCut = tituloSublista.substring(0, 25) + '...';
+    }
+
+    Materialize.toast((subtituloCut == "" ? tituloSublista : subtituloCut), 500000);
+    tituloSublistaOld = tituloSublista;
+
+    var subToast = document.getElementById('toast-container').getElementsByTagName("div")[1];
+    subToast.style.color = "black";
+    subToast.style.background = "white";
+    subToast.style.fontWeight = "400";
+
 }

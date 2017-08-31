@@ -1,5 +1,5 @@
 <?php
-  require_once "../librerias/ConexionPDO.php";
+require_once "../librerias/ConexionPDO.php";
 
 
 class MRadicar
@@ -58,9 +58,19 @@ class MRadicar
    $con->conectar("PG");
    $resultado=$con->afectar($sql);
    $con->cerrarConexion();  
+   return $resultado;
       
-        return $resultado;
-      
+   }
+
+   public function getDatosUsuario($cedula)
+   {
+
+   $sql="";
+   $con = new ConexionPDO();
+   $con->conectar("PG");
+   $resultado=$con->consultar($sql);
+   $con->cerrarConexion(); 
+   return $resultado; 
    }
 }
 

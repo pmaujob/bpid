@@ -36,7 +36,11 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
              <input id="objetivog" name="objetivog" type="hidden" value="" />
              <input id="productos" name="productos" type="hidden" value="" />
              <input id="actividades" name="actividades" type="hidden" value="" />
+             <input id="frm_eje" name="frm_eje" type="hidden"  readonly/>
+            <input id="frm_programa" name="frm_programa" type="hidden" readonly/>
+            <input id="frm_subprograma" name="frm_subprograma"  type="hidden" readonly/>
              <input id="total" name="total" type="hidden" value="" />
+
             <div class="col s12 m11 l9">
                 <div class="bajar">
                     <div class="container-fluid">
@@ -141,6 +145,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                 </div>
                             </div>
                         </div>
+                        <!--
                         <div class="row">
                             <div class="col s12 m2 l2"><div class="etiquetafrm"><div class="textofrm">EJE</div></div></div>
                             <div class="col s12 m10 l10">
@@ -184,7 +189,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                     </div>
                                 </div>
                             </div>
-
+                            ---->
                             <div class="row">
                                 <div class="col s2 m2 l2"></div>
                                 <div class="col s8 m8 l12 center-align">
@@ -238,8 +243,8 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                             <div class="row">
                                                 <h6>RESPONSABLE DEL PROYECTO</h6>
                                                 <div class="input-field col s6">
-                                                    <input  id="frm_id_responsable" name="frm_id_responsable" type="text" class="validate"
-                                                            onKeyPress="return solonum(event)">
+                                                <input  id="frm_id_responsable" name="frm_id_responsable" type="text" class="validate"
+                                               onKeyPress="return solonum(event)" onchange="buscarUsuario()">
                                                     <label for="frm_id_responsable">No IDENTIFICACION</label>
                                                     <div id="d_frm_id_responsable"></div>
                                                 </div>
