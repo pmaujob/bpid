@@ -14,7 +14,10 @@ class MModuloConFunciones{
         
         $con = new ConexionPDO();
         $con->conectar("PG");
-        return $con->consultar($sql);
+        $res = $con->consultar($sql);
+        $con->cerrarConexion();
+        
+        return $res;
         
     }
     

@@ -22,10 +22,10 @@ class ConexionPDO {
     private function conectarPostgreSQL() {
 
         //Servidor
-        $this->motor ='pgsql';
+        $this->motor = 'pgsql';
         $this->user = 'postgres';
         $this->pass = 'bpid2017';
-        $this->host = '181.225.96.71';
+        $this->host = '192.168.1.111';
         $this->db = 'bpid';
 
         //Local

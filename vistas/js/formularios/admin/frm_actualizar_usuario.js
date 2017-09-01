@@ -105,7 +105,9 @@ function permisos(cedula) {
 
 }
 
-function actualizarPermisosUsuario() {
+function actualizarPermisosUsuario(cedula) {
+    
+    ced = cedula;
 
     var cont = document.getElementById('cont').value;
     var permisosRow = new Array();
@@ -128,6 +130,8 @@ function actualizarPermisosUsuario() {
             data: {op: 2 ,cedula: ced ,permisos: permisosRow},
             success: function (respuesta) {
 
+                alert(respuesta);
+
                 if (respuesta == "1") {
                     document.getElementById('d_error').innerHTML = "Los permisos del usuario se han creado con éxito";
                     $('#d_error').dialog("open");
@@ -137,6 +141,8 @@ function actualizarPermisosUsuario() {
                 }else{
                     alert(respuesta);
                 }
+                
+                console.log(respuesta);
 
                 limpiarPermisos();
 

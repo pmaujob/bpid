@@ -26,12 +26,13 @@ if (isset($_POST['op']) && !empty($_POST['op']))
     <tbody>
         <?php
         $res;
-        if ($op == "1")
+        if ($op == 1)
             $res = MModuloConFunciones::getFunciones();
-        else if ($op == "2") {
-            if (isset($_POST['cedula']) && !empty($_POST['cedula']))
+        else if ($op == 2) {
+            if (isset($_POST['cedula']) && !empty($_POST['cedula'])) {
                 $cedula = $_POST['cedula'];
-            $res = MModuloConFunciones::getFuncionesUser($cedula);
+                $res = MModuloConFunciones::getFuncionesUser($cedula);
+            }
         }
 
         $cont = 0;
@@ -59,4 +60,13 @@ if (isset($_POST['op']) && !empty($_POST['op']))
         ?>
     </tbody>
     <input id="cont" type="hidden" value="<?php echo $cont; ?>">
+    <?php
+    if (isset($_POST['cedula']) && !empty($_POST['cedula'])) {
+        ?>
+
+    <input id="cedulah" type="hidden" value="<?php echo $_POST['cedula']; ?>">
+    
+        <?php
+    }
+    ?>
 </table>

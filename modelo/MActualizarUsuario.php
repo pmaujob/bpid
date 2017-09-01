@@ -30,7 +30,7 @@ class MActualizarUsuario{
         $res = $con->consultar($sql);
         $con->cerrarConexion();
         
-        return $res;
+        return $sql;
         
     }
     
