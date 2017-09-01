@@ -5,6 +5,7 @@
 $raiz = $_SESSION['raiz'];
 
 require_once $raiz . '/modelo/MActualizarUsuario.php';
+require_once $raiz.'/librerias/CambiarFormatos.php';
 
 class CActualizarUsuario {
 

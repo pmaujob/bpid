@@ -24,15 +24,15 @@ function ingresar() {
                 
             }else{
                 
-                alert("Error inesperado");
-                console.log("Error en bpid: " + respuesta);
+                alert("Error inesperado PHP");
+                console.log("Error en bpida: " + respuesta);
                 
             }
 
         },
 
         error: function () {
-            alert("Error inesperado");
+            alert("Error inesperado ajax");
             //window.top.location = "../index.html";
         }
 

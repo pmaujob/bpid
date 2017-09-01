@@ -1,5 +1,9 @@
 <?php
 
+@session_start();
+
+$raiz = $_SESSION['raiz'];
+
 require_once '../modelo/MLogin.php';
 require_once '../librerias/SessionVars.php';
 
@@ -12,6 +16,7 @@ class CLogin {
     private $idLog;
     private $contrasena;
     private $ip;
+    private $secretaria;
     
     public function setCorreo($correo) {
         
@@ -39,6 +44,7 @@ class CLogin {
         $this->usuario = $mLogin->getUsuario();
         $this->cedula = $mLogin->getCedula();
         $this->idLog = $mLogin->getIdLog();
+        $this->secretaria = $mLogin->getSecretaria();
 
         return $mLogin->getRespuesta();
         
@@ -52,6 +58,7 @@ class CLogin {
         $sess->setValue('cedula', $this->cedula);
         $sess->setValue('correo', $this->correo);
         $sess->setValue('idLog', $this->idLog);
+        $sess->setValue('idSec', $this->secretaria);
         
     }
 
