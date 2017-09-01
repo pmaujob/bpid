@@ -26,6 +26,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <div id="d_ingreso" title="INFORMACION"></div>
             <div id="modalm" class="modal modal-fixed-footer">
                 <div class="modal-content">
+                    <a href="#!" onclick="cerrar();" style="margin-left: 95%; color: black;">
+                        <i class="material-icons">close</i>                            
+                    </a>
                     <h4>Lista de metas</h4>
                     <ul id="metaContainer" class="collapsible" style="height: auto; padding: 20px;">
                         <p>&nbsp;Cargando datos, por favor espere...</p>

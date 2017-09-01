@@ -119,14 +119,14 @@ function archivo_xml()
 													localizacion.focus();
 													localizacion.value='';
 													localizacion.value=cadena[2];
-													eje.focus();
-													eje.value='';
+													//eje.focus();
+													//eje.value='';
 													eje.value=cadena[3];
-													programa.focus();
-													programa.value='';
+													//programa.focus();
+													//programa.value='';
 													programa.value=cadena[4];
-													subprograma.focus();
-													subprograma.value='';
+													//subprograma.focus();
+													//subprograma.value='';
 													subprograma.value=cadena[5];
 													valor.focus();
 													valor.value='';
@@ -216,9 +216,9 @@ function almacenar()
  	bloquear_pantalla();
  	jQuery.ajax({	
 		    type: "POST",
-              url:'../../controlador/ControladorRadicar.php',
+            url:'../../controlador/ControladorRadicar.php',
 			async: false,
-			data:{value:value},
+			data:{value:value,op:1},
 			success:function(respuesta){
 				//alert(respuesta)
 				
@@ -245,6 +245,7 @@ function almacenar()
 			}
 			else
 			{
+		    console.log(datos);		
 			var mensaje="Error, Intentelo Nuevamente";
 			document.getElementById('d_error').innerHTML='<p>'+ mensaje + '</p>';
 			$("#d_error").dialog("open");
@@ -259,3 +260,25 @@ function almacenar()
         });
         
 }	
+function buscarUsuario()
+{
+		cedula = document.getElementById('frm_id_responsable').value;
+		alert(cedula)
+		jQuery.ajax({
+        type: 'POST',
+         url:'../../controlador/ControladorRadicar.php',
+        async: true,
+        data: {cedula:cedula,op:2},
+        success: function (respuesta) {
+            alert(respuesta);
+           
+        },
+
+        error: function () {
+            alert("Error inesperado")
+            window.top.location = "../index.html";
+        }
+    });
+     
+
+}

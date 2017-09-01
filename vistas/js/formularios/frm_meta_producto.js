@@ -49,7 +49,6 @@ function buscarProyectos() {
         error: function () {
             //quitarPantalla();
             alert("Error inesperado");
-            window.top.location = "../index.html";
         }
     });
 }
@@ -73,8 +72,7 @@ function listarMetasProducto(idRad, op, numProyecto) {
             });
 
         }, error: function () {
-            alert("Error inesperado")
-            window.top.location = "../index.html";
+            alert("Error inesperado");
         }
     });
 
@@ -120,8 +118,7 @@ function mostrarSubprogramas(select) {
             displayControles('esperarSubprogramas', 'divSubprogramas', false);
 
         }, error: function () {
-            alert("Error inesperado")
-            window.top.location = "../index.html";
+            alert("Error inesperado");
         }
     });
 }
@@ -134,8 +131,6 @@ function displayControles(idLogo, idDivSelect, reiniciar) {
 }
 
 function buscarMetas(checkBox, subPrograma) {
-
-    console.log("entró con el id: " + checkBox.id)
 
     if (checkBox.checked) {
 
@@ -185,8 +180,7 @@ function buscarMetas(checkBox, subPrograma) {
                 displayControles('esperarMetas', 'divMetas', false);
 
             }, error: function () {
-                alert("Error inesperado")
-                window.top.location = "../index.html";
+                alert("Error inesperado");
             }
         });
 
@@ -207,7 +201,7 @@ function buscarMetas(checkBox, subPrograma) {
 function insertarDatosPrograma() {
 
     var codRadicacion = document.getElementById('idRad').value;
-    var codPrograma = document.getElementById('selectProgramas');
+    var codPrograma = document.getElementById('selectProgramas').value;
 
     var divSubProgramas = document.getElementById('divSubprogramas');
     var subprogramaChecks = divSubProgramas.getElementsByTagName("input");
@@ -236,20 +230,28 @@ function insertarDatosPrograma() {
 
     }
 
-    console.log("subprogramas: " + subprogramas.length + ", metas: " + metas.length);
+    if (metas.lenght == 0) {
+        console.log('Debe seleccionar una o más metas de producto');
+        return;
+    }
 
     jQuery.ajax({
         type: 'POST',
-        url: '../../modelo/CargarMetas.php',
+        url: '../../controlador/RegistrarDatosPrograma.php',
         async: true,
         timeout: 0,
-        data: {codPrograma: codPrograma, idSubprograma: checkBox.value},
+        data: {codRadicacion: codRadicacion, codPrograma: codPrograma, subprogramas: subprogramas, metas: metas},
         success: function (respuesta) {
+                                   
+            console.log(respuesta);
 
         }, error: function () {
-            alert("Error inesperado")
-            window.top.location = "../index.html";
+            alert("Error inesperado");
         }
     });
 
+}
+
+function cerrar(){
+    $('#modalm').modal('close');
 }
