@@ -36,7 +36,11 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
              <input id="objetivog" name="objetivog" type="hidden" value="" />
              <input id="productos" name="productos" type="hidden" value="" />
              <input id="actividades" name="actividades" type="hidden" value="" />
+             <input id="frm_eje" name="frm_eje" type="hidden"  readonly/>
+            <input id="frm_programa" name="frm_programa" type="hidden" readonly/>
+            <input id="frm_subprograma" name="frm_subprograma"  type="hidden" readonly/>
              <input id="total" name="total" type="hidden" value="" />
+
             <div class="col s12 m11 l9">
                 <div class="bajar">
                     <div class="container-fluid">
@@ -141,50 +145,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col s12 m2 l2"><div class="etiquetafrm"><div class="textofrm">EJE</div></div></div>
-                            <div class="col s12 m10 l10">
-                                <div class="row">
-                                    <div class="opcionesbtn">
-                                        <div class="input-field col s12 m12 l12">
-                                            <input id="frm_eje" name="frm_eje" type="text"  readonly/>
-                                            <label for="frm_eje">Eje Proyecto</label>
-                                            <div class="descripcion"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m2 l2"><div class="etiquetafrm"><div class="textofrm">PROGRAMA</div></div></div>
-                            <div class="col s12 m10 l10">
-                                <div class="row">
-                                    <div class="opcionesbtn">
-                                        <div class="input-field col s12 m12 l12">
-                                            <input id="frm_programa" name="frm_programa" type="text" readonly/>
-                                            <label for="frm_programa">Programa Proyecto</label>
-                                            <div class="descripcion"></div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m2 l2"><div class="etiquetafrm"><div class="textofrm">SUBPROGRAMA</div></div></div>
-                            <div class="col s12 m10 l10">
-                                <div class="row">
-                                    <div class="opcionesbtn">
-                                        <div class="input-field col s12 m12 l12">
-                                            <input id="frm_subprograma" name="frm_subprograma"  type="text" readonly/>
-                                            <label for="frm_subprograma">Subprograma</label>
-                                            <div class="descripcion"></div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
+                       
                             <div class="row">
                                 <div class="col s2 m2 l2"></div>
                                 <div class="col s8 m8 l12 center-align">
@@ -238,8 +199,8 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                             <div class="row">
                                                 <h6>RESPONSABLE DEL PROYECTO</h6>
                                                 <div class="input-field col s6">
-                                                    <input  id="frm_id_responsable" name="frm_id_responsable" type="text" class="validate"
-                                                            onKeyPress="return solonum(event)">
+                                                <input  id="frm_id_responsable" name="frm_id_responsable" type="text" class="validate"
+                                               onKeyPress="return solonum(event)" onchange="buscarUsuario(1)">
                                                     <label for="frm_id_responsable">No IDENTIFICACION</label>
                                                     <div id="d_frm_id_responsable"></div>
                                                 </div>
@@ -253,7 +214,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                             <div class="row">
                                                 <br>
                                                 <div class="input-field col s6">
-                                                    <input  id="frm_cargo_responsable" name="frm_cargo_responsable" type="text" class="validate"						        >
+                                                    <input  id="frm_cargo_responsable" name="frm_cargo_responsable" type="text" class="validate"                                >
                                                     <label for="frm_cargo_responsable">CARGO</label>
                                                     <div id="d_frm_cargo_responsable"></div>
                                                 </div>
@@ -291,7 +252,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                                 <h6>DATOS PERSONA QUE ENTREGA EL PROYECTO</h6>
                                                 <div class="input-field col s6">
                                                     <input  id="frm_id_usuario" name="frm_id_usuario" type="text" class="validate"
-                                                            onKeyPress="return solonum(event)">
+                                                            onKeyPress="return solonum(event)" onchange="buscarUsuario(2)">
                                                     <label for="frm_id_usuario">No IDENTIFICACION</label>
                                                     <div id="d_frm_id_usuario"></div>
                                                 </div>
@@ -316,6 +277,7 @@ if($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess-
                                         </div>
 
                                         <div class="modal-footer">
+                                         <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
                                             <a href="#!"  onClick="if (validar_campos_requeridos('frm_poai-frm_entidad-frm_entidad_ejecuta-frm_id_responsable-frm_nom_responsable-frm_cargo_responsable-frm_dir_responsable-frm_cel_responsable-frm_correo-frm_id_usuario-frm_nom_usuario', 11) == true)
                                                                             almacenar()" class="modal-action  waves-effect waves-green btn-flat ">Guardar</a>
                                             <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
