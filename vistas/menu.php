@@ -33,7 +33,7 @@ $funciones = MGetMenu::getMenu(1);
             <div class="row">
                 <div class="contenedor-menu col s12 m4 l2">
                     <div class="logo">
-                        <img src="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/img/logoajax.png' ?>">
+                        <img src="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/img/bpid.svg' ?>">
                     </div>
                     <a href="#" class="btn-menu">Menú<i class="icono small material-icons">dehaze</i></a>
                     <ul class="menu">
