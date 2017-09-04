@@ -218,9 +218,10 @@ function almacenar()
         type: "POST",
         url: '../../controlador/ControladorRadicar.php',
         async: false,
-        data: {value: value,op:2},
+        data: {value: value,op:1},
+       
         success: function (respuesta) {
-           // alert(respuesta)
+            alert(respuesta)
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
@@ -272,6 +273,8 @@ function buscarUsuario(tipo)
         async: true,
         data: {cedula: cedula, op: 2},
         success: function (respuesta) {
+
+            waitGuardarProgreso.style.display = "";  
            if(tipo==1)
            { 
               if (respuesta.trim() === "NoData"){
@@ -303,14 +306,14 @@ function buscarUsuario(tipo)
                 document.getElementById('frm_cel_responsable').focus();
                 document.getElementById('frm_correo').value = content.correo;
                 document.getElementById('frm_correo').focus();
-                waitGuardarProgreso.style.display = "";
+                waitGuardarProgreso.style.display = "none";
               }
                
             }
             if(tipo==2)
             {
                if (respuesta.trim() === "NoData"){
-                  waitGuardarProgreso.style.display = "";  
+                  waitGuardarProgreso.style.display = "none";  
               Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000);
               var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
                 //Cambiar el estilo de uno de todos los toasts
@@ -320,7 +323,7 @@ function buscarUsuario(tipo)
               document.getElementById('frm_nom_usuario').value = '';
              
                 }else{
-               
+               waitGuardarProgreso.style.display = "none";  
                 var content = JSON.parse(respuesta);
                 document.getElementById('frm_nom_usuario').value = content.nombres;
                 document.getElementById('frm_nom_usuario').focus();

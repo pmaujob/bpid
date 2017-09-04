@@ -59,6 +59,8 @@ class ControladorRadicar {
     }
 
     public function asignar($valores, $cedulaSession) {
+        $sess = new SessionVars();
+        $sess->init();
         $this->numero_proyecto = $valores[0];
         $this->nombre_proyecto = $valores[1];
         $this->sector = $valores[2];
@@ -129,7 +131,6 @@ if (isset($_POST['op']) && !empty($_POST['op'])) {
         $cedula = $_POST['cedula'];
         $radicar = new ControladorRadicar();
         echo $radicar->getDatosUsuario($cedula);
-        
     }
 }
 //} else {
