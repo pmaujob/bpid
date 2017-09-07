@@ -20,7 +20,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
-        <body>
+         <body onload="onLoadBody();">
 
 <!-- Modal Trigger -->
   

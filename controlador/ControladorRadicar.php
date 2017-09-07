@@ -122,6 +122,7 @@ class ControladorRadicar {
 
 if (isset($_POST['op']) && !empty($_POST['op'])) {
     if ($_POST['op'] == 1) {//guardar datos
+        
         $valores = trim(($_POST["value"]));
         $valores = explode("//", $valores);
         $radicar = new ControladorRadicar();

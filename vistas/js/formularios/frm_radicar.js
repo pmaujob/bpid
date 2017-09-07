@@ -211,7 +211,7 @@ function almacenar()
             direccion_responsable + '//' + telefono_responsable + '//' + cel_responsable + '//' + correo_responsable + '//' + id_usuario + '//' + nombre_usuario + '//' +
             observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades;
 
-
+            alert("ingreso")
     $('#modal1').modal('close');
     bloquear_pantalla();
     jQuery.ajax({
@@ -221,6 +221,7 @@ function almacenar()
         data: {value: value,op:1},
        
         success: function (respuesta) {
+            
             alert(respuesta)
 
             if (respuesta == 1) {

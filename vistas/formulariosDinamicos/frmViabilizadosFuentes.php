@@ -2,6 +2,7 @@
 $correcto=1; 
 $idActividad = trim(strtoupper($_POST["idActividad"]));
 $numeroActividad = trim(strtoupper($_POST["numeroActividad"]));
+
 if($idActividad==""){
   	$correcto=0;
 }
@@ -19,12 +20,11 @@ if($correcto==1){
                    <option value="6">SGP</option>
                    <option value="7">Otros</option>
     </select></div></td>
-    
      <td>
-<input  id="frmValorFuenteNacional_<?php echo $numeroActividad;?>" name="frmValorFuenteNacional_<?php echo $numeroActividad;?> type="text" class="validate" value="0"></td>  
-     <td>
-<input  id="frmValorEfectivoNacional_<?php echo $numeroActividad;?>" name="frmValorEfectivoNacional_<?php echo $numeroActividad;?>" type="text" class="validate" value="0"></td>
-      <td><input  id="frmValorEspecieNacional_<?php echo $numeroActividad;?>" name="frmValorEspecieNacional_<?php echo $numeroActividad;?>" type="text" class="validate" value="0"></td> 
+<input  id="frmValorEfectivoNacional_<?php echo $numeroActividad;?>" name="frmValorEfectivoNacional_<?php echo $numeroActividad;?>" type="text" class="validate" value="0" onchange="calcularValorFuente(this)"></td>
+      <td><input  id="frmValorEspecieNacional_<?php echo $numeroActividad;?>" name="frmValorEspecieNacional_<?php echo $numeroActividad;?>" type="text" class="validate" value="0" onchange="calcularValorFuente(this)"></td> 
+    <td>
+<input  id="frmValorFuenteNacional_<?php echo $numeroActividad;?>" name="frmValorFuenteNacional_<?php echo $numeroActividad;?> type="text" class="validate" value="0"></td>    
     
     
   
