@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Description of MLogout
- *
- * @author MAURICIO
- */
 require_once '../librerias/ConexionPDO.php';
 
 class MLogout {
