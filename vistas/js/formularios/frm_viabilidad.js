@@ -1,5 +1,6 @@
 
 numeroActividad=0;
+var valorFuentes= new Array();
 var actividadDatos = new Array();
 var FuentesDatos = new Array();
 function bloquear_pantalla()
@@ -14,6 +15,8 @@ function quitar_pantalla()
     document.getElementById("cargando").style.display = "none";
     document.body.style.overflow = "scroll";
 }
+function onLoadBody() {
+buscarProyectos(2);
 $(document).ready(function() {
     
    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
@@ -38,18 +41,18 @@ $(document).ready(function() {
                         });
 
      $('.dropdown-button').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrainWidth: false, // Does not change width of dropdown to that of the activator
-      hover: true, // Activate on hover
-      gutter: 0, // Spacing from edge
-      belowOrigin: false, // Displays dropdown below the button
-      alignment: 'left', // Displays dropdown with edge aligned to the left of button
-      stopPropagation: false // Stops event propagation
+                  inDuration: 300,
+                  outDuration: 225,
+                  constrainWidth: false, // Does not change width of dropdown to that of the activator
+                  hover: true, // Activate on hover
+                  gutter: 0, // Spacing from edge
+                  belowOrigin: false, // Displays dropdown below the button
+                  alignment: 'left', // Displays dropdown with edge aligned to the left of button
+                  stopPropagation: false // Stops event propagation
     }
   );
 });
-
+}
 function buscarProyectos(op) {
 
     var resultado = document.getElementById('resultado');
@@ -60,6 +63,8 @@ function buscarProyectos(op) {
             + '</div>';
 
     value = document.getElementById("input_buscar").value;
+     if(value=='') {value='null';}
+
     //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
@@ -120,10 +125,12 @@ function editarActividades(codRadicacion,idProducto,idActividad,valorActividad)
         data: {codRadicacion:codRadicacion,idProducto:idProducto,idActividad:idActividad,valorActividad:valorActividad},
         success: function (respuesta) {
             //alert(respuesta);
+            $('select').material_select();
             $('#modal1').modal('open');
             document.getElementById('respuestaact').innerHTML = '';
             document.getElementById('respuestaact').innerHTML = respuesta;
             $('.modal').modal();
+            $('select').material_select();
         },
 
         error: function () {
@@ -137,6 +144,7 @@ function editarActividades(codRadicacion,idProducto,idActividad,valorActividad)
 function agregarFuente(idActividad)
 {
     numeroActividad=numeroActividad+1;
+    
    document.getElementById('codigoActividad').value=idActividad;
    document.getElementById('numeroActividad').value=numeroActividad;
     var tabla = document.getElementById('tableActividades_'+idActividad);
@@ -161,11 +169,12 @@ function agregarFuente(idActividad)
         async: true,
         data: {idActividad: idActividad,numeroActividad:numeroActividad},
         success: function (respuesta) {
-            $('select').material_select();
+           
            // document.getElementById('datosActividad_'+idActividad).innerHTML = '';
             
             var rows = document.createElement("tr");
               rows.innerHTML = respuesta 
+               $('select').material_select();
               //contiene una cadena con los td
               tabla.appendChild(rows);
             //document.getElementById('datosActividad_'+idActividad).innerHTML = respuesta;
@@ -253,4 +262,68 @@ function guardarActividades()
     numeroActividad=0;
     alert(FuentesDatos);
     $('#modal1').modal('close');
+}
+
+function calcularValorFuente(idcampo)
+{
+   
+    var bool = true;
+    var campo= idcampo.id;//seleccionar campo
+    var valor= document.getElementById(campo).value;//valor del campo enviado
+    var valorActividad= document.getElementById('valorActividad').value;
+    var totalact;
+   
+   if(valorFuentes.length!=0){
+
+        for (var i=0; i < valorFuentes.length ; i++)
+        {    
+          if(valorFuentes[i][0]==campo)
+          {
+          //encontro el campo
+            valorFuentes[i][1]=valor;
+            bool = false;
+          }
+        }
+    }else{
+        bool = true; 
+    }
+
+    if(bool){
+        //ingreso datos por no encontrarlo
+        var datosvalores = new Array(2);
+            datosvalores[0] =campo; 
+            datosvalores[1] =valor;
+            valorFuentes.push(datosvalores);
+
+    } 
+     
+    for (var k=0; k < valorFuentes.length ; k++)
+        { 
+            totalact=parseInt(totalact) + parseInt(valorFuentes[k][1]);
+        } 
+
+     //calcular valor de actividade
+
+      console.log(valorFuentes);
+      alert(totalact);
+/*
+    var datosvalores = new Array(2);
+    datosvalores[0] = 
+    datosvalores[1] = especie;
+    valorFuentes.push(datosvalores);
+   
+
+     alert(valorFuentes)
+/*
+    if(valorActividad != valorFuentes)
+    {
+        Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); 
+        return   false 
+    }
+     if(valorActividad == valorFuentes)
+    {
+        Materialize.toast('VALOR CORRECTO', 4000); return    
+    }
+
+  */  
 }

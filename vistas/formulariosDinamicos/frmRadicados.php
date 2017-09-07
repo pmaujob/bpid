@@ -8,6 +8,7 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
 
     $res = CargarRadicados::getRadicados($datos,$op);
     
+    
     ?>
 
     <table>

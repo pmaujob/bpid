@@ -8,6 +8,7 @@ var $toastContent;
 function onLoadBody() {
 
 
+ buscarProyectos(1);
     $(document).ready(function () {
 
         $('.modal').modal({
@@ -62,6 +63,8 @@ function quitarPantalla() {
 
 function buscarProyectos(op) {
 
+    
+
     var resultado = document.getElementById('resultado');
 
     //temporalmente
@@ -70,6 +73,8 @@ function buscarProyectos(op) {
             + '</div>';
 
     value = document.getElementById("input_buscar").value;
+   if(value=='') {value='null';}
+
     //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
