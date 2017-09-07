@@ -53,16 +53,18 @@ function buscarProyectos() {
     });
 }
 
-function listarMetasProducto(idRad, op, numProyecto) {
+function listarMetasProducto(idRad, filtrarDep, numProyecto) {
 
     $('#modalm').modal('open');
+    
+    alert("filtrarDep: "+filtrarDep);
 
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmMetas.php',
         async: true,
         timeout: 0,
-        data: {idRad: idRad, op: op, numProyecto: numProyecto},
+        data: {idRad: idRad, filtrarDep: filtrarDep, numProyecto: numProyecto},
         success: function (respuesta) {
 
             document.getElementById('metaContainer').innerHTML = respuesta;

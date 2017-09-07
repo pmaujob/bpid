@@ -1,12 +1,15 @@
 <?php
+
 require_once '../../modelo/CargarRadicados.php';
+require_once '../../modelo/MSysConf.php';
 
 if (!empty($_POST['value'])) {
 
+    $sysConf = new MSysConf();
+    
     $datos = $_POST['value'];
     $res = CargarRadicados::getRadicados($datos, 2); //2 para consultar por cod_activacion
     ?>
-
     <table>
         <thead>
             <tr>
@@ -27,13 +30,12 @@ if (!empty($_POST['value'])) {
                         <td title="<?php echo $fila[2]; ?>"><?php echo $fila[3]; ?></td>
                         <td>
                             <a href="#" title="Editar">
-                                <div onclick="listarMetasProducto(<?php echo $fila[0]; ?>, null, <?php echo $fila[5]; ?>);">
+                                <div onclick="listarMetasProducto(<?php echo $fila[0]; ?>, <?php echo $sysConf->getFiltrarDep(); ?>, <?php echo $fila[5]; ?>);">
                                     <img src="../../vistas/img/anadir.png">
                                 </div>
                             </a>
                         </td>
                     </tr>
-
                     <?php
                 }
             } else {
