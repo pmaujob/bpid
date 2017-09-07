@@ -247,6 +247,8 @@ importando fuente para los menus
     width: 75%;
     height: 75%;
     margin-left: 50%;
+    margin-top: 15px;
+    transform: translateX(-50%);
 }
 
 .head-usuario{

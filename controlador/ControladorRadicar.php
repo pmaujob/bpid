@@ -156,8 +156,7 @@ class ControladorRadicar{
 }
 
 
-if(isset($_POST['op']) && !empty($_POST['op'])
-{
+if(isset($_POST['op']) && !empty($_POST['op'])) {
 	if($_POST['op']==1)
 	{
 		$valores = trim(($_POST["value"]));
@@ -165,7 +164,7 @@ if(isset($_POST['op']) && !empty($_POST['op'])
 		$radicar=new ControladorRadicar();
 		echo $radicar->iniciar($valores,$sess->getValue('cedula'));
 	}
-	else if ({$_POST['op']==2}) {
+	else if ($_POST['op']==2) {
 		# code...3
 		$cedula=$_POST['cedula'];
 		$radicar=new ControladorRadicar();
@@ -173,9 +172,6 @@ if(isset($_POST['op']) && !empty($_POST['op'])
 		echo "Dario";
 	}
 }
-
-
-
 
  ?>
  <?php
