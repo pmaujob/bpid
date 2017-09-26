@@ -10,6 +10,7 @@ class MLogin {
     private $cedula;
     private $idLog;
     private $respuesta;
+    private $secretaria;
 
     public function logIn($correo, $contrasena, $ip) {
         
@@ -50,13 +51,14 @@ class MLogin {
     
     private function setDatosUsuario(){
         
-        $sql = 'select usuario, ced from seguridad.get_datos_usuario('.$this->correo.') as ("usuario" varchar, "ced" varchar);';
+        $sql = 'select usuario, ced, sec from seguridad.get_datos_usuario('.$this->correo.') as ("usuario" varchar, "ced" varchar, "sec" integer);';
         
         $res = $this->con->consultar($sql);
         
         while ($resultado = $res->fetch(PDO::FETCH_OBJ)){
             $this->usuario = $resultado->usuario;
             $this->cedula = $resultado->ced;
+            $this->secretaria = $resultado->sec;
         }
         
     }
@@ -82,6 +84,12 @@ class MLogin {
     public function getRespuesta(){
         
         return $this->respuesta;
+        
+    }
+    
+    public function getSecretaria(){
+        
+        return $this->secretaria;
         
     }
 

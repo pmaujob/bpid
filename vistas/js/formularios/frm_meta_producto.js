@@ -53,7 +53,7 @@ function buscarProyectos() {
     });
 }
 
-function listarMetasProducto(idRad, op, numProyecto) {
+function listarMetasProducto(idRad, filtrarSec, numProyecto) {
 
     $('#modalm').modal('open');
 
@@ -62,10 +62,16 @@ function listarMetasProducto(idRad, op, numProyecto) {
         url: '../../vistas/formulariosDinamicos/frmMetas.php',
         async: true,
         timeout: 0,
-        data: {idRad: idRad, op: op, numProyecto: numProyecto},
+        data: {idRad: idRad, filtrarSec: filtrarSec, numProyecto: numProyecto},
         success: function (respuesta) {
 
             document.getElementById('metaContainer').innerHTML = respuesta;
+            var filtrarSec = document.getElementById('idFiltrarSec').value;
+
+            if (filtrarSec == 1) {
+                var idSec = document.getElementById('idSec').value;
+                traerMetas(idSec);
+            }
 
             $(document).ready(function () {
                 $('select').material_select();
@@ -78,61 +84,47 @@ function listarMetasProducto(idRad, op, numProyecto) {
 
 }
 
-function mostrarSubprogramas(select) {
+function traerMetas(idSec) {
 
-    displayControles('esperarSubprogramas', 'divSubprogramas', true);
-
-    var selPro = document.getElementById(select);
-    var value = selPro.options[selPro.selectedIndex].value;
-
-    var divSubprogramas = document.getElementById('divSubprogramas');
-    divSubprogramas.innerHTML = "";
-
-    document.getElementById('divMetas').innerHTML = "";
-    metaCount = 0;
+    displayControles('esperarMetas', 'divMetas', true);
+    var divMetas = document.getElementById('divMetas');
 
     jQuery.ajax({
         type: 'POST',
         url: '../../modelo/CargarMetas.php',
         async: true,
         timeout: 0,
-        data: {opConsulta: 1, idPrograma: value},
+        data: {idSecretaria: idSec},
         success: function (respuesta) {
 
-            var subArray = JSON.parse(respuesta);
+            var metaArray = JSON.parse(respuesta);
 
-            var lbl = document.createElement('span');
-            lbl.innerHTML = "Seleccione el o los Subprograma(s) del proyecto:";
-            divSubprogramas.appendChild(lbl);
+            var divTit = document.createElement('span');
+            divTit.id = "divTit";
+            divTit.innerHTML = "Seleccione las Metas de Producto:";
+            divMetas.appendChild(divTit);
 
-            for (var i = 0; i < subArray.length; i++) {
+            for (var i = 0; i < metaArray.length; i++) {
 
-                var subObject = subArray[i];
+                var metaObject = metaArray[i];
                 var opt = document.createElement('p');
-                opt.innerHTML = '<input type="checkbox" id="subProCheck' + subObject.cod + '" value="' + subObject.cod + '" onclick="buscarMetas(this,\'' + subObject.des + '\');" />'
-                        + '<label for="subProCheck' + subObject.cod + '">' + subObject.des + '</label>';
+                opt.innerHTML = '<input type="checkbox" id="metaCheck' + metaObject.cod + '" value="' + metaObject.cod + '" />'
+                        + '<label for="metaCheck' + metaObject.cod + '">' + metaObject.nums + ' - ' + metaObject.des + '</label>';
 
-                divSubprogramas.appendChild(opt);
+                divMetas.appendChild(opt);
+
             }
 
-            displayControles('esperarSubprogramas', 'divSubprogramas', false);
+            displayControles('esperarMetas', 'divMetas', false);
 
         }, error: function () {
             alert("Error inesperado");
         }
     });
-}
-
-function displayControles(idLogo, idDivSelect, reiniciar) {
-
-    document.getElementById(idLogo).style.display = (reiniciar ? "" : "none");
-    document.getElementById(idDivSelect).style.display = (reiniciar ? "none" : "");
 
 }
 
-function buscarMetas(checkBox, subPrograma) {
-
-    console.log("entró con el id: " + checkBox.id)
+function buscarMetas(checkBox, secretaria) {
 
     if (checkBox.checked) {
 
@@ -144,7 +136,7 @@ function buscarMetas(checkBox, subPrograma) {
             url: '../../modelo/CargarMetas.php',
             async: true,
             timeout: 0,
-            data: {opConsulta: 2, idSubprograma: checkBox.value},
+            data: {idSecretaria: checkBox.value},
             success: function (respuesta) {
 
                 var metaArray = JSON.parse(respuesta);
@@ -157,22 +149,23 @@ function buscarMetas(checkBox, subPrograma) {
                     divMeta = document.getElementById('divMeta' + checkBox.value);
                 }
 
-                var subTit = document.createElement('label');
-                subTit.innerHTML = subPrograma;
-                divMeta.appendChild(subTit);
+                var secTit = document.createElement('label');
+                secTit.innerHTML = secretaria;
+                divMeta.appendChild(secTit);
 
                 for (var i = 0; i < metaArray.length; i++) {
 
                     var metaObject = metaArray[i];
                     var opt = document.createElement('p');
                     opt.innerHTML = '<input type="checkbox" id="metaCheck' + metaObject.cod + '" value="' + metaObject.cod + '" />'
-                            + '<label for="metaCheck' + metaObject.cod + '">' + metaObject.des + '</label>';
+                            + '<label for="metaCheck' + metaObject.cod + '">' + metaObject.nums + ' - ' + metaObject.des + '</label>';
 
                     divMeta.appendChild(opt);
                 }
 
                 if (metaCount == 0) {
                     var divTit = document.createElement('span');
+                    divTit.id = "divTit";
                     divTit.innerHTML = "Seleccione las Metas de Producto:";
                     divMetas.appendChild(divTit);
                 }
@@ -194,6 +187,7 @@ function buscarMetas(checkBox, subPrograma) {
 
         if (metaCount == 0) {
             document.getElementById('divMetas').style.display = "none";
+            document.getElementById('divTit').innerHTML = "";
         }
 
     }
@@ -202,54 +196,16 @@ function buscarMetas(checkBox, subPrograma) {
 
 function insertarDatosPrograma() {
 
-    var codRadicacion = document.getElementById('idRad').value;
-    var codPrograma = document.getElementById('selectProgramas').value;
 
-    var divSubProgramas = document.getElementById('divSubprogramas');
-    var subprogramaChecks = divSubProgramas.getElementsByTagName("input");
+}
 
-    var subprogramas = new Array();
+function displayControles(idLogo, idDivSelect, reiniciar) {
 
-    for (var i = 0; i < subprogramaChecks.length; i++) {
-        var subCheck = subprogramaChecks[i];
-        if (subCheck.checked) {
-            subprogramas.push(subCheck.value);
-        }
-    }
+    document.getElementById(idLogo).style.display = (reiniciar ? "" : "none");
+    document.getElementById(idDivSelect).style.display = (reiniciar ? "none" : "");
 
-    var metas = new Array();
+}
 
-    for (var i = 0; i < subprogramas.length; i++) {
-        var divMetas = document.getElementById('divMeta' + subprogramas[i]);
-        var metasChecks = divMetas.getElementsByTagName("input");
-
-        for (var j = 0; j < metasChecks.length; j++) {
-            var metaCheck = metasChecks[j];
-            if (metaCheck.checked) {
-                metas.push(metaCheck.value);
-            }
-        }
-
-    }
-
-    if (metas.lenght == 0) {
-        console.log('Debe seleccionar una o más metas de producto');
-        return;
-    }
-
-    jQuery.ajax({
-        type: 'POST',
-        url: '../../controlador/RegistrarDatosPrograma.php',
-        async: true,
-        timeout: 0,
-        data: {codRadicacion: codRadicacion, codPrograma: codPrograma, subprogramas: subprogramas, metas: metas},
-        success: function (respuesta) {
-                                   
-            console.log(respuesta);
-
-        }, error: function () {
-            alert("Error inesperado");
-        }
-    });
-
+function cerrar() {
+    $('#modalm').modal('close');
 }

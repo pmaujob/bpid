@@ -26,6 +26,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <div id="d_ingreso" title="INFORMACION"></div>
             <div id="modalm" class="modal modal-fixed-footer">
                 <div class="modal-content">
+                    <a href="#!" onclick="cerrar();" style="margin-left: 95%; color: black;">
+                        <i class="material-icons">close</i>                            
+                    </a>
                     <h4>Lista de metas</h4>
                     <ul id="metaContainer" class="collapsible" style="height: auto; padding: 20px;">
                         <p>&nbsp;Cargando datos, por favor espere...</p>
@@ -39,7 +42,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                     <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="insertarDatosPrograma();">Guardar Cambios</a>
                 </div>
             </div>
-
             <?php require_once '../menu.php'; ?>
             <form id='frm_meta_producto' name='frm_meta_producto' onSubmit="return false"  enctype="multipart/form-data">
                 <div class="col s12 m11 l9">
@@ -70,11 +72,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                             </div>
                                         </div>
                                     </div>
-
                                     <div id="resultado" class="row">
 
                                     </div>
-
                                 </div>
                             </div>
                         </div>

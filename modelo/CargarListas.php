@@ -53,6 +53,20 @@ class CargarListas {
 
         return $res;
     }
+    public static function getListaMedidas(){
+
+        $consulta = 'select id, '//0
+                . 'abr, '//1
+                . 'des  '//2
+                . 'from get_unidades_medida() as ("id" integer, "abr" varchar, "des" varchar);';
+        
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->consultar($consulta);
+        $con->cerrarConexion();
+
+        return $res;
+    }
 
 }
 ?>

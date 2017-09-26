@@ -27,6 +27,11 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
                 <div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
+                        
+                        <a href="#!" onclick="cerrarModal();" style="margin-left: 95%; color: black;">
+                            <i class="material-icons">close</i>                            
+                        </a>
+                        
                         <h4>Lista de opciones</h4>
                         <p>Seleccione los items y agregue observaciones si es necesario.</p>
                         <ul id="collapsible" class="collapsible" data-collapsible="accordion">
@@ -34,13 +39,8 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
                             </div>
                         </ul>
-                    </div>
-                    <div class="modal-footer">      
-                        
-                        <div style="position: fixed; float: right; margin-top: 15px;">
-                            <i class="material-icons">exit_to_app</i>
-                        </div>
-                        
+                    </div>                    
+                    <div class="modal-footer">                                                      
                         <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
                         <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
 
@@ -72,7 +72,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                                         <span>Buscar proyecto</span>
                                                     </div>
                                                     <div class="file-path-wrapper">
-                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos('<?php echo idEtapa; ?>');">
+                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos(1);">
                                                     </div>
                                                 </div>
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>

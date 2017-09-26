@@ -1,5 +1,8 @@
 <?php
+session_start();
+$raiz = $_SESSION['raiz'];
 require_once '../../modelo/CargarRadicados.php';
+
 
 if (!empty($_POST['value']) && !empty($_POST['op'])) {
 

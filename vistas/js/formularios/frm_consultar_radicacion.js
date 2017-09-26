@@ -29,6 +29,7 @@ function onLoadBody() {
 function buscarProyectosRadicados(op) {
 
     var resultado = document.getElementById('resultado');
+    
 
     //temporalmente
     resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
