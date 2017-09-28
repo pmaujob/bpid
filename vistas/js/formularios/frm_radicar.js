@@ -103,6 +103,9 @@ function archivo_xml()
                         processData: false,
                         success: function (datos)
                         {
+                            //alert(datos);
+                            if(datos != -1)
+                            {
                             //alert(datos)	
                             var cadena = datos.split("*/");
                             nombre_proyecto.focus();
@@ -136,6 +139,15 @@ function archivo_xml()
                             document.getElementById('productos').value = cadena[14];
                             document.getElementById('actividades').value = cadena[15];
                             quitar_pantalla();
+                            }
+                            else
+                            {
+                              $('#modal1').modal('close');
+                            quitar_pantalla();
+                            document.getElementById('d_ingreso').innerHTML = '<p>ERROR, EL ARCHIVO ESTA INCOMPLETO Y NO PUEDE SER RADICADO</p>';
+                            $("#d_ingreso").dialog("open");
+                            return false;  
+                            }
                         }
                     });
 

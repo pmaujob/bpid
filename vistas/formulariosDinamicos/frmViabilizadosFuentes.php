@@ -1,7 +1,7 @@
 <?php
 $correcto=1; 
 $idActividad = trim(strtoupper($_POST["idActividad"]));
-$numeroActividad = trim(strtoupper($_POST["numeroActividad"]));
+$numeroTupla = trim(strtoupper($_POST["numeroActividad"]));
 
 if($idActividad==""){
   	$correcto=0;
@@ -10,8 +10,8 @@ if($correcto==1){
 ?>
 		
         <td><div class="input-field col s12">
-    <select class="browser-default" id="frmFuente_<?php echo $numeroActividad;?>">
-                   <option value="" disabled selected>Seleccionar</option>
+    <select class="browser-default" id="frmFuente_<?php echo $numeroTupla;?>">
+                   <option value="" selected>Seleccionar</option>
                    <option value="1">Nacional</option>
                    <option value="2">Departamental</option>
                    <option value="3">Municipal</option>
@@ -21,10 +21,14 @@ if($correcto==1){
                    <option value="7">Otros</option>
     </select></div></td>
      <td>
-<input  id="frmValorEfectivoNacional_<?php echo $numeroActividad;?>" name="frmValorEfectivoNacional_<?php echo $numeroActividad;?>" type="text" class="validate" value="0" onchange="calcularValorFuente(this)"></td>
-      <td><input  id="frmValorEspecieNacional_<?php echo $numeroActividad;?>" name="frmValorEspecieNacional_<?php echo $numeroActividad;?>" type="text" class="validate" value="0" onchange="calcularValorFuente(this)"></td> 
+<input  id="frmValorEfectivoNacional_<?php echo $numeroTupla;?>" name="frmValorEfectivoNacional_<?php echo $numeroTupla;?>" type="text" class="validate" value="0" onchange="calcularValorFuente(this,<?php echo $numeroTupla;?>);subtotal(<?php echo $numeroTupla;?>)">
+</td>
+      <td>
+      <input  id="frmValorEspecieNacional_<?php echo $numeroTupla;?>" name="frmValorEspecieNacional_<?php echo $numeroTupla;?>" type="text" class="validate" value="0" onchange="calcularValorFuente(this,<?php echo $numeroTupla;?>);subtotal(<?php echo $numeroTupla;?>)">
+      </td> 
     <td>
-<input  id="frmValorFuenteNacional_<?php echo $numeroActividad;?>" name="frmValorFuenteNacional_<?php echo $numeroActividad;?> type="text" class="validate" value="0"></td>    
+<input  id="frmValorFuenteNacional_<?php echo $numeroTupla;?>" name="frmValorFuenteNacional_<?php echo $numeroTupla;?> type="text" class="validate" value="0"></td>    
+
     
     
   

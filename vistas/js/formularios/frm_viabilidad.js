@@ -1,8 +1,10 @@
-
 numeroActividad=0;
 var valorFuentes= new Array();
 var actividadDatos = new Array();
 var FuentesDatos = new Array();
+var totalfuentes=0;
+var r = [];
+
 function bloquear_pantalla()
 {
    
@@ -148,11 +150,17 @@ function agregarFuente(idActividad)
    document.getElementById('codigoActividad').value=idActividad;
    document.getElementById('numeroActividad').value=numeroActividad;
     var tabla = document.getElementById('tableActividades_'+idActividad);
-    var unidad= document.getElementById('frmUnidad__'+idActividad);
+    var unidad= document.getElementById('frmUnidad_'+idActividad).value;
     var cantidad= document.getElementById('frmCantidad_'+idActividad);
     var unitario= document.getElementById('frmCosto_'+idActividad);
     var total= document.getElementById('frmTotal_'+idActividad).value;
     var valorActividad= document.getElementById('valorActividad').value;
+    
+    if(unidad=="")
+    {
+         Materialize.toast('Error, Seleccione Unidad de Media', 4000); 
+         document.getElementById('frmUnidad_'+idActividad);
+    }
 
      if(valorActividad != total)
     {
@@ -211,68 +219,18 @@ function calcularValorActividad(idActividad)
 
 }
 
-function guardarActividades()
-{
 
-    var numeroActividad=document.getElementById('numeroActividad').value;
-    var i=document.getElementById('codigoActividad').value;
-
-    if(numeroActividad==0){
-        Materialize.toast('Debe Agregar Fuentes de Financiacion', 4000); 
-        return false;
-    }
-   
-    //var fuente= document.getElementById('frmFuente_'+numeroActividad).value;
-    var unidad= document.getElementById('frmUnidad_'+i).value;
-    var cantidad= document.getElementById('frmCantidad_'+i).value;
-    var unitario= document.getElementById('frmCosto_'+i).value;
-    var valorActividad= document.getElementById('valorActividad').value;
-    if(cantidad=="") {Materialize.toast('Digite Cantidad', 4000); return }
-    if(unitario=="") {Materialize.toast('Digite Valor unitario', 4000); return}
-    if(unidad=="") {Materialize.toast('Digite Unidad', 4000); return}
-    total=document.getElementById('frmTotal_'+i).value
-
-    if(valorActividad > total)
-    {
-        Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); 
-        document.getElementById('frmCantidad_'+i).focus();
-        return  false ;
-    }
-    
-    var datosact = new Array(3);
-    datosact[0] = document.getElementById('frmUnidad_'+i).value;//unidad de medida
-    datosact[1] = document.getElementById('frmCantidad_'+i).value;//cantidad de medida
-    datosact[2] = document.getElementById('frmCosto_'+i).value;//costoactividad
-    actividadDatos.push(datosact);
-    
-    if(numeroActividad>0)
-    {
-        var datofuente = new Array(5);
-        for(j=1;j<=numeroActividad;j++){
-        datofuente[0]= i; //codigo de actividad  
-        datofuente[1]= document.getElementById('frmFuente_'+j).value;
-        datofuente[2] = document.getElementById('frmValorFuenteNacional_'+j).value;
-        datofuente[3]= document.getElementById('frmValorEfectivoNacional_'+j).value;
-        datofuente[4] = document.getElementById('frmValorEspecieNacional_'+j).value;
-        FuentesDatos.push(datofuente);
-
-                                        }
-
-    }
-    numeroActividad=0;
-    alert(FuentesDatos);
-    $('#modal1').modal('close');
-}
-
-function calcularValorFuente(idcampo)
+function calcularValorFuente(idcampo,idActividad)
 {
    
     var bool = true;
     var campo= idcampo.id;//seleccionar campo
     var valor= document.getElementById(campo).value;//valor del campo enviado
     var valorActividad= document.getElementById('valorActividad').value;
-    var totalact;
-   
+    var totalact=0;
+    var campototal=document.getElementById('frmValorFuenteNacional_'+idActividad);
+    var suma=document.getElementById('sumaValores');
+    
    if(valorFuentes.length!=0){
 
         for (var i=0; i < valorFuentes.length ; i++)
@@ -294,36 +252,122 @@ function calcularValorFuente(idcampo)
             datosvalores[0] =campo; 
             datosvalores[1] =valor;
             valorFuentes.push(datosvalores);
+            //console.log(valorFuentes);
 
     } 
-     
+    
+    
     for (var k=0; k < valorFuentes.length ; k++)
         { 
+           
+            var prueba=valorFuentes[k][1];
             totalact=parseInt(totalact) + parseInt(valorFuentes[k][1]);
+            console.log(totalact);
         } 
-
-     //calcular valor de actividade
-
-      console.log(valorFuentes);
-      alert(totalact);
-/*
-    var datosvalores = new Array(2);
-    datosvalores[0] = 
-    datosvalores[1] = especie;
-    valorFuentes.push(datosvalores);
+         
+       
    
-
-     alert(valorFuentes)
-/*
-    if(valorActividad != valorFuentes)
+    if(valorActividad != totalact)
     {
         Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); 
+        campototal.value=totalact;
+        suma.value=totalact;
         return   false 
     }
-     if(valorActividad == valorFuentes)
+     if(valorActividad == totalact)
     {
-        Materialize.toast('VALOR CORRECTO', 4000); return    
+        Materialize.toast('VALOR CORRECTO', 4000); 
+        campototal.value=prueba;
+        suma.value=totalact;
+        return    
     }
+    //campototal.value=totalact;
+    
+  
+}
 
-  */  
+
+function guardarActividades()
+{
+ 
+
+    var numeroActividad=document.getElementById('numeroActividad').value;
+    var i=document.getElementById('codigoActividad').value;
+    var total=document.getElementById('frmTotal_'+i).value
+    var suma=document.getElementById('sumaValores').value;
+    
+    if(total=="")
+            {
+                 Materialize.toast('Error, Debe Completar todos los datos', 4000); 
+                return ;
+
+            }
+          if(numeroActividad==0){
+        Materialize.toast('Debe Agregar Fuentes de Financiacion', 4000); 
+        return ;
+    }
+   
+    var fuente= document.getElementById('frmFuente_'+numeroActividad).value;
+    var unidad= document.getElementById('frmUnidad_'+i).value;
+    var cantidad= document.getElementById('frmCantidad_'+i).value;
+    var unitario= document.getElementById('frmCosto_'+i).value;
+    var valorActividad= document.getElementById('valorActividad').value;
+    if(cantidad=="") {Materialize.toast('Digite Cantidad', 4000); return }
+    if(unitario=="") {Materialize.toast('Digite Valor unitario', 4000); return}
+    
+    if(fuente=="") 
+        {
+         Materialize.toast('Seleccione Fuente de Financiacion', 4000);
+         document.getElementById('frmFuente_'+i).focus();
+         return}
+    
+
+    if(valorActividad != suma)
+    {
+        
+        Materialize.toast('Error, El valor Total deber ser igual al Valor de la Actividad', 4000); 
+        document.getElementById('frmUnidad_'+i).focus();
+        return ;
+    }
+    else
+    {
+        var datosact = new Array(3);
+        datosact[0] = document.getElementById('frmUnidad_'+i).value;//unidad de medida
+        datosact[1] = document.getElementById('frmCantidad_'+i).value;//cantidad de medida
+        datosact[2] = document.getElementById('frmCosto_'+i).value;//costoactividad
+        actividadDatos.push(datosact);
+        
+        if(numeroActividad>0)
+        {
+            var datofuente = new Array(5);
+            for(j=1;j<=numeroActividad;j++){
+            datofuente[0]= i; //codigo de actividad  
+            datofuente[1]= document.getElementById('frmFuente_'+j).value;
+            datofuente[2] = document.getElementById('frmValorFuenteNacional_'+j).value;
+            datofuente[3]= document.getElementById('frmValorEfectivoNacional_'+j).value;
+            datofuente[4] = document.getElementById('frmValorEspecieNacional_'+j).value;
+            FuentesDatos.push(datofuente);
+            $('#modal1').modal('close');
+
+                                            }
+
+        }
+        numeroActividad=0;
+      //  alert(FuentesDatos);
+        
+    }
+}
+
+function subtotal(tupla)
+{
+
+    valorEspecie="frmValorEfectivoNacional_"+tupla;
+    valorEfectivo="frmValorEspecieNacional_"+tupla;
+    valorsubtotal="frmValorFuenteNacional_"+tupla;
+    document.getElementById(valorsubtotal).value="";
+    var vEsp=parseInt(document.getElementById(valorEspecie).value=="" ? 0 :document.getElementById(valorEspecie).value);
+    var vEfec=parseInt(document.getElementById(valorEfectivo).value==""? 0 :document.getElementById(valorEfectivo).value);
+    document.getElementById(valorsubtotal).value=vEsp + vEfec;
+
+
 }
