@@ -22,7 +22,7 @@ if ($filtrarSec == 0) {
             foreach ($secretarias as $secretaria) {
                 ?>
                 <input type="checkbox" id="<?php echo "secCheck" . $secretaria[0]; ?>" value="<?php echo $secretaria[0]; ?>" onclick="buscarMetas(this, '<?php echo $secretaria[1]; ?>');" />
-                <label for="<?php echo "secCheck" . $secretaria[0]; ?>"><?php echo $secretaria[1]; ?></label>
+                <label for="<?php echo "secCheck" . $secretaria[0]; ?>" style="color: #000000;"><?php echo $secretaria[1]; ?></label>
                 <br>
                 <?php
             }
@@ -32,7 +32,7 @@ if ($filtrarSec == 0) {
     <br>
     <?php
 } else {
-    $metas = CargarMetas::getMetas($sess->getValue('idSec'));
+    $metas = CargarMetas::getMetas($sess->getValue('idSec'),$idRad);
 }
 ?> 
 <div>    

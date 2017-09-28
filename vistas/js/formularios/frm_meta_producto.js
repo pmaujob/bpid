@@ -88,13 +88,14 @@ function traerMetas(idSec) {
 
     displayControles('esperarMetas', 'divMetas', true);
     var divMetas = document.getElementById('divMetas');
+    var idRad = document.getElementById('idRad').value;
 
     jQuery.ajax({
         type: 'POST',
         url: '../../modelo/CargarMetas.php',
         async: true,
         timeout: 0,
-        data: {idSecretaria: idSec},
+        data: {idSecretaria: idSec, idRad: idRad},
         success: function (respuesta) {
 
             var metaArray = JSON.parse(respuesta);
@@ -108,8 +109,8 @@ function traerMetas(idSec) {
 
                 var metaObject = metaArray[i];
                 var opt = document.createElement('p');
-                opt.innerHTML = '<input type="checkbox" id="metaCheck' + metaObject.cod + '" value="' + metaObject.cod + '" />'
-                        + '<label for="metaCheck' + metaObject.cod + '">' + metaObject.nums + ' - ' + metaObject.des + '</label>';
+                opt.innerHTML = '<input type="checkbox" id="metaCheck' + metaObject.cod + '" value="' + metaObject.cod + '" ' + (metaObject.cr == 1 ? 'checked' : '') + ' />'
+                        + '<label for="metaCheck' + metaObject.cod + '" style="color: #000000; "><span style="color: #008643; font-weight: bold;">' + metaObject.nums + '</span> - ' + metaObject.des + '</label>';
 
                 divMetas.appendChild(opt);
 
@@ -158,7 +159,7 @@ function buscarMetas(checkBox, secretaria) {
                     var metaObject = metaArray[i];
                     var opt = document.createElement('p');
                     opt.innerHTML = '<input type="checkbox" id="metaCheck' + metaObject.cod + '" value="' + metaObject.cod + '" />'
-                            + '<label for="metaCheck' + metaObject.cod + '">' + metaObject.nums + ' - ' + metaObject.des + '</label>';
+                            + '<label for="metaCheck' + metaObject.cod + '" style="color: #000000;"><span style="color: #008643; font-weight: bold;">' + metaObject.nums + '</span> - ' + metaObject.des + '</label>';
 
                     divMeta.appendChild(opt);
                 }
@@ -196,6 +197,39 @@ function buscarMetas(checkBox, secretaria) {
 
 function insertarDatosPrograma() {
 
+    var selectedMetas = new Array();
+    var idRad = document.getElementById('idRad').value;
+    var itemList = document.getElementById('divMetas');
+    var metaArray = itemList.getElementsByTagName('p');
+
+    for (var i = 0; i < metaArray.length; i++) {
+        var metaCheck = metaArray[i].getElementsByTagName('input');
+
+        if (metaCheck[0].checked) {
+            selectedMetas.push(metaCheck[0].value);
+        }
+    }
+
+    jQuery.ajax({
+        type: 'POST',
+        url: '../../controlador/RegistrarMetas.php',
+        async: true,
+        timeout: 0,
+        data: {idRad: idRad, metas: selectedMetas},
+        success: function (respuesta) {
+
+            console.log(respuesta);
+
+            if (respuesta == 1) {
+
+            } else {
+
+            }
+
+        }, error: function () {
+            alert("Error inesperado");
+        }
+    });
 
 }
 

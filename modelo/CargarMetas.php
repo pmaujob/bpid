@@ -21,12 +21,13 @@ class CargarMetas {
         return $res;
     }
 
-    public static function getMetas($idSecretaria) {
+    public static function getMetas($idSecretaria,$idRad) {
 
         $consulta = 'select cod, '//0
                 . 'des, '//1
-                . 'metas '//2
-                . 'from get_metas('.$idSecretaria.') as ("cod" integer, "des" varchar, "metas" varchar)';
+                . 'metas, '//2
+                . 'cr '//3
+                . 'from get_metas('.$idSecretaria.','.$idRad.') as ("cod" integer, "des" varchar, "metas" varchar, "cr" integer)';
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
@@ -39,10 +40,10 @@ class CargarMetas {
 
 if (isset($_POST['idSecretaria'])) {
 
-    $sqlRes = CargarMetas::getMetas($_POST['idSecretaria']);
+    $sqlRes = CargarMetas::getMetas($_POST['idSecretaria'], $_POST['idRad']);
     $array = Array();
     foreach ($sqlRes as $fila) {
-        $array[] = Array("cod" => $fila[0], "des" => $fila[1], "nums" => $fila[2]);
+        $array[] = Array("cod" => $fila[0], "des" => $fila[1], "nums" => $fila[2], "cr" => $fila[3]);
     }
 
     echo json_encode($array);
