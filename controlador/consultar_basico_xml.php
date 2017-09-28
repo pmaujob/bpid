@@ -9,6 +9,9 @@ $trozos = explode(".", $nombre);
 $extension = end($trozos); //obtener la extencion del archivo
 if($extension=="xml" or $extension=="XML")
 {
+	try {
+    $xml = new SimpleXMLElement($buffer);
+
 	$datos=simplexml_load_file($ruta);
 	$nombre_proyecto=(string)utf8_decode($datos->Name);
 	$nombre_proyecto=strtoupper(utf8_encode($nombre_proyecto));
@@ -33,13 +36,14 @@ if($extension=="xml" or $extension=="XML")
 	$periodo=array();
 	$indice=0;
 	$val=0;
+	
 	foreach ($datos->FundingSource->Sources->Source as $tipo) 
 				{
 					
 				$detalle[]=utf8_decode((string)$tipo->ResourceType->Description);
 				//echo $a;
 				
-				foreach ($datos->FundingSource->Sources->Source[$indice]->SourceProgrammings->SourceProgramming as $valores)
+		foreach ($datos->FundingSource->Sources->Source[$indice]->SourceProgrammings->SourceProgramming =""? null:$datos->FundingSource->Sources->Source[$indice]->SourceProgrammings->SourceProgramming as $valores)
 				{
 					
 					$monto[]=(string)$valores->Amount;
@@ -61,5 +65,7 @@ else
 {
 	echo "EL ARCHIVO DEBE TENER EXTENCION XML";
 }
-
+} catch (Exception $e) {
+    echo $e;
+}
 ?>

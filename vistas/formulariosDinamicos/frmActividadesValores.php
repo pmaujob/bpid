@@ -16,6 +16,7 @@ if (!empty($_POST['codRadicacion']) && !empty($_POST['idProducto']) && !empty($_
 	<input type="hidden" name="codigoActividad" id="codigoActividad" value="<?php echo $idActividad;?>">
 	<input type="hidden" name="numeroActividad" id="numeroActividad">
 	<input type="hidden" name="valorActividad" id="valorActividad" value="<?php echo $valorActividad;?>">
+    <input  id="sumaValores" name="sumaValores" type="hidden"  value="0"></td>  
 	<table class="striped">
         <tbody>
         	<tr>
