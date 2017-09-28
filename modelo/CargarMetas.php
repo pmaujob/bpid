@@ -7,13 +7,12 @@ require_once $raiz . '/librerias/ConexionPDO.php';
 
 class CargarMetas {
 
-    public static function getProgramas($codRadicacion) {
+    public static function getSecretarias() {
 
-        $consulta = 'select cod_programa, '//0
-                . 'descripcion, '//1
-                . 'eje, '//2
-                . 'cod_radicacion '//3
-                . 'from get_programas('.$codRadicacion.') as ("cod" integer, "des" varchar, "eje" varchar, "codRad" integer);';
+        $consulta = 'select cod,'//0
+                . 'nom '//1
+                . 'from get_secretarias() as ("cod" integer, "nom" varchar);';
+
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
@@ -22,20 +21,13 @@ class CargarMetas {
         return $res;
     }
 
-    public static function getSubprogramas($idPrograma) {
+    public static function getMetas($idSecretaria,$idRad) {
 
-        $consulta = 'select cod, des from get_subprogramas(' . $idPrograma . ') as ("cod" integer, "des" varchar);';
-        $con = new ConexionPDO();
-        $con->conectar("PG");
-        $res = $con->consultar($consulta);
-        $con->cerrarConexion();
-
-        return $res;
-    }
-
-    public static function getMetas($idSubPrograma) {
-
-        $consulta = 'select cod, des from get_metas(' . $idSubPrograma . ') as ("cod" integer, "des" varchar);';
+        $consulta = 'select cod, '//0
+                . 'des, '//1
+                . 'metas, '//2
+                . 'cr '//3
+                . 'from get_metas('.$idSecretaria.','.$idRad.') as ("cod" integer, "des" varchar, "metas" varchar, "cr" integer)';
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
@@ -46,35 +38,14 @@ class CargarMetas {
 
 }
 
-if (isset($_POST['opConsulta'])) {
+if (isset($_POST['idSecretaria'])) {
 
-    switch ($_POST['opConsulta']) {
-
-        case 1:
-
-            echo json_encode(convertiraJson(CargarMetas::getSubprogramas($_POST['idPrograma'])));
-
-            break;
-
-        case 2:
-
-            echo json_encode(convertiraJson(CargarMetas::getMetas($_POST['idSubprograma'])));
-
-            break;
-
-        default:
-            echo "Opción no reconocida";
-            break;
-    }
-}
-
-function convertiraJson($sqlRes) {
+    $sqlRes = CargarMetas::getMetas($_POST['idSecretaria'], $_POST['idRad']);
     $array = Array();
     foreach ($sqlRes as $fila) {
-        $array[] = Array("cod" => $fila[0], "des" => $fila[1]);
+        $array[] = Array("cod" => $fila[0], "des" => $fila[1], "nums" => $fila[2], "cr" => $fila[3]);
     }
 
-    return $array;
+    echo json_encode($array);
 }
-
 ?>

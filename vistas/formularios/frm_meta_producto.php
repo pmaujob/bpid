@@ -42,7 +42,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                     <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="insertarDatosPrograma();">Guardar Cambios</a>
                 </div>
             </div>
-
             <?php require_once '../menu.php'; ?>
             <form id='frm_meta_producto' name='frm_meta_producto' onSubmit="return false"  enctype="multipart/form-data">
                 <div class="col s12 m11 l9">
@@ -73,11 +72,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                             </div>
                                         </div>
                                     </div>
-
                                     <div id="resultado" class="row">
 
                                     </div>
-
                                 </div>
                             </div>
                         </div>

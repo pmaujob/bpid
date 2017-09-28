@@ -63,8 +63,6 @@ function quitarPantalla() {
 
 function buscarProyectos(op) {
 
-    
-
     var resultado = document.getElementById('resultado');
 
     //temporalmente

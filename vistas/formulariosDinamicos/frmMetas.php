@@ -3,42 +3,48 @@
 $raiz = $_SESSION['raiz'];
 
 require_once $raiz . '/modelo/CargarMetas.php';
+require_once $raiz . '/librerias/SessionVars.php';
 
+$sess = new SessionVars();
 $idRad = $_POST['idRad'];
-$op = $_POST['op']; //opcion para mostrar programas, subprogramas o metas
+$filtrarSec = $_POST['filtrarSec']; //bandera para traer sólo las metas, o también las dependencias
 $numProyecto = $_POST['numProyecto'];
 
-$programas = CargarMetas::getProgramas();
-?>
-<div id="divProgramas">
-    <span>Seleccione el programa correspondiente al proyecto:</span>
-    <div class="input-field col s12">
-        <select id="selectProgramas" class="flow-text" onchange="mostrarSubprogramas('selectProgramas');">            
-            <option value="" disabled selected>Lista de Programas</option>
+$secretarias = CargarMetas::getSecretarias();
+$metas = null;
+
+if ($filtrarSec == 0) {
+    ?>
+    <div id="divSecretarias">
+        <span>Seleccione una o más secretarías:</span>
+        <div class="input-field col s12">        
             <?php
-            foreach ($programas as $programa) {
+            foreach ($secretarias as $secretaria) {
                 ?>
-                <option value="<?php echo $programa[0]; ?>" <?php if($programa[3] != "") echo "selected"; ?> ><?php echo $programa[1]; ?></option>
+                <input type="checkbox" id="<?php echo "secCheck" . $secretaria[0]; ?>" value="<?php echo $secretaria[0]; ?>" onclick="buscarMetas(this, '<?php echo $secretaria[1]; ?>');" />
+                <label for="<?php echo "secCheck" . $secretaria[0]; ?>" style="color: #000000;"><?php echo $secretaria[1]; ?></label>
+                <br>
                 <?php
             }
             ?>
-        </select>
+        </div>
     </div>
-</div>
-<br>
-<div>
-    <div id="esperarSubprogramas" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+    <br>
+    <?php
+} else {
+    $metas = CargarMetas::getMetas($sess->getValue('idSec'),$idRad);
+}
+?> 
+<div>    
+    <div id="esperarMetas" style="text-align: center; margin-left: auto; margin-right: auto; display: <?php if ($filtrarSec == 0) echo "none" ?>; ">
+        <span>Cargando datos por favor espere...</span>
+        <br>
         <img src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
     </div>
-    <div id="divSubprogramas" style="display: none;">              
+    <div id="divMetas" style="display: none">        
     </div>
 </div>
-<br>
-<div>
-    <div id="esperarMetas" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
-        <img src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
-    </div>
-    <div id="divMetas" style="display: none;">       
-    </div>
-</div>
-<input type="hidden" id="idRad" value="<?php echo $idRad; ?>" >
+<input type="hidden" id="idRad" value="<?php echo $idRad; ?>">
+<input type="hidden" id="idFiltrarSec" value="<?php echo $filtrarSec; ?>">
+<input type="hidden" id="idSec" value="<?php echo $sess->getValue('idSec'); ?>">
+
