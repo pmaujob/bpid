@@ -12,6 +12,7 @@ class CargarRadicados {
         $sess = new SessionVars();
         $sess->init();
         $codSecretaria = $sess->getValue('idSec');
+        $cedula = $sess->getValue('cedula');
         $datos = "'" . $datos . "'";
 
         $consulta = 'select cod, '//0
@@ -19,14 +20,14 @@ class CargarRadicados {
                 . 'nombre, '//2
                 . 'abr, '//3
                 . 'id, '//4
-                . 'nump '//5
-                . 'from get_radicados(' . $datos . ',' . $op . ',' . $codSecretaria . ') as ("cod" integer, "num" varchar, "nombre" varchar, "abr" varchar, "id" varchar, "nump" varchar);';
+                . 'numps '//5
+                . 'from get_radicados(' . $datos . ',' . $op . ',' . $codSecretaria . ',' . $cedula . ') as ("cod" integer, "num" varchar, "nombre" varchar, "abr" varchar, "id" varchar, "nump" varchar);';
 
-        $con = new ConexionPDO();
-        $con->conectar("PG");
-        $res = $con->consultar($consulta);
-        $con->cerrarConexion();
-        return $res;
+//        $con = new ConexionPDO();
+//        $con->conectar("PG");
+//        $res = $con->consultar($consulta);
+//        $con->cerrarConexion();
+        return $consulta;
     }
 
 }
