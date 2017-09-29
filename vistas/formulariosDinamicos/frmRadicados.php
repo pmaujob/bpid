@@ -6,10 +6,8 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
     $datos = $_POST['value'];
     $op = $_POST['op'];
 
-    $res = CargarRadicados::getRadicados($datos,$op);
-        
+    $res = CargarRadicados::getRadicados($datos,$op);     
     ?>
-
     <table>
         <thead>
             <tr><th>ID MGA</th><th>Código Bpid</th><th>Nombre del Proyecto</th><th>Editar</th></tr>
