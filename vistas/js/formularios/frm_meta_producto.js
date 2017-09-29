@@ -108,6 +108,8 @@ function traerMetas(idSec) {
             for (var i = 0; i < metaArray.length; i++) {
 
                 var metaObject = metaArray[i];
+
+                
                 var opt = document.createElement('p');
                 opt.innerHTML = '<input type="checkbox" id="metaCheck' + metaObject.cod + '" value="' + metaObject.cod + '" ' + (metaObject.cr == 1 ? 'checked' : '') + ' />'
                         + '<label for="metaCheck' + metaObject.cod + '" style="color: #000000; "><span style="color: #008643; font-weight: bold;">' + metaObject.nums + '</span> - ' + metaObject.des + '</label>';
