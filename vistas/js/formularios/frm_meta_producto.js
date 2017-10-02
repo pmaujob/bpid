@@ -98,6 +98,8 @@ function traerMetas(idSec) {
         data: {idSecretaria: idSec, idRad: idRad},
         success: function (respuesta) {
 
+            console.log(respuesta);
+            
             var metaArray = JSON.parse(respuesta);
 
             var divTit = document.createElement('span');
