@@ -121,7 +121,7 @@ function archivo_xml()
                             localizacion.value = cadena[2];
                             //eje.focus();
                             //eje.value='';
-                            eje.value = cadena[3];
+                            eje.value = 1;
                             //programa.focus();
                             //programa.value='';
                             programa.value = cadena[4];
@@ -222,8 +222,8 @@ function almacenar()
             entidad_proponente + '//' + entidad_ejecutante + '//' + num_id_responsable + '//' + nom_responsable + '//' + cargo_responsable + '//' +
             direccion_responsable + '//' + telefono_responsable + '//' + cel_responsable + '//' + correo_responsable + '//' + id_usuario + '//' + nombre_usuario + '//' +
             observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades;
-
-            alert("ingreso")
+    
+     alert(eje);
     $('#modal1').modal('close');
     bloquear_pantalla();
     jQuery.ajax({
@@ -234,7 +234,7 @@ function almacenar()
        
         success: function (respuesta) {
             
-            alert(respuesta)
+            //alert(respuesta);
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
