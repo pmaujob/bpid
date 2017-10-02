@@ -54,7 +54,7 @@ class ControladorRadicar {
             if ($this->validar())
                 $this->radicar = new MRadicar();
             return $this->radicar->ingresarRadicar(
-                            $this->numero_proyecto, $this->nombre_proyecto, $this->sector, $this->localizacion, $this->valor, $this->eje, $this->programa, $this->subprograma, $this->poai, $this->entidad_proponente, $this->entidad_ejecutante, $this->num_id_responsable, $this->nom_responsable, $this->cargo_responsable, $this->direccion_responsable, $this->telefono_responsable, $this->cel_responsable, $this->correo_responsable, $this->id_usuario, $this->nombre_usuario, $this->observaciones, $this->cod_usuario_ingreso, $this->cod_secretaria, $this->cod_activacion, $this->objetivosEspecificos, $this->fuentesFinanciamiento, $this->problema, $this->poblacion, $this->objetivog, $this->productos, $this->actividades);
+                            $this->numero_proyecto, $this->nombre_proyecto, $this->sector, $this->localizacion, $this->valor,$this->eje,$this->programa,$this->subprogr, $this->poai, $this->entidad_proponente, $this->entidad_ejecutante, $this->num_id_responsable, $this->nom_responsable, $this->cargo_responsable, $this->direccion_responsable, $this->telefono_responsable, $this->cel_responsable, $this->correo_responsable, $this->id_usuario, $this->nombre_usuario, $this->observaciones, $this->cod_usuario_ingreso, $this->cod_secretaria, $this->cod_activacion, $this->objetivosEspecificos, $this->fuentesFinanciamiento, $this->problema, $this->poblacion, $this->objetivog, $this->productos, $this->actividades);
         }
     }
 
