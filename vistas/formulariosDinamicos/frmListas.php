@@ -81,17 +81,17 @@ foreach ($listasRequeridas as $filar) {
                             <td style="width: 20%;">
                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
                                 <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filar1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
-                                <form action="#">
-                                    <div class="file-field input-field">
-                                        <div class="btn">
-                                            <span>Archivo</span>
-                                            <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text">
-                                        </div>
+
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>Archivo</span>
+                                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
                                     </div>
-                                </form>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+                                
                                 <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filar1[4]; ?>">
                             </td>
                         </tr>
@@ -175,7 +175,7 @@ if (count($listasEspecificas) == 0) {
                                             <td style="width: 25%;">
                                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filae1[0]; ?>" />
                                                 <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filae1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
-                                                <form action="#">
+                                                
                                                     <div class="file-field input-field">
                                                         <div class="btn">
                                                             <span>Archivo</span>
@@ -185,7 +185,7 @@ if (count($listasEspecificas) == 0) {
                                                             <input class="file-path validate" type="text">
                                                         </div>
                                                     </div>
-                                                </form>
+                                                
                                                 <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filae1[4]; ?>">
                                             </td>
                                         </tr>
@@ -256,7 +256,7 @@ if (count($listasEspecificas) == 0) {
                                                             <td style="width: 25%;">
                                                                 <input type="hidden" id="<?php echo subFilePre . $nOpcionesSub; ?>" value="<?php echo $filas[0]; ?>" />
                                                                 <input type="hidden" id="<?php echo subFileOb . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>" /><!--saber si el adjunto es obligatorio-->
-                                                                <form action="#">
+                                                                
                                                                     <div class="file-field input-field">
                                                                         <div class="btn">
                                                                             <span>Archivo</span>
@@ -266,7 +266,7 @@ if (count($listasEspecificas) == 0) {
                                                                             <input class="file-path validate" type="text">
                                                                         </div>
                                                                     </div>
-                                                                </form>
+                                                                
                                                                 <input type="hidden" id="<?php echo subFileExist . $nOpcionesSub; ?>" value="<?php echo $filas[4]; ?>">
                                                             </td>
                                                         </tr>                                                                                                                <?php
