@@ -4,6 +4,7 @@
 
 $raiz = $_SESSION['raiz'];
 require_once $raiz . '/librerias/ConexionPDO.php';
+require_once $raiz . '/librerias/SessionVars.php';
 
 class CargarMetas {
 
@@ -21,13 +22,15 @@ class CargarMetas {
         return $res;
     }
 
-    public static function getMetas($idSecretaria,$idRad) {
+    public static function getMetas($idSecretaria, $idRad) {
+
+        $sess = new SessionVars();
 
         $consulta = 'select cod, '//0
                 . 'des, '//1
                 . 'metas, '//2
                 . 'cr '//3
-                . 'from get_metas('.$idSecretaria.','.$idRad.') as ("cod" integer, "des" varchar, "metas" varchar, "cr" integer)';
+                . 'from get_metas(' . (!empty($idSecretaria) ? $idSecretaria : "null") . ',' . $idRad . ',\'' . $sess->getValue('cedula') . '\') as ("cod" integer, "des" varchar, "metas" varchar, "cr" integer)';
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
@@ -45,6 +48,7 @@ if (isset($_POST['idSecretaria'])) {
     foreach ($sqlRes as $fila) {
         $array[] = Array("cod" => $fila[0], "des" => $fila[1], "nums" => $fila[2], "cr" => $fila[3]);
     }
+    //echo $sqlRes;
 
     echo json_encode($array);
 }
