@@ -39,7 +39,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 </div>
                 <div class="modal-footer">          
                     <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
-                    <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="insertarDatosPrograma();">Guardar Cambios</a>
+                    <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="insertarMetas();">Guardar Cambios</a>
                 </div>
             </div>
             <?php require_once '../menu.php'; ?>
