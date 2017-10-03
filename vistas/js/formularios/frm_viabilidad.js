@@ -369,5 +369,5 @@ function subtotal(tupla)
     var vEfec=parseInt(document.getElementById(valorEfectivo).value==""? 0 :document.getElementById(valorEfectivo).value);
     document.getElementById(valorsubtotal).value=vEsp + vEfec;
 
-
 }
+

@@ -116,9 +116,9 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         </table>     
         <br>
         <table class="striped">
-     <tr><th colspan="3" style="text-align:center;">ACTIVIDADES DE PROYECTO</th></tr>
+     <tr><th colspan="4" style="text-align:center;">ACTIVIDADES DE PROYECTO</th></tr>
      <tr>
-     <th>Actividad</th><th>Valor Actividad</th><th>Editar</th>
+     <th>Actividad</th><th>Valor Actividad</th><th>Seleccionar Meta</th><th>Editar</th>
     </tr>
         </thead>
         <tbody>
@@ -129,8 +129,17 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                     ?>
 
                     <tr>
-                         <td><?php echo $act[6]; ?></td>
+                        <td>
+                            <a  title="<?php echo $act[6];?>" style='text-decoration:none;color:black'>
+                                
+                                    <?php 
+                                    $texto=substr($act[6],0, 25);
+                                    echo $texto."...";?>
+                            </a>
+                              
+                        </td>
                          <td><?php echo number_format($act[7]); ?></td>
+                         <td>Aqui va la meta</td>
                          <td>
                             <a class="waves-effect waves-light modal-trigger" href="#modal1" title="Ver Más">
         <div onclick="editarActividades(<?php echo $act[2]; ?>,<?php echo $act[0]; ?>,<?php echo $act[5];?>,<?php echo $act[7];?>)">
