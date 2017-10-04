@@ -27,6 +27,7 @@ if (!file_exists("$dirSubidaSub")) {
 }
 
 for ($i = 0; $i < count($totalArchivosReq); $i += 2) {//incremento en +2 ya que el arreglo viene con requisito y contador de pregunta
+        
     $ar = $_FILES['REQFILE' . $totalArchivosReq[$i + 1]];
     $nombreArchivoReq = basename($ar['name']);
     $archivoReq = $dirSubidaReq . $nombreArchivoReq;

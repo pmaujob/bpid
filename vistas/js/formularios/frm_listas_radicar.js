@@ -8,7 +8,7 @@ var $toastContent;
 function onLoadBody() {
 
 
- buscarProyectos(1);
+    buscarProyectos(1);
     $(document).ready(function () {
 
         $('.modal').modal({
@@ -71,7 +71,9 @@ function buscarProyectos(op) {
             + '</div>';
 
     value = document.getElementById("input_buscar").value;
-   if(value=='') {value='null';}
+    if (value == '') {
+        value = 'null';
+    }
 
     //bloquearPantalla();
     jQuery.ajax({
@@ -93,11 +95,11 @@ function buscarProyectos(op) {
 function mas(cod, bpid, numProyecto) {
 
     $('#modal1').modal('open');
-    
-    if(collapsibleHtml == ""){
+
+    if (collapsibleHtml == "") {
         collapsibleHtml = document.getElementById("collapsible").innerHTML;
     }
-    
+
     if (proyectoActual == numProyecto) {
         return;
     } else {
@@ -162,7 +164,7 @@ function validar(enviarInfo) {
             var reqArchivoExist = document.getElementById('REQFILEEXIST' + i).value;
             var reqArchivo = document.getElementById('REQFILE' + i);
 
-            if (opcionSeleccionada == "SI" && reqArchivoExist == "" && document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
+            if (opcionSeleccionada == "SI" && reqArchivoExist == "" && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
                 alert('Se debe adjuntar un archivo en esta pregunta.');
                 reqArchivo.focus();
                 return;
@@ -171,6 +173,7 @@ function validar(enviarInfo) {
                 archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
                 archivoReqRow[1] = i;//posicion del contador para recorrer archivos más adelante
                 archivosReq.push(archivoReqRow);
+                console.log("Entró a guardar el archivo con la posicion: " + i + ", id: " + document.getElementById('REQH' + i).value);
             }
 
             var reqRow = new Array(3);
@@ -222,7 +225,7 @@ function validar(enviarInfo) {
 
     var waitGuardarProgreso = document.getElementById('waitGuardarProgreso');
     waitGuardarProgreso.style.display = "";
-
+    
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
@@ -231,6 +234,7 @@ function validar(enviarInfo) {
         success: function (respuesta) {
 
             if (respuesta == 1) {
+                                
                 var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
                 $.ajax({
                     url: '../../controlador/ControladorArchivosRadicacion.php',
@@ -239,8 +243,6 @@ function validar(enviarInfo) {
                     contentType: false,
                     processData: false,
                     success: function (datos) {
-
-                        console.log(datos);
 
                         var fallidosReq = datos.split('|')[0];
                         var fallidosSub = datos.split('|')[1];
