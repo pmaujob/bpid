@@ -61,8 +61,6 @@ function mas(cod, bpid, numProyecto) {
     $('#modal1').modal('open');
 
     idRad = cod;
-    value = cod;
-    var bpid = bpid;
 
     document.getElementById('collapsible').innerHTML = "<div style='text-align: center; margin-left: auto; margin-right: auto;'><img id='esperarListas' src='./../css/wait.gif' style='width: 275px; height: 174,5px;' ></div>";
 
@@ -71,7 +69,7 @@ function mas(cod, bpid, numProyecto) {
         url: '../../vistas/formulariosDinamicos/frmListaCriterios.php',
         async: true,
         timeout: 0,
-        data: {value: value, bpid: bpid, numProyecto: numProyecto},
+        data: {idRad: idRad},
         success: function (respuesta) {
 
             document.getElementById('collapsible').innerHTML = respuesta;
@@ -87,17 +85,38 @@ function mas(cod, bpid, numProyecto) {
 function registrarCriterios() {
 
     var cont = document.getElementById('cont').value;
+    var contDimensiones = document.getElementById('contDimensiones').value;
 
+    var obsdimensiones = new Array();
     var criterios = new Array();
+
+    for (var i = 0; i < contDimensiones; i++) {
+
+        if (document.getElementById('OBS' + i).value !== "") {
+
+            var obsdimen = new Array(2);
+
+            obsdimen[0] = document.getElementById('IDDIMEN' + i).value;
+            obsdimen[1] = document.getElementById('OBS' + i).value;
+
+            obsdimensiones.push(obsdimen);
+
+        }
+
+    }
+
+//    if(obsdimensiones.length < 1)
+//        obsdimensiones = 'nohave';
+
     var j = 0;
 
     for (var i = 0; i < cont; i++) {
 
-        var criteriosRow = new Array(3);
+        var criteriosRow = new Array(2);
 
         criteriosRow[0] = document.getElementById('PRE' + i).value;
         criteriosRow[1] = document.getElementById('PRE' + i).checked ? "Si" : "No";
-        criteriosRow[2] = document.getElementById('OBS' + i).value;
+        //criteriosRow[2] = document.getElementById('OBS' + i).value;
 
         criterios.push(criteriosRow);
 
@@ -112,10 +131,13 @@ function registrarCriterios() {
         url: '../../controlador/CRegistrarCriterios.php',
         async: true,
         timeout: 0,
-        data: {idRad: idRad, preguntas: criterios},
+        data: {idRad: idRad, preguntas: criterios, observaciones: obsdimensiones},
         success: function (respuesta) {
+            
+            alert(respuesta);
+            console.log(respuesta);
 
-            if (respuesta == "1") {
+            if (respuesta.trim() == "1") {
                 document.getElementById('d_error').innerHTML = "Los criterios de viabilidad se han registrado con exito.";
                 $('#d_error').dialog("open");
             } else {

@@ -8,9 +8,9 @@ require_once $raiz.'/librerias/ConexionPDO.php';
 
 class MGetListaCriterios{
     
-    public static function getLista(){
+    public static function getLista($idRad){
         
-        $sql = 'select id, des from get_listas_dimension() as ("id" integer, "des" varchar);';
+        $sql = 'select id, des, obs from get_listas_dimension('.$idRad.') as ("id" integer, "des" varchar, "obs" varchar);';
         
         $con = new ConexionPDO();
         $con->conectar("PG");
@@ -21,9 +21,9 @@ class MGetListaCriterios{
         
     }
     
-    public static function getCriterios($id){
+    public static function getCriterios($id,$idRad){
         
-        $sql = 'select id, pre, des from get_listas_criterios('.$id.') as ("id" integer, "pre" varchar, "des" varchar);';
+        $sql = 'select id, pre, des from get_listas_criterios('.$idRad.','.$id.') as ("id" integer, "pre" varchar, "des" varchar);';
         
         $con = new ConexionPDO();
         $con->conectar("PG");
