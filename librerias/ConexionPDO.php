@@ -23,16 +23,16 @@ class ConexionPDO {
 
        
         
-//        $this->motor = 'pgsql';
-//        $this->user = 'postgres';
-//        $this->pass = 'bpid2017';
-//        $this->host = '192.168.1.111';
-//        $this->db = 'bpid';
         $this->motor = 'pgsql';
         $this->user = 'postgres';
-        $this->pass = '123456';
-        $this->host = 'localhost';
-        $this->db = 'bpidtmp';
+        $this->pass = 'bpid2017';
+        $this->host = '192.168.1.111';
+        $this->db = 'bpid';
+//        $this->motor = 'pgsql';
+//        $this->user = 'postgres';
+//        $this->pass = '123456';
+//        $this->host = 'localhost';
+//        $this->db = 'bpidtmp';
         
     }
 

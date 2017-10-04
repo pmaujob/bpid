@@ -1,5 +1,5 @@
 <?php
-
+@session_vars();
 $raiz = $_SESSION['raiz'];
 require_once '../../librerias/ConexionPDO.php';
 require_once $raiz . '/librerias/SessionVars.php';

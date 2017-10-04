@@ -164,7 +164,7 @@ function validar(enviarInfo) {
             var reqArchivoExist = document.getElementById('REQFILEEXIST' + i).value;
             var reqArchivo = document.getElementById('REQFILE' + i);
 
-            if (opcionSeleccionada == "SI" && reqArchivoExist == "" && document.getElementById('REQFILEOB' + i).value == 1 && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
+            if (opcionSeleccionada == "SI" && reqArchivoExist == "" && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
                 alert('Se debe adjuntar un archivo en esta pregunta.');
                 reqArchivo.focus();
                 return;
