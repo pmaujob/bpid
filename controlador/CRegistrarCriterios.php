@@ -12,6 +12,7 @@ class CRegistrarCriterios {
     private $idRadicacion;
     private $preguntas = array(array(2));
     private $observaciones = array(array(2));
+    private $estadoObs;
 
     public function getIdRadicacion() {
         return $this->idRadicacion;
@@ -23,6 +24,10 @@ class CRegistrarCriterios {
     
     public function getObservaciones(){
         return $this->observaciones;
+    }
+    
+    public function getEstadoObs(){
+        return $this->estadoObs;
     }
 
     public function getPreguntasJson() {
@@ -61,10 +66,14 @@ class CRegistrarCriterios {
     public function setObservaciones($observaciones) {
         $this->observaciones = $observaciones;
     }
+    
+    public function setEstadoObs($estado){
+        $this->estadoObs = $estado;
+    }
 
     public function registrarCriterios() {
 
-        return MRegistrarCriterios::registrarCriterios($this->idRadicacion, $this->getPreguntasJson(), $this->getObservaciones()==null ? $this->getObservacionesJson() : 'null');
+        return MRegistrarCriterios::registrarCriterios($this->idRadicacion, $this->getPreguntasJson(), $this->getEstadoObs() ? $this->getObservacionesJson() : "'null'");
     }
 
 }
@@ -75,7 +84,7 @@ if ((isset($_POST['idRad']) && isset($_POST['preguntas']) && isset($_POST['obser
     $criterios->setIdRadicacion($_POST['idRad']);
     $criterios->setPreguntas($_POST['preguntas']);
     $obs = $_POST['observaciones'];
-    if($obs == "nohave") $criterios->setObservaciones('null'); else $criterios->setObservaciones($_POST['observaciones']);
+    if($obs == "nohave") $criterios->setEstadoObs(false); else $criterios->setEstadoObs(true); $criterios->setObservaciones($obs);
     echo $criterios->registrarCriterios();
 }
 ?>

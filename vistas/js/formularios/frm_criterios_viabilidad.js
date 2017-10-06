@@ -73,6 +73,7 @@ function mas(cod, bpid, numProyecto) {
         success: function (respuesta) {
 
             document.getElementById('collapsible').innerHTML = respuesta;
+            document.getElementById('semaforo').style.display = "block";
 
         }, error: function () {
             alert("Error inesperado")
@@ -105,8 +106,8 @@ function registrarCriterios() {
 
     }
 
-//    if(obsdimensiones.length < 1)
-//        obsdimensiones = 'nohave';
+    if (obsdimensiones.length < 1)
+        obsdimensiones = 'nohave';
 
     var j = 0;
 
@@ -133,9 +134,6 @@ function registrarCriterios() {
         timeout: 0,
         data: {idRad: idRad, preguntas: criterios, observaciones: obsdimensiones},
         success: function (respuesta) {
-            
-            alert(respuesta);
-            console.log(respuesta);
 
             if (respuesta.trim() == "1") {
                 document.getElementById('d_error').innerHTML = "Los criterios de viabilidad se han registrado con exito.";
@@ -150,5 +148,29 @@ function registrarCriterios() {
             window.top.location = "../index.html";
         }
     });
+
+}
+
+function semaforo(id) {
+
+    var contTotal = 0;
+    var contChequeados = 0;
+    var res = 0;
+
+    $("#" + id + " input").each(function () {
+        contTotal++;
+        if ($(this).prop('checked'))
+            contChequeados++;
+    });
+    
+    res = (contChequeados * 100)/contTotal;
+    
+    if(res<50)
+        document.getElementById('bonbilla').style.backgroundColor = "red";
+    else if(res >= 50 && res<90)
+        document.getElementById('bonbilla').style.backgroundColor = "orange";
+    else
+        document.getElementById('bonbilla').style.backgroundColor = "green";
+        
 
 }

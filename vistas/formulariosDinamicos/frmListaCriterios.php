@@ -5,9 +5,11 @@ $raiz = $_SESSION['raiz'];
 
 require_once $raiz . '/modelo/MGetListaCriterios.php';
 
+const lista = "LISTA";
 const criterios = "PRE";
 const Observaciones = "OBS";
 const idDimensiones = "IDDIMEN";
+const cantidadDimensiones = "CONTD";
 
 $idRad = $_POST['idRad'];
 
@@ -19,9 +21,9 @@ $listasDimensiones = MGetListaCriterios::getLista($idRad);
 foreach ($listasDimensiones as $fila) {
     ?>
 
-    <li>
-        <div id="<?php echo rTitLista . $fila[0]; ?>" class="collapsible-header item_lista_obligatoria"><span><?php echo $fila[1]; ?></span></div>
-        <div id="<?php echo rlista . $fila[0]; ?>" class="collapsible-body">
+    <li id="<?php echo lista . $contDimensiones; ?>" onclick="semaforo(<?php echo "'".lista . $contDimensiones."'"; ?>);">
+        <div class="collapsible-header item_lista_obligatoria"><span><?php echo $fila[1]; ?></span></div>
+        <div class="collapsible-body">
 
             <?php
             $listasCriterios = MGetListaCriterios::getCriterios($fila[0], $idRad);
@@ -45,7 +47,7 @@ foreach ($listasDimensiones as $fila) {
                                 <div class="switch"  style="margin-right: 60px;">
                                     <label style="margin-right: 60px;">
                                         No
-                                        <input id="<?php echo criterios . $cont; ?>" type="checkbox" value="<?php echo $fila2[0]; ?>" <?php echo $fila2[2] == 'Si' ? 'checked' : '' ?>>
+                                        <input id="<?php echo criterios . $cont; ?>" type="checkbox" onclick="semaforo(<?php echo "'".lista . $contDimensiones."'"; ?>);" value="<?php echo $fila2[0]; ?>" <?php echo $fila2[2] == 'Si' ? 'checked' : '' ?>>
                                         <span class="lever"></span>
                                         Si
                                     </label>

@@ -12,12 +12,12 @@ class MRegistrarCriterios {
 
         $sql = "select from ing_criterios_viabilidad($idRadicacion,$preguntas,$observaciones);";
 
-//        $con = new ConexionPDO();
-//        $con->conectar("PG");
-//        $res = $con->afectar($sql);
-//        $con->cerrarConexion();
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->afectar($sql);
+        $con->cerrarConexion();
 
-        return $sql;
+        return $res;
     }
 
 }
