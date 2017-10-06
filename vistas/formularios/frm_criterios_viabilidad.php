@@ -3,11 +3,11 @@
 
 $raiz = $_SESSION['raiz'];
 
-require_once $raiz.'/librerias/SessionVars.php';
-require_once $raiz.'/modelo/MPermisos.php';
+require_once $raiz . '/librerias/SessionVars.php';
+require_once $raiz . '/modelo/MPermisos.php';
 
-const idFormulario = 7;
-const idEtapa = 2;
+        const idFormulario = 7;
+        const idEtapa = 2;
 $sess = new SessionVars();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
@@ -25,6 +25,11 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         </head>
 
         <body onload="onLoadBody();">
+            <div id="semaforo" class="semaforo">
+                <div id="bonbilla" class="bonbilla">
+
+                </div>
+            </div>
             <div id="d_error" title="ALERTA"></div>
             <div id="d_ingreso" title="INFORMACION"></div>
             <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
@@ -38,15 +43,16 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             </div>
                         </ul>
                     </div>
-                    <div class="modal-footer">          
-                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios();">Guardar y Envíar</a>
+                    <div class="modal-footer">
+                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios();">Guardar y Enviar</a>
+                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios();">Guardar Progreso</a>
                     </div>
                 </div>
             </form>
 
             <?php require_once '../menu.php'; ?>
             <form id='frm_radicar_listas' name='frm_criterios_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
-                
+
                 <div class="col s12 m11 l9">
                     <div class="bajar">
                         <div class="container-fluid">

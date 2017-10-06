@@ -146,3 +146,32 @@
     border: 1px solid #BDBDBD;
 
 }
+
+/* semaforo */
+
+.semaforo{
+    position: fixed;
+    z-index: 99999;
+    right: 0;
+    top: 100px;
+    width: 60px;
+    height: 60px;
+    background-color: #FAFAFA;
+    border-radius: 100% 0 0 100%;
+    display: none;
+}
+
+.bonbilla{
+    border-radius: 100% 100% 100% 100%;
+    background-color: yellow;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+}

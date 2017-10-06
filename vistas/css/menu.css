@@ -255,7 +255,7 @@ importando fuente para los menus
     background-color: #008643;
     height: 60px;
     position: fixed;
-    z-index: 9999;
+    z-index: 999;
 }
 
 .contenedor-menu a{
