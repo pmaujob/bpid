@@ -3,7 +3,16 @@ var idRad;
 function onLoadBody() {
 
     $(document).ready(function () {
-        $('.modal').modal();
+
+        $('.modal').modal({
+            complete: function () {
+
+                document.getElementById('semaforo').style.display = "none";
+                document.getElementById('semaforo').style.right = "-60px";
+
+            }
+        });
+
     });
     $("#d_error").dialog({
         autoOpen: false,
@@ -74,6 +83,7 @@ function mas(cod, bpid, numProyecto) {
 
             document.getElementById('collapsible').innerHTML = respuesta;
             document.getElementById('semaforo').style.display = "block";
+            document.getElementById('semaforo').style.right = "0";
 
         }, error: function () {
             alert("Error inesperado")
@@ -162,15 +172,15 @@ function semaforo(id) {
         if ($(this).prop('checked'))
             contChequeados++;
     });
-    
-    res = (contChequeados * 100)/contTotal;
-    
-    if(res<50)
+
+    res = (contChequeados * 100) / contTotal;
+
+    if (res < 50)
         document.getElementById('bonbilla').style.backgroundColor = "red";
-    else if(res >= 50 && res<90)
+    else if (res >= 50 && res < 90)
         document.getElementById('bonbilla').style.backgroundColor = "orange";
     else
         document.getElementById('bonbilla').style.backgroundColor = "green";
-        
+
 
 }
