@@ -220,12 +220,12 @@ function insertarMetas() {
         data: {idRad: idRad, metas: selectedMetas},
         success: function (respuesta) {
 
-            console.log(respuesta);
-
             if (respuesta == 1) {
                 
                 alert("Las metas se guardaron con éxito.");
-                $("#modal1").modal("close");
+                $("#modalm").modal("close");
+                
+                location.href = document;
 
             } else {
 
