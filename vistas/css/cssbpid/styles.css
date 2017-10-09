@@ -152,13 +152,18 @@
 .semaforo{
     position: fixed;
     z-index: 99999;
-    right: 0;
+    right: -60px;
     top: 100px;
     width: 60px;
     height: 60px;
     background-color: #FAFAFA;
     border-radius: 100% 0 0 100%;
     display: none;
+    transition: display, right 0.5s;
+    -webkit-transition: display, right 0.5s;
+    -moz-transition: display, right 0.5s;
+    -o-transition: display, right 0.5s;
+    -ms-transition: display, right 0.5s;
 }
 
 .bonbilla{
