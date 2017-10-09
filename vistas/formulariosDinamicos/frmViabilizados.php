@@ -41,7 +41,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                         <th>Valor Proyecto</th><td><?php echo $fila[7]; ?></td>
                     </tr>
                     <tr>
-                        <th>Localizacion</th><td><?php echo $fila[8]; ?></td>
+                        <th>Localizacion</th><td><?php echo $fila[7]; ?></td>
                     </tr>
                     <tr> <th>Objetivo General</th> <td><?php echo $fila[2]; ?></td>
                     </tr>

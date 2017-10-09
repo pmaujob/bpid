@@ -8,16 +8,16 @@ class CargarViabilizados{
         
         switch ($op) {
             case 1:
-                 $consulta='select pro,'//0
-                   .'problema,'//1
-                   .'obj,'//2
-                   .'numben,'//3
-                   .'eje,'//4
-                   .'spro,'//5
-                   .'sec,'//6
-                   .'val,'//7
-                   .'localizacion '//8
-                   .'from get_datos_viabilidad('.$numBpid.','.$op.') as ("pro" varchar, "problema" varchar, "obj" varchar, "numben" integer, "eje" varchar, "spro" varchar, "sec" varchar, "val" varchar, "localizacion" varchar);';
+                
+                 $consulta='select r,'//0
+                   .'pro,'//1
+                   .'despro,'//2
+                   .'pob,'//3
+                   .'dessubpro,'//4
+                   .'sec,'//5
+                   .'val,'//6
+                   .'loc '//7
+                   .'from get_datos_viabilidad('.$numBpid.','.$op.') as ("r" integer ,"pro" varchar, "despro" varchar, "pob" integer, "dessubpro" varchar, "sec" varchar, "val" varchar, "loc" varchar);';
                 break;
              case 2:
                  $consulta='select obj '
