@@ -1,0 +1,969 @@
+2017-08-22 15:28:08 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-08-24 10:42:05 ERROR  : ERROR:  no existe la relación «radicacion_meta_producto»
+LINE 1: SELECT * FROM radicacion_meta_producto;
+                      ^
+2017-08-24 15:43:40 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-08-24 15:49:36 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 15:54:30 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:01:14 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:12:18 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:20:39 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:40:03 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 16:43:30 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-24 17:11:01 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "181.225.96.71" and accepting
+	TCP/IP connections on port 5432?
+2017-08-28 15:37:52 ERROR  : SSL SYSCALL error: Software caused connection abort (0x00002745/10053)
+2017-08-31 12:28:56 ERROR  : ERROR:  error de sintaxis en o cerca de «=»
+LINE 1: UPDATE radicacion cod_activacion = 1 WHERE cod_radicacion = ...
+                                         ^
+2017-09-04 15:02:37 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-04 15:02:40 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-04 15:03:07 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-04 15:08:07 ERROR  : ERROR:  el valor null para la columna «eje» viola la restricción not null
+DETAIL:  La fila que falla contiene (7, ARTICULACION REGIONAL Y ORDENAMIENTO TERRITORIAL DIFERENCIAL, null).
+2017-09-04 15:08:10 ERROR  : ERROR:  el valor null para la columna «eje» viola la restricción not null
+DETAIL:  La fila que falla contiene (7, ARTICULACION REGIONAL Y ORDENAMIENTO TERRITORIAL DIFERENCIAL, null).
+2017-09-04 15:19:39 ERROR  : ERROR:  no se puede truncar una tabla referida en una llave foránea
+DETAIL:  La tabla «radicacion_programa» hace referencia a «programa».
+HINT:  Trunque la tabla «radicacion_programa» al mismo tiempo, o utilice TRUNCATE ... CASCADE.
+2017-09-04 15:20:25 ERROR  : ERROR:  no se puede truncar una tabla referida en una llave foránea
+DETAIL:  La tabla «radicacion_programa» hace referencia a «programa».
+HINT:  Trunque la tabla «radicacion_programa» al mismo tiempo, o utilice TRUNCATE ... CASCADE.
+2017-09-04 15:20:48 ERROR  : ERROR:  no se puede truncar una tabla referida en una llave foránea
+DETAIL:  La tabla «radicacion_programa» hace referencia a «programa».
+HINT:  Trunque la tabla «radicacion_programa» al mismo tiempo, o utilice TRUNCATE ... CASCADE.
+2017-09-04 15:21:12 ERROR  : ERROR:  no se puede truncar una tabla referida en una llave foránea
+DETAIL:  La tabla «subprograma» hace referencia a «programa».
+HINT:  Trunque la tabla «subprograma» al mismo tiempo, o utilice TRUNCATE ... CASCADE.
+2017-09-04 15:21:38 ERROR  : ERROR:  no se puede truncar una tabla referida en una llave foránea
+DETAIL:  La tabla «meta_producto» hace referencia a «subprograma».
+HINT:  Trunque la tabla «meta_producto» al mismo tiempo, o utilice TRUNCATE ... CASCADE.
+2017-09-04 15:22:02 ERROR  : ERROR:  no existe la relación «radicacion_meta_producto»
+2017-09-04 15:39:38 ERROR  : ERROR:  no existe la relación «programas»
+LINE 1: SELECT * FROM programas;
+                      ^
+2017-09-04 17:36:49 ERROR  : ERROR:  error de sintaxis en o cerca de «:»
+LINE 5: ):
+         ^
+2017-09-04 17:39:09 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-04 17:39:31 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-04 17:39:32 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-04 17:39:33 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-04 17:39:33 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-04 17:39:33 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-04 17:39:33 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-04 17:39:33 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-04 17:39:35 ERROR  : ERROR:  la relación «num_meta_producto» ya existe
+2017-09-05 09:59:40 ERROR  : ERROR:  error de sintaxis en o cerca de «num_meta_producto»
+LINE 1: SELECT * num_meta_producto;
+                 ^
+2017-09-05 10:32:46 ERROR  : ERROR:  error de sintaxis en o cerca de «*»
+LINE 1: DELETE * FROM meta_producto WHERE cod_meta_producto = 207;
+               ^
+2017-09-05 14:54:13 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-05 17:26:48 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-06 09:52:19 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-06 09:52:47 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-06 09:53:58 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-06 09:54:42 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-06 09:55:28 ERROR  : Failed to re-establish the connection to the server postgres on postgres@192.168.1.111:5432
+2017-09-06 15:24:17 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-07 09:30:11 ERROR  : ERROR:  no existe la relación «num_producto»
+LINE 1: SELECT * FROM num_producto;
+                      ^
+2017-09-07 09:34:53 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-07 09:35:27 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-07 09:36:14 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-07 09:37:37 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-07 14:51:40 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-07 16:00:17 ERROR  : ERROR:  el operador no existe: boolean = integer
+LINE 1: SELECT * FROM sys_conf WHERE filtrar_dep = 0;
+                                                 ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2017-09-07 16:00:44 ERROR  : ERROR:  el operador no existe: ! boolean
+LINE 1: SELECT * FROM sys_conf WHERE !filtrar_dep;
+                                     ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2017-09-07 16:57:43 ERROR  : ERROR:  no existe la relación «num_meta_grupo»
+LINE 1: SELECT * FROM num_meta_grupo;
+                      ^
+2017-09-07 17:05:27 ERROR  : ERROR:  no existe la relación «meta_producto_meta_grupo»
+LINE 1: SELECT * FROM meta_producto_meta_grupo;
+                      ^
+2017-09-07 17:06:17 ERROR  : ERROR:  no existe la relación «num_meta_grupo»
+LINE 1: SELECT * FROM num_meta_grupo;
+                      ^
+2017-09-07 17:33:29 ERROR  : ERROR:  el operador no existe: boolean && integer
+LINE 1: ..._meta_producto WHERE cod_num_meta_producto >= 583 && cod_num...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2017-09-08 12:23:42 ERROR  : ERROR:  no existe la columna mp.cod_mum_meta_producto
+LINE 1: ...S mp INNER JOIN meta_grupo_meta_producto AS mg ON mp.cod_mum...
+                                                             ^
+2017-09-08 12:23:51 ERROR  : ERROR:  error de sintaxis en o cerca de «num_meta_producto»
+LINE 1: num_meta_producto
+        ^
+2017-09-08 12:27:25 ERROR  : ERROR:  no existe la columna mg.cod_meta_producto
+LINE 6: AND mg.cod_meta_producto = 1;
+            ^
+2017-09-08 12:27:42 ERROR  : ERROR:  error de sintaxis en o cerca de «AND»
+LINE 1: AND mg.cod_meta_grupo = 1;
+        ^
+2017-09-08 12:33:06 ERROR  : ERROR:  error de sintaxis en o cerca de «AND»
+LINE 2: AND mg.cod_meta_grupo = 1;
+        ^
+2017-09-08 12:38:57 ERROR  : ERROR:  error de sintaxis en o cerca de «meta_grupo_meta_producto»
+LINE 1: SELECT * meta_grupo_meta_producto WHERE cod_num_meta_product...
+                 ^
+2017-09-08 14:05:33 ERROR  : ERROR:  el operador no existe: integer |
+LINE 7: AND mg.cod_meta_grupo = 1|;
+                                 ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2017-09-08 14:08:55 ERROR  : ERROR:  error de sintaxis en o cerca de «664»
+LINE 1:  664
+         ^
+2017-09-08 14:13:39 ERROR  : ERROR:  error de sintaxis en o cerca de «meta_grupo_meta_producto»
+LINE 1: SELECT * meta_grupo_meta_producto WHERE cod_num_meta_product...
+                 ^
+2017-09-11 12:28:10 ERROR  : ERROR:  no existe la columna «Secretaría de Gobierno»
+LINE 5: UPDATE seguridad.secretarias SET nombre = "Secretaría de Gob...
+                                                  ^
+2017-09-11 12:28:28 ERROR  : ERROR:  no existe la columna «Secretaría de Gobierno»
+LINE 1: UPDATE seguridad.secretarias SET nombre = "Secretaría de Gob...
+                                                  ^
+2017-09-11 12:28:54 ERROR  : ERROR:  error de sintaxis en o cerca de «TE»
+LINE 1: TE seguridad.secretarias SET nombre = 'Secretaría de Gobiern...
+        ^
+2017-09-11 12:32:32 ERROR  : ERROR:  no existe la columna «Secretaría de Ambiente y Desarrollo Sostenible»
+LINE 2: INSERT INTO seguridad.secretarias(nombre) VALUES("Secretaría...
+                                                         ^
+2017-09-11 12:32:56 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «secretarias_nombre_key»
+DETAIL:  Ya existe la llave (nombre)=(Secretaría de Hacienda).
+2017-09-11 12:33:22 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «secretarias_nombre_key»
+DETAIL:  Ya existe la llave (nombre)=(Secretaría de Hacienda).
+2017-09-11 12:34:29 ERROR  : ERROR:  no existe la columna «Despacho del Gobernador»
+LINE 1: INSERT INTO seguridad.secretarias(nombre) VALUES("Despacho d...
+                                                         ^
+2017-09-11 14:50:00 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-11 14:52:24 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-11 15:32:07 ERROR  : ERROR:  no existe la relación «seguridad.secretaria»
+LINE 3: SELECT * FROM seguridad.secretaria;
+                      ^
+2017-09-11 15:32:42 ERROR  : ERROR:  no existe la columna «descripcion»
+LINE 1: SELECT * FROM seguridad.secretarias ORDER BY descripcion ASC...
+                                                     ^
+2017-09-11 15:55:36 ERROR  : ERROR:  inserción o actualización en la tabla «meta_grupo_meta_producto» viola la llave foránea «meta_grupo_fk»
+DETAIL:  La llave (cod_meta_grupo)=(45) no está presente en la tabla «meta_grupo».
+2017-09-11 15:56:11 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «meta_grupo_meta_producto_pkey»
+DETAIL:  Ya existe la llave (cod_num_meta_producto, cod_meta_grupo)=(171, 6).
+2017-09-11 16:01:16 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «meta_grupo_meta_producto_pkey»
+DETAIL:  Ya existe la llave (cod_num_meta_producto, cod_meta_grupo)=(627, 8).
+2017-09-11 16:05:26 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «meta_grupo_meta_producto_pkey»
+DETAIL:  Ya existe la llave (cod_num_meta_producto, cod_meta_grupo)=(627, 30).
+2017-09-11 16:05:33 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «meta_grupo_meta_producto_pkey»
+DETAIL:  Ya existe la llave (cod_num_meta_producto, cod_meta_grupo)=(627, 30).
+2017-09-11 16:07:14 ERROR  : ERROR:  error de sintaxis en o cerca de «*»
+LINE 1: DELETE * FROM meta_grupo_meta_producto;
+               ^
+2017-09-11 16:11:28 ERROR  : ERROR:  error de sintaxis en o cerca de «cod_sec»
+LINE 1: ...ER TABLE secretaria_meta_producto ADD FOREIGN KEY cod_sec RE...
+                                                             ^
+2017-09-11 16:42:48 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-12 09:56:02 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «meta_grupo_meta_producto_pkey»
+DETAIL:  Ya existe la llave (cod_num_meta_producto, cod_sec)=(349, 32).
+2017-09-12 11:27:58 ERROR  : ERROR:  no existe la función group_concat(integer)
+LINE 3: select mp.cod_meta_producto,mp.descripcion,GROUP_CONCAT(nmp....
+                                                   ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-09-12 11:29:01 ERROR  : ERROR:  no existe la columna «,»
+LINE 3: ...roducto,mp.descripcion,array_agg(nmp.num_meta_producto,",") 
+                                                                  ^
+2017-09-12 11:29:15 ERROR  : ERROR:  no existe la columna «,»
+LINE 3: ...oducto,mp.descripcion,string_agg(nmp.num_meta_producto,",") 
+                                                                  ^
+2017-09-12 11:29:22 ERROR  : ERROR:  no existe la función string_agg(integer, unknown)
+LINE 3: select mp.cod_meta_producto,mp.descripcion,string_agg(nmp.nu...
+                                                   ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-09-12 11:29:32 ERROR  : ERROR:  no existe la función string_agg(integer, unknown)
+LINE 3: select mp.cod_meta_producto,mp.descripcion, string_agg(nmp.n...
+                                                    ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-09-12 11:31:08 ERROR  : ERROR:  la columna «mp.cod_meta_producto» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: select mp.cod_meta_producto,mp.descripcion, array_agg(nmp.nu...
+               ^
+2017-09-12 11:32:07 ERROR  : ERROR:  ya existe una función «array_agg» con los mismos argumentos
+2017-09-12 11:32:39 ERROR  : ERROR:  no existe la función string_agg(integer, unknown)
+LINE 1: select mp.cod_meta_producto,mp.descripcion, string_agg(nmp.n...
+                                                    ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-09-12 15:43:01 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-12 16:54:21 ERROR  : ERROR:  no existe la columna smp.cod_meta_producto
+LINE 4: ...ia_meta_producto AS smp ON mp.cod_meta_producto = smp.cod_me...
+                                                             ^
+2017-09-12 16:55:44 ERROR  : ERROR:  no existe la columna nmp.num_cod_meta_producto
+LINE 4: INNER JOIN secretaria_meta_producto AS smp ON nmp.num_cod_me...
+                                                      ^
+2017-09-12 16:55:56 ERROR  : ERROR:  no existe la columna nmp.num_cod_meta_producto
+LINE 4: ...ta_producto AS smp ON nmp.cod_num_meta_producto = nmp.num_co...
+                                                             ^
+2017-09-12 17:28:38 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-12 17:32:30 ERROR  : ERROR:  la columna «nmp.cod_num_meta_producto» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 7: ORDER BY nmp.cod_num_meta_producto;
+                 ^
+2017-09-12 17:33:04 ERROR  : ERROR:  la columna «nmp.cod_num_meta_producto» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 7: ORDER BY nmp.cod_num_meta_producto;
+                 ^
+2017-09-13 11:13:34 ERROR  : ERROR:  la relación «sys_conf» ya existe
+2017-09-19 09:23:49 ERROR  : Error connecting to the server: FATAL:  no hay una línea en pg_hba.conf para «190.253.183.63», usuario «postgres», base de datos «postgres», SSL activo
+FATAL:  no hay una línea en pg_hba.conf para «190.253.183.63», usuario «postgres», base de datos «postgres», SSL inactivo
+
+2017-09-19 09:38:24 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, Dario Santacruz, null, null, null, null, null, 1, null, null).
+2017-09-19 09:38:37 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (2, Dario Santacruz, 192.168.1.1, null, null, null, null, 1, null, null).
+2017-09-19 09:38:47 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (3, Dario Santacruz, 192.168.1.1, /home/, null, null, null, 1, null, null).
+2017-09-19 09:39:12 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (4, Dario Santacruz, 192.168.1.1, /home/, 2017-09-19, null, null, 1, null, null).
+2017-09-19 09:43:18 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (5, Dario Santacruz, 192.168.1.1, /home/, 2017-09-19, kkidfjro393, null, 1, null, null).
+2017-09-19 09:43:25 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (6, Dario Santacruz, 192.168.1.1, /home/, 2017-09-19, kkidfjro393, 192.168.1.1, 1, null, null).
+2017-09-19 09:53:08 ERROR  : ERROR:  el valor null para la columna «id_eusuario» viola la restricción not null
+DETAIL:  La fila que falla contiene (7, Dario Santacruz, 192.168.1.1, /home/, 2017-09-19, kkidfjro393, 192.168.1.1, 1, 1, null).
+2017-09-19 09:53:45 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (9, Daniel Daza, null, null, null, null, null, 1, null, null).
+2017-09-19 09:53:54 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (10, Daniel Daza, 192.168.1.2, null, null, null, null, 1, null, null).
+2017-09-19 09:54:00 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (11, Daniel Daza, 192.168.1.2, /home/, null, null, null, 1, null, null).
+2017-09-19 09:54:11 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (12, Daniel Daza, 192.168.1.2, /home/, 2017-09-18, null, null, 1, null, null).
+2017-09-19 09:54:17 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (13, Daniel Daza, 192.168.1.2, /home/, 2017-09-18, iudjo3994s, null, 1, null, null).
+2017-09-19 09:54:24 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (14, Daniel Daza, 192.168.1.2, /home/, 2017-09-18, iudjo3994s, 192.168.1.2, 1, null, null).
+2017-09-19 09:54:30 ERROR  : ERROR:  el valor null para la columna «id_eusuario» viola la restricción not null
+DETAIL:  La fila que falla contiene (15, Daniel Daza, 192.168.1.2, /home/, 2017-09-18, iudjo3994s, 192.168.1.2, 1, 2, null).
+2017-09-19 09:55:12 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (17, Mauricion Pinzón, null, null, null, null, null, 1, null, null).
+2017-09-19 09:55:18 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (18, Mauricion Pinzón, 192.168.1.3, null, null, null, null, 1, null, null).
+2017-09-19 09:55:24 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (19, Mauricion Pinzón, 192.168.1.3, /home/, null, null, null, 1, null, null).
+2017-09-19 09:55:33 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (20, Mauricion Pinzón, 192.168.1.3, /home/, null, null, null, 1, null, null).
+2017-09-19 09:55:40 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (21, Mauricion Pinzón, 192.168.1.3, /home/, null, louoñd91923, null, 1, null, null).
+2017-09-19 09:55:46 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (22, Mauricion Pinzón, 192.168.1.3, /home/, null, louond91923, null, 1, null, null).
+2017-09-19 09:55:48 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (23, Mauricion Pinzón, 192.168.1.3, /home/, null, louond91923, null, 1, null, null).
+2017-09-19 09:56:12 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (24, Mauricion Pinzón, 192.168.1.3, /home/, null, louond91923, 192.168.1.3, 1, null, null).
+2017-09-19 09:56:17 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (25, Mauricion Pinzón, 192.168.1.3, /home/, null, louond91923, 192.168.1.3, 1, null, null).
+2017-09-19 09:56:23 ERROR  : ERROR:  el valor null para la columna «id_eusuario» viola la restricción not null
+DETAIL:  La fila que falla contiene (26, Mauricion Pinzón, 192.168.1.3, /home/, null, louond91923, 192.168.1.3, 1, 3, null).
+2017-09-19 10:03:24 ERROR  : ERROR:  el valor null para la columna «directorio» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, 1, null).
+2017-09-19 12:00:36 ERROR  : ERROR:  no existe la columna «sis»
+LINE 3: ...ble LIKE '%Sis%' OR a.descripcion LIKE '%'||lower(Sis)||'%';
+                                                             ^
+2017-09-19 15:32:02 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-19 15:32:27 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-19 15:33:29 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-19 15:35:10 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-19 15:35:47 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-19 15:38:15 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-19 15:41:05 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-19 15:44:57 ERROR  : could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host "192.168.1.111" and accepting
+	TCP/IP connections on port 5432?
+2017-09-19 15:45:06 ERROR  : FATAL:  el sistema de base de datos está iniciándose
+FATAL:  el sistema de base de datos está iniciándose
+2017-09-19 16:14:33 ERROR  : ERROR:  no existe la columna d.id_eusuario
+LINE 3: LEFT JOIN directorios AS d ON us.id_eusuario = d.id_eusuario...
+                                                       ^
+2017-09-19 16:14:57 ERROR  : ERROR:  no existe la columna ud.ultimoregistro
+LINE 1: ...,us.cuenta, ud.responsable, ud.ipsync, ud.ipsync, ud.ultimor...
+                                                             ^
+2017-09-19 16:14:58 ERROR  : ERROR:  no existe la columna ud.ultimoregistro
+LINE 1: ...,us.cuenta, ud.responsable, ud.ipsync, ud.ipsync, ud.ultimor...
+                                                             ^
+2017-09-19 16:14:59 ERROR  : ERROR:  no existe la columna ud.ultimoregistro
+LINE 1: ...,us.cuenta, ud.responsable, ud.ipsync, ud.ipsync, ud.ultimor...
+                                                             ^
+2017-09-19 16:14:59 ERROR  : ERROR:  no existe la columna ud.ultimoregistro
+LINE 1: ...,us.cuenta, ud.responsable, ud.ipsync, ud.ipsync, ud.ultimor...
+                                                             ^
+2017-09-19 16:14:59 ERROR  : ERROR:  no existe la columna ud.ultimoregistro
+LINE 1: ...,us.cuenta, ud.responsable, ud.ipsync, ud.ipsync, ud.ultimor...
+                                                             ^
+2017-09-19 16:15:00 ERROR  : ERROR:  no existe la columna ud.ultimoregistro
+LINE 1: ...,us.cuenta, ud.responsable, ud.ipsync, ud.ipsync, ud.ultimor...
+                                                             ^
+2017-09-19 16:15:17 ERROR  : ERROR:  no existe la columna ud.ultimoregistro
+LINE 1: ...,us.cuenta, ud.responsable, ud.ipsync, ud.ipsync, ud.ultimor...
+                                                             ^
+2017-09-19 16:15:19 ERROR  : ERROR:  no existe la columna ud.ultimoregistro
+LINE 1: ...,us.cuenta, ud.responsable, ud.ipsync, ud.ipsync, ud.ultimor...
+                                                             ^
+2017-09-19 16:18:09 ERROR  : ERROR:  error de sintaxis en o cerca de «FROM»
+LINE 1: ...us.cuenta, ud.responsable, ud.ipsync, ud.ipsync,  FROM eudat...
+                                                             ^
+2017-09-19 16:18:13 ERROR  : ERROR:  no existe la columna d.id_eudatos
+LINE 3: LEFT JOIN directorios AS d ON ud.id_eudatos = d.id_eudatos;
+                                                      ^
+2017-09-19 16:27:48 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-19 16:31:16 ERROR  : ERROR:  el valor null para la columna «directorio» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, 1, null).
+2017-09-19 16:43:07 ERROR  : ERROR:  inserción o actualización en la tabla «directorios» viola la llave foránea «directorios_id_eudatos_fkey»
+DETAIL:  La llave (id_eudatos)=(1) no está presente en la tabla «eudatos».
+2017-09-19 16:43:08 ERROR  : ERROR:  inserción o actualización en la tabla «directorios» viola la llave foránea «directorios_id_eudatos_fkey»
+DETAIL:  La llave (id_eudatos)=(1) no está presente en la tabla «eudatos».
+2017-09-19 16:46:05 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (28, Nancy Ramos, 192.168.1.4, null, null, null, null, 1, null, null, null).
+2017-09-19 16:46:11 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (29, Nancy Ramos, 192.168.1.4, /home/, null, null, null, 1, null, null, null).
+2017-09-19 16:46:18 ERROR  : ERROR:  el valor null para la columna «id_area» viola la restricción not null
+DETAIL:  La fila que falla contiene (30, Nancy Ramos, 192.168.1.4, /home/, null, 9373jrtuyriu, null, 1, null, null, null).
+2017-09-19 17:08:26 ERROR  : ERROR:  no existe la relación «eusuario»
+LINE 3: INNER JOIN eusuario AS us ON ud.id_eusuarios = us.id_eusuari...
+                   ^
+2017-09-19 17:08:33 ERROR  : ERROR:  no existe la columna ud.id_eusuarios
+LINE 4: INNER JOIN eusuarios AS us ON ud.id_eusuarios = us.id_eusuar...
+                                      ^
+2017-09-19 17:36:53 ERROR  : ERROR:  el operador no existe: character = integer
+LINE 2: ...R lower(a.descripcion) LIKE '%mau%' AND ud.estado = 1 ORDER ...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2017-09-19 17:37:06 ERROR  : ERROR:  el operador no existe: character = boolean
+LINE 2: ...R lower(a.descripcion) LIKE '%mau%' AND ud.estado = true ORD...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2017-09-19 17:37:07 ERROR  : ERROR:  el operador no existe: character = boolean
+LINE 10: ...R lower(a.descripcion) LIKE '%mau%' AND ud.estado = true ORD...
+                                                              ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2017-09-19 17:37:11 ERROR  : ERROR:  el operador no existe: character = boolean
+LINE 2: ...R lower(a.descripcion) LIKE '%mau%' AND ud.estado = true ORD...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2017-09-19 17:45:28 ERROR  : ERROR:  la referencia a la columna «directorio» es ambigua
+LINE 2: SELECT d.id_dir,directorio FROM eudatos AS ud INNER JOIN dir...
+                        ^
+2017-09-20 15:41:53 ERROR  : ERROR:  error de sintaxis en o cerca de «$»
+LINE 12: WHERE ud.id_eudatos = $idEudatos;)
+                               ^
+2017-09-20 15:42:06 ERROR  : ERROR:  error de sintaxis en o cerca de «;»
+LINE 12: WHERE ud.id_eudatos = 107;)
+                                  ^
+2017-09-20 16:02:09 ERROR  : ERROR:  la subconsulta debe retornar una columna
+LINE 1: ...atos,ud.id_eusuario,ud.responsable,a.descripcion, (SELECT )F...
+                                                             ^
+2017-09-21 14:56:10 ERROR  : ERROR:  error de sintaxis en o cerca de «REFRENCES»
+LINE 17: id_lista INTEGER NOT NULL REFRENCES listas(id_lista),
+                                   ^
+2017-09-21 14:56:19 ERROR  : ERROR:  no existe la relación «listas»
+2017-09-21 14:56:23 ERROR  : ERROR:  no existe la relación «listas»
+2017-09-21 14:56:25 ERROR  : ERROR:  no existe la relación «listas»
+2017-09-21 14:56:28 ERROR  : ERROR:  no existe la relación «listas»
+2017-09-21 14:56:50 ERROR  : ERROR:  no existe la relación «aciweb.listas»
+2017-09-25 14:58:53 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-25 17:15:51 ERROR  : ERROR:  no existe la relación «aci.web»
+LINE 1: SELECT MAX(id_lista) FROM aci.web listas;
+                                  ^
+2017-09-25 17:16:11 ERROR  : ERROR:  la columna «listas.descripcion» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT MAX(id_lista),descripcion FROM aciweb.listas;
+                             ^
+2017-09-26 10:32:01 ERROR  : ERROR:  la ejecución alcanzó el fin de la función sin encontrar RETURN
+CONTEXT:  función PL/pgSQL aciweb.insertar_lista(character varying,character varying)
+2017-09-26 10:35:59 ERROR  : ERROR:  no existe la función aciweb.insertar_lista(integer, unknown)
+LINE 1: select from aciweb.insertar_lista(
+                    ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-09-27 09:52:17 ERROR  : ERROR:  no existe la relación «sys_conf»
+LINE 1: SELECT * FROM sys_conf;
+                      ^
+2017-09-27 09:52:18 ERROR  : ERROR:  no existe la relación «sys_conf»
+LINE 1: SELECT * FROM sys_conf;
+                      ^
+2017-09-27 09:52:31 ERROR  : ERROR:  no existe la relación «private.sys_conf»
+LINE 1: SELECT * FROM private.sys_conf;
+                      ^
+2017-09-27 16:20:14 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-27 16:20:16 ERROR  : ERROR:  la sintaxis de entrada no es válida para integer: «idMeta»
+LINE 1: ...dicacion,cod_meta_producto) values(pcodrad,item->>'idMeta'::...
+                                                             ^
+QUERY:  insert into radicacion_meta(cod_radicacion,cod_meta_producto) values(pcodrad,item->>'idMeta'::integer)
+CONTEXT:  función PL/pgSQL ingresar_metas_radicacion(integer,character varying) en la línea 11 en sentencia SQL
+2017-09-27 16:22:49 ERROR  : ERROR:  error de sintaxis en o cerca de «idMeta»
+LINE 1: idMeta
+        ^
+2017-09-27 16:23:29 ERROR  : ERROR:  la columna «cod_meta_producto» es de tipo integer pero la expresión es de tipo text
+LINE 1: ...cod_radicacion,cod_meta_producto) values(pcodrad,(item->>'id...
+                                                             ^
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+QUERY:  insert into radicacion_meta(cod_radicacion,cod_meta_producto) values(pcodrad,(item->>'idMeta'))
+CONTEXT:  función PL/pgSQL ingresar_metas_radicacion(integer,character varying) en la línea 11 en sentencia SQL
+2017-09-27 16:23:50 ERROR  : ERROR:  la ejecución alcanzó el fin de la función sin encontrar RETURN
+CONTEXT:  función PL/pgSQL ingresar_metas_radicacion(integer,character varying)
+2017-09-27 16:32:02 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-28 15:04:55 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-09-28 15:06:27 ERROR  : ERROR:  error de sintaxis en o cerca de «*»
+LINE 1: DELETE * FROM item_lista;
+               ^
+2017-09-28 15:06:35 ERROR  : ERROR:  no existe la relación «item_lista»
+LINE 1: DELETE FROM item_lista;
+                    ^
+2017-09-28 15:06:57 ERROR  : ERROR:  update o delete en «listas» viola la llave foránea «grupo_lista_id_lista_fkey» en la tabla «grupo_lista»
+DETAIL:  La llave (id_lista)=(1) todavía es referida desde la tabla «grupo_lista».
+2017-09-28 15:07:53 ERROR  : ERROR:  no existe la relación «grupo_lista»
+LINE 1: DELETE FROM grupo_lista;
+                    ^
+2017-09-28 15:08:52 ERROR  : ERROR:  no se puede eliminar restricción «item_tipo_pkey» en tabla aciweb.lista_tipo porque otros objetos dependen de él
+DETAIL:  restricción «item_lista_id_tipo_fkey» en tabla aciweb.item_lista depende de índice aciweb.item_tipo_pkey
+HINT:  Use DROP ... CASCADE para eliminar además los objetos dependientes.
+2017-09-28 15:09:05 ERROR  : ERROR:  no se puede eliminar restricción «item_tipo_pkey» en tabla aciweb.lista_tipo porque otros objetos dependen de él
+DETAIL:  restricción «item_lista_id_tipo_fkey» en tabla aciweb.item_lista depende de índice aciweb.item_tipo_pkey
+HINT:  Use DROP ... CASCADE para eliminar además los objetos dependientes.
+2017-09-28 15:10:13 ERROR  : ERROR:  no existe la restricción «item_tipo_pkey» en la relación «lista_tipo»
+2017-09-28 15:10:46 ERROR  : ERROR:  no existe la restricción «item_tipo_pkey» en la relación «lista_tipo»
+2017-09-28 15:10:49 ERROR  : ERROR:  no existe la restricción «item_tipo_pkey» en la relación «lista_tipo»
+2017-09-28 15:11:15 ERROR  : ERROR:  no existe la restricción «item_tipo_pkey» en la relación «lista_tipo»
+2017-09-28 15:11:25 ERROR  : ERROR:  no existe la restricción «item_tipo_pkey» en la relación «lista_tipo»
+2017-09-28 17:40:08 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: ...ombre, abr, id, numps from get_radicados('null',1,,01101101)...
+                                                             ^
+2017-09-28 17:41:28 ERROR  : ERROR:  no existe la función get_radicados(unknown, integer, integer)
+LINE 1: select cod, num, nombre, abr, id, numps from get_radicados('...
+                                                     ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-09-28 17:41:47 ERROR  : ERROR:  no existe la columna «numps»
+LINE 1: select cod, num, nombre, abr, id, numps from get_radicados('...
+                                          ^
+2017-09-28 17:48:02 ERROR  : ERROR:  no existe la función get_radicados(unknown, integer, unknown, integer)
+LINE 1: select cod, num, nombre, abr, id, numps from get_radicados('...
+                                                     ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-09-28 17:48:30 ERROR  : ERROR:  la sintaxis de entrada no es válida para integer: «null»
+LINE 1: ..., nombre, abr, id, numps from get_radicados('a',1,'null','01...
+                                                             ^
+2017-09-28 17:48:43 ERROR  : ERROR:  no existe la columna «numps»
+LINE 1: select cod, num, nombre, abr, id, numps from get_radicados('...
+                                          ^
+2017-09-29 12:22:56 ERROR  : Error connecting to the server: FATAL:  no hay una línea en pg_hba.conf para «190.253.177.62», usuario «postgres», base de datos «postgres», SSL activo
+FATAL:  no hay una línea en pg_hba.conf para «190.253.177.62», usuario «postgres», base de datos «postgres», SSL inactivo
+
+2017-09-29 12:33:34 ERROR  : ERROR:  error de sintaxis en o cerca de «NOT»
+LINE 3: decripcion NOT NULL,
+                   ^
+2017-09-29 12:33:42 ERROR  : ERROR:  error de sintaxis en o cerca de «)»
+LINE 9: );
+        ^
+2017-09-29 12:33:47 ERROR  : ERROR:  error de sintaxis en o cerca de «id_bd»
+LINE 16: FOREIGN KEY id_bd REFERENCES base_datos(id_bd));
+                     ^
+2017-09-29 12:33:54 ERROR  : ERROR:  error de sintaxis en o cerca de «id_bd»
+LINE 16: FOREIGN KEY id_bd REFERENCES base_datos(id_bd));
+                     ^
+2017-09-29 12:37:40 ERROR  : ERROR:  el valor null para la columna «motor» viola la restricción not null
+DETAIL:  La fila que falla contiene (2, Talento Humano, null, null, null, null, null).
+2017-09-29 12:37:50 ERROR  : ERROR:  el valor null para la columna «usuario» viola la restricción not null
+DETAIL:  La fila que falla contiene (3, Talento Humano, mysql, null, null, null, null).
+2017-09-29 13:09:33 ERROR  : ERROR:  el valor null para la columna «motor» viola la restricción not null
+DETAIL:  La fila que falla contiene (6, Sistema de Contratación, null, null, null, null, null).
+2017-09-29 13:11:38 ERROR  : ERROR:  el valor null para la columna «motor» viola la restricción not null
+DETAIL:  La fila que falla contiene (7, Sistema Contratación, null, null, null, null, null).
+2017-09-29 13:40:08 ERROR  : ERROR:  no existe la restricción «tipo_vinculacion_id_bd_fkey» en la relación «tipo_vinculacion»
+2017-09-29 13:40:15 ERROR  : ERROR:  no existe la restricción «tipo_vinculacion_id_bd_fkey» en la relación «tipo_vinculacion»
+2017-09-29 13:51:30 ERROR  : ERROR:  error de sintaxis en o cerca de «id_vitipo»
+LINE 4: id_vitipo INTEGER NOT NULL REFERENCES base_datos(id_vitipo) 
+        ^
+2017-09-29 13:51:42 ERROR  : ERROR:  no existe la columna «id_vitipo» referida en la llave foránea
+2017-10-02 09:36:16 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,200) as ("cod" in...
+                                                  ^
+2017-10-02 10:06:32 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,200) as ("cod" in...
+                                                  ^
+2017-10-02 10:13:56 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,01101101) as ...
+                                                  ^
+2017-10-02 10:14:25 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,01101101)...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:38 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-02 10:14:39 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-02 10:14:39 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-02 10:14:39 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-02 10:14:39 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-02 10:14:39 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-02 10:14:40 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-02 10:14:40 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-02 10:14:43 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:43 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:43 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:43 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:43 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:44 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:52 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,0110110...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:53 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,0110110...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:53 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,0110110...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:53 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,0110110...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:53 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,0110110...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:53 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,0110110...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:54 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,0110110...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:54 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,0110110...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:57 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:57 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:57 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:57 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:58 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:58 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:58 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:58 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:58 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:58 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:14:59 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas('null',198,'011011...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:02 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:02 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:02 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:02 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:03 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:03 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:03 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:03 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:03 ERROR  : ERROR:  no existe la función get_metas(unknown, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(null,198,'01101101...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:11 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:12 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:12 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:12 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:12 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:12 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:13 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:13 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:25 ERROR  : ERROR:  no existe la función get_metas(integer, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,01101101) a...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:25 ERROR  : ERROR:  no existe la función get_metas(integer, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,01101101) a...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:25 ERROR  : ERROR:  no existe la función get_metas(integer, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,01101101) a...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:25 ERROR  : ERROR:  no existe la función get_metas(integer, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,01101101) a...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:25 ERROR  : ERROR:  no existe la función get_metas(integer, integer, integer)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,01101101) a...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:28 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:28 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:28 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(-1,198,'01101101')...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:47 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:48 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:48 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:48 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:48 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:49 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:49 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:49 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:15:49 ERROR  : ERROR:  no existe la función get_metas(integer, integer, unknown)
+LINE 1: select cod, des, metas, cr from get_metas(9,198,'01101101') ...
+                                        ^
+HINT:  Ninguna función coincide en el nombre y tipos de argumentos. Puede ser necesario agregar conversión explícita de tipos.
+2017-10-02 10:16:40 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: select cod, des, metas, cr from get_metas(,198,'01101101') a...
+                                                  ^
+2017-10-04 14:55:09 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-10-04 14:55:11 ERROR  : Failed to re-establish the connection to the server postgres on postgres@192.168.1.111:5432
+2017-10-04 15:23:14 ERROR  : ERROR:  no existe la relación «bpid»
+LINE 1: SELECT * FROM bpid;
+                      ^
+2017-10-04 15:31:52 ERROR  : ERROR:  no existe la columna r.entidad_ejecutora
+LINE 1: ...to, upper(r.nombre_proyecto),r.entidad_proponente,r.entidad_...
+                                                             ^
+2017-10-04 15:59:07 ERROR  : ERROR:  falta una entrada para la tabla «b» en la cláusula FROM
+LINE 1: ...id AS nb ON r.cod_bpid = nb.cod_numero_bpid WHERE b.numero_c...
+                                                             ^
+2017-10-04 17:34:11 ERROR  : ERROR:  la columna «mp.cod_meta_producto» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT mp.*,s.descripcion,p.descripcion,e.descripcion FROM r...
+               ^
+2017-10-04 17:34:22 ERROR  : ERROR:  la columna «s.descripcion» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT s.descripcion,p.descripcion,e.descripcion FROM radica...
+               ^
+2017-10-04 17:51:04 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT nb.numero_completo, 
+               ^
+2017-10-05 10:17:33 ERROR  : ERROR:  no existe el tipo «records»
+2017-10-05 10:18:14 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  El tipo retornado smallint no coincide con el tipo de registro esperado integer en la columna 1.
+CONTEXT:  función PL/pgSQL get_tipo_vinculacion() en la línea 7 en RETURN NEXT
+2017-10-05 15:46:40 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-10-05 15:46:43 ERROR  : ERROR:  no existe la relación «radicacion»
+LINE 1: ... e.descripcion, p.descripcion, s.descripcion FROM radicacion...
+                                                             ^
+2017-10-05 15:48:26 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT nb.numero_completo, upper(r.nombre_proyecto), r.entid...
+               ^
+2017-10-05 15:48:40 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT nb.numero_completo, upper(r.nombre_proyecto), r.entid...
+               ^
+2017-10-05 15:48:56 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT nb.numero_completo, upper(r.nombre_proyecto), r.entid...
+               ^
+2017-10-05 15:49:02 ERROR  : ERROR:  la columna «r.nombre_proyecto» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT nb.numero_completo, upper(r.nombre_proyecto), r.entid...
+                                         ^
+2017-10-05 15:49:10 ERROR  : ERROR:  la columna «r.entidad_proponente» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: ...ECT nb.numero_completo, upper(r.nombre_proyecto), r.entidad_...
+                                                             ^
+2017-10-05 15:50:29 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT nb.numero_completo, upper(r.nombre_proyecto), r.entid...
+               ^
+2017-10-05 15:50:35 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT nb.numero_completo, upper(r.nombre_proyecto), r.entid...
+               ^
+2017-10-05 15:50:43 ERROR  : ERROR:  error de sintaxis en o cerca de «)»
+LINE 1: ...dad_ejecutante, e.descripcion, p.descripcion, s.descripcion)
+                                                                      ^
+2017-10-05 15:51:12 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT nb.numero_completo, upper(r.nombre_proyecto), r.entid...
+               ^
+2017-10-05 15:51:31 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT r.cod_radicacion,nb.numero_completo, upper(r.nombre_p...
+                                ^
+2017-10-05 15:51:47 ERROR  : ERROR:  la columna «e.descripcion» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: ...cto), r.entidad_proponente, r.entidad_ejecutante, e.descripc...
+                                                             ^
+2017-10-05 15:52:33 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT r.cod_radicacion,nb.numero_completo, upper(r.nombre_p...
+                                ^
+2017-10-05 15:53:24 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2017-10-05 15:56:32 ERROR  : ERROR:  la columna «nb.numero_completo» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+LINE 1: SELECT DISTINCT r.cod_radicacion,nb.numero_completo, upper(r...
+                                         ^
+2017-10-09 10:19:08 ERROR  : ERROR:  no existe la columna r.archivo_req
+LINE 1: ...then 'NA' else r2.estado end)::varchar as estado, r.archivo_...
+                                                             ^
+QUERY:  (select r.cod_requisito_lista as cod, r.descripcion as des, (case when r2.estado is null then 'NA' else r2.estado end)::varchar as estado, r.archivo_req as a, a.nombre_archivo::varchar as nomarc from radicacion_requisito_lista as r2 right join
+         requisito_lista as r on r2.cod_radicacion=pfilter and r.cod_requisito_lista=r2.cod_requisito_lista left join archivos as a on r.cod_requisito_lista=a.cod_etapa and a.tipo_etapa = 2 and r2.cod_radicacion=a.cod_radicacion where r.cod_lista_general=pcod and r.cod_activacion=1)
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 5 en bucle FOR en torno a filas de un SELECT
+2017-10-09 10:33:03 ERROR  : ERROR:  no existe la columna r.archivo_req
+LINE 1: ...then 'NA' else r2.estado end)::varchar as estado, r.archivo_...
+                                                             ^
+QUERY:  (select r.cod_requisito_lista as cod, r.descripcion as des, (case when r2.estado is null then 'NA' else r2.estado end)::varchar as estado, r.archivo_req as a, a.nombre_archivo::varchar as nomarc, r2.observaciones::varchar as obs from radicacion_requisito_lista as r2 right join
+         requisito_lista as r on r2.cod_radicacion=pfilter and r.cod_requisito_lista=r2.cod_requisito_lista left join archivos as a on r.cod_requisito_lista=a.cod_etapa and a.tipo_etapa = 2 and r2.cod_radicacion=a.cod_radicacion where r.cod_lista_general=pcod and r.cod_activacion=1)
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 5 en bucle FOR en torno a filas de un SELECT
+2017-10-09 10:33:04 ERROR  : ERROR:  no existe la columna r.archivo_req
+LINE 1: ...then 'NA' else r2.estado end)::varchar as estado, r.archivo_...
+                                                             ^
+QUERY:  (select r.cod_requisito_lista as cod, r.descripcion as des, (case when r2.estado is null then 'NA' else r2.estado end)::varchar as estado, r.archivo_req as a, a.nombre_archivo::varchar as nomarc, r2.observaciones::varchar as obs from radicacion_requisito_lista as r2 right join
+         requisito_lista as r on r2.cod_radicacion=pfilter and r.cod_requisito_lista=r2.cod_requisito_lista left join archivos as a on r.cod_requisito_lista=a.cod_etapa and a.tipo_etapa = 2 and r2.cod_radicacion=a.cod_radicacion where r.cod_lista_general=pcod and r.cod_activacion=1)
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 5 en bucle FOR en torno a filas de un SELECT
+2017-10-09 10:34:30 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  El tipo retornado character varying no coincide con el tipo de registro esperado integer en la columna 4.
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:34:47 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  El tipo retornado character varying no coincide con el tipo de registro esperado integer en la columna 4.
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:34:48 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  El tipo retornado character varying no coincide con el tipo de registro esperado integer en la columna 4.
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:34:48 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  El tipo retornado character varying no coincide con el tipo de registro esperado integer en la columna 4.
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:34:48 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  El tipo retornado character varying no coincide con el tipo de registro esperado integer en la columna 4.
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:34:48 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  El tipo retornado character varying no coincide con el tipo de registro esperado integer en la columna 4.
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:35:00 ERROR  : ERROR:  no existe la columna «a»
+LINE 1: select cod, des, estado, a, nomarc from get_requisitos(206,0...
+                                 ^
+2017-10-09 10:35:08 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  La cantidad de columnas retornadas (5) no coincide con la cantidad esperada de columnas (4).
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:35:19 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  La cantidad de columnas retornadas (5) no coincide con la cantidad esperada de columnas (4).
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:35:20 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  La cantidad de columnas retornadas (5) no coincide con la cantidad esperada de columnas (4).
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
+2017-10-09 10:35:20 ERROR  : ERROR:  wrong record type supplied in RETURN NEXT
+DETAIL:  La cantidad de columnas retornadas (5) no coincide con la cantidad esperada de columnas (4).
+CONTEXT:  función PL/pgSQL get_requisitos(integer,integer) en la línea 8 en RETURN NEXT
