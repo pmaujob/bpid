@@ -63,7 +63,8 @@ function quitarPantalla() {
 
 function buscarProyectos(op, event) {
 
-    if (event != null && ((event.keyCode === 13) || ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
+    if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
+        console.log("tecla presionada: "+event.keyCode);
         return;
     }
 
