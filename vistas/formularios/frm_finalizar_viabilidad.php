@@ -41,18 +41,18 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                     <p>Agregue los responsables del proyecto y verifique información.</p>
                     <ul class="collapsible popout" data-collapsible="accordion">
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">account_circle</i>Responsables</div>
+                            <div class="collapsible-header" style="background: #F9C000; color: white;"><i class="material-icons">account_circle</i>Responsables</div>
                             <div class="collapsible-body">
                                 <div class="col s12">
                                     <br>
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">search</i>
                                         <input id="txtBuscarUsuarios" type="text" class="validate" onkeyup="encontrar();">
-                                        <label for="txtSearchUsers">Realice la búsqueda por nombre o área.</label><br><br><br>
+                                        <label for="txtSearchUsers">Realice la búsqueda por nombre o número de cedula.</label><br><br><br>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div style="margin-left: 16px; max-height: 160px; max-width: 96%; overflow: scroll; overflow-x: hidden;" id="respuestab" class="col s12">
+                                    <div style="margin-left: 16px; max-height: 140px; max-width: 96%; overflow: scroll; overflow-x: hidden;" id="respuestab" class="col s12">
 
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">receipt</i>Información acercad el proyecto</div>
+                            <div class="collapsible-header" style="background: #008643; color: white;"><i class="material-icons">receipt</i>Información acercad el proyecto</div>
                             <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                         </li>
                     </ul>

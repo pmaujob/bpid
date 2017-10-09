@@ -71,6 +71,11 @@ function buscarProyectos(op) {
 
 function mas(cod, bpid, numProyecto) {
 
+    usuariosa.splice(0);
+    document.getElementById('txtBuscarUsuarios').value = "";
+    document.getElementById('usua').innerHTML = "";
+    document.getElementById('respuestab').innerHTML = "";
+
     $('#modal1').modal('open');
 
     idRad = cod;
@@ -99,11 +104,11 @@ function encontrar() {
 
 }
 
-function agregaru(cedula,nombres,apellidos) {
-    
-    if(usuariosa.length > 0)
-        for(var i = 0; i < usuariosa.length; i++)
-            if(usuariosa[i][0] == cedula)
+function agregaru(cedula, nombres, apellidos) {
+
+    if (usuariosa.length > 0)
+        for (var i = 0; i < usuariosa.length; i++)
+            if (usuariosa[i][0] == cedula)
                 return;
 
     var datosUsuario = new Array(3);
@@ -111,11 +116,25 @@ function agregaru(cedula,nombres,apellidos) {
     datosUsuario [1] = nombres;
     datosUsuario [2] = apellidos;
     usuariosa.push(datosUsuario);
-    
+
     document.getElementById('usua').innerHTML = "";
-    
-    for(var i = 0; i < usuariosa.length; i++)
-        document.getElementById('usua').innerHTML = document.getElementById('usua').innerHTML + "<span>" + usuariosa[i][1] + " " + usuariosa[i][2] + "<a href='#'><i class='material-icons prefix red-text'>cancel</i></a>,    </span>";
+
+    for (var i = 0; i < usuariosa.length; i++)
+        document.getElementById('usua').innerHTML = document.getElementById('usua').innerHTML + "<span>" + usuariosa[i][1] + " " + usuariosa[i][2] + "<a href='#' onclick='eliminar(" + usuariosa[i][0] + ");'><i class='material-icons prefix red-text'>cancel</i></a>  </span>";
+
+}
+
+function eliminar(cedula) {
+
+    if (usuariosa.length > 0)
+        for (var i = 0; i < usuariosa.length; i++)
+            if (usuariosa[i][0] == cedula) {
+                usuariosa.splice(i, 1);
+                document.getElementById('usua').innerHTML = "";
+                for (var j = 0; j < usuariosa.length; j++)
+                    document.getElementById('usua').innerHTML = document.getElementById('usua').innerHTML + "<span>" + usuariosa[j][1] + " " + usuariosa[j][2] + "<a href='#' onclick='eliminar(" + usuariosa[j][0] + ");'><i class='material-icons prefix red-text'>cancel</i></a>  </span>";
+                return;
+            }
 
 }
 
