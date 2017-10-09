@@ -21,7 +21,7 @@ $funciones = MGetMenu::getMenu(1);
             <div class="row">
                 <div class="head-usuario col s12 m12 l12">
                     <div class="usuario">
-                        <a href="#" data-activates="dropdown" class="dropdown-button" style="float: right; width: 230px;">
+                        <a id="btnUserMenu" href="#" data-activates="dropdown" class="dropdown-button" style="float: right; width: 230px;">
                             <img src="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/bpid/vistas/img/usuario.png' ?>">
                         </a>
                         <ul class='dropdown-content' id="dropdown" style="float:right; margin-top: 65px;">
