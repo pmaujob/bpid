@@ -28,7 +28,7 @@ function onLoadBody() {
 
 }
 
-function buscarProyectos() {
+function buscarProyectos(idEtapa) {
     var resultado = document.getElementById('resultado');
     //temporalmente
     resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
@@ -41,7 +41,7 @@ function buscarProyectos() {
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmMetaProyecto.php',
         async: true,
-        data: {value: valorBusqueda},
+        data: {value: valorBusqueda, op: idEtapa},
         success: function (respuesta) {
             //quitarPantalla();                       
             resultado.innerHTML = '<p>' + respuesta + '</p>';
@@ -221,11 +221,11 @@ function insertarMetas() {
         success: function (respuesta) {
 
             if (respuesta == 1) {
-                
+
                 alert("Las metas se guardaron con éxito.");
                 $("#modalm").modal("close");
-                
-                location.href = document;
+
+                location.href = document.body;
 
             } else {
 
