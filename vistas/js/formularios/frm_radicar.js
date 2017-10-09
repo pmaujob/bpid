@@ -223,7 +223,7 @@ function almacenar()
             direccion_responsable + '//' + telefono_responsable + '//' + cel_responsable + '//' + correo_responsable + '//' + id_usuario + '//' + nombre_usuario + '//' +
             observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades;
     
-     alert(eje);
+     
     $('#modal1').modal('close');
     bloquear_pantalla();
     jQuery.ajax({

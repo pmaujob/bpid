@@ -26,10 +26,18 @@ function onLoadBody() {
 
 }
 
-function buscarProyectosRadicados(op) {
-
-    var resultado = document.getElementById('resultado');
+function buscarProyectosRadicados(op,event) {
     
+    var buscarValue = document.getElementById("input_buscar").value;
+    if (buscarValue.toString().trim().length == 0) {
+        return;
+    }
+
+    if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
+        return;
+    }
+
+    var resultado = document.getElementById('resultado');   
 
     //temporalmente
     resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
@@ -42,7 +50,7 @@ function buscarProyectosRadicados(op) {
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmConsultarRadicacion.php',
         async: true,
-        data: {value: valorBusqueda, op: op},
+        data: {value: buscarValue, op: op},
         success: function (respuesta) {
             //quitarPantalla();
             resultado.innerHTML = '<p>' + respuesta + '</p>';

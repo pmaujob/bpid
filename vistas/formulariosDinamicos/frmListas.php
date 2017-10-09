@@ -80,7 +80,6 @@ foreach ($listasRequeridas as $filar) {
                             </td>
                             <td style="width: 20%;">
                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
-                                <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filar1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
 
                                 <div class="file-field input-field">
                                     <div class="btn">
@@ -92,16 +91,16 @@ foreach ($listasRequeridas as $filar) {
                                     </div>
                                 </div>
                                 
-                                <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filar1[4]; ?>">
+                                <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filar1[3]; ?>">
                             </td>
                         </tr>
                         <?php
-                        if ($filar1[4] != "") {
+                        if ($filar1[3] != "") {
                             ?>
                             <tr>
                                 <td colspan="3">
                                     <label style="color: black;">Archivo adjunto: </label>
-                                    <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filar1[4]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filar1[4]; ?></a>
+                                    <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filar1[3]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filar1[3]; ?></a>
                                 </td>
                             </tr> 
                             <tr>
@@ -112,7 +111,7 @@ foreach ($listasRequeridas as $filar) {
                         <tr>
                             <td colspan="3">
                                 <label for="<?php echo reqObs . $nOpcionesReq; ?>" id="<?php echo reqObsLbl . $nOpcionesReq; ?>" style="color: black;" >Observaciones:</label>
-                                <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea"><?php echo $filar1[5]; ?></textarea>
+                                <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea"><?php echo $filar1[4]; ?></textarea>
                             </td>
                         </tr>
                         <?php
@@ -174,7 +173,6 @@ if (count($listasEspecificas) == 0) {
                                             </td>
                                             <td style="width: 25%;">
                                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filae1[0]; ?>" />
-                                                <input type="hidden" id="<?php echo reqFileOb . $nOpcionesReq; ?>" value="<?php echo $filae1[3]; ?>" /><!--saber si el adjunto es obligatorio-->
                                                 
                                                     <div class="file-field input-field">
                                                         <div class="btn">
@@ -186,16 +184,16 @@ if (count($listasEspecificas) == 0) {
                                                         </div>
                                                     </div>
                                                 
-                                                <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filae1[4]; ?>">
+                                                <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filae1[3]; ?>">
                                             </td>
                                         </tr>
                                         <?php
-                                        if ($filae1[4] != "") {
+                                        if ($filae1[3] != "") {
                                             ?>
                                             <tr>
                                                 <td colspan="3">
                                                     <label style="color: black;">Archivo adjunto: </label>
-                                                    <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filae1[4]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filae1[4]; ?></a>
+                                                    <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filae1[3]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filae1[3]; ?></a>
                                                 </td>
                                             </tr> 
                                             <tr>
@@ -206,7 +204,7 @@ if (count($listasEspecificas) == 0) {
                                         <tr>
                                             <td colspan="3">
                                                 <label id="<?php echo reqObsLbl . $nOpcionesReq; ?>" for="<?php echo reqObs . $nOpcionesReq; ?>" style="color: black;">Observaciones:</label>
-                                                <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea" ><?php echo $filae1[5]; ?></textarea>
+                                                <textarea id="<?php echo reqObs . $nOpcionesReq; ?>" class="<?php echo reqObs; ?> materialize-textarea" ><?php echo $filae1[4]; ?></textarea>
                                             </td>
                                         </tr>                                            
                                         <?php
@@ -255,7 +253,6 @@ if (count($listasEspecificas) == 0) {
                                                             </td>
                                                             <td style="width: 25%;">
                                                                 <input type="hidden" id="<?php echo subFilePre . $nOpcionesSub; ?>" value="<?php echo $filas[0]; ?>" />
-                                                                <input type="hidden" id="<?php echo subFileOb . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>" /><!--saber si el adjunto es obligatorio-->
                                                                 
                                                                     <div class="file-field input-field">
                                                                         <div class="btn">
@@ -267,15 +264,15 @@ if (count($listasEspecificas) == 0) {
                                                                         </div>
                                                                     </div>
                                                                 
-                                                                <input type="hidden" id="<?php echo subFileExist . $nOpcionesSub; ?>" value="<?php echo $filas[4]; ?>">
+                                                                <input type="hidden" id="<?php echo subFileExist . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>">
                                                             </td>
                                                         </tr>                                                                                                                <?php
-                                                        if ($filas[4] != "") {
+                                                        if ($filas[3] != "") {
                                                             ?>
                                                             <tr>
                                                                 <td colspan="3">
                                                                     <label style="color: black;">Archivo adjunto: </label>
-                                                                    <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filas[4]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filas[4]; ?></a>
+                                                                    <a id="" href="../../archivos/proyectos/<?php echo $numProyecto; ?>/requisitos/<?php echo $filas[3]; ?>" target="_blank" style="text-decoration: underline"><?php echo $filas[3]; ?></a>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -287,7 +284,7 @@ if (count($listasEspecificas) == 0) {
                                                         <tr>
                                                             <td colspan="3">
                                                                 <label id="<?php echo subObsLbl . $nOpcionesSub; ?>" for="<?php echo subObs . $nOpcionesSub; ?>" style="color: black;">Observaciones:</label>
-                                                                <textarea id="<?php echo subObs . $nOpcionesSub; ?>" class="<?php echo subObs; ?> materialize-textarea"><?php echo $filas[5]; ?></textarea>
+                                                                <textarea id="<?php echo subObs . $nOpcionesSub; ?>" class="<?php echo subObs; ?> materialize-textarea"><?php echo $filas[4]; ?></textarea>
                                                             </td>
                                                         </tr>
                                                         <?php

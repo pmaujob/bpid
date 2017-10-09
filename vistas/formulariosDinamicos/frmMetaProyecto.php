@@ -1,14 +1,14 @@
 <?php
-
 require_once '../../modelo/CargarRadicados.php';
 require_once '../../modelo/MSysConf.php';
 
 if (!empty($_POST['value'])) {
 
+    $op = $_POST['op'];
     $sysConf = new MSysConf();
-    
+
     $datos = $_POST['value'];
-    $res = CargarRadicados::getRadicados($datos, 2); //2 para consultar por cod_activacion
+    $res = CargarRadicados::getRadicados($datos,$op); //2 para consultar por cod_activacion
     ?>
     <table>
         <thead>

@@ -21,8 +21,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
-        <body onload="buscarCertificaciones(<?php echo idEtapa; ?>)">
-
+        <body>
 
             <div id="mas" class="frm_externo">
                 <div class="cerrar" onclick="cerrarFrmExterno('mas');"></div>
@@ -42,17 +41,17 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <div id="d_ingreso" title="INFORMACION"></div>
 
             <?php require_once '../menu.php'; ?>
-            <form id='frm_viabilidad' name='frm_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
-
-
-
+            <form id='frm_consultar_radicacion' name='frm_consultar_radicacion' onSubmit="return false"  enctype="multipart/form-data">
                 <div class="col s12 m11 l9">
                     <div class="bajar">
                         <div class="container-fluid">
-
                             <div class="row">
-                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">CERTIFICADOS RADICACIÓN</div></div>
-                                <br><br>
+                                <div class="col s12 m12 l12 center-align">
+                                    <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
+                                    <div class="titulofrm">GENERAR FICHA RADICACIÓN</div>
+                                </div>
+                                <br>
+                                <br>
                             </div>
                             <div class="row">
                                 <div class="col s12 m12 l12">
@@ -60,38 +59,29 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">
                                                 <div class="file-field input-field">
-                                                    <div class="btn" onclick="buscarCertificaciones(<?php echo idEtapa; ?>);">
+                                                    <div class="btn" onclick="buscarCertificaciones(<?php echo idEtapa; ?>, null);">
                                                         <span>Buscar proyecto</span>
                                                     </div>
                                                     <div class="file-path-wrapper">
-                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeypress="buscarCertificaciones(<?php echo idEtapa; ?>);">
+                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeyup="buscarCertificaciones(<?php echo idEtapa; ?>, event);">
                                                     </div>
                                                 </div>
-                                                <div class="descripcion">&nbsp;&nbsp;&nbsp;Realiza la búsqueda por numero o nombre del proyecto</div>
+                                                <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div id="resultado" >
-
-
+                                    <div id="resultado" class="row">
 
                                     </div>
 
                                 </div>
                             </div>
-
-                            <!-- ------------------------------ -->
-
-
-                            <!--div class="col s12 m12 l12">
-                            <?php require_once "footer.php"; ?>
-                            </div-->
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </body>
 
     </body>
     <?php

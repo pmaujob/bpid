@@ -7,8 +7,8 @@ var $toastContent;
 
 function onLoadBody() {
 
+    buscarProyectos(1, null);
 
-    buscarProyectos(1);
     $(document).ready(function () {
 
         $('.modal').modal({
@@ -61,7 +61,16 @@ function quitarPantalla() {
     document.body.style.overflow = "scroll";
 }
 
-function buscarProyectos(op) {
+function buscarProyectos(op, event) {
+
+    var buscarValue = document.getElementById("input_buscar").value;
+    if (buscarValue.toString().trim().length == 0) {
+        return;
+    }
+
+    if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
+        return;
+    }
 
     var resultado = document.getElementById('resultado');
 
@@ -70,17 +79,12 @@ function buscarProyectos(op) {
             + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
             + '</div>';
 
-    value = document.getElementById("input_buscar").value;
-    if (value == '') {
-        value = 'null';
-    }
-
     //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
-        data: {value: value, op: op},
+        data: {value: buscarValue, op: op},
         success: function (respuesta) {
             //quitarPantalla();
             resultado.innerHTML = '<p>' + respuesta + '</p>';
@@ -225,7 +229,7 @@ function validar(enviarInfo) {
 
     var waitGuardarProgreso = document.getElementById('waitGuardarProgreso');
     waitGuardarProgreso.style.display = "";
-    
+
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
@@ -234,7 +238,7 @@ function validar(enviarInfo) {
         success: function (respuesta) {
 
             if (respuesta == 1) {
-                                
+
                 var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
                 $.ajax({
                     url: '../../controlador/ControladorArchivosRadicacion.php',
@@ -272,11 +276,11 @@ function validar(enviarInfo) {
 
                         } else if (enviarInfo && noCont > 0) {
 
-                            noCont = 0;
-                            $("#modal1").modal("close");
-
                             mostrarMensaje('Se ha guardado el progreso con éxito. Sin embargo, hay items sin aprobar, '
                                     + 'por lo tanto se enviará un informe a su correo registrado en bpid.', true);
+
+                            noCont = 0;
+                            $("#modal1").modal("close");
 
                         } else if (enviarInfo && noCont == 0) {
 
@@ -293,14 +297,13 @@ function validar(enviarInfo) {
                                         mostrarMensaje('No fue posible radicar el proyecto, sus cambios serán guardados.', false);
                                     }
 
+                                    noCont = 0;
+                                    $("#modal1").modal("close");
+
                                 }, error: function () {
                                     mostrarMensaje('No fue posible radicar el proyecto, sus cambios serán guardados.', false);
                                 }
                             });
-
-                            noCont = 0;
-                            $("#modal1").modal("close");
-
                         }
 
                     }, error: function () {
@@ -310,8 +313,6 @@ function validar(enviarInfo) {
                 });
 
             } else {
-
-                console.log("no guardó nada: " + respuesta);
 
                 waitGuardarProgreso.style.display = "none";
 

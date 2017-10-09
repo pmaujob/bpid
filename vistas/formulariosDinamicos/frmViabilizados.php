@@ -21,6 +21,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         <tbody>
             <?php
             if (count($datosViabilizados) > 0) {
+               
                 foreach ($datosViabilizados as $fila) {
                     ?>
 
