@@ -22,7 +22,7 @@ class CargarRadicados {
                 . 'id, '//4
                 . 'nump '//5
                 . 'from get_radicados(' . $datos . ',' . $op . ',' . (!empty($codSecretaria) ? $codSecretaria : "null") . ",'" . $cedula . '\') as ("cod" integer, "num" varchar, "nombre" varchar, "abr" varchar, "id" varchar, "nump" varchar);';
-
+        
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);

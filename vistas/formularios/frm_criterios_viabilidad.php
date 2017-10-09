@@ -6,9 +6,11 @@ $raiz = $_SESSION['raiz'];
 require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
-        const idFormulario = 7;
-        const idEtapa = 2;
+const idFormulario = 7;
+const idEtapa = 4;
+
 $sess = new SessionVars();
+
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
 
@@ -44,7 +46,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios();">Guardar y Enviar</a>
                         <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios();">Guardar Progreso</a>
                     </div>
                 </div>

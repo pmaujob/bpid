@@ -1,13 +1,12 @@
-function buscarCertificaciones(estado){
-   estado=1;
-    
+function buscarCertificaciones(estado) {
+
     value = document.getElementById("input_buscar").value;
 
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
-        data: {value: value,op:estado},
+        data: {value: value, op: estado},
         success: function (respuesta) {
 
             document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
@@ -20,15 +19,15 @@ function buscarCertificaciones(estado){
         }
 
     });
-    
+
 }
 
-function mas(codRadicacion,codBpid,c){
-    
-    
+function mas(codRadicacion, codBpid, c) {
+
+
     value = codBpid;
-    direccion='../certificados/certificadoRadicar.php';
-    window.open(direccion+'?value='+value);
-   
+    direccion = '../certificados/certificadoRadicar.php';
+    window.open(direccion + '?value=' + value);
+
 }
 
