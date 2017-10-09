@@ -28,20 +28,28 @@ function onLoadBody() {
 
 }
 
-function buscarProyectos(idEtapa) {
+function buscarProyectos(idEtapa, event) {
+
+    var buscarValue = document.getElementById("input_buscar").value;
+    if (buscarValue.toString().trim().length == 0) {
+        return;
+    }
+
+    if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
+        return;
+    }
+
     var resultado = document.getElementById('resultado');
     //temporalmente
     resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
             + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
             + '</div>';
 
-    var valorBusqueda = document.getElementById("input_buscar").value;
-
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmMetaProyecto.php',
         async: true,
-        data: {value: valorBusqueda, op: idEtapa},
+        data: {value: buscarValue, op: idEtapa},
         success: function (respuesta) {
             //quitarPantalla();                       
             resultado.innerHTML = '<p>' + respuesta + '</p>';

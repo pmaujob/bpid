@@ -21,24 +21,24 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
-         <body onload="onLoadBody();">
+        <body onload="onLoadBody();">
 
-<!-- Modal Trigger -->
-  
-  <div id="modal1" class="modal">
-    <div class="modal-content" id="titulo">
-      <h5>Discriminación de Montos por Fuente de Financiación</h5>
-      <p></p>
-      <div id="respuestaact"></div>
-    </div>
-     <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
-    <div class="modal-footer">
-     <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
-      <a  class="modal-action waves-effect waves-green btn-flat " onclick="guardarActividades()">Enviar</a>
-    </div>
-  </div>
-  <!-- Modal Structure -->
-                     
+            <!-- Modal Trigger -->
+
+            <div id="modal1" class="modal">
+                <div class="modal-content" id="titulo">
+                    <h5>Discriminación de Montos por Fuente de Financiación</h5>
+                    <p></p>
+                    <div id="respuestaact"></div>
+                </div>
+                <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
+                <div class="modal-footer">
+                    <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
+                    <a  class="modal-action waves-effect waves-green btn-flat " onclick="guardarActividades()">Enviar</a>
+                </div>
+            </div>
+            <!-- Modal Structure -->
+
             <?php require_once '../menu.php'; ?>
             <form id='frm_viabilidad' name='frm_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
 
@@ -58,11 +58,11 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">
                                                 <div class="file-field input-field">
-                                                    <div class="btn" onclick="buscarProyectos(<?php echo idEtapa; ?>);">
+                                                    <div class="btn" onclick="buscarProyectos(<?php echo idEtapa; ?>, null);">
                                                         <span>Buscar proyecto</span>
                                                     </div>
                                                     <div class="file-path-wrapper">
-                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos(<?php echo idEtapa; ?>);">
+                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeyup="buscarProyectos(<?php echo idEtapa; ?>, event);">
                                                     </div>
                                                 </div>
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
@@ -77,7 +77,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 </div>
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
             </form>
