@@ -63,12 +63,12 @@ function quitarPantalla() {
 
 function buscarProyectos(op, event) {
 
-    if (event != null && ((event.keyCode === 13) || ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
+    var buscarValue = document.getElementById("input_buscar").value;
+    if (buscarValue.toString().trim().length == 0) {
         return;
     }
 
-    var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
         return;
     }
 

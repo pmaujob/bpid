@@ -61,11 +61,11 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">
                                                 <div class="file-field input-field">
-                                                    <div class="btn" onclick="buscarProyectos('<?php echo idEtapa;?>');">
+                                                    <div class="btn" onclick="buscarProyectos('<?php echo idEtapa;?>',null);">
                                                         <span>Buscar proyecto</span>
                                                     </div>
                                                     <div class="file-path-wrapper">
-                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos('<?php echo idEtapa;?>');">
+                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeyup="buscarProyectos('<?php echo idEtapa;?>',event);">
                                                     </div>
                                                 </div>
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>

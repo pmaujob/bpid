@@ -1,4 +1,8 @@
-function ingresar() {
+function ingresar(event) {
+
+    if (event != null && event.keyCode != 13) {
+        return;
+    }
 
     getIp();
     //alert(getIpAddress());
@@ -11,22 +15,22 @@ function ingresar() {
         type: 'POST',
         url: 'controlador/Clogin.php',
         async: true,
-        data: {ip: ip,correo: correo, contrasena: contrasena},
+        data: {ip: ip, correo: correo, contrasena: contrasena},
         success: function (respuesta) {
-            
-            if(respuesta === "Ok"){
-                
+
+            if (respuesta === "Ok") {
+
                 location.href = "vistas/index.php";
-                
-            }else if(respuesta === "No"){
-                
+
+            } else if (respuesta === "No") {
+
                 alert("El usuario o la contraseña son incorrectos intentelo de nuevo.");
-                
-            }else{
-                
+
+            } else {
+
                 alert("Error inesperado PHP");
                 console.log("Error en bpida: " + respuesta);
-                
+
             }
 
         },

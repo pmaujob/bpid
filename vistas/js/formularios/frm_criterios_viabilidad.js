@@ -37,7 +37,16 @@ function onLoadBody() {
 
 }
 
-function buscarProyectos(op) {
+function buscarProyectos(op, event) {
+
+    var buscarValue = document.getElementById("input_buscar").value;
+    if (buscarValue.toString().trim().length == 0) {
+        return;
+    }
+
+    if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
+        return;
+    }
 
     var resultado = document.getElementById('resultado');
 
@@ -46,13 +55,12 @@ function buscarProyectos(op) {
             + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
             + '</div>';
 
-    value = document.getElementById("input_buscar").value;
     //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
-        data: {value: value, op: op},
+        data: {value: buscarValue, op: op},
         success: function (respuesta) {
             //quitarPantalla();
             resultado.innerHTML = '<p>' + respuesta + '</p>';
