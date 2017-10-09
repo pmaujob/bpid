@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['raiz'] =dirname(__FILE__) ;
+$_SESSION['raiz'] = dirname(__FILE__);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +18,11 @@ $_SESSION['raiz'] =dirname(__FILE__) ;
             <div id="izquierda">
                 <div id="imglogin">
                     <div id="botones">
-                        <form>
-                            <label>Usuario</label><br>
-                            <input class="btnslogin" type="text" id="correo" placeholder="tucorreo@dominio.com"><br>
-                            <label>Contraseña</label><br>
-                            <input class="btnslogin" type="password" id="contrasena" placeholder="123456"><br><br>
-                            <input type="button" id="btnenviar" value="Iniciar sesión" onclick="ingresar();">
-                        </form>
+                        <label style="color: white;">Usuario</label><br>
+                        <input class="btnslogin" type="text" id="correo" placeholder="tucorreo@dominio.com" onkeydown="ingresar(event);"><br>
+                        <label style="color: white;">Contraseña</label><br>
+                        <input class="btnslogin" type="password" id="contrasena" placeholder="123456" onkeydown="ingresar(event);"><br><br>
+                        <a class="btn" id="btnenviar" style="width: 140px; height: 35px; font-size: 10px; margin-top: 5px;" onclick="ingresar(null);">Iniciar Sesión</a>
                     </div>
                 </div>
             </div>
