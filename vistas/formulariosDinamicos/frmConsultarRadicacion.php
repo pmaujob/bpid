@@ -37,7 +37,6 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
                             </a>
                         </td>
                     </tr>
-
                     <?php
                 }
             } else {
