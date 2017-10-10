@@ -318,6 +318,13 @@ importando fuente para los menus
     color: #e9e9e9;
 }
 
+#btnUserMenu.active {
+    color: #03A9F4;
+    float: right;
+    width: 230px;
+    cursor: default;
+}
+
 .contenedor-menu .menu .activado > a{
     background-color: #008643;
     color: #FFFFFF;
