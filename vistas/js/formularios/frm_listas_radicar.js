@@ -171,13 +171,13 @@ function validar(enviarInfo) {
             if (opcionSeleccionada == "SI" && reqArchivoExist == "" && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
                 alert('Se debe adjuntar un archivo en esta pregunta.');
 
-                $('.collapsible-header').removeClass('active');
-                $('.collapsible-body').css('display','none');
-                $('#REQFILE' + i).parents('div').parents('div').parents('div').css('display','block');
+//                $('.collapsible-header').removeClass('active');
+//                $('.collapsible-body').css('display','none');
+//                $('#REQFILE' + i).parents('div').parents('div').parents('div').css('display','block');
                 reqArchivo.focus();
-                
+
                 return;
-                
+
             } else if (opcionSeleccionada == "SI" && reqArchivo.value != '') {
                 var archivoReqRow = new Array(2);
                 archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
@@ -425,7 +425,7 @@ function mostrarTitulo(tituloLista) {
         tituloCut = tituloLista.substring(0, 25) + '...';
     }
 
-    Materialize.toast((tituloCut == "" ? tituloLista : tituloCut), 500000);
+    Materialize.toast((tituloCut == "" ? tituloLista : tituloCut));
     tituloListaOld = tituloLista;
 
     var toast = document.getElementById('toast-container').getElementsByTagName("div")[0];
@@ -453,7 +453,7 @@ function mostrarSubtitulo(tituloSublista) {
         subtituloCut = tituloSublista.substring(0, 25) + '...';
     }
 
-    Materialize.toast((subtituloCut == "" ? tituloSublista : subtituloCut), 500000);
+    Materialize.toast((subtituloCut == "" ? tituloSublista : subtituloCut));
     tituloSublistaOld = tituloSublista;
 
     var subToast = document.getElementById('toast-container').getElementsByTagName("div")[1];

@@ -38,6 +38,26 @@ class CargarMetas {
 
         return $res;
     }
+    
+    public static function getProyectMetas($numProyecto){
+        
+        $consulta = "select mp.cod_meta_producto as cod, "
+                . "mp.descripcion as des, "
+                . "array_agg(nmp.num_meta_producto) as metas "
+                . "from num_meta_producto as nmp "
+                . "join meta_producto as mp on nmp.cod_meta_producto = mp.cod_meta_producto "
+                . "join radicacion_meta as met on met.cod_meta_producto = mp.cod_meta_producto "
+                . "join radicacion as r on r.cod_radicacion = met.cod_radicacion "
+                . "where r.num_proyecto = '$numProyecto' "
+                . "group by mp.cod_meta_producto;";
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->consultar($consulta);
+        $con->cerrarConexion();
+
+        return $res;
+        
+    }
 
 }
 
