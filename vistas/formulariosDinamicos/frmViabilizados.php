@@ -26,24 +26,24 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                     ?>
 
                     <tr>
-                        <th>Nombre del Proyecto</th><td><?php echo $fila[2]; ?></td>
+                        <th>Nombre del Proyecto</th><td><?php echo $fila[1]; ?></td>
                     </tr>
                     <tr>
-                        <th>Problema o Necesidad</th><td><?php echo $fila[1]; ?></td>
+                        <th>Problema Central</th><td><?php echo $fila[2]; ?></td>
                     </tr>
                     <tr>
-                        <th>Numero de Beneficiarios</th><td><?php echo number_format($fila[3], 0,'', '.')."Poblacion Objetivo"; ?></td>
+                        <th>Poblacion Objetivo</th><td><?php echo number_format($fila[5], 0,'', '.'); ?></td>
                     </tr>
                     <tr>
-                        <th>Sector</th><td><?php echo $fila[6]; ?></td>
+                        <th>Sector</th><td><?php echo $fila[7]; ?></td>
                     </tr>
                     <tr>
-                        <th>Valor Proyecto</th><td><?php echo $fila[7]; ?></td>
+                        <th>Valor Proyecto</th><td><?php echo "$".$fila[8]; ?></td>
                     </tr>
                     <tr>
-                        <th>Localizacion</th><td><?php echo $fila[7]; ?></td>
+                        <th>Localizacion</th><td><?php echo $fila[9]; ?></td>
                     </tr>
-                    <tr> <th>Objetivo General</th> <td><?php echo $fila[2]; ?></td>
+                    <tr> <th>Objetivo General</th> <td><?php echo $fila[3]; ?></td>
                     </tr>
                     
                     <?php
