@@ -5,14 +5,7 @@ function onLoadBody() {
 
     $(document).ready(function () {
 
-        $('.modal').modal({
-            complete: function () {
-
-                document.getElementById('semaforo').style.display = "none";
-                document.getElementById('semaforo').style.right = "-60px";
-
-            }
-        });
+        $('.modal').modal();
 
         $('.collapsible').collapsible();
 
@@ -71,6 +64,8 @@ function buscarProyectos(op) {
 
 function mas(cod, bpid, numProyecto) {
 
+    idRad = cod;
+
     usuariosa.splice(0);
     document.getElementById('txtBuscarUsuarios').value = "";
     document.getElementById('usua').innerHTML = "";
@@ -78,7 +73,21 @@ function mas(cod, bpid, numProyecto) {
 
     $('#modal1').modal('open');
 
-    idRad = cod;
+    jQuery.ajax({
+        type: 'POST',
+        url: '../../vistas/formulariosDinamicos/frmDatosViabilidad.php',
+        async: true,
+        data: {idRad: idRad},
+        success: function (respuesta)
+        {
+            document.getElementById('respuestainfo').innerHTML = "<p>" + respuesta + "</p>";
+
+        },
+        error: function () {
+            alert("Error inesperado");
+            window.top.location = "../index.html";
+        }
+    });
 
 }
 
@@ -104,17 +113,23 @@ function encontrar() {
 
 }
 
-function agregaru(cedula, nombres, apellidos) {
+function agregaru(cedula, nombres, apellidos, cargo) {
+
+    if (document.getElementById(cargo).value.length === 0) {
+        alert("El cargo no puede estar vacio");
+        return;
+    }
 
     if (usuariosa.length > 0)
         for (var i = 0; i < usuariosa.length; i++)
             if (usuariosa[i][0] == cedula)
                 return;
 
-    var datosUsuario = new Array(3);
+    var datosUsuario = new Array(4);
     datosUsuario [0] = cedula;
     datosUsuario [1] = nombres;
     datosUsuario [2] = apellidos;
+    datosUsuario [3] = cargo;
     usuariosa.push(datosUsuario);
 
     document.getElementById('usua').innerHTML = "";
@@ -140,7 +155,32 @@ function eliminar(cedula) {
 
 function registrarResponsables() {
 
+    jQuery.ajax({
+        type: 'POST',
+        url: '../../controlador/CFinalizarViabilidad.php',
+        async: true,
+        data: {idRad: idRad, responsables: usuariosa},
+        success: function (respuesta)
+        {
 
+            $('#modal1').modal('close');
+
+            if (respuesta.trim() == "1") {
+                document.getElementById('d_error').innerHTML = "Los responsables del proyecto han sido guardados con exito.";
+                $('#d_error').dialog("open");
+            } else {
+                document.getElementById('d_error').innerHTML = "Los responsables del proyecto no han sido registrados, por favor intentelo de nuevo mas tarde.";
+                $('#d_error').dialog("open");
+            }
+
+            console.log(respuesta);
+
+        },
+        error: function () {
+            alert("Error inesperado");
+            window.top.location = "../index.html";
+        }
+    });
 
 }
 
@@ -165,5 +205,10 @@ function semaforo(id) {
     else
         document.getElementById('bonbilla').style.backgroundColor = "green";
 
+}
+
+function cerrarModal() {
+
+    $('#modal1').modal('close');
 
 }

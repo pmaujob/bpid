@@ -6,8 +6,8 @@ $raiz = $_SESSION['raiz'];
 require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
-const idFormulario = 7;
-const idEtapa = 4;
+        const idFormulario = 7;
+        const idEtapa = 4;
 
 $sess = new SessionVars();
 
@@ -36,6 +36,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <div id="d_ingreso" title="INFORMACION"></div>
             <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
                 <div id="modal1" class="modal modal-fixed-footer">
+                    <a href="#!" onclick="cerrarModal();" style="margin-left: 95%; color: black;">
+                        <i class="material-icons" style="margin-top: 16px;">close</i>                            
+                    </a>
                     <div class="modal-content">
                         <h4>Lista de criterios</h4>
                         <p>Seleccione los items y agregue observaciones si es necesario.</p>
@@ -46,7 +49,8 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios();">Guardar Progreso</a>
+                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(1);">Guardar y Enviar</a>
+                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(2);">Guardar Progreso</a>
                     </div>
                 </div>
             </form>
@@ -73,7 +77,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                                         <span>Buscar proyecto</span>
                                                     </div>
                                                     <div class="file-path-wrapper">
-                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeyup="buscarProyectos('<?php echo idEtapa; ?>',event);">
+                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeyup="buscarProyectos('<?php echo idEtapa; ?>', event);">
                                                     </div>
                                                 </div>
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>

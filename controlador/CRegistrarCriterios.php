@@ -13,6 +13,7 @@ class CRegistrarCriterios {
     private $preguntas = array(array(2));
     private $observaciones = array(array(2));
     private $estadoObs;
+    private $op;
 
     public function getIdRadicacion() {
         return $this->idRadicacion;
@@ -28,6 +29,10 @@ class CRegistrarCriterios {
     
     public function getEstadoObs(){
         return $this->estadoObs;
+    }
+    
+    public function getOp() {
+        return $this->op;
     }
 
     public function getPreguntasJson() {
@@ -45,7 +50,7 @@ class CRegistrarCriterios {
     public function getObservacionesJson() {
         $obs = array();
         foreach ($this->getObservaciones() as $fila) {
-            $aux = array("idDimen" => $fila[0], "obs" => $fila[1]);
+            $aux = array("idDimen" => $fila[0], "obs" => $fila[1], "porcentaje" => $fila[2]);
             $obs[] = $aux;
         }
 
@@ -70,22 +75,29 @@ class CRegistrarCriterios {
     public function setEstadoObs($estado){
         $this->estadoObs = $estado;
     }
+    
+    public function setOp($op) {
+        $this->op = $op;
+    }
 
     public function registrarCriterios() {
 
-        return MRegistrarCriterios::registrarCriterios($this->idRadicacion, $this->getPreguntasJson(), $this->getEstadoObs() ? $this->getObservacionesJson() : "'null'");
+        return MRegistrarCriterios::registrarCriterios($this->idRadicacion, $this->getPreguntasJson(), $this->getEstadoObs() ? $this->getObservacionesJson() : "'null'", $this->getOp());
     }
 
 }
 
-if ((isset($_POST['idRad']) && isset($_POST['preguntas']) && isset($_POST['observaciones'])) && (!empty($_POST['idRad']) && !empty($_POST['preguntas']) && !empty($_POST['observaciones']))) {
+if ((isset($_POST['idRad']) && isset($_POST['preguntas']) && isset($_POST['observaciones']) && isset($_POST['op'])) && (!empty($_POST['idRad']) && !empty($_POST['preguntas']) && !empty($_POST['observaciones']) && !empty($_POST['op']))) {
 
     $criterios = new CRegistrarCriterios();
     $criterios->setIdRadicacion($_POST['idRad']);
     $criterios->setPreguntas($_POST['preguntas']);
+    $criterios->setOp($_POST['op']);
     $obs = $_POST['observaciones'];
     if($obs == "nohave") $criterios->setEstadoObs(false); else $criterios->setEstadoObs(true); $criterios->setObservaciones($obs);
     echo $criterios->registrarCriterios();
+}else{
+    echo var_dump($_POST['op']);
 }
 ?>
 
