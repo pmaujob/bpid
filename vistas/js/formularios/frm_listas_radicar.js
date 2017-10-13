@@ -170,8 +170,14 @@ function validar(enviarInfo) {
 
             if (opcionSeleccionada == "SI" && reqArchivoExist == "" && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
                 alert('Se debe adjuntar un archivo en esta pregunta.');
+
+                $('.collapsible-header').removeClass('active');
+                $('.collapsible-body').css('display','none');
+                $('#REQFILE' + i).parents('div').parents('div').parents('div').css('display','block');
                 reqArchivo.focus();
+                
                 return;
+                
             } else if (opcionSeleccionada == "SI" && reqArchivo.value != '') {
                 var archivoReqRow = new Array(2);
                 archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
