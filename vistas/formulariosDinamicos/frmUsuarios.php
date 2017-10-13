@@ -11,9 +11,9 @@ if (!empty($_POST['value'])) {
     $res = CargarUsuarios::getUsuarios($datos);
     ?>
     <table>
-        <thead>
+        <!--<thead>
             <tr><th>Cédula</th><th>Nombres</th><th>Apellidos</th><th>Agregar</th></tr>
-        </thead>
+        </thead> -->
         <tbody>
             <?php
             if (count($res) > 0) {
