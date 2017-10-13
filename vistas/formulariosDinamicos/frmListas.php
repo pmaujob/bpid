@@ -16,8 +16,6 @@ const reqFile = 'REQFILE'; //id de los archivos adjuntos
 const subFile = 'SUBFILE';
 const reqFilePre = 'REQFILEPRE'; //id del hidden perteneciente a los archivos para guardar id pregunta
 const subFilePre = 'SUBFILEPRE';
-const reqFileOb = 'REQFILEOB'; //id del hidden perteneciente a los archivos para validar si son obligatorios o no
-const subFileOb = 'SUBFILEOB';
 const reqFileExist = 'REQFILEEXIST'; //id del hidden para validar si el requisito ya tiene un archivo subido
 const subFileExist = 'SUBFILEEXIST';
 const reqObsLbl = 'REQOBSLBL';
@@ -67,8 +65,12 @@ foreach ($listasRequeridas as $filar) {
                         }
                         ?>
                         <tr class="cardview_checklist">
-                            <td style="width: 55%;"><?php echo $filar1[1]; ?></td>
-                            <td style="width: 25%;">
+                            <td style="width: 55%;">
+                                <p style="text-align: justify; margin-top: -4px;">
+                                    <?php echo $filar1[1]; ?>                                    
+                                </p>
+                            </td>
+                            <td style="width: 15%;">
                                 <p style="margin-bottom: 15%;">
                                     <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filar1[0]; ?>">
                                     <select id="<?php echo req . $nOpcionesReq; ?>" class="browser-default" onchange="validarNo('<?php echo req . $nOpcionesReq; ?>');" >
@@ -78,7 +80,7 @@ foreach ($listasRequeridas as $filar) {
                                     </select>
                                 </p>
                             </td>
-                            <td style="width: 20%;">
+                            <td style="width: 30%;">
                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
 
                                 <div class="file-field input-field">
@@ -90,7 +92,7 @@ foreach ($listasRequeridas as $filar) {
                                         <input class="file-path validate" type="text">
                                     </div>
                                 </div>
-                                
+
                                 <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filar1[3]; ?>">
                             </td>
                         </tr>
@@ -160,8 +162,12 @@ if (count($listasEspecificas) == 0) {
                                         }
                                         ?>
                                         <tr class="cardview_checklist">
-                                            <td style="width: 55%;"><?php echo $filae1[1]; ?></td>
-                                            <td style="width: 25%;">
+                                            <td style="width: 55%;">
+                                                <p style="text-align: justify; margin-top: -4px;">
+                                                    <?php echo $filae1[1]; ?>
+                                                </p>
+                                            </td>
+                                            <td style="width: 15%;">
                                                 <p style="margin-bottom: 15%;">
                                                     <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filae1[0]; ?>">
                                                     <select id="<?php echo req . $nOpcionesReq; ?>" class="<?php echo req; ?> browser-default" onchange="validarNo('<?php echo req . $nOpcionesReq; ?>');">
@@ -171,19 +177,19 @@ if (count($listasEspecificas) == 0) {
                                                     </select>
                                                 </p>
                                             </td>
-                                            <td style="width: 25%;">
+                                            <td style="width: 30%;">
                                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filae1[0]; ?>" />
-                                                
-                                                    <div class="file-field input-field">
-                                                        <div class="btn">
-                                                            <span>Archivo</span>
-                                                            <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
-                                                        </div>
-                                                        <div class="file-path-wrapper">
-                                                            <input class="file-path validate" type="text">
-                                                        </div>
+
+                                                <div class="file-field input-field">
+                                                    <div class="btn">
+                                                        <span>Archivo</span>
+                                                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
                                                     </div>
-                                                
+                                                    <div class="file-path-wrapper">
+                                                        <input class="file-path validate" type="text">
+                                                    </div>
+                                                </div>
+
                                                 <input type="hidden" id="<?php echo reqFileExist . $nOpcionesReq; ?>" value="<?php echo $filae1[3]; ?>">
                                             </td>
                                         </tr>
@@ -240,8 +246,12 @@ if (count($listasEspecificas) == 0) {
                                                         }
                                                         ?>
                                                         <tr class="cardview_checklist">
-                                                            <td style="width: 50%;"><?php echo $filas[1]; ?></td>
-                                                            <td style="width: 25%;">
+                                                            <td style="width: 50%;">
+                                                                <p style="text-align: justify; margin-top: -4px;">
+                                                                    <?php echo $filas[1]; ?>
+                                                                </p>
+                                                            </td>
+                                                            <td style="width: 15%;">
                                                                 <p style="margin-bottom: 15%;">
                                                                     <input id="<?php echo subh . $nOpcionesSub; ?>" type="hidden" value="<?php echo $filas[0]; ?>">
                                                                     <select id="<?php echo sub . $nOpcionesSub; ?>" class="<?php echo sub; ?> browser-default" onchange="validarNo('<?php echo sub . $nOpcionesSub; ?>');">
@@ -251,19 +261,19 @@ if (count($listasEspecificas) == 0) {
                                                                     </select>
                                                                 </p>
                                                             </td>
-                                                            <td style="width: 25%;">
+                                                            <td style="width: 35%;">
                                                                 <input type="hidden" id="<?php echo subFilePre . $nOpcionesSub; ?>" value="<?php echo $filas[0]; ?>" />
-                                                                
-                                                                    <div class="file-field input-field">
-                                                                        <div class="btn">
-                                                                            <span>Archivo</span>
-                                                                            <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
-                                                                        </div>
-                                                                        <div class="file-path-wrapper">
-                                                                            <input class="file-path validate" type="text">
-                                                                        </div>
+
+                                                                <div class="file-field input-field">
+                                                                    <div class="btn">
+                                                                        <span>Archivo</span>
+                                                                        <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
                                                                     </div>
-                                                                
+                                                                    <div class="file-path-wrapper">
+                                                                        <input class="file-path validate" type="text">
+                                                                    </div>
+                                                                </div>
+
                                                                 <input type="hidden" id="<?php echo subFileExist . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>">
                                                             </td>
                                                         </tr>                                                                                                                <?php
