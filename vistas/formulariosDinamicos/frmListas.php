@@ -70,7 +70,7 @@ foreach ($listasRequeridas as $filar) {
                                     <?php echo $filar1[1]; ?>                                    
                                 </p>
                             </td>
-                            <td style="width: 25%;">
+                            <td style="width: 15%;">
                                 <p style="margin-bottom: 15%;">
                                     <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filar1[0]; ?>">
                                     <select id="<?php echo req . $nOpcionesReq; ?>" class="browser-default" onchange="validarNo('<?php echo req . $nOpcionesReq; ?>');" >
@@ -80,7 +80,7 @@ foreach ($listasRequeridas as $filar) {
                                     </select>
                                 </p>
                             </td>
-                            <td style="width: 20%;">
+                            <td style="width: 30%;">
                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
 
                                 <div class="file-field input-field">
@@ -162,8 +162,12 @@ if (count($listasEspecificas) == 0) {
                                         }
                                         ?>
                                         <tr class="cardview_checklist">
-                                            <td style="width: 55%;"><?php echo $filae1[1]; ?></td>
-                                            <td style="width: 25%;">
+                                            <td style="width: 55%;">
+                                                <p style="text-align: justify; margin-top: -4px;">
+                                                    <?php echo $filae1[1]; ?>
+                                                </p>
+                                            </td>
+                                            <td style="width: 15%;">
                                                 <p style="margin-bottom: 15%;">
                                                     <input id="<?php echo reqh . $nOpcionesReq; ?>" type="hidden" value="<?php echo $filae1[0]; ?>">
                                                     <select id="<?php echo req . $nOpcionesReq; ?>" class="<?php echo req; ?> browser-default" onchange="validarNo('<?php echo req . $nOpcionesReq; ?>');">
@@ -173,7 +177,7 @@ if (count($listasEspecificas) == 0) {
                                                     </select>
                                                 </p>
                                             </td>
-                                            <td style="width: 25%;">
+                                            <td style="width: 30%;">
                                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filae1[0]; ?>" />
 
                                                 <div class="file-field input-field">
@@ -242,8 +246,12 @@ if (count($listasEspecificas) == 0) {
                                                         }
                                                         ?>
                                                         <tr class="cardview_checklist">
-                                                            <td style="width: 50%;"><?php echo $filas[1]; ?></td>
-                                                            <td style="width: 25%;">
+                                                            <td style="width: 50%;">
+                                                                <p style="text-align: justify; margin-top: -4px;">
+                                                                    <?php echo $filas[1]; ?>
+                                                                </p>
+                                                            </td>
+                                                            <td style="width: 15%;">
                                                                 <p style="margin-bottom: 15%;">
                                                                     <input id="<?php echo subh . $nOpcionesSub; ?>" type="hidden" value="<?php echo $filas[0]; ?>">
                                                                     <select id="<?php echo sub . $nOpcionesSub; ?>" class="<?php echo sub; ?> browser-default" onchange="validarNo('<?php echo sub . $nOpcionesSub; ?>');">
@@ -253,7 +261,7 @@ if (count($listasEspecificas) == 0) {
                                                                     </select>
                                                                 </p>
                                                             </td>
-                                                            <td style="width: 25%;">
+                                                            <td style="width: 35%;">
                                                                 <input type="hidden" id="<?php echo subFilePre . $nOpcionesSub; ?>" value="<?php echo $filas[0]; ?>" />
 
                                                                 <div class="file-field input-field">

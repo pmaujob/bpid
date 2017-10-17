@@ -6,11 +6,11 @@ $raiz = $_SESSION['raiz'];
 
 require_once $raiz . '/librerias/ConexionPDO.php';
 
-class MRegistrarCriterios {
+class MFinalizarViabilidad {
 
-    public static function registrarCriterios($idRadicacion, $preguntas, $observaciones, $op) {
+    public static function registrarViabilidad($idRad,$responsables) {
 
-        $sql = "select from ing_criterios_viabilidad($idRadicacion,$preguntas,$observaciones,$op);";
+        $sql = "select from ingresar_responsables_viabilidad($idRad,$responsables);";
 
         $con = new ConexionPDO();
         $con->conectar("PG");
@@ -18,6 +18,7 @@ class MRegistrarCriterios {
         $con->cerrarConexion();
 
         return $res;
+        
     }
 
 }

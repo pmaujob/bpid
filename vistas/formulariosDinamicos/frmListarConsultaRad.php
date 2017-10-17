@@ -75,9 +75,9 @@ foreach ($sublistas as $sublista) {
                             foreach ($subitems as $subitem) {
                                 ?>
                                 <div class="cardview_checklist">
-                                    <span>
+                                    <p style="text-align: justify; margin-top: -4px;">
                                         <?php echo $subitem[1]; ?>
-                                    </span>   
+                                    </p>   
                                     <p>
                                         <label>Observaciones:</label>
                                         <textarea class="materialize-textarea" disabled style="color: #000000" ><?php echo $subitem[5]; ?></textarea>

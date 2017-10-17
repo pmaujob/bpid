@@ -105,13 +105,20 @@ function mas(cod, bpid, numProyecto) {
         async: true,
         data: {bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
+
             //alert(respuesta);
             quitar_pantalla()
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
+
+            Materialize.toast(document.getElementById('proyectName').value);
+
+            var toast = document.getElementById('toast-container').getElementsByTagName("div")[0];
+            toast.style.background = "#008643";
+            toast.style.fontWeight = "400";
+
             $('.modal').modal();
 
-            //
         },
 
         error: function () {
