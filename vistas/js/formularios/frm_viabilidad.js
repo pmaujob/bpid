@@ -21,7 +21,6 @@ function onLoadBody() {
     buscarProyectos(3, null);
     $(document).ready(function () {
 
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $("#d_error").dialog({
             autoOpen: false,
             modal: true,
@@ -34,23 +33,55 @@ function onLoadBody() {
         $("#d_ingreso").dialog({
             autoOpen: false,
             modal: true,
-            buttons: {
-                "Aceptar": function () {
-                    $(this).dialog("close");
-                    window.self.location = "../formularios/frm_radicar.php";
+            width: "50%",
+            buttons: [
+                {text: "Aceptar",
+                    click: function () {
+
+                        var idRad = document.getElementById('idRad').value;
+
+                        jQuery.ajax({
+                            type: 'POST',
+                            url: '../../controlador/CRollBack.php',
+                            async: true,
+                            data: {op: 2, idRad: idRad},
+                            success: function (respuesta) {
+
+                                $("#d_ingreso").dialog("close");
+
+                                if (respuesta == 1) {
+                                    alert("Su proyecto ha sido regresado a la etapa de Metas de Producto.");
+                                    window.self.location = "../formularios/frm_meta_producto.php";
+                                } else {
+                                    alert("No fue posible realizar el proceso, vuelva a intentarlo.");
+                                }
+
+                            },
+                            error: function () {
+                                alert("Error inesperado");
+                            }
+
+                        });
+
+                    }
+                },
+                {text: "Cancelar",
+                    click: function () {
+                        $(this).dialog("close");
+                    }
                 }
-            }
+            ]
         });
 
         $('.dropdown-button').dropdown({
             inDuration: 300,
             outDuration: 225,
-            constrainWidth: false, // Does not change width of dropdown to that of the activator
-            hover: true, // Activate on hover
-            gutter: 0, // Spacing from edge
-            belowOrigin: false, // Displays dropdown below the button
-            alignment: 'left', // Displays dropdown with edge aligned to the left of button
-            stopPropagation: false // Stops event propagation
+            constrainWidth: false,
+            hover: true,
+            gutter: 0,
+            belowOrigin: false,
+            alignment: 'left',
+            stopPropagation: false
         }
         );
     });
@@ -96,14 +127,14 @@ function buscarProyectos(op, event) {
 
 }
 
-function mas(cod, bpid, numProyecto) {
+function mas(idRad, bpid, numProyecto) {
 
     bloquear_pantalla()
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmViabilizados.php',
         async: true,
-        data: {bpid: bpid, numProyecto: numProyecto},
+        data: {idRad: idRad, bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
 
             //alert(respuesta);
@@ -308,7 +339,6 @@ function calcularValorFuente(idcampo, idActividad)
 function guardarActividades()
 {
 
-
     var numeroActividad = document.getElementById('numeroActividad').value;
     var i = document.getElementById('codigoActividad').value;
     var total = document.getElementById('frmTotal_' + i).value
@@ -384,7 +414,6 @@ function guardarActividades()
 
 function subtotal(tupla)
 {
-
     valorEspecie = "frmValorEfectivoNacional_" + tupla;
     valorEfectivo = "frmValorEspecieNacional_" + tupla;
     valorsubtotal = "frmValorFuenteNacional_" + tupla;
@@ -395,3 +424,31 @@ function subtotal(tupla)
 
 }
 
+function guardarMetas() {
+
+    var contMeta = document.getElementById('contMeta').value;
+    var contItemMeta = document.getElementById('contItemMeta');
+    if (contItemMeta.value > contMeta) {
+        $("#d_ingreso").dialog("open");
+        return;
+    }
+
+    for (var i = 0; i < contMeta; i++) {
+        var select = document.getElementById('METASELECT' + (i + 1));
+
+        if (select.value == 0) {
+            alert('Debe seleccionar una meta en este item.');
+            select.focus();
+            return;
+        }
+    }
+    
+    for (var i = 0; i < contMeta; i++) {
+        
+        for (var j = 0; j < contItemMeta.value; j++) {
+            
+        }
+        
+    }
+
+}

@@ -233,7 +233,7 @@ function insertarMetas() {
                 alert("Las metas se guardaron con éxito.");
                 $("#modalm").modal("close");
 
-                location.href = document.body;
+                location.href = "../formularios/frm_meta_producto.php";
 
             } else {
 
