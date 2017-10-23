@@ -22,6 +22,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         </head>
 
         <body onload="onLoadBody();">
+            <div id="d_ingreso" title="Información">
+                <pre>El número de metas no puede ser mayor al número de actividades. 
+¿Desea regresar a la etapa de Metas de Producto?</pre>             
+            </div>
 
             <!-- Modal Trigger -->
 
