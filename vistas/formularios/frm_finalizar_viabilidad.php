@@ -36,6 +36,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <div id="d_ingreso" title="INFORMACION"></div>
 
             <div id="modal1" class="modal modal-fixed-footer">
+                <a href="#!" onclick="cerrarModal();" style="margin-left: 95%; color: black;">
+                    <i class="material-icons" style="margin-top: 16px;">close</i>                            
+                </a>
                 <div class="modal-content">
                     <h4>Información general del proyecto</h4>
                     <p>Agregue los responsables del proyecto y verifique información.</p>
@@ -59,18 +62,18 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <hr>
                                 <br>
                                 <div id="usua">
-                                    
+
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header" style="background: #008643; color: white;"><i class="material-icons">receipt</i>Información acercad el proyecto</div>
-                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            <div class="collapsible-header" style="background: #008643; color: white;"><i class="material-icons">receipt</i>Información acerca del proyecto</div>
+                            <div id="respuestainfo" class="collapsible-body"></div>
                         </li>
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios();">Resgistrar responsables</a>
+                    <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarResponsables();">Guardar enviar</a>
                 </div>
             </div>
 

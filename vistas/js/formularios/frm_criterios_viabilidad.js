@@ -10,6 +10,16 @@ function onLoadBody() {
                 document.getElementById('semaforo').style.display = "none";
                 document.getElementById('semaforo').style.right = "-60px";
 
+                var toasts = new Array();
+
+                if (document.getElementById('toast-container') != null) {
+                    toasts = document.getElementById('toast-container').getElementsByTagName("div");
+                }
+
+                for (var i = toasts.length - 1; i >= 0; i--) {
+                    toasts[i].parentNode.removeChild(toasts[i]);
+                }
+
             }
         });
 
@@ -101,7 +111,7 @@ function mas(cod, bpid, numProyecto) {
 
 }
 
-function registrarCriterios() {
+function registrarCriterios(op) {
 
     var cont = document.getElementById('cont').value;
     var contDimensiones = document.getElementById('contDimensiones').value;
@@ -111,16 +121,24 @@ function registrarCriterios() {
 
     for (var i = 0; i < contDimensiones; i++) {
 
-        if (document.getElementById('OBS' + i).value !== "") {
+        var obsdimen = new Array(2);
+        var contTotal = 0;
+        var contChequeados = 0;
+        var res = 0;
 
-            var obsdimen = new Array(2);
+        $("#LISTA" + i + " input").each(function () {
+            contTotal++;
+            if ($(this).prop('checked'))
+                contChequeados++;
+        });
 
-            obsdimen[0] = document.getElementById('IDDIMEN' + i).value;
-            obsdimen[1] = document.getElementById('OBS' + i).value;
+        res = (contChequeados * 100) / (contTotal - 1);
 
-            obsdimensiones.push(obsdimen);
+        obsdimen[0] = document.getElementById('IDDIMEN' + i).value;
+        obsdimen[1] = document.getElementById('OBS' + i).value;
+        obsdimen[2] = res.toFixed(2);
 
-        }
+        obsdimensiones.push(obsdimen);
 
     }
 
@@ -150,7 +168,7 @@ function registrarCriterios() {
         url: '../../controlador/CRegistrarCriterios.php',
         async: true,
         timeout: 0,
-        data: {idRad: idRad, preguntas: criterios, observaciones: obsdimensiones},
+        data: {idRad: idRad, preguntas: criterios, observaciones: obsdimensiones, op: op},
         success: function (respuesta) {
 
             if (respuesta.trim() == "1") {
@@ -174,6 +192,9 @@ function semaforo(id) {
     var contTotal = 0;
     var contChequeados = 0;
     var res = 0;
+    var texto;
+
+    texto = $("#" + id).children('div').html();
 
     $("#" + id + " input").each(function () {
         contTotal++;
@@ -181,7 +202,7 @@ function semaforo(id) {
             contChequeados++;
     });
 
-    res = (contChequeados * 100) / contTotal;
+    res = (contChequeados * 100) / (contTotal - 1);
 
     if (res < 50)
         document.getElementById('bonbilla').style.backgroundColor = "red";
@@ -190,5 +211,35 @@ function semaforo(id) {
     else
         document.getElementById('bonbilla').style.backgroundColor = "green";
 
+    crearToast(texto + " (" + res.toFixed(2) + "%)");
+
+
+
+}
+
+function crearToast(texto) {
+
+    var toasts = new Array();
+
+    if (document.getElementById('toast-container') != null) {
+        toasts = document.getElementById('toast-container').getElementsByTagName("div");
+    }
+
+    for (var i = toasts.length - 1; i >= 0; i--) {
+        toasts[i].parentNode.removeChild(toasts[i]);
+    }
+
+    Materialize.toast(texto, 500000);
+
+    var toast = document.getElementById('toast-container').getElementsByTagName("div")[0];
+    toast.style.background = "#008643";
+    toast.style.fontWeight = "400";
+
+}
+
+function cerrarModal() {
+
+    $('#modal1').modal('close');
+    document.getElementById('toast-container').innerHTML = "";
 
 }

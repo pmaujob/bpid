@@ -83,7 +83,7 @@ function archivo_xml()
         bloquear_pantalla();
         var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
         $.ajax({
-            url: '../../modelo/consultar_existencia_xml.php',
+            url: '../../modelo/ConsutarDatosXml.php',
             type: "POST",
             data: formData,
             contentType: false,
