@@ -4,9 +4,8 @@ var actividadDatos = new Array();
 var FuentesDatos = new Array();
 var totalfuentes = 0;
 var r = [];
-    $(document).ready(function () {
-        
-    });
+$(document).ready(function () {
+
 
     $("#d_error").dialog({
         autoOpen: false,
@@ -59,6 +58,10 @@ var r = [];
             }
         ]
     });
+
+});
+
+
 function bloquear_pantalla()
 {
 
@@ -479,4 +482,14 @@ function guardarMetas() {
 
 
 
+}
+function vermga(opcion)
+{
+
+    fila = document.getElementById("fila_mga");
+    if (opcion == 1) {
+        fila.style.display = 'none';
+    } else {
+        fila.style.display = '';
+    }
 }

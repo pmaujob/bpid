@@ -34,16 +34,31 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                     <td>
 
                         <p style="margin-left: 44px;">
-                           <input name="group1" type="radio" id="test1"  />
+                            <input name="group1" type="radio" id="test1" value="0" onclick="vermga(this.value)" />
                             <label for="test1">SI</label>
                         </p>
                         <p style="margin-left: 44px;">
-                            <input name="group1" type="radio" id="test2" />
+                            <input name="group1" type="radio" id="test2" value="1" onclick="vermga(this.value)"/>
                             <label for="test2">NO</label>
                         </p>
                     <td>
                 </tr>
-
+                <tr style='display:none' id="fila_mga">
+                    <td><strong>Seleccione Archivo MGA</strong></td>
+                    <td>
+                     <div class="file-field input-field">
+                                                    <div class="btn">
+                                                        <span>Subir Archivo MGA XML</span>
+                                                        <input type="file" id="frm_archivo" name="frm_archivo" onchange="archivo_xml()" multiple
+                                                               alt="Cargar Archivo MGA WEB">
+                                                    </div>
+                                                    <div class="file-path-wrapper">
+                                                        <input class="file-path validate" type="text" placeholder="Seleccionar archivo XML">
+                                                    </div>
+                                                </div>
+                    </td>   
+                    
+                </tr>
 
 
             </tbody>
@@ -88,7 +103,11 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                         <tr>
                             <th>Objetivo General</th>
                             <td><?php echo $fila[3]; ?></td>
-                        </tr>                    
+                        </tr> 
+                        <tr>
+                            <th>Desicion:</th>
+                            <td><?php echo $fila[10]; ?></td>
+                        </tr> 
                         <?php
                     }
                 } else {

@@ -18,8 +18,9 @@ class CargarViabilizados {
                         . 'dessubpro,'//6
                         . 'sec,'//7
                         . 'val,'//8
-                        . 'loc '//9
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("r" integer, "nompro" varchar ,"pro" varchar,"radobj" varchar  ,"despro" varchar, "pob" integer, "dessubpro" varchar, "sec" varchar, "val" varchar, "loc" varchar);';
+                        . 'loc,'//9
+                        . 'resumen '//10
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("r" integer, "nompro" varchar ,"pro" varchar,"radobj" varchar  ,"despro" varchar, "pob" integer, "dessubpro" varchar, "sec" varchar, "val" varchar, "loc" varchar,"resumen" varchar);';
                 break;
             case 2:
                 $consulta = 'select obj '
