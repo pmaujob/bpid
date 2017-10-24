@@ -1,4 +1,4 @@
- // JavaScript Document
+// JavaScript Document
 // Desarrollado Ing Dario Santacruz
 function bloquear_pantalla()
 {
@@ -83,7 +83,7 @@ function archivo_xml()
         bloquear_pantalla();
         var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
         $.ajax({
-            url: '../../modelo/ConsutarDatosXml.php',
+            url: '../../controlador/CConsutarExistenciasXml.php',
             type: "POST",
             data: formData,
             contentType: false,
@@ -96,7 +96,7 @@ function archivo_xml()
                 {
 
                     $.ajax({
-                        url: '../../modelo/consultar_basico_xml.php',
+                        url: '../../controlador/CConsutarDatosXml.php',
                         type: "POST",
                         data: formData,
                         contentType: false,
@@ -104,49 +104,47 @@ function archivo_xml()
                         success: function (datos)
                         {
                             //alert(datos);
-                            if(datos != -1)
+
+                            if (datos != -1)
                             {
-                            //alert(datos)	
-                            var cadena = datos.split("*/");
-                            nombre_proyecto.focus();
-                            nombre_proyecto.value = '';
-                            nombre_proyecto.value = cadena[0];
-                            numero_proyecto.focus();
-                            numero_proyecto.value = '';
-                            numero_proyecto.value = cadena[8];
-                            sector.focus();
-                            sector.value = cadena[1];
-                            localizacion.focus();
-                            localizacion.value = '';
-                            localizacion.value = cadena[2];
-                            //eje.focus();
-                            //eje.value='';
-                            eje.value = 1;
-                            //programa.focus();
-                            //programa.value='';
-                            programa.value = cadena[4];
-                            //subprograma.focus();
-                            //subprograma.value='';
-                            subprograma.value = cadena[5];
-                            valor.focus();
-                            valor.value = '';
-                            valor.value = cadena[7];
-                            document.getElementById('objetivos').value = cadena[9];
-                            document.getElementById('fuentes').value = cadena[10];
-                            document.getElementById('problema').value = cadena[11];
-                            document.getElementById('poblacion').value = cadena[12];
-                            document.getElementById('objetivog').value = cadena[13];
-                            document.getElementById('productos').value = cadena[14];
-                            document.getElementById('actividades').value = cadena[15];
-                            quitar_pantalla();
+
+                                var cadena = datos.split("*/");
+
+                                nombre_proyecto.focus();
+                                nombre_proyecto.value = '';
+                                nombre_proyecto.value = cadena[0];
+                                numero_proyecto.focus();
+                                numero_proyecto.value = '';
+                                numero_proyecto.value = cadena[8];
+                                sector.focus();
+                                sector.value = cadena[1];
+                                localizacion.focus();
+                                localizacion.value = '';
+                                localizacion.value = cadena[2];
+                                eje.value = 1;
+                                programa.value = cadena[4];
+                                subprograma.value = cadena[5];
+                                valor.focus();
+                                valor.value = '';
+                                valor.value = cadena[7];
+                                document.getElementById('objetivos').value = cadena[9];
+                                document.getElementById('fuentes').value = cadena[10];
+                                document.getElementById('problema').value = cadena[11];
+                                document.getElementById('poblacion').value = cadena[12];
+                                document.getElementById('objetivog').value = cadena[13];
+                                document.getElementById('productos').value = cadena[14];
+                                document.getElementById('actividades').value = cadena[15];
+                                document.getElementById('resumen').value = cadena[16];
+                                quitar_pantalla();
                             }
-                            else
+                            if (datos == -1)
                             {
-                              $('#modal1').modal('close');
-                            quitar_pantalla();
-                            document.getElementById('d_ingreso').innerHTML = '<p>ERROR, EL ARCHIVO ESTA INCOMPLETO Y NO PUEDE SER RADICADO</p>';
-                            $("#d_ingreso").dialog("open");
-                            return false;  
+
+                                $('#modal1').modal('close');
+                                quitar_pantalla();
+                                document.getElementById('d_ingreso').innerHTML = '<p>ERROR, EL ARCHIVO ESTA INCOMPLETO Y NO PUEDE SER RADICADO</p>';
+                                $("#d_ingreso").dialog("open");
+                                return false;
                             }
                         }
                     });
@@ -217,25 +215,25 @@ function almacenar()
     var objetivog = document.getElementById('objetivog').value;
     var productos = document.getElementById('productos').value;
     var actividades = document.getElementById('actividades').value;
+    var resumen = document.getElementById('resumen').value;
 
     var value = numero_proyecto + '//' + nombre_proyecto + '//' + sector + '//' + localizacion + '//' + valor + '//' + eje + '//' + programa + '//' + subprograma + '//' + poai + '//' +
             entidad_proponente + '//' + entidad_ejecutante + '//' + num_id_responsable + '//' + nom_responsable + '//' + cargo_responsable + '//' +
             direccion_responsable + '//' + telefono_responsable + '//' + cel_responsable + '//' + correo_responsable + '//' + id_usuario + '//' + nombre_usuario + '//' +
-            observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades;
-    
-     
+            observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades + '//' + resumen;
+
+            
     $('#modal1').modal('close');
-    bloquear_pantalla();
+    //bloquear_pantalla();
     jQuery.ajax({
         type: "POST",
         url: '../../controlador/ControladorRadicar.php',
         async: false,
-        data: {value: value,op:1},
-       
+        data: {value: value, op: 1},
         success: function (respuesta) {
-            
-            //alert(respuesta);
 
+            alert(respuesta);
+            return;
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
                 $.ajax({
@@ -275,11 +273,15 @@ function almacenar()
 
 function buscarUsuario(tipo)
 {
-    
-  if(tipo==1){cedula = document.getElementById('frm_id_responsable').value;}
-  if(tipo==2){cedula = document.getElementById('frm_id_usuario').value;}
-  var waitGuardarProgreso = document.getElementById('waitGuardarProgreso');
-      waitGuardarProgreso.style.display = "";
+
+    if (tipo == 1) {
+        cedula = document.getElementById('frm_id_responsable').value;
+    }
+    if (tipo == 2) {
+        cedula = document.getElementById('frm_id_usuario').value;
+    }
+    var waitGuardarProgreso = document.getElementById('waitGuardarProgreso');
+    waitGuardarProgreso.style.display = "";
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/ControladorRadicar.php',
@@ -287,70 +289,70 @@ function buscarUsuario(tipo)
         data: {cedula: cedula, op: 2},
         success: function (respuesta) {
 
-            waitGuardarProgreso.style.display = "";  
-           if(tipo==1)
-           { 
-              if (respuesta.trim() === "NoData"){
-              waitGuardarProgreso.style.display = 'none';
-              Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000);
-              var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
-                //Cambiar el estilo de uno de todos los toasts
-                toasts[0].style.background = "#008643";
-                toasts[0].style.fontWeight = "400";
-              document.getElementById('frm_id_responsable').focus();
-              document.getElementById('frm_nom_responsable').value = '';
-              document.getElementById('frm_cargo_responsable').value= '';
-              document.getElementById('frm_dir_responsable').value = '';
-              document.getElementById('frm_tel_responsable').value = '';
-              document.getElementById('frm_cel_responsable').value = '';
-              document.getElementById('frm_correo').value='';
-                }else{
-               
-                var content = JSON.parse(respuesta);
-                document.getElementById('frm_nom_responsable').value = content.nombres;
-                document.getElementById('frm_nom_responsable').focus();
-                document.getElementById('frm_cargo_responsable').value= content.cargo;
-                document.getElementById('frm_cargo_responsable').focus();
-                document.getElementById('frm_dir_responsable').value = content.direccion;
-                document.getElementById('frm_dir_responsable').focus();
-                document.getElementById('frm_tel_responsable').value = content.telefono;
-                document.getElementById('frm_tel_responsable').focus();
-                document.getElementById('frm_cel_responsable').value = content.celular;
-                document.getElementById('frm_cel_responsable').focus();
-                document.getElementById('frm_correo').value = content.correo;
-                document.getElementById('frm_correo').focus();
-                waitGuardarProgreso.style.display = "none";
-              }
-               
-            }
-            if(tipo==2)
+            waitGuardarProgreso.style.display = "";
+            if (tipo == 1)
             {
-               if (respuesta.trim() === "NoData"){
-                  waitGuardarProgreso.style.display = "none";  
-              Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000);
-              var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
-                //Cambiar el estilo de uno de todos los toasts
-                toasts[0].style.background = "#008643";
-                toasts[0].style.fontWeight = "400";
-              document.getElementById('frm_id_usuario').focus();
-              document.getElementById('frm_nom_usuario').value = '';
-             
-                }else{
-               waitGuardarProgreso.style.display = "none";  
-                var content = JSON.parse(respuesta);
-                document.getElementById('frm_nom_usuario').value = content.nombres;
-                document.getElementById('frm_nom_usuario').focus();
-              
-              }     
+                if (respuesta.trim() === "NoData") {
+                    waitGuardarProgreso.style.display = 'none';
+                    Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000);
+                    var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
+                    //Cambiar el estilo de uno de todos los toasts
+                    toasts[0].style.background = "#008643";
+                    toasts[0].style.fontWeight = "400";
+                    document.getElementById('frm_id_responsable').focus();
+                    document.getElementById('frm_nom_responsable').value = '';
+                    document.getElementById('frm_cargo_responsable').value = '';
+                    document.getElementById('frm_dir_responsable').value = '';
+                    document.getElementById('frm_tel_responsable').value = '';
+                    document.getElementById('frm_cel_responsable').value = '';
+                    document.getElementById('frm_correo').value = '';
+                } else {
+
+                    var content = JSON.parse(respuesta);
+                    document.getElementById('frm_nom_responsable').value = content.nombres;
+                    document.getElementById('frm_nom_responsable').focus();
+                    document.getElementById('frm_cargo_responsable').value = content.cargo;
+                    document.getElementById('frm_cargo_responsable').focus();
+                    document.getElementById('frm_dir_responsable').value = content.direccion;
+                    document.getElementById('frm_dir_responsable').focus();
+                    document.getElementById('frm_tel_responsable').value = content.telefono;
+                    document.getElementById('frm_tel_responsable').focus();
+                    document.getElementById('frm_cel_responsable').value = content.celular;
+                    document.getElementById('frm_cel_responsable').focus();
+                    document.getElementById('frm_correo').value = content.correo;
+                    document.getElementById('frm_correo').focus();
+                    waitGuardarProgreso.style.display = "none";
+                }
 
             }
-                
+            if (tipo == 2)
+            {
+                if (respuesta.trim() === "NoData") {
+                    waitGuardarProgreso.style.display = "none";
+                    Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000);
+                    var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
+                    //Cambiar el estilo de uno de todos los toasts
+                    toasts[0].style.background = "#008643";
+                    toasts[0].style.fontWeight = "400";
+                    document.getElementById('frm_id_usuario').focus();
+                    document.getElementById('frm_nom_usuario').value = '';
+
+                } else {
+                    waitGuardarProgreso.style.display = "none";
+                    var content = JSON.parse(respuesta);
+                    document.getElementById('frm_nom_usuario').value = content.nombres;
+                    document.getElementById('frm_nom_usuario').focus();
+
+                }
+
+            }
+
         },
         error: function () {
             alert("Error inesperado")
             window.top.location = "../index.html";
         }
-            
+
     });
 
 
