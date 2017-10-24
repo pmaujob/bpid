@@ -2,7 +2,8 @@
 require_once '../../modelo/CargarViabilizados.php';
 require_once '../../modelo/CargarMetas.php';
 
-        const metaSelect = 'METASELECT';
+const metaSelect = 'METASELECT';
+const actId = 'ACTID';
 
 if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
@@ -178,8 +179,9 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                         ?>
                         <tr>
                             <td>
+                                <input type="hidden" id="<?php echo actId . $contMeta ?>" value="<?php echo $act[5]; ?>">
                                 <p style="text-align: justify; margin-top: -4px;">
-                                    <?php echo $act[6]; ?>                                    
+                                    <?php echo $act[5] . "; " . $act[6]; ?>                                    
                                 </p>
                             </td>
                             <td style="text-align: center;"><?php echo "$" . number_format($act[7]); ?></td>

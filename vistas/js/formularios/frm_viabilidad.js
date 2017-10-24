@@ -5,70 +5,59 @@ var FuentesDatos = new Array();
 var totalfuentes = 0;
 var r = [];
     $(document).ready(function () {
+        
+    });
 
-        $("#d_error").dialog({
-            autoOpen: false,
-            modal: true,
-            buttons: {
-                "Cerrar": function () {
+    $("#d_error").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            "Cerrar": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+    $("#d_ingreso").dialog({
+        autoOpen: false,
+        modal: true,
+        width: "50%",
+        buttons: [
+            {text: "Aceptar",
+                click: function () {
+
+                    var idRad = document.getElementById('idRad').value;
+
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: '../../controlador/CRollBack.php',
+                        async: true,
+                        data: {op: 2, idRad: idRad},
+                        success: function (respuesta) {
+
+                            $("#d_ingreso").dialog("close");
+
+                            if (respuesta == 1) {
+                                alert("Su proyecto ha sido regresado a la etapa de Metas de Producto.");
+                                window.self.location = "../formularios/frm_meta_producto.php";
+                            } else {
+                                alert("No fue posible realizar el proceso, vuelva a intentarlo.");
+                            }
+
+                        },
+                        error: function () {
+                            alert("Error inesperado");
+                        }
+
+                    });
+
+                }
+            },
+            {text: "Cancelar",
+                click: function () {
                     $(this).dialog("close");
                 }
             }
-        });
-        $("#d_ingreso").dialog({
-            autoOpen: false,
-            modal: true,
-            width: "50%",
-            buttons: [
-                {text: "Aceptar",
-                    click: function () {
-
-                        var idRad = document.getElementById('idRad').value;
-
-                        jQuery.ajax({
-                            type: 'POST',
-                            url: '../../controlador/CRollBack.php',
-                            async: true,
-                            data: {op: 2, idRad: idRad},
-                            success: function (respuesta) {
-
-                                $("#d_ingreso").dialog("close");
-
-                                if (respuesta == 1) {
-                                    alert("Su proyecto ha sido regresado a la etapa de Metas de Producto.");
-                                    window.self.location = "../formularios/frm_meta_producto.php";
-                                } else {
-                                    alert("No fue posible realizar el proceso, vuelva a intentarlo.");
-                                }
-
-                            },
-                            error: function () {
-                                alert("Error inesperado");
-                            }
-
-                        });
-
-                    }
-                },
-                {text: "Cancelar",
-                    click: function () {
-                        $(this).dialog("close");
-                    }
-                }
-            ]
-        });
-
-        $('.dropdown-button').dropdown({
-            inDuration: 300,
-            outDuration: 225,
-            constrainWidth: false,
-            hover: true,
-            gutter: 0,
-            belowOrigin: false,
-            alignment: 'left',
-            stopPropagation: false
-        }
-        );
+        ]
     });
 function bloquear_pantalla()
 {
@@ -373,7 +362,6 @@ function guardarActividades()
         return
     }
 
-
     if (valorActividad != suma)
     {
 
@@ -430,8 +418,8 @@ function guardarMetas() {
         return;
     }
 
-    for (var i = 0; i < contMeta; i++) {
-        var select = document.getElementById('METASELECT' + (i + 1));
+    for (var i = 1; i <= contMeta; i++) {
+        var select = document.getElementById('METASELECT' + (i));
 
         if (select.value == 0) {
             alert('Debe seleccionar una meta en este item.');
@@ -440,12 +428,55 @@ function guardarMetas() {
         }
     }
 
-    for (var i = 0; i < contMeta; i++) {
+    var options = select.getElementsByTagName('option');
+    for (var i = 1; i < options.length; i++) {
+        var found = false;
+        var option = options[i];
 
-        for (var j = 0; j < contItemMeta.value; j++) {
+        for (var j = 1; j <= contMeta; j++) {
+            var select = document.getElementById('METASELECT' + (j));
+
+            if (select.value == option.value) {
+                found = true;
+                break;
+            }
 
         }
 
+        if (!found) {
+            alert("No puede quedar ninguna meta sin actividades.");
+            return;
+        }
+
     }
+
+    var metaActividades = new Array();
+    for (var i = 1; i <= contMeta; i++) {
+        var metaAct = new Array();
+        var actId = document.getElementById('ACTID' + (i)).value;
+        var select = document.getElementById('METASELECT' + (i)).value;
+
+        metaAct.push(actId);
+        metaAct.push(select);
+
+        metaActividades.push(metaAct);
+    }
+
+    jQuery.ajax({
+        type: 'POST',
+        url: '../../controlador/ActualizarActividades.php',
+        async: true,
+        data: {metaActividades: metaActividades},
+        success: function (respuesta) {
+
+            console.log(respuesta);
+
+        },
+        error: function () {
+            alert("Error inesperado");
+        }
+    });
+
+
 
 }
