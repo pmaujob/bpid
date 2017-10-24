@@ -38,8 +38,8 @@ class CargarViabilizados {
                         . 'nom,'//3
                         . 'val,'//4
                         . 'idact,'//5
-                        . 'des,'//5
-                        . 'val '//6
+                        . 'des,'//6
+                        . 'val '//7
                         . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric);';
                 break;
 
