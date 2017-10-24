@@ -2,7 +2,7 @@
 require_once '../../modelo/CargarViabilizados.php';
 require_once '../../modelo/CargarMetas.php';
 
-const metaSelect = 'METASELECT';
+        const metaSelect = 'METASELECT';
 
 if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
@@ -20,11 +20,37 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     $metasProyecto = CargarMetas::getProyectMetas($numProyecto)->fetchAll(PDO::FETCH_BOTH);
     ?>
 
-    <div class="contenedor_tabla">  
+    <div class="contenedor_tabla"> 
         <table class="striped">
             <thead>
+                <tr style="background-color: #008643">
+                    <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?</th>
+                </tr>
+            </thead>
+            <tbody>
+
                 <tr>
-                    <th colspan="2" >DATOS INICIALES DEL PROYECTO:<?php echo $numProyecto; ?></th>
+                    <td>
+
+                        <p style="margin-left: 44px;">
+                           <input name="group1" type="radio" id="test1"  />
+                            <label for="test1">SI</label>
+                        </p>
+                        <p style="margin-left: 44px;">
+                            <input name="group1" type="radio" id="test2" />
+                            <label for="test2">NO</label>
+                        </p>
+                    <td>
+                </tr>
+
+
+
+            </tbody>
+        </table> 
+        <table class="striped">
+            <thead>
+                <tr style="background-color: #008643">
+                    <th colspan="2" style="text-align:center; color: #ffffff">DATOS INICIALES DEL PROYECTO:<?php echo $numProyecto; ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -76,7 +102,8 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         </table>  
         <table class="striped">        
             <thead>
-                <tr><th colspan="2" style="text-align:center;">OBJETIVOS ESPECIFICOS PROYECTO </th></tr>
+                <tr style="background-color: #008643">
+                    <th colspan="2" style="text-align:center; color: #ffffff">OBJETIVOS ESPECIFICOS PROYECTO </th></tr>
             </thead>
             <tbody>
                 <?php
@@ -98,10 +125,10 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                 ?>
             </tbody>
         </table>       
-        <table class="striped">         
+        <table class="striped" >         
             <thead>
-                <tr>
-                    <th colspan="3" style="text-align:center;">FUENTES DE FINANCIACIÓN </th>
+                <tr style="background-color: #008643">
+                    <th colspan="3" style="text-align:center; color: #ffffff" >FUENTES DE FINANCIACIÓN </th>
                 </tr>
                 <tr>
                     <th>Tipo de Recursos</th>
@@ -134,8 +161,8 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         <br>
         <table class="striped">
             <thead>
-                <tr>
-                    <th colspan="4" style="text-align:center;">ACTIVIDADES DE PROYECTO</th>
+                <tr style="background-color: #008643">
+                    <th colspan="4" style="text-align:center; color: #ffffff">ACTIVIDADES DE PROYECTO</th>
                 </tr>
                 <tr>
                     <th style="width:40%;">Actividad</th>
@@ -155,7 +182,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                     <?php echo $act[6]; ?>                                    
                                 </p>
                             </td>
-                            <td style="text-align: center;"><?php echo number_format($act[7]); ?></td>
+                            <td style="text-align: center;"><?php echo "$" . number_format($act[7]); ?></td>
                             <td>                            
                                 <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
                                     <option value="0" selected disabled>Seleccione una Meta</option>                                    
@@ -171,7 +198,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                 </select>
                             </td>
                         </tr>
-                        <?php }
+                    <?php }
                     ?>
                     <tr>
                         <th colspan="4" style="text-align:center;">

@@ -4,21 +4,6 @@ var actividadDatos = new Array();
 var FuentesDatos = new Array();
 var totalfuentes = 0;
 var r = [];
-
-function bloquear_pantalla()
-{
-
-    document.getElementById("cargando").style.display = "block";
-    document.body.style.overflow = "hidden";
-}
-function quitar_pantalla()
-{
-
-    document.getElementById("cargando").style.display = "none";
-    document.body.style.overflow = "scroll";
-}
-function onLoadBody() {
-    buscarProyectos(3, null);
     $(document).ready(function () {
 
         $("#d_error").dialog({
@@ -85,6 +70,21 @@ function onLoadBody() {
         }
         );
     });
+function bloquear_pantalla()
+{
+
+    document.getElementById("cargando").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+function quitar_pantalla()
+{
+
+    document.getElementById("cargando").style.display = "none";
+    document.body.style.overflow = "scroll";
+}
+function onLoadBody() {
+    buscarProyectos(3, null);
+
 }
 function buscarProyectos(op, event) {
 
@@ -116,7 +116,6 @@ function buscarProyectos(op, event) {
 
 
         },
-
         error: function () {
             //quitarPantalla();
             alert("Error inesperado")
@@ -151,7 +150,6 @@ function mas(idRad, bpid, numProyecto) {
             $('.modal').modal();
 
         },
-
         error: function () {
             alert("Error inesperado")
             window.top.location = "../index.html";
@@ -177,7 +175,6 @@ function editarActividades(codRadicacion, idProducto, idActividad, valorActivida
             $('.modal').modal();
             $('select').material_select();
         },
-
         error: function () {
             alert("Error inesperado")
             window.top.location = "../index.html";
@@ -442,13 +439,13 @@ function guardarMetas() {
             return;
         }
     }
-    
+
     for (var i = 0; i < contMeta; i++) {
-        
+
         for (var j = 0; j < contItemMeta.value; j++) {
-            
+
         }
-        
+
     }
 
 }
