@@ -61,7 +61,7 @@ foreach ($datosRadicacion as $row) {
     $pdf->Ln(10);
     $pdf->Cell(0, 6, utf8_decode('Nombre del Programa o Proyecto:'));
     $pdf->Ln(5);
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[1]), 1, $pdf); //*************
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[1]), 0.965, $pdf); //*************
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Entidad Proponente:'));
     $pdf->Cell(60, 6, utf8_decode($row[2]), 0, 0); //*************
@@ -71,15 +71,40 @@ foreach ($datosRadicacion as $row) {
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Eje Estratégico:'));
     $pdf->Cell(60, 6, utf8_decode(ucfirst($row[4])), 0, 0); //*************
-    $pdf->Ln(4);
+    $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Programa:'));
     $strPrograma = ucfirst(substr($row[5], 2, strlen($row[5]) - 4));
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strPrograma), 1.5, $pdf); //*************
-    $pdf->Ln(4);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strPrograma), 1.46, $pdf); //*************
     $pdf->Cell(60, 6, utf8_decode('Subprograma:'));
     $strSub = ucfirst(substr($row[6], 2, strlen($row[6]) - 4));
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strSub), 1.5, $pdf); //*************
-    
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strSub), 1.46, $pdf); //*************
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Problema central o necesidad:'));
+    $pdf->Ln(5);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[7])), 0.965, $pdf); //*************
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Objetivo general:'));
+    $pdf->Ln(5);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[8])), 0.965, $pdf); //*************
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Objetivos específicos:'));
+    $pdf->Ln(5);
+
+    $obEspecificos = CargarDatosCerViabilidad::getObjetivosEspecificos($row[9]);
+    $i = 1;
+
+    foreach ($obEspecificos as $ob) {
+        DisenoCertificacionesPDF::justificarParrafo(utf8_decode("$i. " . ucfirst($ob[1])), 0.965, $pdf); //*************
+        $i++;
+    }
+
+    /* INSERTAR PRODUCTOS */
+
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Descripción del programa o proyecto:'));
+    $pdf->Ln(5);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[10])), 0.965, $pdf); //*************
+
     break;
 }
 $pdf->Output();
