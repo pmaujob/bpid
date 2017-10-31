@@ -2,6 +2,9 @@
 
 date_default_timezone_set('America/Bogota');
 session_start();
+/**********                          **********
+ ********** INSERTAR VARIABLES PROOT **********
+ **********                          **********/
 require_once '../../librerias/fpdf/fpdf.php';
 require_once '../../librerias/fpdf/PDF.php';
 require_once '../../librerias/DisenoCertificacionesPDF.php';
@@ -62,7 +65,7 @@ foreach ($datosRadicacion as $row) {
     $pdf->Cell(0, 6, utf8_decode('Nombre del Programa o Proyecto:'));
     $pdf->Ln(5);
     DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[1]), 0.965, $pdf); //*************
-    $pdf->Ln(10);
+    $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Entidad Proponente:'));
     $pdf->Cell(60, 6, utf8_decode($row[2]), 0, 0); //*************
     $pdf->Ln(10);
@@ -97,13 +100,44 @@ foreach ($datosRadicacion as $row) {
         DisenoCertificacionesPDF::justificarParrafo(utf8_decode("$i. " . ucfirst($ob[1])), 0.965, $pdf); //*************
         $i++;
     }
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Información de Productos:'));
+    $pdf->Ln(5);
 
-    /* INSERTAR PRODUCTOS */
+    //========================== PRODUCTOS =========================================
+    $productos = CargarDatosCerViabilidad::getProductos($row[13]);
+
+    foreach ($productos as $p) {
+        $pdf->Cell(176, 8, 'Producto', 1, 0, 'C');
+        $pdf->Ln();
+        $pdf->Cell(176, 4, utf8_decode($p[1]), 1, 0, 'C');
+        $pdf->Ln();
+        $pdf->Cell(88, 8, 'Cantidad', 1, 0, 'C');
+        $pdf->Cell(88, 8, 'Costo', 1, 0, 'C');
+        $pdf->Ln();
+        
+        $pdf->Cell(88, 4, $p[2], 1, 0, 'C');
+        $pdf->Cell(88, 4, 'HACE FALTA COLOCAR TOTAL', 1, 0, 'C');
+        $pdf->Ln();
+        $pdf->Cell(176, 8, 'Actividades', 1, 0, 'C');
+        $pdf->Ln();
+        $pdf->Cell(88, 8, utf8_decode('Descripción'), 1, 0, 'C');
+        $pdf->Cell(88, 8, 'Valor', 1, 0, 'C');
+        $pdf->Ln(10);
+    }
+
+
+
+
 
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Descripción del programa o proyecto:'));
     $pdf->Ln(5);
     DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[10])), 0.965, $pdf); //*************
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Número estimado de beneficiarios (Población): ' . $row[11]));
+    $pdf->Ln(10);
+    $pdf->Cell(60, 6, utf8_decode('Localización: ' . $row[12]));
 
     break;
 }
