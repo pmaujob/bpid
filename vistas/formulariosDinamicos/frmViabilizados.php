@@ -2,8 +2,8 @@
 require_once '../../modelo/CargarViabilizados.php';
 require_once '../../modelo/CargarMetas.php';
 
-const metaSelect = 'METASELECT';
-const actId = 'ACTID';
+        const metaSelect = 'METASELECT';
+        const actId = 'ACTID';
 
 if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
@@ -46,18 +46,18 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                 <tr style='display:none' id="fila_mga">
                     <td><strong>Seleccione Archivo MGA</strong></td>
                     <td>
-                     <div class="file-field input-field">
-                                                    <div class="btn">
-                                                        <span>Subir Archivo MGA XML</span>
-                                                        <input type="file" id="frm_archivo" name="frm_archivo" onchange="archivo_xml()" multiple
-                                                               alt="Cargar Archivo MGA WEB">
-                                                    </div>
-                                                    <div class="file-path-wrapper">
-                                                        <input class="file-path validate" type="text" placeholder="Seleccionar archivo XML">
-                                                    </div>
-                                                </div>
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Subir Archivo MGA XML</span>
+                                <input type="file" id="frm_archivo" name="frm_archivo" onchange="archivo_xml()" multiple
+                                       alt="Cargar Archivo MGA WEB">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Seleccionar archivo XML">
+                            </div>
+                        </div>
                     </td>   
-                    
+
                 </tr>
 
 
@@ -148,12 +148,16 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         <table class="striped" >         
             <thead>
                 <tr style="background-color: #008643">
-                    <th colspan="3" style="text-align:center; color: #ffffff" >FUENTES DE FINANCIACIÓN </th>
+                    <th colspan="6" style="text-align:center; color: #ffffff" >FUENTES DE FINANCIACIÓN </th>
                 </tr>
                 <tr>
                     <th>Tipo de Recursos</th>
-                    <th>Valor Financiación</th>
-                    <th>Periodo Financiación</th>
+                    <th>Valor </th>
+                    <th>Periodo</th>
+                    <th>Etapa </th>
+                    <th>Tipo Entidad </th>
+                    <th>Nombre Entidad </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -164,6 +168,9 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                         <tr>
                             <td><?php echo $fin[0]; ?></td>
                             <td><?php echo number_format($fin[1]) ?></td>
+                            <td><?php echo $fin[2]; ?></td>
+                            <td><?php echo $fin[2]; ?></td>
+                            <td><?php echo $fin[2]; ?></td>
                             <td><?php echo $fin[2]; ?></td>
                         </tr>                    
                         <?php

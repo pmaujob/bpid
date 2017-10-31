@@ -90,7 +90,7 @@ function archivo_xml()
             processData: false,
             success: function (existe)
             {
-                //alert(existe)
+               // alert(existe)
                 //	quitar_pantalla();
                 if (existe == 0)//si el archivo existe
                 {
@@ -151,7 +151,7 @@ function archivo_xml()
 
 
 
-                } else
+                } if(existe == 1)
                 {
                     $('#modal1').modal('close');
                     quitar_pantalla();
@@ -160,7 +160,15 @@ function archivo_xml()
                     return false;
 
                 }
+                if(existe == 2)
+                {
+                    $('#modal1').modal('close');
+                    quitar_pantalla();
+                    document.getElementById('d_ingreso').innerHTML = '<p> ERROR!, EL ARCHIVO NO PUEDE SER RADICADO</p>';
+                    $("#d_ingreso").dialog("open");
+                    return false;
 
+                }
 
 
             }
@@ -222,7 +230,7 @@ function almacenar()
             direccion_responsable + '//' + telefono_responsable + '//' + cel_responsable + '//' + correo_responsable + '//' + id_usuario + '//' + nombre_usuario + '//' +
             observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades + '//' + resumen;
 
-            
+         
     $('#modal1').modal('close');
     //bloquear_pantalla();
     jQuery.ajax({
@@ -232,8 +240,8 @@ function almacenar()
         data: {value: value, op: 1},
         success: function (respuesta) {
 
-            alert(respuesta);
-            return;
+           // alert(respuesta);
+           
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
                 $.ajax({
