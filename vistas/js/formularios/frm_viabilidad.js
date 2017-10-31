@@ -414,6 +414,7 @@ function subtotal(tupla)
 
 function guardarMetas() {
 
+    var idRad = document.getElementById('idRad').value;
     var contMeta = document.getElementById('contMeta').value;
     var contItemMeta = document.getElementById('contItemMeta');
     if (contItemMeta.value > contMeta) {
@@ -469,10 +470,16 @@ function guardarMetas() {
         type: 'POST',
         url: '../../controlador/ActualizarActividades.php',
         async: true,
-        data: {metaActividades: metaActividades},
+        data: {metaActividades: metaActividades, idRad: idRad},
         success: function (respuesta) {
 
-            console.log(respuesta);
+            if (respuesta == 1) {
+                alert("Los datos se actualizaron con éxito.");
+                location.href = 'frm_viabilidad.php';
+                
+            } else {
+                alert("No se pudo registrar las metas, por favor vuelva a intentarlo.");
+            }
 
         },
         error: function () {
