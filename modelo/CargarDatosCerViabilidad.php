@@ -70,7 +70,29 @@ class CargarDatosCerViabilidad {
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
-        
+
+        $con->cerrarConexion();
+
+        return $res;
+    }
+
+    public static function getActividades($codProducto) {
+
+        $consulta = "SELECT ra.id_actividad,"//0
+                . "ra.valor,"//1
+                . "ra.descripcion,"//2
+                . "ra.cod_meta_producto,"//3
+                . "mp.descripcion,"//4
+                . "array_agg(nm.num_meta_producto) as nums "//5
+                . "FROM radicacion_actividades AS ra "
+                . "INNER JOIN meta_producto AS mp ON ra.cod_meta_producto = mp.cod_meta_producto "
+                . "INNER JOIN num_meta_producto AS nm ON mp.cod_meta_producto = nm.cod_meta_producto "
+                . "WHERE id_producto = $codProducto "
+                . "GROUP BY ra.id_actividad,ra.valor,ra.descripcion,ra.cod_meta_producto,mp.descripcion;";
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->consultar($consulta);
         $con->cerrarConexion();
 
         return $res;

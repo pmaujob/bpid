@@ -46,18 +46,18 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                 <tr style='display:none' id="fila_mga">
                     <td><strong>Seleccione Archivo MGA</strong></td>
                     <td>
-                     <div class="file-field input-field">
-                                                    <div class="btn">
-                                                        <span>Subir Archivo MGA XML</span>
-                                                        <input type="file" id="frm_archivo" name="frm_archivo" onchange="archivo_xml()" multiple
-                                                               alt="Cargar Archivo MGA WEB">
-                                                    </div>
-                                                    <div class="file-path-wrapper">
-                                                        <input class="file-path validate" type="text" placeholder="Seleccionar archivo XML">
-                                                    </div>
-                                                </div>
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Subir Archivo MGA XML</span>
+                                <input type="file" id="frm_archivo" name="frm_archivo" onchange="archivo_xml()" multiple
+                                       alt="Cargar Archivo MGA WEB">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Seleccionar archivo XML">
+                            </div>
+                        </div>
                     </td>   
-                    
+
                 </tr>
 
 
@@ -200,10 +200,10 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                             <td>
                                 <input type="hidden" id="<?php echo actId . $contMeta ?>" value="<?php echo $act[5]; ?>">
                                 <p style="text-align: justify; margin-top: -4px;">
-                                    <?php echo $act[5] . "; " . $act[6]; ?>                                    
+                                    <?php echo $act[6]; ?>                                    
                                 </p>
                             </td>
-                            <td style="text-align: center;"><?php echo "$" . number_format($act[7]); ?></td>
+                            <td><?php echo "$" . number_format($act[7]); ?></td>
                             <td>                            
                                 <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
                                     <option value="0" selected disabled>Seleccione una Meta</option>                                    
