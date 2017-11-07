@@ -181,6 +181,17 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                             </div>
                                             <div class="row">
                                                 <div class="input-field col s12">
+                                                    <select id="frm_poai" name="frm_programa">
+                                                        <option value="" disabled selected>PERTENECE A UN PROGRAMA DE INVERSION</option>
+                                                        <option value="1">NUMERO DE PROGRAMA 1</option>
+                                                        <option value="2">NUMERO DE PROGRAMA 2</option>
+                                                    </select>
+                                                    <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
+                                                    <div id="d_frm_poai"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
                                                     <input id="frm_entidad" name="frm_entidad" type="text" class="validate">
                                                     <label for="frm_entidad" id="lbl_frm_entidad">ENTIDAD PROPONENTE</label>
                                                     <div id="d_frm_entidad"></div>

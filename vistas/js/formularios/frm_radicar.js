@@ -365,3 +365,13 @@ function buscarUsuario(tipo)
 
 
 }
+function verpro(opcion)
+{
+
+    fila = document.getElementById("fila_programa");
+    if (opcion == 1) {
+        fila.style.display = 'none';
+    } else {
+        fila.style.display = '';
+    }
+}
