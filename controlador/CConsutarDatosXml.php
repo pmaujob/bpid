@@ -266,7 +266,7 @@ class CConsutarDatosXml {
         $this->setPrograma((string) $this->getDatosProyecto()->PublicationContribution->ProgramDescription);
         $this->setSubprograma((string) $this->getDatosProyecto()->FundingSource->ExpenseType->Description);
         $this->setObjetivo((string) $this->getDatosProyecto()->GeneralObjective->GeneralObjective);
-        $this->setDecision((string) $this->getDatosProyecto()->EconomicEvaluations->EconomicEvaluation->AlternativeName);
+        $this->setDecision((string) $this->getDatosProyecto()->Alternatives->Alternative->TechnicalAnalisys);
         //Datos fuentes de financiamiento
         $monto = array();
         $detalle = array();

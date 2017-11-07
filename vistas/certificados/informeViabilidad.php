@@ -2,6 +2,9 @@
 
 date_default_timezone_set('America/Bogota');
 session_start();
+/**********                          **********
+ ********** INSERTAR VARIABLES PROOT **********
+ **********                          **********/
 require_once '../../librerias/fpdf/fpdf.php';
 require_once '../../librerias/fpdf/PDF.php';
 require_once '../../librerias/DisenoCertificacionesPDF.php';
@@ -61,8 +64,8 @@ foreach ($datosRadicacion as $row) {
     $pdf->Ln(10);
     $pdf->Cell(0, 6, utf8_decode('Nombre del Programa o Proyecto:'));
     $pdf->Ln(5);
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[1]), 1, $pdf); //*************
-    $pdf->Ln(10);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[1]), 0.965, $pdf); //*************
+    $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Entidad Proponente:'));
     $pdf->Cell(60, 6, utf8_decode($row[2]), 0, 0); //*************
     $pdf->Ln(10);
@@ -71,15 +74,71 @@ foreach ($datosRadicacion as $row) {
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Eje Estratégico:'));
     $pdf->Cell(60, 6, utf8_decode(ucfirst($row[4])), 0, 0); //*************
-    $pdf->Ln(4);
+    $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Programa:'));
     $strPrograma = ucfirst(substr($row[5], 2, strlen($row[5]) - 4));
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strPrograma), 1.5, $pdf); //*************
-    $pdf->Ln(4);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strPrograma), 1.46, $pdf); //*************
     $pdf->Cell(60, 6, utf8_decode('Subprograma:'));
     $strSub = ucfirst(substr($row[6], 2, strlen($row[6]) - 4));
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strSub), 1.5, $pdf); //*************
-    
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strSub), 1.46, $pdf); //*************
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Problema central o necesidad:'));
+    $pdf->Ln(5);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[7])), 0.965, $pdf); //*************
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Objetivo general:'));
+    $pdf->Ln(5);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[8])), 0.965, $pdf); //*************
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Objetivos específicos:'));
+    $pdf->Ln(5);
+
+    $obEspecificos = CargarDatosCerViabilidad::getObjetivosEspecificos($row[9]);
+    $i = 1;
+
+    foreach ($obEspecificos as $ob) {
+        DisenoCertificacionesPDF::justificarParrafo(utf8_decode("$i. " . ucfirst($ob[1])), 0.965, $pdf); //*************
+        $i++;
+    }
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Información de Productos:'));
+    $pdf->Ln(5);
+
+    //========================== PRODUCTOS =========================================
+    $productos = CargarDatosCerViabilidad::getProductos($row[13]);
+
+    foreach ($productos as $p) {
+        $pdf->Cell(176, 8, 'Producto', 1, 0, 'C');
+        $pdf->Ln();
+        $pdf->Cell(176, 4, utf8_decode($p[1]), 1, 0, 'C');
+        $pdf->Ln();
+        $pdf->Cell(88, 8, 'Cantidad', 1, 0, 'C');
+        $pdf->Cell(88, 8, 'Costo', 1, 0, 'C');
+        $pdf->Ln();
+        
+        $pdf->Cell(88, 4, $p[2], 1, 0, 'C');
+        $pdf->Cell(88, 4, 'HACE FALTA COLOCAR TOTAL', 1, 0, 'C');
+        $pdf->Ln();
+        $pdf->Cell(176, 8, 'Actividades', 1, 0, 'C');
+        $pdf->Ln();
+        $pdf->Cell(88, 8, utf8_decode('Descripción'), 1, 0, 'C');
+        $pdf->Cell(88, 8, 'Valor', 1, 0, 'C');
+        $pdf->Ln(10);
+    }
+
+
+
+
+
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Descripción del programa o proyecto:'));
+    $pdf->Ln(5);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[10])), 0.965, $pdf); //*************
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Número estimado de beneficiarios (Población): ' . $row[11]));
+    $pdf->Ln(10);
+    $pdf->Cell(60, 6, utf8_decode('Localización: ' . $row[12]));
+
     break;
 }
 $pdf->Output();

@@ -129,10 +129,11 @@ function mas(idRad, bpid, numProyecto) {
         success: function (respuesta) {
 
             //alert(respuesta);
+
             quitar_pantalla()
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
-
+            $('.collapsible').collapsible();
             Materialize.toast(document.getElementById('proyectName').value);
 
             var toast = document.getElementById('toast-container').getElementsByTagName("div")[0];
@@ -476,7 +477,7 @@ function guardarMetas() {
             if (respuesta == 1) {
                 alert("Los datos se actualizaron con éxito.");
                 location.href = 'frm_viabilidad.php';
-                
+
             } else {
                 alert("No se pudo registrar las metas, por favor vuelva a intentarlo.");
             }
