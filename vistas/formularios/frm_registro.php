@@ -7,7 +7,7 @@ require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
         const idFormulario = 7;
-        const idEtapa = 4;
+        const idEtapa = 3;
 
 $sess = new SessionVars();
 
@@ -20,9 +20,8 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <meta charset="UTF-8">
             <title>BPID</title>
             <?php require_once '../links.php'; ?>
-            <script type="text/javascript" src="../js/formularios/frm_criterios_viabilidad.js"></script>
+            <script type="text/javascript" src="../js/formularios/frm_registro.js"></script>
             <script type="text/javascript" src="../../modelo/fun_propias/validacion_campos.js"></script>
-
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
@@ -60,7 +59,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
                 <div class="col s12 m11 l9">
                     <div class="bajar">
-                        <div id="container" class="container-fluid">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
                                 <div class="col s12 m12 l12 center-align"><div class="titulofrm">CRITERIOS DE VIABILIDAD</div></div>
@@ -68,7 +67,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <br>
                             </div>
                             <div class="row">
-                                <div class="col s12 m12 l12">
+                                <div id="container" class="col s12 m12 l12">
                                     <div class="row">
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">
