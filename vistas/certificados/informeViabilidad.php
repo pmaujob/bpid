@@ -2,13 +2,13 @@
 
 date_default_timezone_set('America/Bogota');
 session_start();
-/**********                          **********
- ********** INSERTAR VARIABLES PROOT **********
- **********                          **********/
-require_once '../../librerias/fpdf/fpdf.php';
-require_once '../../librerias/fpdf/PDF.php';
-require_once '../../librerias/DisenoCertificacionesPDF.php';
-require_once '../../modelo/CargarDatosCerViabilidad.php';
+
+$raiz = $_SESSION['raiz'];
+
+require_once $raiz . '/librerias/fpdf/fpdf.php';
+require_once $raiz . '/librerias/fpdf/PDF.php';
+require_once $raiz . '/librerias/DisenoCertificacionesPDF.php';
+require_once $raiz . '/modelo/CargarDatosCerViabilidad.php';
 
 $datos = 1;
 
@@ -35,7 +35,6 @@ foreach ($datosRadicacion as $row) {
     $pdf->Ln(3);
     $pdf->Cell(20, 3, '_______________________________________________________________________________________________________________');
     $pdf->Ln(2);
-    $pdf->SetFont('Arial', 'B', 6);
     $pdf->Cell(10, 6, utf8_decode('Código Formato: BPID-IV01'));
     $pdf->Ln(0);
     $pdf->Cell(0, 6, utf8_decode('Versión: 02'), 0, 0, 'C');
@@ -101,34 +100,68 @@ foreach ($datosRadicacion as $row) {
         $i++;
     }
     $pdf->Ln(5);
-    $pdf->Cell(60, 6, utf8_decode('Información de Productos:'));
-    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('Cadena de Valor:'));
+    $pdf->Ln(10);
 
     //========================== PRODUCTOS =========================================
     $productos = CargarDatosCerViabilidad::getProductos($row[13]);
-
     foreach ($productos as $p) {
-        $pdf->Cell(176, 8, 'Producto', 1, 0, 'C');
+
+        $pdf->SetFillColor(0, 134, 67);
+        $pdf->SetTextColor(255);
+        $pdf->Cell(176, 8, 'Producto', 1, 0, 'C', true);
         $pdf->Ln();
-        $pdf->Cell(176, 4, utf8_decode($p[1]), 1, 0, 'C');
+
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetTextColor(0);
+        $pdf->Cell(90, 8, utf8_decode('Descripción'), 1, 0, 'C');
+        $pdf->Cell(43, 8, 'Cantidad', 1, 0, 'C');
+        $pdf->Cell(43, 8, 'Costo', 1, 0, 'C');
         $pdf->Ln();
-        $pdf->Cell(88, 8, 'Cantidad', 1, 0, 'C');
-        $pdf->Cell(88, 8, 'Costo', 1, 0, 'C');
+
+        $productDes = utf8_decode($p[1]);
+        $aProductLines = $pdf->getNumberLn(90, 4, $productDes);
+
+        DisenoCertificacionesPDF::justificarParrafo($productDes, 1.89, $pdf, 1, 6);
+        $pdf->backLn(110, $aProductLines * 6);
+        $pdf->Cell(43, $aProductLines * 6, $p[2], 1);
+        $pdf->Cell(43, $aProductLines * 6, '$' . '1000000000000', 1);
         $pdf->Ln();
-        
-        $pdf->Cell(88, 4, $p[2], 1, 0, 'C');
-        $pdf->Cell(88, 4, 'HACE FALTA COLOCAR TOTAL', 1, 0, 'C');
+
+        $pdf->SetFillColor(187, 208, 73);
+        $pdf->SetTextColor(255);
+        $pdf->Cell(176, 8, 'Actividades', 1, 0, 'C', true);
         $pdf->Ln();
-        $pdf->Cell(176, 8, 'Actividades', 1, 0, 'C');
+
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetTextColor(0);
+        $pdf->Cell(11, 8, utf8_decode('No.'), 1, 0, 'C');
+        $pdf->Cell(65, 8, utf8_decode('Descripción'), 1, 0, 'C');
+        $pdf->Cell(35, 8, 'Valor', 1, 0, 'C');
+        $pdf->Cell(65, 8, 'Meta', 1, 0, 'C');
         $pdf->Ln();
-        $pdf->Cell(88, 8, utf8_decode('Descripción'), 1, 0, 'C');
-        $pdf->Cell(88, 8, 'Valor', 1, 0, 'C');
-        $pdf->Ln(10);
+
+        $i = 1;
+        $actividades = CargarDatosCerViabilidad::getActividades($p[0]);
+        foreach ($actividades as $a) {
+
+            $textDes = utf8_decode(ucfirst($a[2]));
+            $textMeta = utf8_decode(ucfirst($a[5] . " - " . $a[4]));
+
+            $aNameLines = $pdf->getNumberLn(65, 4, $textDes);
+            $aMetaLines = $pdf->getNumberLn(65, 4, $textMeta);
+            $aMost = ($aNameLines > $aMetaLines ? $aNameLines : $aMetaLines) * 4;
+
+            $pdf->Cell(11, $aMost, $i, 1);
+            DisenoCertificacionesPDF::justificarParrafo($textDes, 2.615, $pdf, 1, $aMost / $aNameLines);
+            $pdf->backLn(96, $aMost);
+            $pdf->Cell(35, $aMost, "$" . $a[1], 1);
+            DisenoCertificacionesPDF::justificarParrafo($textMeta, 2.615, $pdf, 1, $aMost / $aMetaLines);
+
+            $i++;
+        }
+        $pdf->Ln(5);
     }
-
-
-
-
 
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Descripción del programa o proyecto:'));
