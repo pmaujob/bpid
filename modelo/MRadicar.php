@@ -23,6 +23,8 @@ class MRadicar {
         $resultado = $con->afectar($sql);
         $con->cerrarConexion();
         return $resultado;
+    
+        
     }
 
     public function getDatosUsuario($cedula) {

@@ -51,11 +51,16 @@ class ControladorRadicar {
     public function iniciar($valores, $cedulaSession) {
 
         if ($this->validarVacios($valores)) {
+
             $this->asignar($valores, $cedulaSession);
+
             if ($this->validar())
                 $this->radicar = new MRadicar();
             return $this->radicar->ingresarRadicar(
-                            $this->numero_proyecto, $this->nombre_proyecto, $this->sector, $this->localizacion, $this->valor,$this->eje,$this->programa,$this->subprograma, $this->poai, $this->entidad_proponente, $this->entidad_ejecutante, $this->num_id_responsable, $this->nom_responsable, $this->cargo_responsable, $this->direccion_responsable, $this->telefono_responsable, $this->cel_responsable, $this->correo_responsable, $this->id_usuario, $this->nombre_usuario, $this->observaciones, $this->cod_usuario_ingreso, $this->cod_secretaria, $this->cod_activacion, $this->objetivosEspecificos, $this->fuentesFinanciamiento, $this->problema, $this->poblacion, $this->objetivog, $this->productos, $this->actividades, $this->resumen);
+                            $this->numero_proyecto, $this->nombre_proyecto, $this->sector, $this->localizacion, $this->valor, $this->eje, $this->programa, $this->subprograma, $this->poai, $this->entidad_proponente, $this->entidad_ejecutante, $this->num_id_responsable, $this->nom_responsable, $this->cargo_responsable, $this->direccion_responsable, $this->telefono_responsable, $this->cel_responsable, $this->correo_responsable, $this->id_usuario, $this->nombre_usuario, $this->observaciones, $this->cod_usuario_ingreso, $this->cod_secretaria, $this->cod_activacion, $this->objetivosEspecificos, $this->fuentesFinanciamiento, $this->problema, $this->poblacion, $this->objetivog, $this->productos, $this->actividades, $this->resumen);
+        }
+        else {
+            echo "vacio";
         }
     }
 
@@ -90,17 +95,23 @@ class ControladorRadicar {
         $this->objetivog = $valores[25];
         $this->productos = $valores[26];
         $this->actividades = $valores[27];
+        $this->resumen = $valores[28];
         $this->cod_usuario_ingreso = $cedulaSession; //variable de sesion
         $this->cod_activacion = 1;
         $this->cod_secretaria = $sess->getValue('idSec');
-        $this->resumen= $valores[28];
     }
 
     public function validarVacios($valores) {
-        $cont = 0;
+        $cont = $cont2 = 0;
+
         foreach ($valores as $campo)
-            if (empty($campo))
-                $cont++;
+            $cont2++;
+        if (empty($campo)) {
+            $cont++;
+
+            echo $cont2;
+        }
+
 
         if ($cont > 0)
             return false;
@@ -124,7 +135,6 @@ class ControladorRadicar {
 
 if (isset($_POST['op']) && !empty($_POST['op'])) {
     if ($_POST['op'] == 1) {//guardar datos
-        
         $valores = trim(($_POST["value"]));
         $valores = explode("//", $valores);
         $radicar = new ControladorRadicar();

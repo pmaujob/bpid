@@ -29,8 +29,12 @@ class CargarViabilizados {
             case 3:
                 $consulta = 'select origen,'//0
                         . 'valor,'//1
-                        . 'periodo '//2
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("origen" varchar, "valor" numeric, "periodo" integer);';
+                        . 'periodo,'//2
+                        .'etapa,' //3
+                        .'tend,' //4
+                        .'tentd ' //5
+                    
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("origen" varchar, "valor" numeric, "periodo" integer,"etapa" varchar,"tend" varchar,"tentd" varchar );';
                 break;
             case 4:
                 $consulta = 'select id,'//0

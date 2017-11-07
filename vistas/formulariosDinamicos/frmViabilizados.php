@@ -2,8 +2,8 @@
 require_once '../../modelo/CargarViabilizados.php';
 require_once '../../modelo/CargarMetas.php';
 
-const metaSelect = 'METASELECT';
-const actId = 'ACTID';
+        const metaSelect = 'METASELECT';
+        const actId = 'ACTID';
 
 if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
@@ -25,7 +25,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
-                    <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?</th>
+                    <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?<?php echo $numBpid; ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                 ?></td>
                         </tr>
                         <tr>
-                            <th>Problema Central</th><td><?php echo $fila[2]; ?></td>
+                            <th>Problema Central</th><td style="text-align:justify"><?php echo $fila[2]; ?></td>
                         </tr>
                         <tr>
                             <th>Poblacion Objetivo</th>
@@ -106,7 +106,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                         </tr> 
                         <tr>
                             <th>Desicion:</th>
-                            <td><?php echo $fila[10]; ?></td>
+                            <td style="text-align:justify"><?php echo $fila[10]; ?></td>
                         </tr> 
                         <?php
                     }
@@ -148,12 +148,16 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         <table class="striped" >         
             <thead>
                 <tr style="background-color: #008643">
-                    <th colspan="3" style="text-align:center; color: #ffffff" >FUENTES DE FINANCIACIÓN </th>
+                    <th colspan="6" style="text-align:center; color: #ffffff" >FUENTES DE FINANCIACIÓN </th>
                 </tr>
                 <tr>
                     <th>Tipo de Recursos</th>
-                    <th>Valor Financiación</th>
-                    <th>Periodo Financiación</th>
+                    <th>Valor </th>
+                    <th>Periodo</th>
+                    <th>Etapa </th>
+                    <th>Tipo Entidad </th>
+                    <th>Nombre Entidad </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -163,8 +167,16 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                         ?>
                         <tr>
                             <td><?php echo $fin[0]; ?></td>
-                            <td><?php echo number_format($fin[1]) ?></td>
+                            <td><?php echo "$" . number_format($fin[1]) ?></td>
                             <td><?php echo $fin[2]; ?></td>
+                            <td><?php echo $fin[3]; ?></td>
+                            <td><?php echo $fin[4]; ?></td>
+                            <td><?php
+                                if ($fin[5] == -1) {
+                                    $fin[5] = "";
+                                };
+                                echo $fin[5];
+                                ?></td>
                         </tr>                    
                         <?php
                     }
@@ -182,68 +194,114 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
-                    <th colspan="4" style="text-align:center; color: #ffffff">ACTIVIDADES DE PROYECTO</th>
+                    <th colspan="4" style="text-align:center; color: #ffffff">CADENA DE VALOR DE LA ALTERNATIVA</th>
                 </tr>
-                <tr>
-                    <th style="width:40%;">Actividad</th>
-                    <th style="width:20%;">Valor Actividad</th>
-                    <th style="width:40%;">Seleccionar Meta</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if (count($datosActividades) > 0) {
-                    foreach ($datosActividades as $act) {
-                        $contMeta++;
-                        ?>
-                        <tr>
-                            <td>
-                                <input type="hidden" id="<?php echo actId . $contMeta ?>" value="<?php echo $act[5]; ?>">
-                                <p style="text-align: justify; margin-top: -4px;">
-                                    <?php echo $act[6]; ?>                                    
-                                </p>
-                            </td>
-                            <td><?php echo "$" . number_format($act[7]); ?></td>
-                            <td>                            
-                                <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
-                                    <option value="0" selected disabled>Seleccione una Meta</option>                                    
-                                    <?php
-                                    for ($i = 0; $i < count($metasProyecto); $i++) {
-                                        $meta = $metasProyecto[$i];
+
+        </table>
+        <ul class="collapsible" data-collapsible="accordion">
+            <?php
+            if (count($datosActividades) > 0) {
+                $aux = -1;
+                foreach ($datosActividades as $act) {
+                    //echo "<br>aux:$aux-act:$act[1]<br>";
+                    // $contMeta++;
+                    if ($aux == -1) {
+
+                        $aux = $act[1];
+                        ?>  
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">add</i><strong>PRODUCTO : </strong><?php echo $act[3]; ?></div>
+                            <div class="collapsible-body">
+                                <table class="striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 40%; text-align: center" >ACTIVIDAD</th>
+                                            <th style="width: 30%;  text-align: center">VALOR </th>
+                                            <th style="width: 30%;  text-align: center">META</th>
+                                        </tr>
+                                    </thead>  
+                                    <tbody>
+
+                                        <?php
+                                    } else if ($aux != $act[1]) {
+
+                                        $aux = $act[1];
                                         ?>
-                                        <option value="<?php echo $meta[0]; ?>" style="" ><?php echo $meta[2] . " - " . $meta[1]; ?></option>
+                                    </tbody></table>
+                            </div>                            </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">add</i><strong>PRODUCTO : </strong><?php echo $act[3]; ?></div>
+                            <div class="collapsible-body">
+                                <table class="striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 40%;  text-align: center">ACTIVIDAD</th>
+                                            <th style="width: 30%;  text-align: center">VALOR </th>
+                                            <th style="width: 30%;  text-align: center">META</th>
+                                        </tr>
+                                    </thead>  
+                                    <tbody>
                                         <?php
                                     }
-                                    unset($meta);
-                                    ?> 
-                                </select>
-                            </td>
-                        </tr>
-                    <?php }
-                    ?>
-                    <tr>
-                        <th colspan="4" style="text-align:center;">
-                            <button class="btn waves-effect waves-light" onclick="guardarMetas();">Guardar
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </th>
-                    </tr>
-                    <?php
-                } else {
-                    ?>
-                    <tr>
-                        <td>No se encontraron resultados para la búsqueda.</td>
-                    </tr>
-                    <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                                    ?>
+                                <span>
+
+                                    <tr>
+                                        <td style="width: 40%;">
+                                            <input type="hidden" id="<?php echo actId . $contMeta ?>" value="<?php echo $act[5]; ?>">
+                                            <p style="text-align: justify; margin-top: -4px;">
+                                                <?php echo $act[6]; ?>                                    
+                                            </p>
+                                        </td>
+                                        <td style="text-align: center;" style="width: 30%;"><?php echo "$" . number_format($act[7]); ?></td>
+                                        <td style="width: 30%;">                            
+                                            <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
+                                                <option value="0" selected disabled>Seleccione una Meta</option>                                    
+                                                <?php
+                                                for ($i = 0; $i < count($metasProyecto); $i++) {
+                                                    $meta = $metasProyecto[$i];
+                                                    ?>
+                                                    <option value="<?php echo $meta[0]; ?>" style="" ><?php echo $meta[2] . " - " . $meta[1]; ?></option>
+                                                    <?php
+                                                }
+                                                unset($meta);
+                                                ?> 
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                </span>   
+                                <?php
+                            }
+                            ?>
+                    </div></li>  
+                <?php
+            } else {
+                
+            }
+            ?>
+            </thead>  
+
+            </tbody></table>
+        </ul>
     </div>    
     <?php
 }
 ?>
+
 <input type="hidden" id="contMeta" value="<?php echo $contMeta; ?>">
 <input type="hidden" id="contItemMeta" value="<?php echo count($metasProyecto); ?>">
 <input type="hidden" id="idRad" value="<?php echo $idRad; ?>">
 <input type="hidden" id="proyectName" value="<?php echo $proyectName; ?>">
+<table class="striped">
+    <thead>
+        <tr>
+            <th colspan="4" style="text-align:center;">
+                <button class="btn waves-effect waves-light" onclick="guardarMetas();">Guardar
+                    <i class="material-icons right">send</i>
+                </button>
+            </th>
+        </tr>
+    </thead>  
+    <tbody>
+</table>
