@@ -34,7 +34,7 @@ class CargarViabilizados {
                         .'tend,' //4
                         .'tentd ' //5
                     
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("origen" varchar, "valor" numeric, "periodo" integer);';
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("origen" varchar, "valor" numeric, "periodo" integer,"etapa" varchar,"tend" varchar,"tentd" varchar );';
                 break;
             case 4:
                 $consulta = 'select id,'//0
