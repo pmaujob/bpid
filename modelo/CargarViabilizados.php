@@ -44,8 +44,9 @@ class CargarViabilizados {
                         . 'val,'//4
                         . 'idact,'//5
                         . 'des,'//6
-                        . 'val '//7
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric);';
+                        . 'val,'//7
+                        . 'mdes ' //8
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric, "mdes" varchar);';
                 break;
 
             default:

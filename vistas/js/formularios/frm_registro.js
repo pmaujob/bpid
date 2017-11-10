@@ -2,6 +2,11 @@ var idRad;
 
 function onLoadBody() {
 
+    $(document).ready(function () {
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+    });
+
     $("#d_error").dialog({
         autoOpen: false,
         modal: true,
@@ -66,6 +71,8 @@ function mas(cod, bpid, numProyecto) {
     var container = document.getElementById('container');
 
     idRad = cod;
+    bp = bpid;
+    num = numProyecto;
 
     document.getElementById('collapsible').innerHTML = "<div style='text-align: center; margin-left: auto; margin-right: auto;'><img id='esperarListas' src='./../css/wait.gif' style='width: 275px; height: 174,5px;' ></div>";
 
@@ -74,11 +81,12 @@ function mas(cod, bpid, numProyecto) {
         url: '../../vistas/formulariosDinamicos/frmDatosRegistro.php',
         async: true,
         timeout: 0,
-        data: {idRad: idRad},
+        data: {idRad: idRad, bpid: bp, nump: num},
         success: function (respuesta) {
 
             container.innerHTML = "";
             container.innerHTML = respuesta;
+
             $('.collapsible').collapsible();
             $('select').material_select();
 
@@ -88,4 +96,30 @@ function mas(cod, bpid, numProyecto) {
         }
     });
 
+}
+
+function listarDatosRadicacion(idRad, numProyecto) {
+
+    $('#modal1').modal('open');
+
+    jQuery.ajax({
+        type: 'POST',
+        url: '../../vistas/formulariosDinamicos/frmListarConsultaRad.php',
+        async: true,
+        timeout: 0,
+        data: {idRad: idRad, numProyecto: numProyecto},
+        success: function (respuesta) {
+
+            document.getElementById('collapsible').innerHTML = respuesta;
+
+        }, error: function () {
+            alert("Error inesperado")
+            window.top.location = "../index.html";
+        }
+    });
+
+}
+
+function cerrar(){
+    $('#modal1').modal('close');
 }

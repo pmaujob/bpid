@@ -7,7 +7,7 @@ require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
         const idFormulario = 7;
-        const idEtapa = 3;
+        const idEtapa = 3; //7
 
 $sess = new SessionVars();
 
@@ -26,33 +26,25 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         </head>
 
         <body onload="onLoadBody();">
-            <div id="semaforo" class="semaforo">
-                <div id="bonbilla" class="bonbilla">
-
+            <div id="modal1" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <a href="#!" onclick="cerrar();" style="margin-left: 95%; color: black;">
+                        <i class="material-icons">close</i>                            
+                    </a>
+                    <h4>Información del Proyecto</h4>
+                    <p>A continuación se mostrará la información de radicación del proyecto</p>
+                    <ul id="collapsible" class="collapsible" data-collapsible="accordion"> 
+                        <div style="text-align: center; margin-left: auto; margin-right: auto;">
+                            <img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
+                        </div>
+                    </ul>
+                </div>
+                <div class="modal-footer">          
+                    <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="cerrar();">Cerrar</a>
                 </div>
             </div>
             <div id="d_error" title="ALERTA"></div>
             <div id="d_ingreso" title="INFORMACION"></div>
-            <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
-                <div id="modal1" class="modal modal-fixed-footer">
-                    <a href="#!" onclick="cerrarModal();" style="margin-left: 95%; color: black;">
-                        <i class="material-icons" style="margin-top: 16px;">close</i>                            
-                    </a>
-                    <div class="modal-content">
-                        <h4>Lista de criterios</h4>
-                        <p>Seleccione los items y agregue observaciones si es necesario.</p>
-                        <ul id="collapsible" class="collapsible" data-collapsible="accordion">
-                            <div style="text-align: center; margin-left: auto; margin-right: auto;">
-                                <img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
-                            </div>
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(1);">Guardar y Enviar</a>
-                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(2);">Guardar Progreso</a>
-                    </div>
-                </div>
-            </form>
 
             <?php require_once '../menu.php'; ?>
             <form id='frm_radicar_listas' name='frm_criterios_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
@@ -62,7 +54,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
-                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">CRITERIOS DE VIABILIDAD</div></div>
+                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">Registro</div></div>
                                 <br>
                                 <br>
                             </div>
