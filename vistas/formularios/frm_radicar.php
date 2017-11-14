@@ -48,7 +48,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
-                                <div class="col s12 m12 l12 center-align"><div class="titulofrm"> RADICAR NUEVO PROYECTO</div></div>
+                                <div class="col s12 m12 l12 center-align">
+                                    <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
+                                        <i class="material-icons small left">description</i>
+                                        Radicar Nuevo Proyecto
+                                    </div>
+                                </div>
                                 <br><br>
                             </div>
                             <div class="row">

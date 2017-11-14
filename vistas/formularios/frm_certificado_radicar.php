@@ -3,8 +3,8 @@ session_start();
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
-const idFormulario = 3;
-const idEtapa = -2;
+        const idFormulario = 3;
+        const idEtapa = -2;
 $sess = new SessionVars();
 $sess->init();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
@@ -48,7 +48,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align">
                                     <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
-                                    <div class="titulofrm">GENERAR FICHA RADICACIÓN</div>
+                                    <div class="col s12 m12 l12 center-align">
+                                        <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
+                                            <i class="material-icons small left">library_books</i>
+                                            Generar Ficha Radicación
+                                        </div>
+                                    </div>
                                 </div>
                                 <br>
                                 <br>

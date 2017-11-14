@@ -3,8 +3,8 @@
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
-const idFormulario = 4; //id 4 pertenece a consultar radicacion
-const idEtapa = 2; //id 2 pertenece a los archivos ya radicados
+        const idFormulario = 4; //id 4 pertenece a consultar radicacion
+        const idEtapa = 2; //id 2 pertenece a los archivos ya radicados
 $sess = new SessionVars();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
@@ -50,7 +50,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align">
                                     <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
-                                    <div class="titulofrm">METAS DE PRODUCTO</div>
+                                    <div class="col s12 m12 l12 center-align">
+                                        <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
+                                            <i class="material-icons small left">landscape</i>
+                                            Metas de Producto
+                                        </div>
+                                    </div>
                                 </div>
                                 <br>
                                 <br>
@@ -61,11 +66,11 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">
                                                 <div class="file-field input-field">
-                                                    <div class="btn" onclick="buscarProyectos('<?php echo idEtapa;?>',null);">
+                                                    <div class="btn" onclick="buscarProyectos('<?php echo idEtapa; ?>', null);">
                                                         <span>Buscar proyecto</span>
                                                     </div>
                                                     <div class="file-path-wrapper">
-                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeyup="buscarProyectos('<?php echo idEtapa;?>',event);">
+                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeyup="buscarProyectos('<?php echo idEtapa; ?>', event);">
                                                     </div>
                                                 </div>
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
