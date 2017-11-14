@@ -20,7 +20,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <script type="text/javascript" src="../../modelo/fun_propias/validacion_campos.js"></script>
         </head>
 
-        <body>
+        <body onload="tipoproyecto()">
             <div id="dario"></div>
             <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
             <div id="d_error" title="ALERTA"></div>
@@ -40,6 +40,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 <input id="frm_subprograma" name="frm_subprograma"  type="hidden" readonly/>
                 <input id="total" name="total" type="hidden" value="" />
                 <input id="resumen" name="resumen" type="hidden" value="" />
+                <input id="controltipo" name="controltipo" type="hidden" value="" />
 
                 <div class="col s12 m11 l9">
                     <div class="bajar">
@@ -47,7 +48,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
-                                <div class="col s12 m12 l12 center-align"><div class="titulofrm"> RADICAR NUEVO PROYECTO</div></div>
+                                <div class="col s12 m12 l12 center-align">
+                                    <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
+                                        <i class="material-icons small left">description</i>
+                                        Radicar Nuevo Proyecto
+                                    </div>
+                                </div>
                                 <br><br>
                             </div>
                             <div class="row">
@@ -160,8 +166,24 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
                                     <div class="col s2 m2 l2"></div>
                                 </div>
-
+                               
+                        </div>      
                             </div>
+                        <p><p>
+                                
+                            <div class="row">
+                                <div class="col s2 m2 l2"></div>
+                                <div class="col s8 m8 l12 center-align">
+                                    <br>
+                                    <hr style="background-color: #008643; border-width: 1px;">
+                                    <a class="waves-effect waves-light btn " style="background: #FFCA04" onclick="tipoproyecto()"><i class="material-icons right">sync</i><strong>Cambiar Tipo Proyecto</strong></a>
+
+                                    
+
+                                    <div class="col s2 m2 l2"></div>
+                                </div>
+                               
+                        </div>    
                             <!-- MODAL-->
                             <div class="container">
                                 <div class="row">
@@ -179,9 +201,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                                     <div id="d_frm_poai"></div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row" style="display: none" id="filatipoproyecto">
+                                                
                                                 <div class="input-field col s12">
-                                                    <select id="frm_poai" name="frm_programa">
+                                                    <select id="frm_poai" name="frm_programa_inversion">
                                                         <option value="" disabled selected>PERTENECE A UN PROGRAMA DE INVERSION</option>
                                                         <option value="1">NUMERO DE PROGRAMA 1</option>
                                                         <option value="2">NUMERO DE PROGRAMA 2</option>
@@ -290,7 +313,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         <div class="modal-footer">
                                             <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
                                             <a href="#!"  onClick="if (validar_campos_requeridos('frm_poai-frm_entidad-frm_entidad_ejecuta-frm_id_responsable-frm_nom_responsable-frm_cargo_responsable-frm_dir_responsable-frm_cel_responsable-frm_correo-frm_id_usuario-frm_nom_usuario', 11) == true)
-                                                            almacenar()" class="modal-action  waves-effect waves-green btn-flat ">Guardar</a>
+                                                        almacenar()" class="modal-action  waves-effect waves-green btn-flat ">Guardar</a>
                                             <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
 
                                         </div>
@@ -300,6 +323,28 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 </div>
 
                             </div>
+                            <!-- Modal  -->
+
+                            <div id="ventanatipo" class="modal" style=" max-width: 650px; max-height: 750px; height:250px">
+                                <div class="modal-content">
+                                    <h5>TIPO DE PROYECTO A RADICAR</h5>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <select id="frm_tipo" name="frm_tipo">
+                                                <option value="1">PROYECTO GENERAL </option>
+                                                <option value="2"> PROGRAMA DE INVERSION</option>
+                                                <option value="3"> PROYECTO PERTENECE A  PROGRAMA DE INVERSION</option>
+                                            </select>
+                                            <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
+                                            <div id="d_frm_poai"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                       <button class="btn waves-effect waves-light" onclick="validarTipo()">Aceptar
+                                        <i class="material-icons right">send</i> 
+                                </div>
+                            </div>          
 
                         </div>
                     </div>

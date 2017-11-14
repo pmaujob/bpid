@@ -1,5 +1,6 @@
 // JavaScript Document
 // Desarrollado Ing Dario Santacruz
+
 function bloquear_pantalla()
 {
 
@@ -90,7 +91,7 @@ function archivo_xml()
             processData: false,
             success: function (existe)
             {
-               // alert(existe)
+                // alert(existe)
                 //	quitar_pantalla();
                 if (existe == 0)//si el archivo existe
                 {
@@ -151,7 +152,8 @@ function archivo_xml()
 
 
 
-                } if(existe == 1)
+                }
+                if (existe == 1)
                 {
                     $('#modal1').modal('close');
                     quitar_pantalla();
@@ -160,7 +162,7 @@ function archivo_xml()
                     return false;
 
                 }
-                if(existe == 2)
+                if (existe == 2)
                 {
                     $('#modal1').modal('close');
                     quitar_pantalla();
@@ -224,13 +226,18 @@ function almacenar()
     var productos = document.getElementById('productos').value;
     var actividades = document.getElementById('actividades').value;
     var resumen = document.getElementById('resumen').value;
+    var tipo_proyecto = document.getElementById('frm_tipo').value;
+    if(tipo_proyecto==0){var numero_programa_inversion=-1;}//proyecto General
+    else if(tipo_proyecto==1){var numero_programa_inversion=1;}//Proyecto de Inversion
+    else {var numero_programa_inversion=document.getElementById('frm_programa_inversion').value;}
+
 
     var value = numero_proyecto + '//' + nombre_proyecto + '//' + sector + '//' + localizacion + '//' + valor + '//' + eje + '//' + programa + '//' + subprograma + '//' + poai + '//' +
             entidad_proponente + '//' + entidad_ejecutante + '//' + num_id_responsable + '//' + nom_responsable + '//' + cargo_responsable + '//' +
             direccion_responsable + '//' + telefono_responsable + '//' + cel_responsable + '//' + correo_responsable + '//' + id_usuario + '//' + nombre_usuario + '//' +
             observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades + '//' + resumen;
 
-         
+
     $('#modal1').modal('close');
     //bloquear_pantalla();
     jQuery.ajax({
@@ -240,8 +247,8 @@ function almacenar()
         data: {value: value, op: 1},
         success: function (respuesta) {
 
-           // alert(respuesta);
-           
+            // alert(respuesta);
+
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
                 $.ajax({
@@ -374,4 +381,42 @@ function verpro(opcion)
     } else {
         fila.style.display = '';
     }
+}
+
+function tipoproyecto()
+{
+    $('#ventanatipo').modal('open');
+}
+function validarTipo()
+{
+    if (document.getElementById('toast-container') != null) {
+        toasts = document.getElementById('toast-container').getElementsByTagName("div");
+        for (var i = toasts.length - 1; i >= 0; i--) {
+        toasts[i].parentNode.removeChild(toasts[i]);
+    }
+    }
+
+    
+    $('#ventanatipo').modal('close');
+    var proyectotipo = document.getElementById('frm_tipo').value;
+    if (proyectotipo == 1) {
+        Materialize.toast('PROYECTO GENERAL', 14000);
+        document.getElementById("filatipoproyecto").style.display = 'none';
+        
+        
+    }
+     if (proyectotipo == 2) {
+        Materialize.toast('PROGRAMA DE INVERSION', 14000);
+                document.getElementById("filatipoproyecto").style.display = 'block';
+    }
+    if (proyectotipo == 3) {
+        Materialize.toast('EL PROYECTO PERTENECE A PROYECTO DE INVERSION', 14000);
+                document.getElementById("filatipoproyecto").style.display = 'block';
+    }
+    
+
+    var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer
+    toasts[0].style.background = "#FFCA04";
+    toasts[0].style.fontWeight = "400";
+
 }

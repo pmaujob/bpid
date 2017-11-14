@@ -11,6 +11,7 @@ class MLogin {
     private $idLog;
     private $respuesta;
     private $secretaria;
+    private $desSecretaria;
 
     public function logIn($correo, $contrasena, $ip) {
         
@@ -51,7 +52,7 @@ class MLogin {
     
     private function setDatosUsuario(){
         
-        $sql = 'select usuario, ced, sec from seguridad.get_datos_usuario('.$this->correo.') as ("usuario" varchar, "ced" varchar, "sec" integer);';
+        $sql = 'select usuario, ced, sec, dess from seguridad.get_datos_usuario('.$this->correo.') as ("usuario" varchar, "ced" varchar, "sec" integer, "dess" varchar);';
         
         $res = $this->con->consultar($sql);
         
@@ -59,6 +60,7 @@ class MLogin {
             $this->usuario = $resultado->usuario;
             $this->cedula = $resultado->ced;
             $this->secretaria = $resultado->sec;
+            $this->desSecretaria = $resultado->dess;
         }
         
     }
@@ -90,6 +92,12 @@ class MLogin {
     public function getSecretaria(){
         
         return $this->secretaria;
+        
+    }
+    
+    public function getDesSecreatria(){
+        
+        return $this->desSecretaria;
         
     }
 

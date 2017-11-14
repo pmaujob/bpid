@@ -2,6 +2,10 @@ var idRad;
 
 function onLoadBody() {
 
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+
     $("#d_error").dialog({
         autoOpen: false,
         modal: true,
@@ -66,6 +70,8 @@ function mas(cod, bpid, numProyecto) {
     var container = document.getElementById('container');
 
     idRad = cod;
+    bp = bpid;
+    num = numProyecto;
 
     document.getElementById('collapsible').innerHTML = "<div style='text-align: center; margin-left: auto; margin-right: auto;'><img id='esperarListas' src='./../css/wait.gif' style='width: 275px; height: 174,5px;' ></div>";
 
@@ -74,11 +80,12 @@ function mas(cod, bpid, numProyecto) {
         url: '../../vistas/formulariosDinamicos/frmDatosRegistro.php',
         async: true,
         timeout: 0,
-        data: {idRad: idRad},
+        data: {idRad: idRad, bpid: bp, nump: num},
         success: function (respuesta) {
 
             container.innerHTML = "";
             container.innerHTML = respuesta;
+
             $('.collapsible').collapsible();
             $('select').material_select();
 
@@ -88,4 +95,68 @@ function mas(cod, bpid, numProyecto) {
         }
     });
 
+}
+
+function listarDatosRadicacion(idRad, numProyecto) {
+
+    $('#modal1').modal('open');
+
+    jQuery.ajax({
+        type: 'POST',
+        url: '../../vistas/formulariosDinamicos/frmListarConsultaRad.php',
+        async: true,
+        timeout: 0,
+        data: {idRad: idRad, numProyecto: numProyecto},
+        success: function (respuesta) {
+
+            document.getElementById('collapsible').innerHTML = respuesta;
+
+        }, error: function () {
+            alert("Error inesperado")
+            window.top.location = "../index.html";
+        }
+    });
+
+}
+
+function registrar() {
+
+    tipoReg = document.getElementById('tipo_reg').selectedIndex; //select
+    conceptoPost = document.getElementById('concepto_post').selectedIndex; //select
+    motivacion = document.getElementById('motivacion').value;
+    archivo = document.getElementById('archivo').value; //file
+    archivoText = document.getElementById('archivo_text').value; //texto file
+    secretario = document.getElementById('secretario').selectedIndex; //select
+
+    if (tipoReg != 0 && conceptoPost != 0 && motivacion !== "" && archivo != "" && archivoText != "" && secretario != 0) {
+
+        var formData = new FormData($("#frm_registro")[0]);
+        $.ajax({
+            url: '../../controlador/CRegistro.php',
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (datos)
+            {
+
+                alert(datos);
+
+                var mensaje = "Se han registrado los datos de registro con exito.";
+                document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
+                $("#d_error").dialog("open");
+
+            }
+        });
+
+    } else {
+        var mensaje = "Error, Verifique que todos los campos esten diligenciados correctamente.";
+        document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
+        $("#d_error").dialog("open");
+    }
+
+}
+
+function cerrar() {
+    $('#modal1').modal('close');
 }
