@@ -419,6 +419,7 @@ function guardarMetas() {
     var contMeta = document.getElementById('contMeta').value;
     var contItemMeta = document.getElementById('contItemMeta');
     if (contItemMeta.value > contMeta) {
+        console.log("contItemMeta.value: "+contItemMeta.value + ", contMeta: "+contMeta);
         $("#d_ingreso").dialog("open");
         return;
     }
