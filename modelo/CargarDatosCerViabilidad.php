@@ -7,12 +7,7 @@ require_once $raiz . '/librerias/SessionVars.php';
 
 class CargarDatosCerViabilidad {
 
-    public static function getDatosInformeViabilidad($filtro) {
-
-        $sess = new SessionVars();
-        $sess->init();
-        $codSecretaria = $sess->getValue('idSec');
-        $cedula = $sess->getValue('cedula');
+    public static function getDatosInformeViabilidad($idRad) {
 
         $consulta = "SELECT nb.numero_completo,"//0
                 . "upper(r.nombre_proyecto),"//1
@@ -27,7 +22,9 @@ class CargarDatosCerViabilidad {
                 . "r.resumen,"//10
                 . "r.poblacion,"//11
                 . "r.localizacion,"//12
-                . "r.cod_radicacion "//13
+                . "r.cod_radicacion,"//13
+                . "r.fecha_viabilidad,"//14
+                . "r.hora_viabilidad "//15
                 . "FROM radicacion AS r "
                 . "INNER JOIN numero_bpid AS nb ON r.cod_bpid = nb.cod_numero_bpid "
                 . "INNER JOIN radicacion_meta AS rm ON r.cod_radicacion = rm.cod_radicacion "
@@ -35,8 +32,8 @@ class CargarDatosCerViabilidad {
                 . "INNER JOIN subprograma AS s ON mp.cod_subprograma = s.cod_subprograma "
                 . "INNER JOIN programa AS p ON s.cod_programa = p.cod_programa "
                 . "INNER JOIN eje AS e ON p.cod_eje = e.cod_eje "
-                . "WHERE nb.numero_completo like '%0%' "
-                . "GROUP BY nb.numero_completo,upper(r.nombre_proyecto),r.entidad_proponente,r.entidad_ejecutante,e.descripcion,r.problema,r.objetivo,r.cod_bpid,r.resumen,r.poblacion,r.localizacion,r.cod_radicacion;";
+                . "WHERE r.cod_radicacion = $idRad "
+                . "GROUP BY nb.numero_completo,upper(r.nombre_proyecto),r.entidad_proponente,r.entidad_ejecutante,e.descripcion,r.problema,r.objetivo,r.cod_bpid,r.resumen,r.poblacion,r.localizacion,r.cod_radicacion,r.fecha_viabilidad;";
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
@@ -64,7 +61,8 @@ class CargarDatosCerViabilidad {
 
         $consulta = "SELECT id_producto,"//0
                 . "nom_producto,"//1
-                . "cantidad "//2
+                . "cantidad, "//2
+                . "'XXXXXX' "//3
                 . "FROM radicacion_productos WHERE cod_radicacion = $codRadicacion;";
 
         $con = new ConexionPDO();
@@ -96,6 +94,24 @@ class CargarDatosCerViabilidad {
         $con->cerrarConexion();
 
         return $res;
+    }
+
+    public static function getResponsables($codRadicacion) {
+        
+        $consulta = "SELECT idres,"//0
+                . "nombres,"//1
+                . "apellidos,"//2
+                . "cargo "//3
+                . "FROM radicacion_responsables WHERE cod_radicacion = $codRadicacion;";
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->consultar($consulta);
+
+        $con->cerrarConexion();
+
+        return $res;
+        
     }
 
 }

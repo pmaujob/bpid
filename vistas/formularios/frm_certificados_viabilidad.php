@@ -4,7 +4,7 @@ require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
 const idFormulario = 8; //id 8 pertenece a certificados viabilidad
-const idEtapa = 2; //id 2 pertenece a los archivos ya radicados
+const idEtapa = -6; //id 6 pertenece a los proyectos ya viabilizados
 $sess = new SessionVars();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
@@ -34,74 +34,59 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         </div>
 
                         <div class="row">
-                            <div class="col m12 l2">
-
-                            </div>
-
-                            <div class="col s12 m8 l8">
+                            <div class="col s12 m12 l12">
                                 <div class="row">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>No.</th>
-                                                <th width="400px">Certificado</th>
-                                                <th width="100px">Acción</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Informe de Viabilidad</td>
-                                                <td>
-                                                    <a href="../certificados/informeViabilidad.php" title="Ver Más">
-                                                        <div onclick="mas(1);">
-                                                            <img style="width: 50%; height: 50%;" src="../../vistas/img/pdf.png">
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Certificado de Viabilidad</td>
-                                                <td>
-                                                    <a href="#" title="Ver Más">
-                                                        <div onclick="mas(2);">
-                                                            <img style="width: 50%; height: 50%;" src="../../vistas/img/pdf.png">
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Certificado de NO Viabilidad</td>
-                                                <td>
-                                                    <a href="#" title="Ver Más">
-                                                        <div onclick="mas(3);">
-                                                            <img style="width: 50%; height: 50%;" src="../../vistas/img/pdf.png">
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Solicitud de Registro</td>
-                                                <td>
-                                                    <a href="#" title="Ver Más">
-                                                        <div onclick="mas(4);">
-                                                            <img style="width: 50%; height: 50%;" src="../../vistas/img/pdf.png">
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="input-field col s12 m12 l12">
+                                        <div class="opcionesbtn">
+                                            <div class="file-field input-field">
+                                                <div class="btn" onclick="buscarProyectos('<?php echo idEtapa; ?>', null);">
+                                                    <span>Buscar proyecto</span>
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeyup="buscarProyectos('<?php echo idEtapa; ?>', event);">
+                                                </div>
+                                            </div>
+                                            <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="resultado" class="row">
+
+                                </div>
+                                <div id="esperarListas" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                    <img src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col m12 l2">
+                        <div id="divCertificados" style="display: none;">
+                            <div class="row">
+                                <div class="col s2 m4 l4">
 
+                                </div>
+                                <div class="col s8 m4 l4 center-align">
+                                    <span id="txtCertificate">
+                                        Certificado de NO viabilidad
+                                    </span>
+                                </div>
+                                <div class="col s2 m2 l2">
+
+                                </div>                            
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col s2 m4 l4">
 
+                                </div>
+                                <div class="col s8 m4 l4 center-align">
+                                    <a href="#!" target="_blank" title="Ver Más" onclick="creteCertificate();">
+                                        <img style="width: 25%; height: 25%;" src="../../vistas/img/pdf.png">
+                                    </a>
+                                </div>
+                                <div class="col s2 m4 l4">
+
+                                </div>
+                            </div>
                         </div>
 
                     </div>      

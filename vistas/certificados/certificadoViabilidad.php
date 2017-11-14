@@ -9,10 +9,11 @@ require_once $raiz . '/librerias/fpdf/fpdf.php';
 require_once $raiz . '/librerias/fpdf/PDF.php';
 require_once $raiz . '/librerias/DisenoCertificacionesPDF.php';
 require_once $raiz . '/modelo/CargarDatosCerViabilidad.php';
+require_once $raiz . '/librerias/CambiarFormatos.php';
 
-$datos = 1;
+$idRad = 1;
 
-$datosRadicacion = CargarDatosCerViabilidad::getDatosInformeViabilidad($datos);
+$datosRadicacion = CargarDatosCerViabilidad::getDatosInformeViabilidad($idRad);
 
 $pdf = new FPDF('P', 'mm', 'Letter'); // vertical, milimetros y tamaño
 $pdf->SetMargins(20, 15, 20);
@@ -44,7 +45,7 @@ foreach ($datosRadicacion as $row) {
     //================== Cuerpo ==========================
     $pdf->Ln(10);
     $pdf->SetFont('Arial', 'B', 8);
-    $pdf->Cell(0, 6, utf8_decode('INFORME DE VIABILIDAD'), 0, 0, 'C');
+    $pdf->Cell(0, 6, utf8_decode('CERTIFICADO DE VIABILIDAD'), 0, 0, 'C');
     $pdf->Ln(10);
     $pdf->Cell(0, 6, utf8_decode('Código de Radicación:'));
     $pdf->Ln(0);
@@ -56,38 +57,39 @@ foreach ($datosRadicacion as $row) {
     $pdf->Ln(4);
     $pdf->Cell(0, 6, $row[0]);
     $pdf->Ln(0);
-    $pdf->Cell(0, 6, utf8_decode(date("d/M/Y")), 0, 0, 'C');
+    $pdf->Cell(0, 6, CambiarFormatos::cambiarFecha($row[14] != null && $row[14] != "" ? $row[14] : date("m/d/Y")), 0, 0, 'C');
     $pdf->Ln(0);
-    $pdf->Cell(0, 6, utf8_decode('10:08:56'), 0, 0, 'R');
+    $timeVia = new DateTime($row[15]);
+    $pdf->Cell(0, 6, date_format($timeVia, 'g:i A'), 0, 0, 'R');
 
     $pdf->Ln(10);
     $pdf->Cell(0, 6, utf8_decode('Nombre del Programa o Proyecto:'));
     $pdf->Ln(5);
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[1]), 0.965, $pdf); //*************
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[1]), 0.965, $pdf);
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Entidad Proponente:'));
-    $pdf->Cell(60, 6, utf8_decode($row[2]), 0, 0); //*************
+    $pdf->Cell(60, 6, utf8_decode($row[2]), 0, 0);
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Entidad Ejecutora:'));
-    $pdf->Cell(60, 6, utf8_decode($row[3]), 0, 0); //*************
+    $pdf->Cell(60, 6, utf8_decode($row[3]), 0, 0);
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Eje Estratégico:'));
-    $pdf->Cell(60, 6, utf8_decode(ucfirst($row[4])), 0, 0); //*************
+    $pdf->Cell(60, 6, utf8_decode(ucfirst($row[4])), 0, 0);
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Programa:'));
     $strPrograma = ucfirst(substr($row[5], 2, strlen($row[5]) - 4));
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strPrograma), 1.46, $pdf); //*************
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strPrograma), 1.46, $pdf);
     $pdf->Cell(60, 6, utf8_decode('Subprograma:'));
     $strSub = ucfirst(substr($row[6], 2, strlen($row[6]) - 4));
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strSub), 1.46, $pdf); //*************
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strSub), 1.46, $pdf);
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Problema central o necesidad:'));
     $pdf->Ln(5);
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[7])), 0.965, $pdf); //*************
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[7])), 0.965, $pdf);
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Objetivo general:'));
     $pdf->Ln(5);
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[8])), 0.965, $pdf); //*************
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[8])), 0.965, $pdf);
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Objetivos específicos:'));
     $pdf->Ln(5);
@@ -96,7 +98,7 @@ foreach ($datosRadicacion as $row) {
     $i = 1;
 
     foreach ($obEspecificos as $ob) {
-        DisenoCertificacionesPDF::justificarParrafo(utf8_decode("$i. " . ucfirst($ob[1])), 0.965, $pdf); //*************
+        DisenoCertificacionesPDF::justificarParrafo(utf8_decode("$i. " . ucfirst($ob[1])), 0.965, $pdf);
         $i++;
     }
     $pdf->Ln(5);
@@ -107,25 +109,29 @@ foreach ($datosRadicacion as $row) {
     $productos = CargarDatosCerViabilidad::getProductos($row[13]);
     foreach ($productos as $p) {
 
+        $actividades = CargarDatosCerViabilidad::getActividades($p[0])->fetchAll(PDO::FETCH_BOTH);
+        $total = 0;
+        for ($i = 0; $i < count($actividades); $i++) {
+            $act = $actividades[$i];
+            $total += $act[1];
+        }
+
         $pdf->SetFillColor(0, 134, 67);
         $pdf->SetTextColor(255);
         $pdf->Cell(176, 8, 'Producto', 1, 0, 'C', true);
         $pdf->Ln();
-
         $pdf->SetFillColor(255, 255, 255);
         $pdf->SetTextColor(0);
-        $pdf->Cell(90, 8, utf8_decode('Descripción'), 1, 0, 'C');
-        $pdf->Cell(43, 8, 'Cantidad', 1, 0, 'C');
-        $pdf->Cell(43, 8, 'Costo', 1, 0, 'C');
+        $pdf->MultiCell(176, 6, utf8_decode($p[1]), 1, 'C');
+
+        $pdf->Cell(58, 8, 'Cantidad', 1, 0, 'C');
+        $pdf->Cell(58, 8, 'Costo', 1, 0, 'C');
+        $pdf->Cell(60, 8, 'Unidad de Medida', 1, 0, 'C');
         $pdf->Ln();
 
-        $productDes = utf8_decode($p[1]);
-        $aProductLines = $pdf->getNumberLn(90, 4, $productDes);
-
-        DisenoCertificacionesPDF::justificarParrafo($productDes, 1.89, $pdf, 1, 6);
-        $pdf->backLn(110, $aProductLines * 6);
-        $pdf->Cell(43, $aProductLines * 6, $p[2], 1);
-        $pdf->Cell(43, $aProductLines * 6, '$' . '1000000000000', 1);
+        $pdf->Cell(58, 6, $p[2], 1);
+        $pdf->Cell(58, 6, '$' . $total, 1);
+        $pdf->Cell(60, 6, $p[3], 1, 0, 'C');
         $pdf->Ln();
 
         $pdf->SetFillColor(187, 208, 73);
@@ -141,9 +147,9 @@ foreach ($datosRadicacion as $row) {
         $pdf->Cell(65, 8, 'Meta', 1, 0, 'C');
         $pdf->Ln();
 
-        $i = 1;
-        $actividades = CargarDatosCerViabilidad::getActividades($p[0]);
-        foreach ($actividades as $a) {
+        $n = 1;
+        for ($i = 0; $i < count($actividades); $i++) {
+            $a = $actividades[$i];
 
             $textDes = utf8_decode(ucfirst($a[2]));
             $textMeta = utf8_decode(ucfirst($a[5] . " - " . $a[4]));
@@ -152,25 +158,60 @@ foreach ($datosRadicacion as $row) {
             $aMetaLines = $pdf->getNumberLn(65, 4, $textMeta);
             $aMost = ($aNameLines > $aMetaLines ? $aNameLines : $aMetaLines) * 4;
 
-            $pdf->Cell(11, $aMost, $i, 1);
+            $pdf->Cell(11, $aMost, $n, 1);
             DisenoCertificacionesPDF::justificarParrafo($textDes, 2.615, $pdf, 1, $aMost / $aNameLines);
             $pdf->backLn(96, $aMost);
-            $pdf->Cell(35, $aMost, "$" . $a[1], 1);
+            $actVal = 0 + $a[1]; //para quitar las decimales si no hay
+            $pdf->Cell(35, $aMost, "$" . $actVal, 1);
             DisenoCertificacionesPDF::justificarParrafo($textMeta, 2.615, $pdf, 1, $aMost / $aMetaLines);
 
-            $i++;
+            $n++;
         }
         $pdf->Ln(5);
     }
 
-    $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Descripción del programa o proyecto:'));
     $pdf->Ln(5);
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[10])), 0.965, $pdf); //*************
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[10])), 0.965, $pdf);
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Número estimado de beneficiarios (Población): ' . $row[11]));
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Localización: ' . $row[12]));
+    $pdf->Ln(10);
+    $pdf->Cell(60, 6, utf8_decode('Motivación de la Viabilidad Departamental:'));
+    $pdf->Cell(0, 6, utf8_decode('Favorable'), 0, 0, 'R');
+    $pdf->Ln(5);
+    $pdf->Cell(60, 6, utf8_decode('El proyecto es viable.'));
+    $pdf->Ln(10);
+    $pdf->Cell(60, 6, utf8_decode('Funcionarios Responsables: '));
+    $pdf->SetMargins(30, 15, 30);
+    $pdf->Ln(20);
+
+    $responsables = CargarDatosCerViabilidad::getResponsables($row[13])->fetchAll(PDO::FETCH_BOTH);
+    for ($i = 0; $i < count($responsables); $i += 2) {
+        $r = $responsables[$i];
+
+        $pdf->Cell(0, 6, utf8_decode('________________________________________'));
+        $pdf->Ln(4);
+        $pdf->Cell(0, 6, utf8_decode($r[1] . " " . $r[2]));
+        $pdf->Ln(4);
+        $pdf->Cell(0, 6, utf8_decode($r[3]));
+        $pdf->Ln();
+
+        if ($responsables[$i + 1] != null) {
+
+            $r2 = $responsables[$i + 1];
+
+            $pdf->backLn(0, 15);
+            $pdf->Cell(0, 6, utf8_decode('________________________________________'), 0, 0, 'R');
+            $pdf->Ln(4);
+            $pdf->Cell(0, 6, utf8_decode($r2[1] . " " . $r2[2]), 0, 0, 'R');
+            $pdf->Ln(4);
+            $pdf->Cell(0, 6, utf8_decode($r2[3]), 0, 0, 'R');
+            $pdf->Ln();
+        }
+        $pdf->Ln(15);
+    }
 
     break;
 }
