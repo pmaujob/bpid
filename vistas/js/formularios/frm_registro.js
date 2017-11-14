@@ -3,7 +3,6 @@ var idRad;
 function onLoadBody() {
 
     $(document).ready(function () {
-        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
 
@@ -120,6 +119,44 @@ function listarDatosRadicacion(idRad, numProyecto) {
 
 }
 
-function cerrar(){
+function registrar() {
+
+    tipoReg = document.getElementById('tipo_reg').selectedIndex; //select
+    conceptoPost = document.getElementById('concepto_post').selectedIndex; //select
+    motivacion = document.getElementById('motivacion').value;
+    archivo = document.getElementById('archivo').value; //file
+    archivoText = document.getElementById('archivo_text').value; //texto file
+    secretario = document.getElementById('secretario').selectedIndex; //select
+
+    if (tipoReg != 0 && conceptoPost != 0 && motivacion !== "" && archivo != "" && archivoText != "" && secretario != 0) {
+
+        var formData = new FormData($("#frm_registro")[0]);
+        $.ajax({
+            url: '../../controlador/CRegistro.php',
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (datos)
+            {
+
+                alert(datos);
+
+                var mensaje = "Se han registrado los datos de registro con exito.";
+                document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
+                $("#d_error").dialog("open");
+
+            }
+        });
+
+    } else {
+        var mensaje = "Error, Verifique que todos los campos esten diligenciados correctamente.";
+        document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
+        $("#d_error").dialog("open");
+    }
+
+}
+
+function cerrar() {
     $('#modal1').modal('close');
 }

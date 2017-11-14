@@ -17,6 +17,7 @@ class CLogin {
     private $contrasena;
     private $ip;
     private $secretaria;
+    private $desSecretaria;
     
     public function setCorreo($correo) {
         
@@ -45,6 +46,7 @@ class CLogin {
         $this->cedula = $mLogin->getCedula();
         $this->idLog = $mLogin->getIdLog();
         $this->secretaria = $mLogin->getSecretaria();
+        $this->desSecretaria = $mLogin->getDesSecreatria();
 
         return $mLogin->getRespuesta();
         
@@ -59,6 +61,7 @@ class CLogin {
         $sess->setValue('correo', $this->correo);
         $sess->setValue('idLog', $this->idLog);
         $sess->setValue('idSec', $this->secretaria);
+        $sess->setValue('secretaria', $this->desSecretaria);
         
     }
 

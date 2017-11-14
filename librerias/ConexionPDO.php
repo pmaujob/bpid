@@ -25,8 +25,8 @@ class ConexionPDO {
         
         $this->motor = 'pgsql';
         $this->user = 'postgres';
-        $this->pass = 'bpid2017';
-        $this->host = '192.168.1.111';
+        $this->pass = 'venon123';
+        $this->host = '127.0.0.1';
         $this->db = 'bpid';
 //        $this->motor = 'pgsql';
 //        $this->user = 'postgres';

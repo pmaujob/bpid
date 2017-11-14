@@ -194,7 +194,8 @@ $firmas = MDatosRegistro::getDatosFirmas();
             <div class="collapsible-header"><i class="material-icons">playlist_add_check</i>Diligenciar los datos para la etapa de registro</div>
             <div class="collapsible-body">
                 <div class="input-field col s12">
-                    <select>
+                    <input name="num_proyecto" type="hidden" value="<?php echo $numProyecto; ?>">
+                    <select id="tipo_reg" name="tipo_reg">
                         <option value="" disabled selected>Seleccione su opción</option>
                         <option value="1">Con Fines Informativos</option>
                         <option value="2">Sin Fines Informativos</option>
@@ -203,7 +204,7 @@ $firmas = MDatosRegistro::getDatosFirmas();
                 </div>
                 <br><br><br><br>
                 <div class="input-field col s12">
-                    <select>
+                    <select id="concepto_post" name="concepto_post">
                         <option value="" disabled selected>Seleccione su opción</option>
                         <option value="1">Favorable</option>
                         <option value="2">Desfavorable</option>
@@ -212,27 +213,27 @@ $firmas = MDatosRegistro::getDatosFirmas();
                 </div>
                 <br><br><br><br>
                 <div class="input-field col s12">
-                    <input placeholder="Motivación" id="first_name" type="text" class="validate">
-                    <label for="first_name">Motivación de la Viabilidad o No Viabilidad</label>
+                    <input placeholder="Motivación" id="motivacion" name="motivacion" type="text" class="validate">
+                    <label for="motivacion">Motivación de la Viabilidad o No Viabilidad</label>
                 </div>
                 <br><br><br><br>
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>Seleccione Archivo</span>
-                        <input type="file">
+                        <input id="archivo" name="archivo" type="file">
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
+                        <input id="archivo_text" name="archivo_text" class="file-path validate" type="text">
                     </div>
                 </div>
                 <br><br><br><br>
                 <div class="input-field col s12">
-                    <select>
+                    <select id="secretario" name="secretario">
                         <option value="" disabled selected>Seleccione su opción</option>
                         <?php
                         foreach ($firmas as $firm) {
                             ?>
-                            <option value="<?php echo $firmas[0]; ?>"><?php echo $firmas[1]; ?></option>
+                            <option value="<?php echo $firm[0]; ?>"><?php echo $firm[1]; ?></option>
                             <?php
                         }
                         ?>
@@ -249,7 +250,7 @@ $firmas = MDatosRegistro::getDatosFirmas();
 
         </div>
         <div class="col s12 m2 l2 center-align">
-            <a class="waves-effect waves-light btn"><i class="material-icons left">send</i>Registrar</a>
+            <a class="waves-effect waves-light btn" onclick="registrar();"><i class="material-icons left">send</i>Registrar</a>
         </div>
     </div>
 

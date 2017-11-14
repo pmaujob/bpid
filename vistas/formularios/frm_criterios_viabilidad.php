@@ -63,7 +63,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         <div id="container" class="container-fluid">
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
-                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">CRITERIOS DE VIABILIDAD</div></div>
+                                <div class="col s12 m12 l12 center-align">
+                                    <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
+                                        <i class="material-icons small left">storage</i>
+                                        Metas de Producto
+                                    </div>
+                                </div>
                                 <br>
                                 <br>
                             </div>

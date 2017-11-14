@@ -47,14 +47,19 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <div id="d_ingreso" title="INFORMACION"></div>
 
             <?php require_once '../menu.php'; ?>
-            <form id='frm_radicar_listas' name='frm_criterios_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
+            <form id='frm_registro' name='frm_registro' onSubmit="return false"  enctype="multipart/form-data">
 
                 <div class="col s12 m11 l9">
                     <div class="bajar">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
-                                <div class="col s12 m12 l12 center-align"><div class="titulofrm">Registro</div></div>
+                                <div class="col s12 m12 l12 center-align">
+                                    <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
+                                        <i class="material-icons small left">insert_chart</i>
+                                        Registro
+                                    </div>
+                                </div>
                                 <br>
                                 <br>
                             </div>

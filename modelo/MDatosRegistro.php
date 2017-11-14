@@ -29,7 +29,7 @@ class MDatosRegistro {
         $res = $con->consultar($sql);
         $con->cerrarConexion();
         
-        return $sql;//$res;
+        return $res;
         
     }
 
