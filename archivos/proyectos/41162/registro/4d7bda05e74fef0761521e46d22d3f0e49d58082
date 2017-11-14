@@ -1,0 +1,13 @@
+Correciones y recomendaciones:
+ 
+- Arreglar focus seteando la class al div contenedor.
+
+- Solicitar actualización de items en listas de chequeo, (ntc y transporte)
+  
+- Cuando se cierra la modal de las listas de chequeo y la bandera de los toast para mostrar el titulo de la lista está en 1,
+actualizar a 0
+ 
+- consultar productos del MGA para actividades
+  
+- En el módulo de actividades (viabilidad) al inicio poner opción para actualizar MGA, y dar info sobre el MGA Actual. Al final de viabilidad validar
+si se debe subir el MGA denuevo o no.

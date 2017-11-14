@@ -249,7 +249,7 @@ $firmas = MDatosRegistro::getDatosFirmas();
         <div class="col s12 m5 l5">
 
         </div>
-        <div class="col s12 m2 l2 center-align">
+        <div class="col s12 center-align">
             <a class="waves-effect waves-light btn" onclick="registrar();"><i class="material-icons left">send</i>Registrar</a>
         </div>
     </div>

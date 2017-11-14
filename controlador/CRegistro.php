@@ -84,7 +84,7 @@ class CRegistro {
                 mkdir($rutaProyecto, 0777, true);
             }
 
-            $rutaProyecto = $rutaProyecto . "/" . $this->getArchivoHash();
+            $rutaProyecto = $rutaProyecto . "/" . $this->getArchivo()['name'];
             move_uploaded_file($this->getArchivo()['tmp_name'], $rutaProyecto);
         } catch (Exception $e) {
             print "Error Al subir Archivo" . $e;

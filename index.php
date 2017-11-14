@@ -1,7 +1,7 @@
 <?php
 session_start();
 $_SESSION['raiz'] = dirname(__FILE__);
-$_SESSION['raizHtml'] = 'http://' . $_SERVER['SERVER_NAME'] . ':8080/bpid';
+$_SESSION['raizHtml'] = 'http://' . $_SERVER['SERVER_NAME'] . '/bpid';
 ?>
 <!DOCTYPE html>
 <html lang="en">
