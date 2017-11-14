@@ -25,7 +25,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
-                    <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?<?php echo $numBpid; ?></th>
+          <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?<?php echo $numProyecto; ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -204,7 +204,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                 $aux = -1;
                 foreach ($datosActividades as $act) {
                     //echo "<br>aux:$aux-act:$act[1]<br>";
-                    // $contMeta++;
+                    $contMeta++;
                     if ($aux == -1) {
 
                         $aux = $act[1];

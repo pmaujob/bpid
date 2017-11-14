@@ -10,7 +10,7 @@ require_once $raiz . '/librerias/fpdf/PDF.php';
 require_once $raiz . '/librerias/DisenoCertificacionesPDF.php';
 require_once $raiz . '/modelo/CargarDatosCerViabilidad.php';
 
-$datos = 1;
+$datos = 2;
 
 $datosRadicacion = CargarDatosCerViabilidad::getDatosInformeViabilidad($datos);
 
