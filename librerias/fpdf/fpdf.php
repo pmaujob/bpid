@@ -706,7 +706,6 @@ class FPDF {
         $ns = 0;
         $nl = 1;
 
-        $saltos = 0;
         while ($i < $nb) {
             // Get next character
             $c = $s[$i];
@@ -734,7 +733,6 @@ class FPDF {
             }
             $l += $cw[$c];
             if ($l > $wmax) {
-                $saltos++;
                 // Automatic line break
                 if ($sep == -1) {
                     if ($i == $j)
@@ -771,8 +769,6 @@ class FPDF {
             $b .= 'B';
         $this->Cell($w, $h, substr($s, $j, $i - $j), $b, 2, $align, $fill);
         $this->x = $this->lMargin;
-
-        return $saltos . ", ";
     }
 
     function Write($h, $txt, $link = '') {
