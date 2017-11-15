@@ -53,15 +53,14 @@ class CargarViabilizados {
                 # code...
                 break;
         }
-
-
-
+        
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
         $con->cerrarConexion();
         return $res;
     }
+            
 
 }
 
