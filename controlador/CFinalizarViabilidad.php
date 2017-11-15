@@ -70,7 +70,7 @@ class CFinalizarViabilidad {
     }
 
     public function registrarResponsables() {
-        //return "correo: " . $this->enviar();
+        $this->enviar();
         return MFinalizarViabilidad::registrarViabilidad($this->getIdRadicacion(), $this->getResponsablesJson(), $this->getEstado());
     }
 
@@ -88,25 +88,19 @@ class CFinalizarViabilidad {
 
             $destino = $this->getResponsable();
 
-            $this->enviar($destino, $asunto, $cuerpo, $altCuerpo);
+            $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
         } else {
             $cuerpo = "Su proyecto tiene viabilidad favorable.";
             $altCuerpo = "Su proyecto tiene viabilidad favorable.";
 
             $destino = $this->getResponsable();
-            $this->enviar($destino, $asunto, $cuerpo, $altCuerpo);
+            $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
 
             $destino = $this->getUsuario();
-            $this->enviar($destino, $asunto, $cuerpo, $altCuerpo);
+            $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
             
         }
-
-        $asunto = "Estado Proyecto - Bpid";
-        $cuerpo = "Su proyecto tiene viabilidad favorable.";
-        $altCuerpo = "Su proyecto tiene viabilidad favorable.";
-
-        $destino = "venonmp@gmail.com";
-        return $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
+        
     }
 
     private function enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo) {
