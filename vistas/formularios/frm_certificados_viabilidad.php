@@ -29,7 +29,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         <div class="row">
                             <div class="col s12 m12 l12 center-align">
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
-                                <div class="titulofrm">CERTFICADOS DE VIABILIDAD</div>
+                                <div class="col s12 m12 l12 center-align">
+                                    <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
+                                        <i class="material-icons small left">insert_drive_file</i>
+                                        Certificados de Viabilidad
+                                    </div>
+                                </div>
                             </div>                            
                         </div>
 
@@ -79,7 +84,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
                                 </div>
                                 <div class="col s8 m4 l4 center-align">
-                                    <a href="#!" target="_blank" title="Ver Más" onclick="creteCertificate();">
+                                    <a href="#!" title="Ver Más" onclick="creteCertificate();">
                                         <img style="width: 25%; height: 25%;" src="../../vistas/img/pdf.png">
                                     </a>
                                 </div>
@@ -93,7 +98,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 </div>
             </form>
         </body>
-
     </html>
     <?php
 }

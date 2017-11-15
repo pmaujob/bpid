@@ -34,12 +34,21 @@ class CargarDatosCerViabilidad {
                 . "INNER JOIN eje AS e ON p.cod_eje = e.cod_eje "
                 . "WHERE r.cod_radicacion = $idRad "
                 . "GROUP BY nb.numero_completo,upper(r.nombre_proyecto),r.entidad_proponente,r.entidad_ejecutante,e.descripcion,r.problema,r.objetivo,r.cod_bpid,r.resumen,r.poblacion,r.localizacion,r.cod_radicacion,r.fecha_viabilidad;";
-        $con = new ConexionPDO();
-        $con->conectar("PG");
-        $res = $con->consultar($consulta);
-        $con->cerrarConexion();
 
-        return $res;
+        return self::getDatos($consulta);
+    }
+
+    public static function getDatosInformeNoViabilidad($idRad) {
+
+        $consulta = 'SELECT r.cod_radicacion,'//0
+                . 'r.nombre_proyecto,'//1
+                . 'r.fecha_envio,'//2
+                . 'nb.numero_completo '//3
+                . 'FROM radicacion AS r '
+                . 'INNER JOIN numero_bpid AS nb ON r.cod_bpid = cod_numero_bpid '
+                . 'WHERE r.cod_radicacion = ' . $idRad;
+
+        return self::getDatos($consulta);
     }
 
     public static function getObjetivosEspecificos($codBpid) {
@@ -49,12 +58,7 @@ class CargarDatosCerViabilidad {
                 . "FROM numero_bpid AS n "
                 . "INNER JOIN radic_objespecificos AS o ON n.cod_numero_bpid = o.cod_bpid AND n.cod_numero_bpid = $codBpid";
 
-        $con = new ConexionPDO();
-        $con->conectar("PG");
-        $res = $con->consultar($consulta);
-        $con->cerrarConexion();
-
-        return $res;
+        return self::getDatos($consulta);
     }
 
     public static function getProductos($codRadicacion) {
@@ -65,13 +69,7 @@ class CargarDatosCerViabilidad {
                 . "'XXXXXX' "//3
                 . "FROM radicacion_productos WHERE cod_radicacion = $codRadicacion;";
 
-        $con = new ConexionPDO();
-        $con->conectar("PG");
-        $res = $con->consultar($consulta);
-
-        $con->cerrarConexion();
-
-        return $res;
+        return self::getDatos($consulta);
     }
 
     public static function getActividades($codProducto) {
@@ -88,30 +86,42 @@ class CargarDatosCerViabilidad {
                 . "WHERE id_producto = $codProducto "
                 . "GROUP BY ra.id_actividad,ra.valor,ra.descripcion,ra.cod_meta_producto,mp.descripcion;";
 
-        $con = new ConexionPDO();
-        $con->conectar("PG");
-        $res = $con->consultar($consulta);
-        $con->cerrarConexion();
-
-        return $res;
+        return self::getDatos($consulta);
     }
 
     public static function getResponsables($codRadicacion) {
-        
+
         $consulta = "SELECT idres,"//0
                 . "nombres,"//1
                 . "apellidos,"//2
                 . "cargo "//3
                 . "FROM radicacion_responsables WHERE cod_radicacion = $codRadicacion;";
 
+        return self::getDatos($consulta);
+    }
+
+    public static function getObservaciones($idRad) {
+
+        $consulta = "SELECT rdo.iddimobs,"//0
+                . "rdo.observacion,"//1
+                . "rdo.porcentaje,"//2
+                . "vd.descripcion "//3
+                . "FROM radicacion_dimensiones_observaciones AS rdo "
+                . "INNER JOIN viabilidad_dimension AS vd ON rdo.id_dimen = vd.id_dimen "
+                . "WHERE rdo.cod_radicacion = $idRad "
+                . "AND rdo.porcentaje < 90;";
+
+        return self::getDatos($consulta);
+    }
+
+    private static function getDatos($consulta) {
+        
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
-
         $con->cerrarConexion();
 
         return $res;
-        
     }
 
 }

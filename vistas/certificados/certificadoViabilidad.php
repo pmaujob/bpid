@@ -3,47 +3,54 @@
 date_default_timezone_set('America/Bogota');
 session_start();
 
+if (!isset($_SESSION['idRad']) && isset($_POST['idRad'])) {
+    $_SESSION['idRad'] = $_POST['idRad'];
+} else if (!isset($_SESSION['idRad']) && !isset($_POST['idRad'])) {
+    return;
+}
+
 $raiz = $_SESSION['raiz'];
+$raizHtml = $_SESSION['raizHtml'];
 
 require_once $raiz . '/librerias/fpdf/fpdf.php';
 require_once $raiz . '/librerias/fpdf/PDF.php';
 require_once $raiz . '/librerias/DisenoCertificacionesPDF.php';
 require_once $raiz . '/modelo/CargarDatosCerViabilidad.php';
 require_once $raiz . '/librerias/CambiarFormatos.php';
+require_once $raiz . '/librerias/SessionVars.php';
 
-$idRad = 1;
+$sess = new SessionVars();
 
-$datosRadicacion = CargarDatosCerViabilidad::getDatosInformeViabilidad($idRad);
+$datosRadicacion = CargarDatosCerViabilidad::getDatosInformeViabilidad($_SESSION['idRad']);
 
 $pdf = new FPDF('P', 'mm', 'Letter'); // vertical, milimetros y tamaño
 $pdf->SetMargins(20, 15, 20);
 $pdf->AddPage();
+//================== Cabecera ==========================
+$pdf->Image('imagenes/colombia_escudo.png', 34, 17, 13);
+$pdf->Image('imagenes/corazonmundo.png', 170, 17, 15);
+
+$pdf->SetFont('Arial', 'B', 8);
+$pdf->Cell(0, 6, utf8_decode('SECRETARIA DE PLANEACIÓN DEPARTAMENTAL'), 0, 0, 'C');
+$pdf->Ln(5);
+$pdf->Cell(0, 6, utf8_decode('BANCO DE PROGRAMAS Y PROYECTOS'), 0, 0, 'C');
+$pdf->Ln(5);
+$pdf->Cell(0, 6, utf8_decode('DE INVERSIÓN DEPARTAMENTAL'), 0, 0, 'C');
+$pdf->Ln(5);
+$pdf->Cell(40, 6, utf8_decode('Républica de Colombia'), 0, 0, 'C');
+$pdf->Ln(0);
+$pdf->Cell(0, 6, utf8_decode('BPID'), 0, 0, 'C');
+$pdf->Ln(3);
+$pdf->Cell(20, 3, '_______________________________________________________________________________________________________________');
+$pdf->Ln(2);
+$pdf->Cell(10, 6, utf8_decode('Código Formato: BPID-IV01'));
+$pdf->Ln(0);
+$pdf->Cell(0, 6, utf8_decode('Versión: 02'), 0, 0, 'C');
+$pdf->Ln(0);
+$pdf->Cell(0, 6, utf8_decode('Fecha Formato: ' . date("d/M/Y")), 0, 0, 'R');
+$pdf->Ln(10);
+
 foreach ($datosRadicacion as $row) {
-    //================== Cabecera ==========================
-    $pdf->Image('imagenes/colombia_escudo.png', 34, 17, 13);
-    $pdf->Image('imagenes/corazonmundo.png', 170, 17, 15);
-
-    $pdf->SetFont('Arial', 'B', 8);
-    $pdf->Cell(0, 6, utf8_decode('SECRETARIA DE PLANEACIÓN DEPARTAMENTAL'), 0, 0, 'C');
-    $pdf->Ln(5);
-    $pdf->Cell(0, 6, utf8_decode('BANCO DE PROGRAMAS Y PROYECTOS'), 0, 0, 'C');
-    $pdf->Ln(5);
-    $pdf->Cell(0, 6, utf8_decode('DE INVERSIÓN DEPARTAMENTAL'), 0, 0, 'C');
-    $pdf->Ln(5);
-    $pdf->Cell(40, 6, utf8_decode('Républica de Colombia'), 0, 0, 'C');
-    $pdf->Ln(0);
-    $pdf->Cell(0, 6, utf8_decode('BPID'), 0, 0, 'C');
-    $pdf->Ln(3);
-    $pdf->Cell(20, 3, '_______________________________________________________________________________________________________________');
-    $pdf->Ln(2);
-    $pdf->Cell(10, 6, utf8_decode('Código Formato: BPID-IV01'));
-    $pdf->Ln(0);
-    $pdf->Cell(0, 6, utf8_decode('Versión: 02'), 0, 0, 'C');
-    $pdf->Ln(0);
-    $pdf->Cell(0, 6, utf8_decode('Fecha Formato: ' . date("d/M/Y")), 0, 0, 'R');
-
-    //================== Cuerpo ==========================
-    $pdf->Ln(10);
     $pdf->SetFont('Arial', 'B', 8);
     $pdf->Cell(0, 6, utf8_decode('CERTIFICADO DE VIABILIDAD'), 0, 0, 'C');
     $pdf->Ln(10);
@@ -212,6 +219,14 @@ foreach ($datosRadicacion as $row) {
         }
         $pdf->Ln(15);
     }
+
+    $pos = (($i - 1) % 2 == 0 ? 'R' : 'L');
+    $pdf->Cell(0, 6, utf8_decode('________________________________________'), 0, 0, $pos);
+    $pdf->Ln(4);
+    $pdf->Cell(0, 6, utf8_decode($sess->getValue('usuario')), 0, 0, $pos);
+    $pdf->Ln(4);
+    $pdf->Cell(0, 6, utf8_decode("Funcionario Responsable"), 0, 0, $pos);
+    $pdf->Ln();
 
     break;
 }
