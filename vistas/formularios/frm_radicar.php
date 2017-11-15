@@ -156,7 +156,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <div class="col s2 m2 l2"></div>
                                 <div class="col s8 m8 l12 center-align">
                                     <br>
-                                    <button class="btn waves-effect waves-light" onclick="validar()">Enviar
+                                    <button class="btn waves-effect waves-light" onclick="validar()">Completar
                                         <i class="material-icons right">send</i>
                                     </button>
 
@@ -206,8 +206,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                                 <div class="input-field col s12">
                                                     <select id="frm_poai" name="frm_programa_inversion">
                                                         <option value="" disabled selected>PERTENECE A UN PROGRAMA DE INVERSION</option>
-                                                        <option value="1">NUMERO DE PROGRAMA 1</option>
-                                                        <option value="2">NUMERO DE PROGRAMA 2</option>
+                                                        
                                                     </select>
                                                     <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
                                                     <div id="d_frm_poai"></div>
