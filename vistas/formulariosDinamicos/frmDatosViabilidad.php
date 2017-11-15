@@ -39,6 +39,7 @@ foreach ($datosDimensiones as $fila) {
                 </span>
             </div>
         </div>
+        <input id="estado" type="hidden" value="<?php echo !$estado ? 'A' : 'R'; ?>">
     </div>
 
     <?php

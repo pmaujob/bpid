@@ -1,5 +1,11 @@
 <?php
 
+@session_start();
+
+$raiz = $_SESSION['raiz'];
+
+require_once $raiz . '/modelo/MRegistro.php';
+
 class CRegistro {
 
     private $tipoReg;
@@ -10,6 +16,7 @@ class CRegistro {
     private $secretario;
     private $archivoHash;
     private $numProyecto;
+    private $idRad;
 
     private function getTipoReg() {
         return $this->tipoReg;
@@ -41,6 +48,10 @@ class CRegistro {
 
     private function getNumProyecto() {
         return $this->numProyecto;
+    }
+    
+    private function getIdRad() {
+        return $this->idRad;
     }
 
     public function setTipoReg($tipoReg) {
@@ -74,6 +85,10 @@ class CRegistro {
     public function setNumProyecto($numProyecto) {
         $this->numProyecto = $numProyecto;
     }
+    
+    public function setIdRad($idRad) {
+        $this->idRad = $idRad;
+    }
 
     private function crearDirectorio() {
 
@@ -94,7 +109,8 @@ class CRegistro {
     public function registrar() {
 
         $this->crearDirectorio();
-        return "Tipo registro: " . $this->getTipoReg() . ", Concepto: " . $this->getConceptoPost() . ", Motivacion: " . $this->getMotivacion() . ", Archivo: " . var_dump($this->getArchivo()) . ", Archivo texto: " . $this->getArchivoText() . ", Secretario: " . $this->getSecretario() . ", numero proyecto: " . $this->getNumProyecto();
+        return MRegistro::registrar($this->getTipoReg(),$this->getConceptoPost(),$this->getMotivacion(),$this->getArchivo()['name'] == '' ? NULL : $this->getArchivo()['name'], $this->getArchivoHash() == '' ? NULL : $this->getArchivoHash(), $this->getIdRad(), $this->getSecretario());
+        //return "Tipo registro: " . $this->getTipoReg() . ", Concepto: " . $this->getConceptoPost() . ", Motivacion: " . $this->getMotivacion() . ", Archivo: " . var_dump($this->getArchivo()) . ", Archivo texto: " . $this->getArchivoText() . ", Secretario: " . $this->getSecretario() . ", numero proyecto: " . $this->getNumProyecto();
     }
 
 }
@@ -109,7 +125,8 @@ if (isset($_FILES['archivo']) && !empty($_FILES['archivo'])) {
     $cRegistro->setArchivo($_FILES['archivo']);
     $cRegistro->setArchivoText($_POST['archivo_text']);
     $cRegistro->setSecretario($_POST['secretario']);
-    $cRegistro->setArchivoHash(sha1_file($cRegistro->getArchivo()['tmp_name']));
+    $cRegistro->setIdRad($_POST['idRad']);
+    $cRegistro->getArchivo()['tmp_name'] == '' ? $cRegistro->setArchivoHash(NULL) : $cRegistro->setArchivoHash(sha1_file($cRegistro->getArchivo()['tmp_name']));
 
     echo $cRegistro->registrar();
 }

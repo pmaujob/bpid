@@ -7,7 +7,7 @@ require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
         const idFormulario = 7;
-        const idEtapa = 3; //7
+        const idEtapa = 6; //7
 
 $sess = new SessionVars();
 
