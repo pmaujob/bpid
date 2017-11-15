@@ -227,15 +227,17 @@ function almacenar()
     var actividades = document.getElementById('actividades').value;
     var resumen = document.getElementById('resumen').value;
     var tipo_proyecto = document.getElementById('frm_tipo').value;
-    if(tipo_proyecto==0){var numero_programa_inversion=-1;}//proyecto General
-    else if(tipo_proyecto==1){var numero_programa_inversion=1;}//Proyecto de Inversion
-    else {var numero_programa_inversion=document.getElementById('frm_programa_inversion').value;}
-
-
+    
+    if(tipo_proyecto==1 || tipo_proyecto==2){var numero_programa_inversion=null;}//proyecto General
+     else {var numero_programa_inversion=document.getElementById('frm_programa_inversion').value;}
+    if(tipo_proyecto==3 && numero_programa_inversion==""){ Materialize.toast('SELECCIONE EL PROYECTO AL QUE PERTENECE', 4000);}//proyecto General
+    
+    alert("tipo Proyecto"+tipo_proyecto);
+    alert("Numero programa"+numero_programa_inversion);
     var value = numero_proyecto + '//' + nombre_proyecto + '//' + sector + '//' + localizacion + '//' + valor + '//' + eje + '//' + programa + '//' + subprograma + '//' + poai + '//' +
             entidad_proponente + '//' + entidad_ejecutante + '//' + num_id_responsable + '//' + nom_responsable + '//' + cargo_responsable + '//' +
             direccion_responsable + '//' + telefono_responsable + '//' + cel_responsable + '//' + correo_responsable + '//' + id_usuario + '//' + nombre_usuario + '//' +
-            observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades + '//' + resumen;
+            observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades + '//' + resumen+ '//' +tipo_proyecto+ '//' +numero_programa_inversion;
 
 
     $('#modal1').modal('close');
@@ -247,7 +249,7 @@ function almacenar()
         data: {value: value, op: 1},
         success: function (respuesta) {
 
-            // alert(respuesta);
+             alert(respuesta);
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion

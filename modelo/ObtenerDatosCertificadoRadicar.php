@@ -24,12 +24,13 @@ class ObtenerDatosCertificadoRadicar {
     private $nomusu;
     private $observaciones;
     private $numproyecto;
+    private $usuario;
 
     public function setDatos($cod_bpid) {
         $consulta = 'select num, fec, hor, nom, sec, loc, entp, entej, numidres, nomres, dirres, telres, cel, correo,
-						idusu, nomusu, obs,proy from get_datos_certificado_radicado(' . $cod_bpid . ',-2)
+						idusu, nomusu, obs,proy,usuario from get_datos_certificado_radicado(' . $cod_bpid . ',-2)
 						 as ("num" bigint, "fec"  varchar,"hor" varchar, "nom" varchar, "sec" varchar, "loc" varchar, "entp" varchar, "entej" varchar, "numidres" varchar, "nomres"
-						 varchar, "dirres" varchar,"telres" varchar,"cel" varchar, "correo" varchar, "idusu" varchar,"nomusu" varchar,"obs" varchar,"proy" varchar)';
+						 varchar, "dirres" varchar,"telres" varchar,"cel" varchar, "correo" varchar, "idusu" varchar,"nomusu" varchar,"obs" varchar,"proy" varchar,"usuario" varchar)';
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
@@ -53,6 +54,7 @@ class ObtenerDatosCertificadoRadicar {
             $this->nomusu = $fila[15];
             $this->observaciones = $fila[16];
             $this->numproyecto = $fila[17];
+            $this->usuario = $fila[18];
         }
 
 
@@ -148,6 +150,10 @@ class ObtenerDatosCertificadoRadicar {
     function getNumproyecto() {
         return $this->numproyecto;
     }
+    public function getUsuario() {
+        return $this->usuario;
+    }
+
 
 }
 
