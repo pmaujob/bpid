@@ -19,8 +19,10 @@ class CargarViabilizados {
                         . 'sec,'//7
                         . 'val,'//8
                         . 'loc,'//9
-                        . 'resumen '//10
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("r" integer, "nompro" varchar ,"pro" varchar,"radobj" varchar  ,"despro" varchar, "pob" integer, "dessubpro" varchar, "sec" varchar, "val" varchar, "loc" varchar,"resumen" varchar);';
+                        . 'resumen,'//10
+                        . 'num,'//11
+                        . 'fecvia ' //12
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("r" integer, "nompro" varchar ,"pro" varchar,"radobj" varchar  ,"despro" varchar, "pob" integer, "dessubpro" varchar, "sec" varchar, "val" varchar, "loc" varchar,"resumen" varchar, "num" varchar, "fecvia" varchar);';
                 break;
             case 2:
                 $consulta = 'select obj '
@@ -30,10 +32,9 @@ class CargarViabilizados {
                 $consulta = 'select origen,'//0
                         . 'valor,'//1
                         . 'periodo,'//2
-                        .'etapa,' //3
-                        .'tend,' //4
-                        .'tentd ' //5
-                    
+                        . 'etapa,' //3
+                        . 'tend,' //4
+                        . 'tentd ' //5
                         . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("origen" varchar, "valor" numeric, "periodo" integer,"etapa" varchar,"tend" varchar,"tentd" varchar );';
                 break;
             case 4:
@@ -53,14 +54,13 @@ class CargarViabilizados {
                 # code...
                 break;
         }
-        
+
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
         $con->cerrarConexion();
         return $res;
     }
-            
 
 }
 

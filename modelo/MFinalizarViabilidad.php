@@ -32,6 +32,21 @@ class MFinalizarViabilidad {
         return $res;
     }
 
+    public static function getCorreosRegistro() {
+
+        $idFun = 13;
+        $codSec = 37;
+
+        $sql = 'select correo from get_correos_registro(' . $idFun . ', ' . $codSec . ') as ("correo" varchar);';
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->consultar($sql);
+        $con->cerrarConexion();
+
+        return $res;
+    }
+
 }
 
 ?>
