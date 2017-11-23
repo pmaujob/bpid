@@ -1,4 +1,5 @@
 var idRad;
+var codBpid;
 var usuariosa = new Array();
 
 function onLoadBody() {
@@ -65,6 +66,7 @@ function buscarProyectos(op) {
 function mas(cod, bpid, numProyecto) {
 
     idRad = cod;
+    codBpid = bpid;
 
     usuariosa.splice(0);
     document.getElementById('txtBuscarUsuarios').value = "";
@@ -163,7 +165,7 @@ function registrarResponsables() {
             type: 'POST',
             url: '../../controlador/CFinalizarViabilidad.php',
             async: true,
-            data: {idRad: idRad, responsables: usuariosa, est: est},
+            data: {idRad: idRad, responsables: usuariosa, est: est, codBpid: codBpid},
             success: function (respuesta)
             {
                 

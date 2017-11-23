@@ -8,10 +8,12 @@ require_once $raiz . '/modelo/MFinalizarViabilidad.php';
 require_once $raiz . '/librerias/CambiarFormatos.php';
 require_once $raiz . '/librerias/Correos.php';
 require_once $raiz . '/librerias/SessionVars.php';
+require_once $raiz . '/modelo/CargarViabilizados.php';
 
 class CFinalizarViabilidad {
 
     private $idRadicacion;
+    private $codBpid;
     private $responsables = array(array());
     private $estado;
     private $responsable;
@@ -37,6 +39,10 @@ class CFinalizarViabilidad {
         return $this->usuario;
     }
 
+    private function getCodBpid() {
+        return $this->codBpid;
+    }
+
     public function setIdRadicacion($idRadicacion) {
         $this->idRadicacion = $idRadicacion;
     }
@@ -55,6 +61,10 @@ class CFinalizarViabilidad {
 
     public function setUsuario($usuario) {
         $this->usuario = $usuario;
+    }
+
+    public function setCodBpid($codBpid) {
+        $this->codBpid = $codBpid;
     }
 
     public function getResponsablesJson() {
@@ -98,9 +108,17 @@ class CFinalizarViabilidad {
 
             $destino = $this->getUsuario();
             $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
-            
+
+            $correos = MFinalizarViabilidad::getCorreosRegistro();
+            $datosProyecto = CargarViabilizados::getViabilizados($this->getCodBpid(), 1)->fetch(PDO::FETCH_OBJ);
+
+            $cuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . " se encuetra disponible para el control psterior de la viabilidad.";
+            $altCuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . " se encuetra disponible para el control psterior de la viabilidad.";
+
+            foreach ($correos as $row) {
+                $this->enviarCorreo($row[0], $asunto, $cuerpo, $altCuerpo);
+            }
         }
-        
     }
 
     private function enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo) {
@@ -131,6 +149,7 @@ if ((isset($_POST['idRad']) && isset($_POST['responsables'])) && (!empty($_POST[
     $cFinalizarViabilidad->setIdRadicacion($_POST['idRad']);
     $cFinalizarViabilidad->setResponsables($_POST['responsables']);
     $cFinalizarViabilidad->setEstado("'" . $_POST['est'] . "'");
+    $cFinalizarViabilidad->setCodBpid($_POST['codBpid']);
     echo $cFinalizarViabilidad->registrarResponsables();
 } else {
 
