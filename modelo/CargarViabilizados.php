@@ -19,8 +19,10 @@ class CargarViabilizados {
                         . 'sec,'//7
                         . 'val,'//8
                         . 'loc,'//9
-                        . 'resumen '//10
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("r" integer, "nompro" varchar ,"pro" varchar,"radobj" varchar  ,"despro" varchar, "pob" integer, "dessubpro" varchar, "sec" varchar, "val" varchar, "loc" varchar,"resumen" varchar);';
+                        . 'resumen,'//10
+                        . 'num,'//11
+                        . 'fecvia '//12
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("r" integer, "nompro" varchar ,"pro" varchar,"radobj" varchar  ,"despro" varchar, "pob" integer, "dessubpro" varchar, "sec" varchar, "val" varchar, "loc" varchar,"resumen" varchar, "num" varchar, "fecvia" varchar);';
                 break;
             case 2:
                 $consulta = 'select obj '
@@ -45,8 +47,10 @@ class CargarViabilizados {
                         . 'idact,'//5
                         . 'des,'//6
                         . 'val,'//7
-                        . 'mdes '//7
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric, "mdes" varchar);';
+                        . 'mdes,'//8
+                        . 'cant,'//9
+                        . 'total '//10
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric, "mdes" varchar, "cant" numeric,"total" numeric);';
                 break;
 
             default:

@@ -53,10 +53,29 @@ function validar() {
     } else
     {
         //codigo para llenar combo de programa
-        
+
+        $.ajax({
+            type: "POST",
+            url: '../../controlador/ControladorRadicar.php',
+            async: true,
+            data: {op: 3},
+            success: function (datos)            {
+                $("#frm_programa_inversion").empty();
+                var content = JSON.parse(datos);     
+                for (var i = 0; i < content.length; i++) {
+                    var obj = content[i];
+                    var option = document.createElement('option');
+                    option.value = obj.cod;
+                    option.innerHTML = obj.nom;
+                    $('#frm_programa_inversion').append(option);
+                }
+                $("#frm_programa_inversion").material_select('update');
+                //  alert(datos);
+            }
+        });
         //abrir ventana modal
         $('#modal1').modal('open');
-        
+
     }
 }
 
