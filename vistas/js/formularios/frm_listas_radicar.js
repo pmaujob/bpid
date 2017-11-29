@@ -183,7 +183,6 @@ function validar(enviarInfo) {
                 archivoReqRow[0] = document.getElementById('REQH' + i).value;//id requisito
                 archivoReqRow[1] = i;//posicion del contador para recorrer archivos más adelante
                 archivosReq.push(archivoReqRow);
-                console.log("Entró a guardar el archivo con la posicion: " + i + ", id: " + document.getElementById('REQH' + i).value);
             }
 
             var reqRow = new Array(3);
@@ -206,21 +205,19 @@ function validar(enviarInfo) {
         if (opcionSeleccionada != "NA") {
 
             var subArchivoExist = document.getElementById('SUBFILEEXIST' + i).value;
-            if (subArchivoExist == "") {//para evitar error de elemento para subir archivos
+            var subArchivo = document.getElementById('SUBFILE' + i);
 
-                var subArchivo = document.getElementById('SUBFILE' + i);
-                if (opcionSeleccionada == "SI" && document.getElementById('SUBFILEOB' + i).value == 1 && subArchivo.value == '') {
-                    alert('Se debe adjuntar un archivo en esta pregunta.');
-                    subArchivo.focus();
-                    return;
-                } else if (opcionSeleccionada == "SI" && subArchivo.value != '') {
-                    var archivoSubRow = new Array(2);
-                    archivoSubRow[0] = document.getElementById('SUBH' + i).value;//id requisito
-                    archivoSubRow[1] = i;//posicion del contador para recorrer archivos más adelante
-                    archivosSub.push(archivoSubRow);
-                }
-
+            if (opcionSeleccionada == "SI" && subArchivoExist == "" && subArchivo.value == '') {
+                alert('Se debe adjuntar un archivo en esta pregunta.');
+                subArchivo.focus();
+                return;
+            } else if (opcionSeleccionada == "SI" && subArchivo.value != '') {
+                var archivoSubRow = new Array(2);
+                archivoSubRow[0] = document.getElementById('SUBH' + i).value;//id requisito
+                archivoSubRow[1] = i;//posicion del contador para recorrer archivos más adelante
+                archivosSub.push(archivoSubRow);
             }
+
 
             var subRow = new Array(3);
             subRow[0] = document.getElementById('SUBH' + i).value;//id subequisito
