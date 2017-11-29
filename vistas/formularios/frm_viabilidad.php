@@ -3,8 +3,8 @@ session_start();
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
-        const idFormulario = 4; //id 2 pertenece a lista de checkeo
-        const idEtapa = 3;
+const idFormulario = 4; //id 2 pertenece a lista de checkeo
+const idEtapa = 3;
 $sess = new SessionVars();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
@@ -24,7 +24,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         <body onload="onLoadBody();">
             <div id="d_ingreso" title="Información">
                 <pre>El número de metas no puede ser mayor al número de actividades. 
-    ¿Desea regresar a la etapa de Metas de Producto?</pre>             
+        ¿Desea regresar a la etapa de Metas de Producto?</pre>             
             </div>
 
             <!-- Modal Trigger -->

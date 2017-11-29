@@ -18,7 +18,6 @@
         </style>
 
     </head>
-    <!-- comentaro prueba -->
     <body>
         <div class="container-fluid">
             <?php require_once "menu.php"; ?>
@@ -30,12 +29,11 @@
                     </div>
                 </div>
 
-                </div>
             </div>
-
         </div>
+
         <div class="col s12 m8 l9">
 
         </div>
-</body>
+    </body>
 </html>
