@@ -107,6 +107,7 @@ $firmas = MDatosRegistro::getDatosFirmas();
 
                 <ul class="collapsible" data-collapsible="accordion">
                     <?php
+
                     if (count($datosActividades) > 0) {
                         $aux = -1;
                         foreach ($datosActividades as $act) {

@@ -25,7 +25,7 @@ class CargarViabilizados {
                         . 'loc,'//9
                         . 'resumen,'//10
                         . 'num,'//11
-                        . 'fecvia '//12
+                        . 'fecvia ' //12
                         . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("r" integer, "nompro" varchar ,"pro" varchar,"radobj" varchar  ,"despro" varchar, "pob" integer, "dessubpro" varchar, "sec" varchar, "val" varchar, "loc" varchar,"resumen" varchar, "num" varchar, "fecvia" varchar);';
                 break;
             case 2:
@@ -53,7 +53,7 @@ class CargarViabilizados {
                         . 'mdes,'//8
                         . 'cant,'//9
                         . 'total '//10
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric, "mdes" varchar, "cant" numeric,"total" numeric);';
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric, "mdes" varchar, "cant" numeric, "total" numeric);';
                 break;
 
             default:

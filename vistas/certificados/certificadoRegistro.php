@@ -13,15 +13,23 @@ require_once $raiz . '/modelo/MGetDatosCertificadoRegistro.php';
 require_once $raiz . '/modelo/CargarViabilizados.php';
 require_once $raiz . '/librerias/CambiarFormatos.php';
 require_once $raiz . '/librerias/SessionVars.php';
+require_once $raiz . '/modelo/MRegistrarResponsableEtapa.php';
 
 $sess = new SessionVars();
 
 $idRad = $_GET['idRad'];
 $codBpid = $_GET['codBpid'];
+const etapa = 7;
 
 $viabilidad = CargarViabilizados::getViabilizados($codBpid, 1)->fetch(PDO::FETCH_OBJ);
 $viabilidadEjePro = MGetDatosCertificadoRegistro::getDatosProEjeSub($idRad)->fetch(PDO::FETCH_OBJ);
 $actividades = MGetDatosCertificadoRegistro::getDatosFuentesFinanciazion($codBpid);
+$nombre = MRegistrarResponsableEtapa::getResponsableEtapa($idRad, etapa)->fetch(PDO::FETCH_OBJ)->nombre;
+
+if(MGetDatosCertificadoRegistro::getSecretarios($idRad)->rowCount() > 0)
+    $secretario = MGetDatosCertificadoRegistro::getSecretarios($idRad)->fetch(PDO::FETCH_OBJ)->nom ;
+else
+    $secretario = '';
 
 $informacion = utf8_encode('El programa o proyecto denominado ') . utf8_decode($viabilidad->nompro)
         . utf8_decode(' se encuentra registrado con código BPI ') . $viabilidad->num
@@ -30,7 +38,7 @@ $informacion = utf8_encode('El programa o proyecto denominado ') . utf8_decode($
 $informacion2 = utf8_decode('Cuenta con concepto de vibilidad técnica favorable expedida por ' . $sess->getValue('secretaria')) . ' '
         . CambiarFormatos::cambiarFecha($viabilidad->fecvia) . utf8_decode(' y certificación de inclusión en Plan de Desarrollo Departamental.');
 
-$informacion3 = 'El proyecto se encuentra incluido en el Plan de Desarrollo Departamental 2012 - 2017, ' .utf8_decode('Eje estratégico: ')
+$informacion3 = 'El proyecto se encuentra incluido en el Plan de Desarrollo Departamental 2012 - 2017, ' . utf8_decode('Eje estratégico: ')
         . utf8_decode($viabilidadEjePro->eje) . ' Programa: ' . utf8_decode($viabilidadEjePro->pro) . ', Subprograma: ' . utf8_decode($viabilidadEjePro->sub);
 
 $pdf = new FPDF('P', 'mm', 'Letter'); // vertical, milimetros y tamaño
@@ -88,15 +96,35 @@ $pdf->Ln();
 
 foreach ($actividades as $row) {
 
-    $lnsOrigen = $pdf->getNumberLn(35, 4, utf8_decode($row[0]));
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[0]), 4.855, $pdf, 1); //c1    
-    $pdf->backLn(55, $lnsOrigen * 4);
-    $pdf->Cell(35, $lnsOrigen * 4, utf8_decode($row[1]), 1, 0, 'C');
-    $pdf->Cell(35, $lnsOrigen * 4, utf8_decode($row[2]), 1, 0, 'C');
-    $pdf->Cell(36, $lnsOrigen * 4, utf8_decode($row[3]), 1, 0, 'C');
-    $pdf->Cell(35, $lnsOrigen * 4, utf8_decode($row[4]), 1, 0, 'C');
-    $pdf->Ln();
+    $rowLines = $pdf->getNumberLn(35, 4, utf8_decode($row[0]));
+    $rowLines2 = $pdf->getNumberLn(35, 4, utf8_decode($row[3]));
+    $rowLines3 = $pdf->getNumberLn(35, 4, utf8_decode($row[4]));
+
+    $aux = [$rowLines, $rowLines2, $rowLines3];
+    $mayor = $aux[0];
+
+    for ($i = 1; $i < 3; $i++) {
+        if ($aux[$i] > $mayor)
+            $mayor = $aux[$i];
+    }
+
+    $mayor *= 4;
+
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[0]), 4.855, $pdf, 1, $mayor / $rowLines);
+    $pdf->backLn(55, $mayor);
+    $pdf->Cell(35, $mayor, utf8_decode($row[1]), 1, 0, 'C');
+    $pdf->Cell(35, $mayor, utf8_decode($row[2]), 1, 0, 'C');
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[3]), 4.725, $pdf, 1, $mayor / $rowLines2);
+    $pdf->backLn(161, $mayor);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[4]), 4.855, $pdf, 1, $mayor / $rowLines3);
 }
+
+$pdf->Ln(20);
+$pdf->Cell(106, 6, "_________________________________________", 0, 0);
+$pdf->Cell(0, 6, "___________________________________________", 0, 0);
+$pdf->Ln();
+$pdf->Cell(106, 6, $secretario, 0, 0);
+$pdf->Cell(0, 6, $nombre, 0, 0);
 
 $pdf->Output();
 ?>
