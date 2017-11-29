@@ -373,8 +373,9 @@ function infoproductos(id)
 }
 function ejecutar(posicion, op)
 {
-
+    
     if (op == 0)
+    
     {
         var collapos = document.getElementById('frm_collapsible_' + posicion).value;
         var lugar = collapos - 1;
@@ -388,3 +389,5 @@ function ejecutar(posicion, op)
         $('.collapsible').collapsible('open', posicion - 1);
     }
 }
+
+
