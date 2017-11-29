@@ -1,6 +1,10 @@
 <?php
 
-require_once '../../librerias/ConexionPDO.php';
+@session_start();
+
+$raiz = $_SESSION['raiz'];
+
+require_once $raiz . '/librerias/ConexionPDO.php';
 
 class CargarViabilizados {
 
@@ -46,8 +50,10 @@ class CargarViabilizados {
                         . 'idact,'//5
                         . 'des,'//6
                         . 'val,'//7
-                        . 'mdes '//7
-                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric, "mdes" varchar);';
+                        . 'mdes,'//8
+                        . 'cant,'//9
+                        . 'total '//10
+                        . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("id" integer , "nump"  integer,"codr"  integer, "nom"  varchar,"idact"  integer,"des"  varchar,"val"  numeric, "mdes" varchar, "cant" numeric, "total" numeric);';
                 break;
 
             default:
