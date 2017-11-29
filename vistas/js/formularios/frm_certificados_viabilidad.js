@@ -50,9 +50,7 @@ function seleccionar(idRad, tipo, rowId) {
     var contRow = document.getElementById("contRow").value;
 
     for (var i = 1; i <= contRow; i++) {
-
         document.getElementById("cerRow" + i).style.backgroundColor = "";
-
     }
 
     document.getElementById('divCertificados').style.display = "";

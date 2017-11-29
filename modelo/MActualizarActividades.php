@@ -15,6 +15,17 @@ class MActualizarActividades {
 
         return $resultado;
     }
+    public static function actualizarUnidades($datosUnidades) {
+
+        $sql = "select from act_producto_unidad($datosUnidades);";
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $resultado = $con->afectar($sql);
+        $con->cerrarConexion();
+
+        return $resultado;
+    }
 
 }
 
