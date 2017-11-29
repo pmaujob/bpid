@@ -1,3 +1,9 @@
+function onLoad() {
+
+    document.getElementById('logoc').style.bottom = "0";
+
+}
+
 function ingresar(event) {
 
     if (event != null && event.keyCode != 13) {
@@ -5,41 +11,53 @@ function ingresar(event) {
     }
 
     getIp();
-    //alert(getIpAddress());
 
     var ip = getIpAddress();
     var correo = document.getElementById("correo").value;
     var contrasena = document.getElementById("contrasena").value;
 
-    jQuery.ajax({
-        type: 'POST',
-        url: 'controlador/Clogin.php',
-        async: true,
-        data: {ip: ip, correo: correo, contrasena: contrasena},
-        success: function (respuesta) {
+    if (correo == "" || contrasena == "") {
 
-            if (respuesta === "Ok") {
+        Materialize.toast("Los campos no pueden estar vacios.", 3000);
 
-                location.href = "vistas/index.php";
+    } else {
 
-            } else if (respuesta === "No") {
+        jQuery.ajax({
+            type: 'POST',
+            url: 'controlador/Clogin.php',
+            async: true,
+            data: {ip: ip, correo: correo, contrasena: contrasena},
+            success: function (respuesta) {
 
-                alert("El usuario o la contraseña son incorrectos intentelo de nuevo.");
+                if (respuesta === "Ok") {
 
-            } else {
+                    location.href = "vistas/index.php";
 
-                alert("Error inesperado PHP");
-                console.log("Error en bpida: " + respuesta);
+                } else if (respuesta === "No") {
 
+                    Materialize.toast("El Usuario o la contraseña son incorrectos.", 3000);
+
+
+                } else {
+
+                    Materialize.toast("Error inesperado .", 3000);
+                    console.log("Error en bpida: " + respuesta);
+
+                }
+
+            },
+
+            error: function () {
+                Materialize.toast("Error inesperado .", 3000);
             }
 
-        },
+        });
+    }
 
-        error: function () {
-            alert("Error inesperado ajax");
-            //window.top.location = "../index.html";
-        }
-
-    });
+    var toasts = document.getElementById('toast-container').getElementsByTagName("div");
+    for (var i = 0; i < toasts.length; i++) {
+        toasts[i].style.background = "#008643";
+        toasts[i].style.fontWeight = "400";
+    }
 
 }

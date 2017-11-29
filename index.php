@@ -10,7 +10,6 @@ $_SESSION['raizHtml'] = 'http://' . $_SERVER['SERVER_NAME'] . '/bpid';
         <title>Login BPID</title>
         <?php include_once 'vistas/links.php'; ?>
         <link rel="stylesheet" href="vistas/css/cssbpid/login.css" type="text/css">
-        <script type="text/javascript" src="vistas/js/formularios/frm_login.js"></script>
         <script type="text/javascript" src="vistas/js/IpAddress.js"></script>
         <script type="text/javascript" src="vistas/js/formularios/frm_login.js"></script>
     </head>
