@@ -62,15 +62,36 @@ class RadicacionActividades {
             $newArray[] = $newRow;
         }
 
-        echo MActualizarActividades::actualizarActividades($idRad, CambiarFormatos::convertirAJsonItems($newArray));
+        return MActualizarActividades::actualizarActividades($idRad, CambiarFormatos::convertirAJsonItems($newArray));
+    }
+     function actProductos($unidadesMedida) {
+
+        $newArrayUnidad = array();
+
+        foreach ($unidadesMedida as $unidad) {
+            $newUnidad = array("idPro" => $unidad[0],"numero" => $unidad[1], "unidad" => $unidad[2]);
+            $newArrayUnidad[] = $newUnidad;
+        }
+
+        return MActualizarActividades::actualizarUnidades(CambiarFormatos::convertirAJsonItems($newArrayUnidad));
+       // return  var_dump(CambiarFormatos::convertirAJsonItems($newArrayUnidad));
     }
 
 }
 
 $metaActividades = array();
 $metaActividades = $_POST['metaActividades'];
+$unidadesMedida = array();
+$unidadesMedida = $_POST['unidades'];
 $idRad = $_POST['idRad'];
 $radicacionActividades = new RadicacionActividades();
 
+if( $radicacionActividades->actProductos($unidadesMedida)==1)
+{
 echo $radicacionActividades->actualizar($idRad, $metaActividades);
+}
+else
+{
+    echo 0;
+}
 ?>

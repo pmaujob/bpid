@@ -1,16 +1,25 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+@session_start();
 
-/**
- * Description of MRegistro
- *
- * @author Pmau
- */
+$raiz = $_SESSION['raiz'];
+
+require_once $raiz . '/librerias/ConexionPDO.php';
+require_once $raiz . '/modelo/MRegistrarResponsableEtapa.php';
+
 class MRegistro {
-    //put your code here
+
+    public static function registrar($tipoReg, $conceptoPost, $motivacion, $archivo, $archivoHash, $idRad, $secretario) {
+
+        MRegistrarResponsableEtapa::registrarResponsableEtapa($idRad, 7);
+        
+        $sql = "select from ing_registro('$tipoReg','$conceptoPost','$motivacion','$archivo','$archivoHash','$idRad',$secretario);";
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->afectar($sql);
+
+        return $res;
+    }
+
 }

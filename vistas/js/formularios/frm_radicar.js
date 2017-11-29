@@ -52,7 +52,30 @@ function validar() {
         nombre_archivo.focus();
     } else
     {
+        //codigo para llenar combo de programa
+
+        $.ajax({
+            type: "POST",
+            url: '../../controlador/ControladorRadicar.php',
+            async: true,
+            data: {op: 3},
+            success: function (datos)            {
+                $("#frm_programa_inversion").empty();
+                var content = JSON.parse(datos);     
+                for (var i = 0; i < content.length; i++) {
+                    var obj = content[i];
+                    var option = document.createElement('option');
+                    option.value = obj.cod;
+                    option.innerHTML = obj.nom;
+                    $('#frm_programa_inversion').append(option);
+                }
+                $("#frm_programa_inversion").material_select('update');
+                //  alert(datos);
+            }
+        });
+        //abrir ventana modal
         $('#modal1').modal('open');
+
     }
 }
 
@@ -227,15 +250,22 @@ function almacenar()
     var actividades = document.getElementById('actividades').value;
     var resumen = document.getElementById('resumen').value;
     var tipo_proyecto = document.getElementById('frm_tipo').value;
-    if(tipo_proyecto==0){var numero_programa_inversion=-1;}//proyecto General
-    else if(tipo_proyecto==1){var numero_programa_inversion=1;}//Proyecto de Inversion
-    else {var numero_programa_inversion=document.getElementById('frm_programa_inversion').value;}
+
+    if (tipo_proyecto == 1 || tipo_proyecto == 2) {
+        var numero_programa_inversion = null;
+    }//proyecto General
+    else {
+        var numero_programa_inversion = document.getElementById('frm_programa_inversion').value;
+    }
+    if (tipo_proyecto == 3 && numero_programa_inversion == "") {
+        Materialize.toast('SELECCIONE EL PROYECTO AL QUE PERTENECE', 4000);
+    }//proyecto General
 
 
     var value = numero_proyecto + '//' + nombre_proyecto + '//' + sector + '//' + localizacion + '//' + valor + '//' + eje + '//' + programa + '//' + subprograma + '//' + poai + '//' +
             entidad_proponente + '//' + entidad_ejecutante + '//' + num_id_responsable + '//' + nom_responsable + '//' + cargo_responsable + '//' +
             direccion_responsable + '//' + telefono_responsable + '//' + cel_responsable + '//' + correo_responsable + '//' + id_usuario + '//' + nombre_usuario + '//' +
-            observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades + '//' + resumen;
+            observaciones + '//' + objetivos + '//' + fuentes + '//' + problema + '//' + poblacion + '//' + objetivog + '//' + productos + '//' + actividades + '//' + resumen + '//' + tipo_proyecto + '//' + numero_programa_inversion;
 
 
     $('#modal1').modal('close');
@@ -392,28 +422,28 @@ function validarTipo()
     if (document.getElementById('toast-container') != null) {
         toasts = document.getElementById('toast-container').getElementsByTagName("div");
         for (var i = toasts.length - 1; i >= 0; i--) {
-        toasts[i].parentNode.removeChild(toasts[i]);
-    }
+            toasts[i].parentNode.removeChild(toasts[i]);
+        }
     }
 
-    
+
     $('#ventanatipo').modal('close');
     var proyectotipo = document.getElementById('frm_tipo').value;
     if (proyectotipo == 1) {
         Materialize.toast('PROYECTO GENERAL', 14000);
         document.getElementById("filatipoproyecto").style.display = 'none';
-        
-        
+
+
     }
-     if (proyectotipo == 2) {
+    if (proyectotipo == 2) {
         Materialize.toast('PROGRAMA DE INVERSION', 14000);
-                document.getElementById("filatipoproyecto").style.display = 'block';
+        document.getElementById("filatipoproyecto").style.display = 'none';
     }
     if (proyectotipo == 3) {
         Materialize.toast('EL PROYECTO PERTENECE A PROYECTO DE INVERSION', 14000);
-                document.getElementById("filatipoproyecto").style.display = 'block';
+        document.getElementById("filatipoproyecto").style.display = 'block';
     }
-    
+
 
     var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer
     toasts[0].style.background = "#FFCA04";

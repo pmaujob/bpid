@@ -128,7 +128,7 @@ function registrar() {
     archivoText = document.getElementById('archivo_text').value; //texto file
     secretario = document.getElementById('secretario').selectedIndex; //select
 
-    if (tipoReg != 0 && conceptoPost != 0 && motivacion !== "" && archivo != "" && archivoText != "" && secretario != 0) {
+    if (tipoReg != 0 && conceptoPost != 0 && motivacion !== "" && secretario != 0) {
 
         var formData = new FormData($("#frm_registro")[0]);
         $.ajax({
@@ -139,8 +139,6 @@ function registrar() {
             processData: false,
             success: function (datos)
             {
-
-                alert(datos);
 
                 var mensaje = "Se han registrado los datos de registro con exito.";
                 document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';

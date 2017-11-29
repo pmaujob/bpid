@@ -6,7 +6,6 @@ require_once $raiz . '/modelo/MRadicar.php';
 require_once $raiz . '/librerias/ValidarDatos.php';
 require_once $raiz . '/librerias/SessionVars.php';
 $sess = new SessionVars();
-$sess->init();
 
 //if ($sess->exist() && $sess->varExist('cedula')) {
 
@@ -47,6 +46,9 @@ class ControladorRadicar {
     private $productos;
     private $actividades;
     private $resumen;
+    private $tipo_proyecto;
+    private $numero_proyecto_inversion;
+    private $usuario_creador;
 
     public function iniciar($valores, $cedulaSession) {
 
@@ -57,7 +59,7 @@ class ControladorRadicar {
             if ($this->validar())
                 $this->radicar = new MRadicar();
             return $this->radicar->ingresarRadicar(
-                            $this->numero_proyecto, $this->nombre_proyecto, $this->sector, $this->localizacion, $this->valor, $this->eje, $this->programa, $this->subprograma, $this->poai, $this->entidad_proponente, $this->entidad_ejecutante, $this->num_id_responsable, $this->nom_responsable, $this->cargo_responsable, $this->direccion_responsable, $this->telefono_responsable, $this->cel_responsable, $this->correo_responsable, $this->id_usuario, $this->nombre_usuario, $this->observaciones, $this->cod_usuario_ingreso, $this->cod_secretaria, $this->cod_activacion, $this->objetivosEspecificos, $this->fuentesFinanciamiento, $this->problema, $this->poblacion, $this->objetivog, $this->productos, $this->actividades, $this->resumen);
+                            $this->numero_proyecto, $this->nombre_proyecto, $this->sector, $this->localizacion, $this->valor, $this->eje, $this->programa, $this->subprograma, $this->poai, $this->entidad_proponente, $this->entidad_ejecutante, $this->num_id_responsable, $this->nom_responsable, $this->cargo_responsable, $this->direccion_responsable, $this->telefono_responsable, $this->cel_responsable, $this->correo_responsable, $this->id_usuario, $this->nombre_usuario, $this->observaciones, $this->cod_usuario_ingreso, $this->cod_secretaria, $this->cod_activacion, $this->objetivosEspecificos, $this->fuentesFinanciamiento, $this->problema, $this->poblacion, $this->objetivog, $this->productos, $this->actividades, $this->resumen, $this->tipo_proyecto, $this->numero_proyecto_inversion);
         }
         else {
             echo "vacio";
@@ -96,8 +98,11 @@ class ControladorRadicar {
         $this->productos = $valores[26];
         $this->actividades = $valores[27];
         $this->resumen = $valores[28];
+        $this->tipo_proyecto = $valores[29];
+        $this->numero_proyecto_inversion = $valores[30];
         $this->cod_usuario_ingreso = $cedulaSession; //variable de sesion
         $this->cod_activacion = 1;
+
         $this->cod_secretaria = $sess->getValue('idSec');
     }
 
@@ -130,10 +135,16 @@ class ControladorRadicar {
         $rad = new MRadicar();
         return $rad->getDatosUsuario($cedula);
     }
+    public function getDatosProyectoPadre($secretaria) {
+
+        $rad = new MRadicar();
+        return $rad->getDatosProyectoPadre($secretaria);
+    }
 
 }
 
 if (isset($_POST['op']) && !empty($_POST['op'])) {
+    
     if ($_POST['op'] == 1) {//guardar datos
         $valores = trim(($_POST["value"]));
         $valores = explode("//", $valores);
@@ -144,9 +155,15 @@ if (isset($_POST['op']) && !empty($_POST['op'])) {
         $cedula = $_POST['cedula'];
         $radicar = new ControladorRadicar();
         echo $radicar->getDatosUsuario($cedula);
+    } else if ($_POST['op'] == 3) {
+        //consultar Datos Proyecto
+        $radicar = new ControladorRadicar();
+        
+        echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'));
     }
 }
-//} else {
+ else {
+        echo "no entro".$_POST['op'];
 //    header('http://' . $_SERVER['SERVER_NAME']);
-//}
+}
 ?>

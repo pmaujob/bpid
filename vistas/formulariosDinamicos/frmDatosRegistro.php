@@ -107,6 +107,7 @@ $firmas = MDatosRegistro::getDatosFirmas();
 
                 <ul class="collapsible" data-collapsible="accordion">
                     <?php
+
                     if (count($datosActividades) > 0) {
                         $aux = -1;
                         foreach ($datosActividades as $act) {
@@ -195,6 +196,7 @@ $firmas = MDatosRegistro::getDatosFirmas();
             <div class="collapsible-body">
                 <div class="input-field col s12">
                     <input name="num_proyecto" type="hidden" value="<?php echo $numProyecto; ?>">
+                    <input name="idRad" type="hidden" value="<?php echo $idRad; ?>">
                     <select id="tipo_reg" name="tipo_reg">
                         <option value="" disabled selected>Seleccione su opción</option>
                         <option value="1">Con Fines Informativos</option>

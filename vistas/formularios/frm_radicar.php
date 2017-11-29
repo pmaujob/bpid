@@ -156,7 +156,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <div class="col s2 m2 l2"></div>
                                 <div class="col s8 m8 l12 center-align">
                                     <br>
-                                    <button class="btn waves-effect waves-light" onclick="validar()">Enviar
+                                    <button class="btn waves-effect waves-light" onclick="validar()">Completar
                                         <i class="material-icons right">send</i>
                                     </button>
 
@@ -166,191 +166,189 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
                                     <div class="col s2 m2 l2"></div>
                                 </div>
-                               
-                        </div>      
-                            </div>
+
+                            </div>      
+                        </div>
                         <p><p>
-                                
-                            <div class="row">
+
+                        <div class="row">
+                            <div class="col s2 m2 l2"></div>
+                            <div class="col s8 m8 l12 center-align">
+                                <br>
+                                <hr style="background-color: #008643; border-width: 1px;">
+                                <a class="waves-effect waves-light btn " style="background: #FFCA04" onclick="tipoproyecto()"><i class="material-icons right">sync</i><strong>Cambiar Tipo Proyecto</strong></a>
+
+
+
                                 <div class="col s2 m2 l2"></div>
-                                <div class="col s8 m8 l12 center-align">
-                                    <br>
-                                    <hr style="background-color: #008643; border-width: 1px;">
-                                    <a class="waves-effect waves-light btn " style="background: #FFCA04" onclick="tipoproyecto()"><i class="material-icons right">sync</i><strong>Cambiar Tipo Proyecto</strong></a>
+                            </div>
 
-                                    
-
-                                    <div class="col s2 m2 l2"></div>
-                                </div>
-                               
                         </div>    
-                            <!-- MODAL-->
-                            <div class="container">
-                                <div class="row">
-                                    <div id="modal1" class="modal modal-fixed-footer">
-                                        <div class="modal-content" >
-                                            <h5>DATOS COMPLEMENTARIOS</h5>
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <select id="frm_poai" name="frm_poai">
-                                                        <option value="" disabled selected>PERTENECE AL POAI</option>
-                                                        <option value="1">SI</option>
-                                                        <option value="2">NO</option>
-                                                    </select>
-                                                    <label>PERTENECE AL POAI</label>
-                                                    <div id="d_frm_poai"></div>
-                                                </div>
+                        <!-- MODAL-->
+                        <div class="container">
+                            <div class="row">
+                                <div id="modal1" class="modal modal-fixed-footer">
+                                    <div class="modal-content" >
+                                        <h5>DATOS COMPLEMENTARIOS</h5>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <select id="frm_poai" name="frm_poai">
+                                                    <option value="" disabled selected>PERTENECE AL POAI</option>
+                                                    <option value="1">SI</option>
+                                                    <option value="2">NO</option>
+                                                </select>
+                                                <label>PERTENECE AL POAI</label>
+                                                <div id="d_frm_poai"></div>
                                             </div>
-                                            <div class="row" style="display: none" id="filatipoproyecto">
-                                                
-                                                <div class="input-field col s12">
-                                                    <select id="frm_poai" name="frm_programa_inversion">
-                                                        <option value="" disabled selected>PERTENECE A UN PROGRAMA DE INVERSION</option>
-                                                        <option value="1">NUMERO DE PROGRAMA 1</option>
-                                                        <option value="2">NUMERO DE PROGRAMA 2</option>
-                                                    </select>
-                                                    <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
-                                                    <div id="d_frm_poai"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input id="frm_entidad" name="frm_entidad" type="text" class="validate">
-                                                    <label for="frm_entidad" id="lbl_frm_entidad">ENTIDAD PROPONENTE</label>
-                                                    <div id="d_frm_entidad"></div>
-                                                </div>
-                                            </div>
-                                            <BR>
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input  id="frm_entidad_ejecuta" name="frm_entidad_ejecuta" type="text" class="validate" >
-                                                    <label for="frm_entidad_ejecuta" id="lbl_">ENTIDAD EJECUTANTE</label>
-                                                    <div id="d_frm_entidad_ejecuta"></div>
-                                                </div>
-                                            </div>
+                                        </div>
+                                        <div class="row" style="display: none" id="filatipoproyecto">
 
-                                            <br>
-                                            <div class="row">
-                                                <h6>RESPONSABLE DEL PROYECTO</h6>
-                                                <div class="input-field col s6">
-                                                    <input  id="frm_id_responsable" name="frm_id_responsable" type="text" class="validate"
-                                                            onKeyPress="return solonum(event)" onchange="buscarUsuario(1)">
-                                                    <label for="frm_id_responsable">No IDENTIFICACION</label>
-                                                    <div id="d_frm_id_responsable"></div>
-                                                </div>
-                                                <div class="input-field col s6">
-                                                    <input id="frm_nom_responsable" name="frm_nom_responsable" type="text" class="validate"
-                                                           >
-                                                    <label for="frm_nom_responsable">NOMBRE RESPONSABLE</label>
-                                                    <div id="d_frm_nom_responsable"></div>
-                                                </div>
+                                            <div class="input-field col s12">
+                                                <select id="frm_programa_inversion" name="frm_programa_inversion">
+
+                                                </select>
+                                                <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
+                                                <div id="d_frm_programa_inversion"></div>
                                             </div>
-                                            <div class="row">
-                                                <br>
-                                                <div class="input-field col s6">
-                                                    <input  id="frm_cargo_responsable" name="frm_cargo_responsable" type="text" class="validate"                                >
-                                                    <label for="frm_cargo_responsable">CARGO</label>
-                                                    <div id="d_frm_cargo_responsable"></div>
-                                                </div>
-                                                <div class="input-field col s6">
-                                                    <input id="frm_dir_responsable" name="frm_dir_responsable" type="text" class="validate">
-                                                    <label for="frm_dir_responsable">DIRECCION</label>
-                                                    <div id="d_frm_dir_responsable"></div>
-                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="frm_entidad" name="frm_entidad" type="text" class="validate">
+                                                <label for="frm_entidad" id="lbl_frm_entidad">ENTIDAD PROPONENTE</label>
+                                                <div id="d_frm_entidad"></div>
                                             </div>
-                                            <div class="row">
-                                                <br>
-                                                <div class="input-field col s6">
-                                                    <input  id="frm_tel_responsable" name="frm_tel_responsable" type="text" class="validate"
-                                                            onKeyPress="return solonum(event)" >
-                                                    <label for="frm_tel_responsable">TELEFONO/FAX</label>
-                                                    <div id="d_frm_tel_responsable"></div>
-                                                </div>
-                                                <div class="input-field col s6">
-                                                    <input id="frm_cel_responsable" name="frm_cel_responsable" type="text" class="validate"
-                                                           onKeyPress="return solonum(event)" >
-                                                    <label for="frm_cel_responsable">CELULAR</label>
-                                                    <div id="d_frm_cel_responsable"></div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input  id="frm_correo" name="frm_correo" type="email" class="validate">
-                                                    <label for="frm_correo">CORREO ELECTRONICO</label>
-                                                    <div id="d_frm_correo"></div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <h6>DATOS PERSONA QUE ENTREGA EL PROYECTO</h6>
-                                                <div class="input-field col s6">
-                                                    <input  id="frm_id_usuario" name="frm_id_usuario" type="text" class="validate"
-                                                            onKeyPress="return solonum(event)" onchange="buscarUsuario(2)">
-                                                    <label for="frm_id_usuario">No IDENTIFICACION</label>
-                                                    <div id="d_frm_id_usuario"></div>
-                                                </div>
-                                                <div class="input-field col s6">
-                                                    <input id="frm_nom_usuario" name="frm_nom_usuario" type="text" class="validate"
-                                                           >
-                                                    <label for="frm_nom_usuario">NOMBRE USUARIO</label>
-                                                    <div id="d_frm_nom_usuario"></div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <h6>OBSERVACIONES</h6>
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <textarea class="materialize-textarea" id="frm_observaciones" name="frm_observaciones">
-                                                    </textarea>
-                                                    <input id="frm_num_programa" name="frm_num_programa" type="hidden" value="000">
-                                                    <label for="frm_observaciones">OBSERVACIONES</label>
-                                                    <div id="d_frm_observaciones"></div>
-                                                </div>
+                                        </div>
+                                        <BR>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input  id="frm_entidad_ejecuta" name="frm_entidad_ejecuta" type="text" class="validate" >
+                                                <label for="frm_entidad_ejecuta" id="lbl_">ENTIDAD EJECUTANTE</label>
+                                                <div id="d_frm_entidad_ejecuta"></div>
                                             </div>
                                         </div>
 
-                                        <div class="modal-footer">
-                                            <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
-                                            <a href="#!"  onClick="if (validar_campos_requeridos('frm_poai-frm_entidad-frm_entidad_ejecuta-frm_id_responsable-frm_nom_responsable-frm_cargo_responsable-frm_dir_responsable-frm_cel_responsable-frm_correo-frm_id_usuario-frm_nom_usuario', 11) == true)
-                                                        almacenar()" class="modal-action  waves-effect waves-green btn-flat ">Guardar</a>
-                                            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-
+                                        <br>
+                                        <div class="row">
+                                            <h6>RESPONSABLE DEL PROYECTO</h6>
+                                            <div class="input-field col s6">
+                                                <input  id="frm_id_responsable" name="frm_id_responsable" type="text" class="validate"
+                                                        onKeyPress="return solonum(event)" onchange="buscarUsuario(1)">
+                                                <label for="frm_id_responsable">No IDENTIFICACION</label>
+                                                <div id="d_frm_id_responsable"></div>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input id="frm_nom_responsable" name="frm_nom_responsable" type="text" class="validate"
+                                                       >
+                                                <label for="frm_nom_responsable">NOMBRE RESPONSABLE</label>
+                                                <div id="d_frm_nom_responsable"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <br>
+                                            <div class="input-field col s6">
+                                                <input  id="frm_cargo_responsable" name="frm_cargo_responsable" type="text" class="validate"                                >
+                                                <label for="frm_cargo_responsable">CARGO</label>
+                                                <div id="d_frm_cargo_responsable"></div>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input id="frm_dir_responsable" name="frm_dir_responsable" type="text" class="validate">
+                                                <label for="frm_dir_responsable">DIRECCION</label>
+                                                <div id="d_frm_dir_responsable"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <br>
+                                            <div class="input-field col s6">
+                                                <input  id="frm_tel_responsable" name="frm_tel_responsable" type="text" class="validate"
+                                                        onKeyPress="return solonum(event)" >
+                                                <label for="frm_tel_responsable">TELEFONO/FAX</label>
+                                                <div id="d_frm_tel_responsable"></div>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input id="frm_cel_responsable" name="frm_cel_responsable" type="text" class="validate"
+                                                       onKeyPress="return solonum(event)" >
+                                                <label for="frm_cel_responsable">CELULAR</label>
+                                                <div id="d_frm_cel_responsable"></div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input  id="frm_correo" name="frm_correo" type="email" class="validate">
+                                                <label for="frm_correo">CORREO ELECTRONICO</label>
+                                                <div id="d_frm_correo"></div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <h6>DATOS PERSONA QUE ENTREGA EL PROYECTO</h6>
+                                            <div class="input-field col s6">
+                                                <input  id="frm_id_usuario" name="frm_id_usuario" type="text" class="validate"
+                                                        onKeyPress="return solonum(event)" onchange="buscarUsuario(2)">
+                                                <label for="frm_id_usuario">No IDENTIFICACION</label>
+                                                <div id="d_frm_id_usuario"></div>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input id="frm_nom_usuario" name="frm_nom_usuario" type="text" class="validate"
+                                                       >
+                                                <label for="frm_nom_usuario">NOMBRE USUARIO</label>
+                                                <div id="d_frm_nom_usuario"></div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <h6>OBSERVACIONES</h6>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <textarea class="materialize-textarea" id="frm_observaciones" name="frm_observaciones">
+                                                </textarea>
+                                                <input id="frm_num_programa" name="frm_num_programa" type="hidden" value="000">
+                                                <label for="frm_observaciones">OBSERVACIONES</label>
+                                                <div id="d_frm_observaciones"></div>
+                                            </div>
                                         </div>
                                     </div>
 
+                                    <div class="modal-footer">
+                                        <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
+                                        <a href="#!"  onClick="if (validar_campos_requeridos('frm_poai-frm_entidad-frm_entidad_ejecuta-frm_id_responsable-frm_nom_responsable-frm_cargo_responsable-frm_dir_responsable-frm_cel_responsable-frm_correo-frm_id_usuario-frm_nom_usuario', 11) == true)
+                                                            almacenar()" class="modal-action  waves-effect waves-green btn-flat ">Guardar</a>
+                                        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
 
+                                    </div>
                                 </div>
+
 
                             </div>
-                            <!-- Modal  -->
-
-                            <div id="ventanatipo" class="modal" style=" max-width: 650px; max-height: 750px; height:250px">
-                                <div class="modal-content">
-                                    <h5>TIPO DE PROYECTO A RADICAR</h5>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <select id="frm_tipo" name="frm_tipo">
-                                                <option value="1">PROYECTO GENERAL </option>
-                                                <option value="2"> PROGRAMA DE INVERSION</option>
-                                                <option value="3"> PROYECTO PERTENECE A  PROGRAMA DE INVERSION</option>
-                                            </select>
-                                            <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
-                                            <div id="d_frm_poai"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                       <button class="btn waves-effect waves-light" onclick="validarTipo()">Aceptar
-                                        <i class="material-icons right">send</i> 
-                                </div>
-                            </div>          
 
                         </div>
+                        <!-- Modal  -->
+
+                        <div id="ventanatipo" class="modal" style=" max-width: 650px; max-height: 750px; height:250px">
+                            <div class="modal-content">
+                                <h5>TIPO DE PROYECTO A RADICAR</h5>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <select id="frm_tipo" name="frm_tipo">
+                                            <option value="1">PROYECTO GENERAL </option>
+                                            <option value="2"> PROGRAMA DE INVERSION</option>
+                                            <option value="3"> PROYECTO PERTENECE A  PROGRAMA DE INVERSION</option>
+                                        </select>
+                                        <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
+                                        <div id="d_frm_poai"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn waves-effect waves-light" onclick="validarTipo()">Aceptar
+                                    <i class="material-icons right">send</i> 
+                            </div>
+                        </div>          
+
                     </div>
+                </div>
 
 
-                </div></div></form>
+            </div></div></form>
 
     </body>
     </html>

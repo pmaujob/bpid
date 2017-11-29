@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Bogota');
 session_start();
 require_once '../../modelo/ObtenerDatosCertificadoRadicar.php';
 require_once '../../librerias/fpdf/fpdf.php';
@@ -31,7 +31,8 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial', '', 11);
 $pdf->Cell(60, 6, utf8_decode($datos->getCodigoRadicacion()), 0, 0);
 $pdf->Cell(68, 6, utf8_decode($datos->getFechaRadicacion()), 0, 0);
-$pdf->Cell(78, 6, utf8_decode($datos->getHoraRadicacion()), 0, 0);
+$hora = strtotime($datos->getHoraRadicacion());
+$pdf->Cell(78, 6, date("g:i a", $hora), 0, 0);
 $pdf->Ln(7);
 $pdf->SetFont('Arial', 'B', 11);
 $pdf->Cell(60, 6, utf8_decode('Nombre Programa o Proyecto:'), 0, 0);
@@ -114,8 +115,8 @@ $pdf->Ln(7);
 $pdf->Cell(90, 6, '__________________________________', 0, 0);
 $pdf->Cell(90, 6, '__________________________________', 0, 0);
 $pdf->Ln(5);
+$pdf->Cell(90, 6, $datos->getUsuario(), 0, 0, 'C');
 $pdf->Cell(90, 6, $datos->getresponsable(), 0, 0, 'C');
-$pdf->Cell(90, 6, $datos->getnomusu(), 0, 0, 'C');
 $pdf->Ln(5);
 $pdf->Cell(90, 6, 'Funcionario Responsable Radicacion', 0, 0, 'C');
 $pdf->Cell(90, 6, 'Responsable Programa o Proyecto', 0, 0, 'C');

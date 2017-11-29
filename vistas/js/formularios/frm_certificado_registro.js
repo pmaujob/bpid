@@ -32,9 +32,9 @@ function buscarCertificaciones(estado, event) {
 function mas(codRadicacion, codBpid, c) {
 
 
-    value = codBpid;
-    direccion = '../certificados/certificadoRadicar.php';
-    window.open(direccion + '?value=' + value);
+    value = codRadicacion;
+    direccion = '../certificados/certificadoRegistro.php';
+    window.open(direccion + '?idRad=' + value + '&codBpid=' + codBpid);
 
 }
 

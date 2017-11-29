@@ -15,6 +15,7 @@ require_once $raiz . '/librerias/fpdf/fpdf.php';
 require_once $raiz . '/librerias/fpdf/PDF.php';
 require_once $raiz . '/librerias/DisenoCertificacionesPDF.php';
 require_once $raiz . '/modelo/CargarDatosCerViabilidad.php';
+require_once $raiz . '/modelo/CargarDatosCerViabilidad.php';
 require_once $raiz . '/librerias/CambiarFormatos.php';
 require_once $raiz . '/librerias/SessionVars.php';
 
@@ -87,7 +88,7 @@ foreach ($datosRadicacion as $row) {
         $pdf->Cell(0, 6, utf8_decode($r[3]));
         $pdf->Ln();
 
-        if ($responsables[$i + 1] != null) {
+        if (isset($responsables[$i + 1])) {
 
             $r2 = $responsables[$i + 1];
 

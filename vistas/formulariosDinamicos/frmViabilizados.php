@@ -4,6 +4,7 @@ require_once '../../modelo/CargarMetas.php';
 
         const metaSelect = 'METASELECT';
         const actId = 'ACTID';
+         const prodiv = 'PRODIV';
 
 if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
@@ -20,12 +21,23 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     $contMeta = 0;
     $metasProyecto = CargarMetas::getProyectMetas($numProyecto)->fetchAll(PDO::FETCH_BOTH);
     ?>
+    <div id="d_error" title="ALERTA"></div>
+    <div id="d_errormetas" title="ALERTA"></div>
+    <div id="modal2" class="modal" style="max-width: 250px;">
+            <div class="modal-content center-align">
+                <p>ERROR</p>
+                <i class="large material-icons green-text">info_outline</i>
 
+            </div>
+            <div class="modal-footer">
+                <a class="waves-effect waves-light btn light-blue blueb" onclick="closeModa2()">Aceptar</a>
+            </div>
+        </div>
     <div class="contenedor_tabla"> 
         <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
-          <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?<?php echo $numProyecto; ?></th>
+                    <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,11 +46,11 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                     <td>
 
                         <p style="margin-left: 44px;">
-                            <input name="group1" type="radio" id="test1" value="0" onclick="vermga(this.value)" />
+                            <input name="group1" type="radio" id="test1" value="0" onclick="verarchivoMga(this.value)" />
                             <label for="test1">SI</label>
                         </p>
                         <p style="margin-left: 44px;">
-                            <input name="group1" type="radio" id="test2" value="1" onclick="vermga(this.value)"/>
+                            <input name="group1" type="radio" id="test2" value="1" onclick="verarchivoMga(this.value)"/>
                             <label for="test2">NO</label>
                         </p>
                     <td>
@@ -202,42 +214,91 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
             <?php
             if (count($datosActividades) > 0) {
                 $aux = -1;
+                $acum = 0;
                 foreach ($datosActividades as $act) {
+
+
                     //echo "<br>aux:$aux-act:$act[1]<br>";
                     $contMeta++;
                     if ($aux == -1) {
-
-                        $aux = $act[1];
+                        $acum++;
+                         $aux = $act[1];
                         ?>  
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">add</i><strong>PRODUCTO : </strong><?php echo $act[3]; ?></div>
+                            <div class="collapsible-header" onclick="infoproductos(this)" id="<?php echo prodiv.$acum; ?>"><i class="material-icons">add</i><strong>PRODUCTO : </strong><?php echo $rest = substr($act[3], 0, 80); ?></div>
                             <div class="collapsible-body">
                                 <table class="striped">
                                     <thead>
+                                        <tr style="background-color: #008643">
+                                            <th colspan="3" style=" text-align: center; color: #ffffff" ><strong>DATOS DEL PRODUCTO</strong></th>
+                                        </tr>
                                         <tr>
-                                            <th style="width: 40%; text-align: center" >ACTIVIDAD</th>
-                                            <th style="width: 30%;  text-align: center">VALOR </th>
-                                            <th style="width: 30%;  text-align: center">META</th>
+                                            <th style=" text-align: center" >
+
+                                                <input  placeholder="Cantidad" id="first_name" type="text"    value="<?php echo $act[9]; ?>" readonly style="text-align: center">
+                                                <label for="first_name" style="text-align: center; color: #000"><strong>Cantidad</strong></label>
+
+                                            </th>
+                                            <th style=" text-align: center" >
+                                                <input placeholder="Costo" id="frm_costo" type="text" value="<?php echo number_format($act[10], 0, '', '.'); ?>" readonly style="text-align: center">
+                                                <label for="first_name" style="text-align: center; color: #000"><strong>Costo</strong></label>
+                                            </th>
+                                            <th style=" text-align: center" >
+                                                <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text"  style="text-align: center" >
+                                                <label for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medida</strong></label>
+                                               <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
+                                               <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
+                                            </th>
+                                        </tr>
+
+                                        <tr style="background-color: #008643">
+                                            <th style="width: 40%; text-align: center;color: #ffffff " >ACTIVIDAD</th>
+                                            <th style="width: 30%;  text-align: center; color: #ffffff">VALOR </th>
+                                            <th style="width: 30%;  text-align: center; color: #ffffff">META</th>
                                         </tr>
                                     </thead>  
                                     <tbody>
 
                                         <?php
                                     } else if ($aux != $act[1]) {
-
-                                        $aux = $act[1];
+                                        $acum++;
+                                         $aux = $act[1];
                                         ?>
                                     </tbody></table>
                             </div>                            </li>
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">add</i><strong>PRODUCTO : </strong><?php echo $act[3]; ?></div>
-                            <div class="collapsible-body">
+                            <div class="collapsible-header" onclick="infoproductos(this)" id="<?php echo prodiv.$acum; ?>"><i class="material-icons" id="<?php echo $acum; ?>">add</i><strong>PRODUCTO : </strong><?php echo substr($act[3], 0, 80); ?></div>
+                            <div class="collapsible-body" >
                                 <table class="striped">
                                     <thead>
+                                        <tr style="background-color: #008643">
+                                            <th colspan="3" style=" text-align: center; color: #ffffff" ><strong>DATOS DEL PRODUCTO</strong></th>
+                                        </tr>
                                         <tr>
-                                            <th style="width: 40%;  text-align: center">ACTIVIDAD</th>
-                                            <th style="width: 30%;  text-align: center">VALOR </th>
-                                            <th style="width: 30%;  text-align: center">META</th>
+                                            <th>
+
+                                                <input  placeholder="Cantidad" id="first_name" type="text"    value="<?php echo $act[9]; ?>" readonly style="text-align: center">
+
+                                                <label for="first_name" style="text-align: center; color: #000"><strong>Cantidad</strong></label>
+
+                                            </th>
+                                            <th style=" text-align: center" >
+                                                <input placeholder="Costo" id="first_name" type="text" value="<?php echo number_format($act[10], 0, '', '.'); ?>" readonly style="text-align: center">
+                                                <label for="first_name" style="text-align: center; color: #000"><strong>Costo</strong></label>
+                                            </th>
+                                            <th style=" text-align: center" >
+                                                <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text" style="text-align: center" >
+                                                <label for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medida</strong></label>
+                                                <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
+                                                <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
+                                                
+                                            </th>
+                                        </tr>
+
+                                        <tr style="background-color: #008643">
+                                            <th style="width: 40%;  text-align: center; color: #ffffff">ACTIVIDAD</th>
+                                            <th style="width: 30%;  text-align: center; color: #ffffff" >VALOR </th>
+                                            <th style="width: 30%;  text-align: center; color: #ffffff">META</th>
                                         </tr>
                                     </thead>  
                                     <tbody>
@@ -254,16 +315,22 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                             </p>
                                         </td>
                                         <td style="text-align: center;" style="width: 30%;"><?php echo "$" . number_format($act[7]); ?></td>
-                                        <td style="width: 30%;">                            
-                                            <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
+                                        <td style="width: 30%;">    
+                                            <input  type="hidden" id="frm_collapsible_<?php echo $contMeta ?>"  value="<?php echo $acum ?>">
+                                                <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
                                                 <option value="0" selected disabled>Seleccione una Meta</option>                                    
                                                 <?php
                                                 for ($i = 0; $i < count($metasProyecto); $i++) {
+                                                    
                                                     $meta = $metasProyecto[$i];
+                                                    
                                                     ?>
+                                                    
                                                     <option value="<?php echo $meta[0]; ?>" style="" ><?php echo $meta[2] . " - " . $meta[1]; ?></option>
+                                                    
                                                     <?php
                                                 }
+                                                
                                                 unset($meta);
                                                 ?> 
                                             </select>
@@ -293,6 +360,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 <input type="hidden" id="contItemMeta" value="<?php echo count($metasProyecto); ?>">
 <input type="hidden" id="idRad" value="<?php echo $idRad; ?>">
 <input type="hidden" id="proyectName" value="<?php echo $proyectName; ?>">
+<input type="hidden" id="frmacum" value="<?php echo $acum; ?>">
 <table class="striped">
     <thead>
         <tr>

@@ -1,4 +1,5 @@
 var idRad;
+var codBpid;
 var usuariosa = new Array();
 
 function onLoadBody() {
@@ -65,6 +66,7 @@ function buscarProyectos(op) {
 function mas(cod, bpid, numProyecto) {
 
     idRad = cod;
+    codBpid = bpid;
 
     usuariosa.splice(0);
     document.getElementById('txtBuscarUsuarios').value = "";
@@ -155,32 +157,43 @@ function eliminar(cedula) {
 
 function registrarResponsables() {
 
-    jQuery.ajax({
-        type: 'POST',
-        url: '../../controlador/CFinalizarViabilidad.php',
-        async: true,
-        data: {idRad: idRad, responsables: usuariosa},
-        success: function (respuesta)
-        {
+    var est = document.getElementById('estado').value;
 
-            $('#modal1').modal('close');
+    if (usuariosa.length > 0) {
 
-            if (respuesta.trim() == "1") {
-                document.getElementById('d_error').innerHTML = "Los responsables del proyecto han sido guardados con exito.";
-                $('#d_error').dialog("open");
-            } else {
-                document.getElementById('d_error').innerHTML = "Los responsables del proyecto no han sido registrados, por favor intentelo de nuevo mas tarde.";
-                $('#d_error').dialog("open");
+        jQuery.ajax({
+            type: 'POST',
+            url: '../../controlador/CFinalizarViabilidad.php',
+            async: true,
+            data: {idRad: idRad, responsables: usuariosa, est: est, codBpid: codBpid},
+            success: function (respuesta)
+            {
+                
+                //alert(respuesta);
+
+                $('#modal1').modal('close');
+
+                if (respuesta.trim() == "1") {
+                    document.getElementById('d_error').innerHTML = "Los responsables del proyecto han sido guardados con exito.";
+                    $('#d_error').dialog("open");
+                } else {
+                    document.getElementById('d_error').innerHTML = "Los responsables del proyecto no han sido registrados, por favor intentelo de nuevo mas tarde.";
+                    $('#d_error').dialog("open");
+                }
+
+                console.log(respuesta);
+
+            },
+            error: function () {
+                alert("Error inesperado");
+                window.top.location = "../index.html";
             }
+        });
 
-            console.log(respuesta);
-
-        },
-        error: function () {
-            alert("Error inesperado");
-            window.top.location = "../index.html";
-        }
-    });
+    } else {
+        document.getElementById('d_error').innerHTML = "Debe haber por lo menos un responsable.";
+        $('#d_error').dialog("open");
+    }
 
 }
 
