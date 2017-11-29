@@ -1,6 +1,10 @@
 <?php
 
-require_once '../../librerias/ConexionPDO.php';
+@session_start();
+
+$raiz = $_SESSION['raiz'];
+
+require_once $raiz . '/librerias/ConexionPDO.php';
 
 class CargarViabilizados {
 
@@ -32,10 +36,9 @@ class CargarViabilizados {
                 $consulta = 'select origen,'//0
                         . 'valor,'//1
                         . 'periodo,'//2
-                        .'etapa,' //3
-                        .'tend,' //4
-                        .'tentd ' //5
-                    
+                        . 'etapa,' //3
+                        . 'tend,' //4
+                        . 'tentd ' //5
                         . 'from get_datos_viabilidad(' . $numBpid . ',' . $op . ') as ("origen" varchar, "valor" numeric, "periodo" integer,"etapa" varchar,"tend" varchar,"tentd" varchar );';
                 break;
             case 4:
@@ -57,14 +60,13 @@ class CargarViabilizados {
                 # code...
                 break;
         }
-        
+
         $con = new ConexionPDO();
         $con->conectar("PG");
         $res = $con->consultar($consulta);
         $con->cerrarConexion();
         return $res;
     }
-            
 
 }
 

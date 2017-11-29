@@ -22,6 +22,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     $metasProyecto = CargarMetas::getProyectMetas($numProyecto)->fetchAll(PDO::FETCH_BOTH);
     ?>
     <div id="d_error" title="ALERTA"></div>
+    <div id="d_errormetas" title="ALERTA"></div>
     <div id="modal2" class="modal" style="max-width: 250px;">
             <div class="modal-content center-align">
                 <p>ERROR</p>
@@ -36,7 +37,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
-                    <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?<?php echo $numBpid; ?></th>
+                    <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?</th>
                 </tr>
             </thead>
             <tbody>
@@ -245,6 +246,8 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                             <th style=" text-align: center" >
                                                 <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text"  style="text-align: center" >
                                                 <label for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medida</strong></label>
+                                               <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
+                                               <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
                                             </th>
                                         </tr>
 
@@ -284,8 +287,11 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                                 <label for="first_name" style="text-align: center; color: #000"><strong>Costo</strong></label>
                                             </th>
                                             <th style=" text-align: center" >
-                                                <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text" class="validate" >
+                                                <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text" style="text-align: center" >
                                                 <label for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medida</strong></label>
+                                                <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
+                                                <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
+                                                
                                             </th>
                                         </tr>
 
@@ -309,16 +315,22 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                             </p>
                                         </td>
                                         <td style="text-align: center;" style="width: 30%;"><?php echo "$" . number_format($act[7]); ?></td>
-                                        <td style="width: 30%;">                            
-                                            <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
+                                        <td style="width: 30%;">    
+                                            <input  type="hidden" id="frm_collapsible_<?php echo $contMeta ?>"  value="<?php echo $acum ?>">
+                                                <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
                                                 <option value="0" selected disabled>Seleccione una Meta</option>                                    
                                                 <?php
                                                 for ($i = 0; $i < count($metasProyecto); $i++) {
+                                                    
                                                     $meta = $metasProyecto[$i];
+                                                    
                                                     ?>
+                                                    
                                                     <option value="<?php echo $meta[0]; ?>" style="" ><?php echo $meta[2] . " - " . $meta[1]; ?></option>
+                                                    
                                                     <?php
                                                 }
+                                                
                                                 unset($meta);
                                                 ?> 
                                             </select>
