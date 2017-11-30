@@ -158,6 +158,8 @@ function eliminar(cedula) {
 function registrarResponsables() {
 
     var est = document.getElementById('estado').value;
+    
+    alert(usuariosa);
 
     if (usuariosa.length > 0) {
 
