@@ -13,6 +13,7 @@ class RegistrarListasChequeo {
     private $idRad;
     private $requisitos;
     private $subRequisitos;
+    private $numeroProyecto;
 
     public function getIdRad() {
         return $this->idRad;
@@ -38,11 +39,20 @@ class RegistrarListasChequeo {
         $this->subRequisitos = $subRequisitos;
     }
 
+    public function setNumeroProyecto($numeroProyecto) {
+        $this->numeroProyecto = $numeroProyecto;
+    }
+
+    public function getNumeroProyecto() {
+        return $this->numeroProyecto;
+    }
+
     public function registrar() {
 
         $reqArray = array();
         foreach ($this->getRequisitos() as $fila) {
-            $aux = array("idReq" => $fila[0], "reqOp" => $fila[1], "reqObs" => $fila[2]);
+            $temporal = str_replace("'", "''", $fila[2]);
+            $aux = array("idReq" => $fila[0], "reqOp" => $fila[1], "reqObs" => $temporal);
             $reqArray[] = $aux;
         }
 
@@ -53,6 +63,7 @@ class RegistrarListasChequeo {
 
             $subArray = array();
             foreach ($this->getSubRequisitos() as $fila) {
+                $temporal = str_replace("'", "''", $fila[2]);
                 $aux = array("idSub" => $fila[0], "subOp" => $fila[1], "subObs" => $fila[2]);
                 $subArray[] = $aux;
             }
@@ -68,7 +79,7 @@ class RegistrarListasChequeo {
                 foreach ($resCorreo as $obj) {
                     $destino = $obj[0];
                 }
-                $asunto = "Radicación Proyecto - Bpid";
+                $asunto = "Radicación Proyecto Bpid";
                 $cuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
                 $altCuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
 
@@ -86,6 +97,8 @@ if (!isset($_POST['guardarEnviar'])) {
     $registrar->setIdRad($_POST['idRad']);
     $registrar->setRequisitos($_POST['reqData']);
     $registrar->setSubRequisitos($_POST['subData']);
+    $registrar->setnumeroProyecto($_POST['numeroProyecto']);
+
 
     echo $registrar->registrar();
 } else {//enviar correo proyecto radicado
@@ -99,8 +112,10 @@ if (!isset($_POST['guardarEnviar'])) {
         foreach ($resCorreo as $obj) {
             $destino = $obj[0];
         }
-        $asunto = "Radicación Proyecto - Bpid";
-        $cuerpo = "Su proyecto ha sido radicado con éxito";
+        
+        $asunto =utf8_decode("Radicación Proyecto Bpid") ;
+        //$imagen="<img src='https://www.google.com.co/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiskc_tqPHXAhXOSN8KHSz7BA8QjRwIBw&url=https%3A%2F%2Fimpuestovehicular.narino.gov.co%2Fportal-narino%2F&psig=AOvVaw028B8qrPFZxu-wEdnJhXVc&ust=1512509942289850'";
+        $cuerpo = "Su proyecto numero ha sido radicado con éxito";
         $altCuerpo = "Su proyecto ha sido radicado con éxito";
 
         enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);

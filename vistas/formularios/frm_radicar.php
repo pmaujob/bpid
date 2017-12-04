@@ -95,13 +95,13 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col s12 m2 l2"><div class="etiquetafrm"><div class="textofrm">NUMERO PROYECTO</div></div></div>
+                                <div class="col s12 m2 l2"><div class="etiquetafrm"><div class="textofrm">ID Mga Web</div></div></div>
                                 <div class="col s12 m10 l10">
                                     <div class="row">
                                         <div class="opcionesbtn">
                                             <div class="input-field col s12 m12 l12">
                                                 <input id="frm_num_proyecto" name="frm_num_proyecto" type="text" readonly/>
-                                                <label for="frm_num_proyecto">numero Proyecto</label>
+                                                <label for="frm_num_proyecto">ID Mga</label>
                                                 <div class="descripcion"></div>
                                             </div>
                                         </div>
@@ -156,7 +156,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <div class="col s2 m2 l2"></div>
                                 <div class="col s8 m8 l12 center-align">
                                     <br>
-                                    <button class="btn waves-effect waves-light" onclick="validar()">Completar
+                                    <button class="btn waves-effect waves-light" onclick="validar()">Siguiente
                                         <i class="material-icons right">send</i>
                                     </button>
 
@@ -299,8 +299,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         <h6>OBSERVACIONES</h6>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea class="materialize-textarea" id="frm_observaciones" name="frm_observaciones">
-                                                </textarea>
+                                                <textarea class="materialize-textarea" id="frm_observaciones" name="frm_observaciones"></textarea>
                                                 <input id="frm_num_programa" name="frm_num_programa" type="hidden" value="000">
                                                 <label for="frm_observaciones">OBSERVACIONES</label>
                                                 <div id="d_frm_observaciones"></div>
@@ -324,12 +323,13 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         <!-- Modal  -->
 
                         <div id="ventanatipo" class="modal" style=" max-width: 650px; max-height: 750px; height:250px">
+                          
                             <div class="modal-content">
                                 <h5>TIPO DE PROYECTO A RADICAR</h5>
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <select id="frm_tipo" name="frm_tipo">
-                                            <option value="1">PROYECTO GENERAL </option>
+                                            <option value="1">PROYECTO</option>
                                             <option value="2"> PROGRAMA DE INVERSION</option>
                                             <option value="3"> PROYECTO PERTENECE A  PROGRAMA DE INVERSION</option>
                                         </select>
@@ -341,6 +341,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             <div class="modal-footer">
                                 <button class="btn waves-effect waves-light" onclick="validarTipo()">Aceptar
                                     <i class="material-icons right">send</i> 
+                                    
+                                    <button class="btn waves-effect waves-light" onclick="cerrarModal()">Cerrar
+                                    <i class="material-icons right">highlight_off</i> 
                             </div>
                         </div>          
 

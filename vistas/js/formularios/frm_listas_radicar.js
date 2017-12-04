@@ -155,6 +155,9 @@ function validar(enviarInfo) {
     var nOpcionesSub = document.getElementById('nOpcionesSub').value;
     var totalArchivosReq = document.getElementById('totalArchivosReq');
     var totalArchivosSub = document.getElementById('totalArchivosSub');
+     var numeroProyecto = document.getElementById('numProyecto').value;
+     
+   
 
     var reqData = new Array();
     var subData = new Array();
@@ -171,9 +174,9 @@ function validar(enviarInfo) {
             if (opcionSeleccionada == "SI" && reqArchivoExist == "" && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
                 alert('Se debe adjuntar un archivo en esta pregunta.');
 
-//                $('.collapsible-header').removeClass('active');
+//inii                $('.collapsible-header').removeClass('active');
 //                $('.collapsible-body').css('display','none');
-//                $('#REQFILE' + i).parents('div').parents('div').parents('div').css('display','block');
+//  fin              $('#REQFILE' + i).parents('div').parents('div').parents('div').css('display','block');
                 reqArchivo.focus();
 
                 return;
@@ -237,9 +240,9 @@ function validar(enviarInfo) {
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
         async: true,
-        data: {idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
+        data: {numeroProyecto:numeroProyecto,idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
-
+                                
             if (respuesta == 1) {
 
                 var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
@@ -250,6 +253,7 @@ function validar(enviarInfo) {
                     contentType: false,
                     processData: false,
                     success: function (datos) {
+                                    
 
                         var fallidosReq = datos.split('|')[0];
                         var fallidosSub = datos.split('|')[1];

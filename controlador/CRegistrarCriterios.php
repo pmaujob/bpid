@@ -50,7 +50,8 @@ class CRegistrarCriterios {
     public function getObservacionesJson() {
         $obs = array();
         foreach ($this->getObservaciones() as $fila) {
-            $aux = array("idDimen" => $fila[0], "obs" => $fila[1], "porcentaje" => $fila[2]);
+             $temporal=str_replace("'","''",$fila[1]) ;
+            $aux = array("idDimen" => $fila[0], "obs" => $temporal, "porcentaje" => $fila[2]);
             $obs[] = $aux;
         }
 

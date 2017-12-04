@@ -59,7 +59,7 @@ class ControladorRadicar {
             if ($this->validar())
                 $this->radicar = new MRadicar();
             return $this->radicar->ingresarRadicar(
-                            $this->numero_proyecto, $this->nombre_proyecto, $this->sector, $this->localizacion, $this->valor, $this->eje, $this->programa, $this->subprograma, $this->poai, $this->entidad_proponente, $this->entidad_ejecutante, $this->num_id_responsable, $this->nom_responsable, $this->cargo_responsable, $this->direccion_responsable, $this->telefono_responsable, $this->cel_responsable, $this->correo_responsable, $this->id_usuario, $this->nombre_usuario, $this->observaciones, $this->cod_usuario_ingreso, $this->cod_secretaria, $this->cod_activacion, $this->objetivosEspecificos, $this->fuentesFinanciamiento, $this->problema, $this->poblacion, $this->objetivog, $this->productos, $this->actividades, $this->resumen, $this->tipo_proyecto, $this->numero_proyecto_inversion);
+                            $this->numero_proyecto, $this->nombre_proyecto, $this->sector, $this->localizacion, $this->valor, $this->eje, $this->programa, $this->subprograma, $this->poai, $this->entidad_proponente, $this->entidad_ejecutante, $this->num_id_responsable, $this->nom_responsable, $this->cargo_responsable, $this->direccion_responsable, $this->telefono_responsable, $this->cel_responsable, $this->correo_responsable, $this->id_usuario, $this->nombre_usuario, $this->observaciones, $this->cod_usuario_ingreso, $this->cod_secretaria, $this->cod_activacion, $this->objetivosEspecificos, $this->fuentesFinanciamiento, $this->problema, $this->poblacion,$this->objetivog, $this->productos, $this->actividades, $this->resumen, $this->tipo_proyecto, $this->numero_proyecto_inversion);
         }
         else {
             echo "vacio";
@@ -89,12 +89,13 @@ class ControladorRadicar {
         $this->correo_responsable = $valores[17];
         $this->id_usuario = $valores[18];
         $this->nombre_usuario = $valores[19];
-        $this->observaciones = $valores[20];
+        $temporal=str_replace("'","''",$valores[20]) ;
+        $this->observaciones = $temporal;
         $this->objetivosEspecificos = $valores[21];
         $this->fuentesFinanciamiento = $valores[22];
         $this->problema = $valores[23];
-        $this->poblacion = $valores[24];
-        $this->objetivog = $valores[25];
+        $this->poblacion =$valores[24];
+        $this->objetivog=$valores[25];; 
         $this->productos = $valores[26];
         $this->actividades = $valores[27];
         $this->resumen = $valores[28];
