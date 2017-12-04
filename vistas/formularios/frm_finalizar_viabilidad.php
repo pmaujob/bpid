@@ -40,9 +40,13 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                     <i class="material-icons" style="margin-top: 16px;">close</i>                            
                 </a>
                 <div class="modal-content">
-                    <h4>Información general del proyecto</h4>
+                    <h4>Resultado de la viabilidad</h4>
                     <p>Agregue los responsables del proyecto y verifique información.</p>
                     <ul class="collapsible popout" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header" style="background: #008643; color: white;"><i class="material-icons">receipt</i>Resultado Criterios de Viabilidad</div>
+                            <div id="respuestainfo" class="collapsible-body"></div>
+                        </li>
                         <li>
                             <div class="collapsible-header" style="background: #F9C000; color: white;"><i class="material-icons">account_circle</i>Responsables</div>
                             <div class="collapsible-body">
@@ -66,11 +70,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="collapsible-header" style="background: #008643; color: white;"><i class="material-icons">receipt</i>Información acerca del proyecto</div>
-                            <div id="respuestainfo" class="collapsible-body"></div>
-                        </li>
                     </ul>
+                    <div style="height: 100px;">
+                        <!-- espacio -->
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarResponsables();">Guardar enviar</a>
