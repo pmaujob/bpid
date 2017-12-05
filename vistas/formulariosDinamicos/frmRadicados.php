@@ -12,9 +12,8 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
     $res = CargarRadicados::getRadicados($datos, $op);
 
     $asunto = utf8_decode("Radicación Proyecto Bpid");
-    $cuerpo = file_get_contents('../correos/correoRadicacion.php');
+    $cuerpo = file_get_contents('../correos/correoRadicacion.php');    
     $altCuerpo = "Su proyecto ha sido radicado con éxito";
-
     $asd = enviarCorreo("danielernestodaza@hotmail.com", $asunto, $cuerpo, $altCuerpo);
     
     echo "resultado: " . $asd;

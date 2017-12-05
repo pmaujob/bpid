@@ -11,21 +11,18 @@ class Correos {
 
     public function inicializar() {
 
-        $this->phpMailer = new PHPMailer();
+        $this->phpMailer = new PHPMailer;
 
-        $this->phpMailer->IsSMTP();
+        $this->phpMailer->IsSMTP();        
+        $this->SMTPDebug = 2;
+        $this->Debugoutput = 'html';
+        $this->SMTPSecure = 'tls';
         $this->phpMailer->SMTPAuth = true;
+        $this->phpMailer->Port = 587;
         $this->phpMailer->Host = "smtp.gmail.com";
         $this->phpMailer->Username = "planeacionbpid@gmail.com";
         $this->phpMailer->Password = "bpid2017";
-        $this->phpMailer->Port = 587;
-        $this->phpMailer->From = "planeacionbpid@gmail.com";
-        $this->phpMailer->FromName = "BPID";
-        $this->phpMailer->IsHTML(true);
-    }
-
-    public function getMierda() {
-        return $this->phpMailer->From;
+        $this->phpMailer->setFrom('planeacionbpid@gmail.com', 'BPID');
     }
 
     public function setDestinatario($correoDestinatario) {
@@ -37,8 +34,7 @@ class Correos {
         ob_start();
         include '../../vistas/correos/correoRadicacion.php';
         $this->phpMailer->Body = ob_get_clean();
-//        
-//        $this->phpMailer->AltBody = $altCuerpo;
+        $this->phpMailer->AltBody = $altCuerpo;
     }
 
     public function enviar() {
