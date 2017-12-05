@@ -19,15 +19,16 @@ $sess = new SessionVars();
 
 $idRad = $_GET['idRad'];
 $codBpid = $_GET['codBpid'];
-const etapa = 7;
+const etapa = 6;
 
 $viabilidad = CargarViabilizados::getViabilizados($codBpid, 1)->fetch(PDO::FETCH_OBJ);
 $viabilidadEjePro = MGetDatosCertificadoRegistro::getDatosProEjeSub($idRad)->fetch(PDO::FETCH_OBJ);
 $actividades = MGetDatosCertificadoRegistro::getDatosFuentesFinanciazion($codBpid);
 $nombre = MRegistrarResponsableEtapa::getResponsableEtapa($idRad, etapa)->fetch(PDO::FETCH_OBJ)->nombre;
+$cargoSecretario = MRegistrarResponsableEtapa::getResponsableEtapa($idRad, etapa)->fetch(PDO::FETCH_OBJ)->cargo;
 
 if(MGetDatosCertificadoRegistro::getSecretarios($idRad)->rowCount() > 0)
-    $secretario = MGetDatosCertificadoRegistro::getSecretarios($idRad)->fetch(PDO::FETCH_OBJ)->nom ;
+    $secretario = MGetDatosCertificadoRegistro::getSecretarios($idRad)->fetch(PDO::FETCH_OBJ)->nom;
 else
     $secretario = '';
 
@@ -125,6 +126,9 @@ $pdf->Cell(0, 6, "___________________________________________", 0, 0);
 $pdf->Ln();
 $pdf->Cell(106, 6, $secretario, 0, 0);
 $pdf->Cell(0, 6, $nombre, 0, 0);
+$pdf->Ln();
+$pdf->Cell(106, 6, $cargoSecretario, 0, 0);
+$pdf->Cell(0, 6, "Funcionario Responsable", 0, 0);
 
 $pdf->Output();
 ?>

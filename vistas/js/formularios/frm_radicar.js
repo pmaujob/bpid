@@ -59,9 +59,9 @@ function validar() {
             url: '../../controlador/ControladorRadicar.php',
             async: true,
             data: {op: 3},
-            success: function (datos)            {
+            success: function (datos) {
                 $("#frm_programa_inversion").empty();
-                var content = JSON.parse(datos);     
+                var content = JSON.parse(datos);
                 for (var i = 0; i < content.length; i++) {
                     var obj = content[i];
                     var option = document.createElement('option');
@@ -159,13 +159,13 @@ function archivo_xml()
                                 document.getElementById('productos').value = cadena[14];
                                 document.getElementById('actividades').value = cadena[15];
                                 document.getElementById('resumen').value = cadena[16];
-                                quitar_pantalla();
+                                //quitar_pantalla();
                             }
                             if (datos == -1)
                             {
 
                                 $('#modal1').modal('close');
-                                quitar_pantalla();
+                                //quitar_pantalla();
                                 document.getElementById('d_ingreso').innerHTML = '<p>ERROR, EL ARCHIVO ESTA INCOMPLETO Y NO PUEDE SER RADICADO</p>';
                                 $("#d_ingreso").dialog("open");
                                 return false;
@@ -179,7 +179,7 @@ function archivo_xml()
                 if (existe == 1)
                 {
                     $('#modal1').modal('close');
-                    quitar_pantalla();
+                    //quitar_pantalla();
                     document.getElementById('d_ingreso').innerHTML = '<p> EL ARCHIVO YA SE ENCUENTRA RADICADO!, SELECCIONE UNO NUEVO</p>';
                     $("#d_ingreso").dialog("open");
                     return false;
@@ -188,7 +188,7 @@ function archivo_xml()
                 if (existe == 2)
                 {
                     $('#modal1').modal('close');
-                    quitar_pantalla();
+                    //quitar_pantalla();
                     document.getElementById('d_ingreso').innerHTML = '<p> ERROR!, EL ARCHIVO NO PUEDE SER RADICADO</p>';
                     $("#d_ingreso").dialog("open");
                     return false;
@@ -294,7 +294,19 @@ function almacenar()
                         $('#modal1').modal('close');
                         document.getElementById('d_ingreso').innerHTML = '<p>EL NUMERO BPID ASIGNADO ES ' + datos + '</p>';
                         $("#d_ingreso").dialog("open");
+                        
+                        $("##d_ingreso").dialog({
+                            autoOpen: false,
+                            modal: true,
+                            buttons: {
+                                "Cerrar": function () {
+                                    $(this).dialog("close");
+                                    window.top.location = "../../vistas/formularios/frm_radicar.php";
+       
 
+                                }
+                            }
+                        });
                     }
                 });
 
@@ -309,8 +321,8 @@ function almacenar()
             }
         },
         error: function () {
-            alert("Error inesperado")
-            window.top.location = "../index.html";
+            alert("Error inesperado");
+
         }
     });
 
@@ -430,7 +442,7 @@ function validarTipo()
     $('#ventanatipo').modal('close');
     var proyectotipo = document.getElementById('frm_tipo').value;
     if (proyectotipo == 1) {
-        Materialize.toast('PROYECTO GENERAL', 14000);
+        Materialize.toast('PROYECTO', 14000);
         document.getElementById("filatipoproyecto").style.display = 'none';
 
 
@@ -448,5 +460,11 @@ function validarTipo()
     var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer
     toasts[0].style.background = "#FFCA04";
     toasts[0].style.fontWeight = "400";
+
+}
+function cerrarModal() {
+
+    $('#ventanatipo').modal('close');
+
 
 }

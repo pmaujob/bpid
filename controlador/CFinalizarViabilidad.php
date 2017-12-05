@@ -93,15 +93,17 @@ class CFinalizarViabilidad {
         $asunto = "Estado Proyecto - Bpid";
 
         if ($this->getEstado() === "A") {//no viable
-            $cuerpo = "Su proyecto tiene viabilidad desfavorable.";
-            $altCuerpo = "Su proyecto tiene viabilidad no favorable.";
+                    
+            $cuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad desfavorable";
+            $altCuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad no favorable.";
 
             $destino = $this->getResponsable();
 
             $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
         } else {
-            $cuerpo = "Su proyecto tiene viabilidad favorable.";
-            $altCuerpo = "Su proyecto tiene viabilidad favorable.";
+            $cuerpo = "El proyecto:" . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad favorable";
+            $altCuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad favorable";
+
 
             $destino = $this->getResponsable();
             $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);

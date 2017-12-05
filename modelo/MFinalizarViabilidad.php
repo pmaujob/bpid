@@ -5,10 +5,13 @@
 $raiz = $_SESSION['raiz'];
 
 require_once $raiz . '/librerias/ConexionPDO.php';
+require_once $raiz . '/modelo/MRegistrarResponsableEtapa.php';
 
 class MFinalizarViabilidad {
 
     public static function registrarViabilidad($idRad, $responsables, $estado) {
+
+        MRegistrarResponsableEtapa::registrarResponsableEtapa($idRad, 6);
 
         $sql = "select from ingresar_responsables_viabilidad($idRad,$responsables,$estado);";
 

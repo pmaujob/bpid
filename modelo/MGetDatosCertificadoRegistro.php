@@ -32,7 +32,7 @@ class MGetDatosCertificadoRegistro {
 
     public static function getSecretarios($idRad) {
 
-        $sql = 'select nom from get_secretarios('.$idRad.') as ("nom" varchar);';
+        $sql = 'select nom, cargo from get_secretarios('.$idRad.') as ("nom" varchar, "cargo" varchar);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");

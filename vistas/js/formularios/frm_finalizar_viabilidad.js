@@ -131,7 +131,7 @@ function agregaru(cedula, nombres, apellidos, cargo) {
     datosUsuario [0] = cedula;
     datosUsuario [1] = nombres;
     datosUsuario [2] = apellidos;
-    datosUsuario [3] = cargo;
+    datosUsuario [3] = document.getElementById(cargo).value;
     usuariosa.push(datosUsuario);
 
     document.getElementById('usua').innerHTML = "";
@@ -158,6 +158,8 @@ function eliminar(cedula) {
 function registrarResponsables() {
 
     var est = document.getElementById('estado').value;
+    
+    alert(usuariosa);
 
     if (usuariosa.length > 0) {
 

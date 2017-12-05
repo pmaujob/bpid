@@ -78,6 +78,9 @@ $funciones = MGetMenu::getMenu(1);
                             echo "Este usuario no tiene acceso a ningun modulo";
                         }
                         ?>
+                        <div style="height: 100px;">
+
+                        </div>
                     </ul>
                 </div>
             </div>
