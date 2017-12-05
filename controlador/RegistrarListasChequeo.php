@@ -113,9 +113,8 @@ if (!isset($_POST['guardarEnviar'])) {
             $destino = $obj[0];
         }
         
-        $asunto =utf8_decode("Radicación Proyecto Bpid") ;
-        //$imagen="<img src='https://www.google.com.co/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiskc_tqPHXAhXOSN8KHSz7BA8QjRwIBw&url=https%3A%2F%2Fimpuestovehicular.narino.gov.co%2Fportal-narino%2F&psig=AOvVaw028B8qrPFZxu-wEdnJhXVc&ust=1512509942289850'";
-        $cuerpo = "Su proyecto numero ha sido radicado con éxito";
+        $asunto = utf8_decode("Radicación Proyecto Bpid") ;
+        $cuerpo = file_get_contents('../vistas/correos/correoRadicacion.php');
         $altCuerpo = "Su proyecto ha sido radicado con éxito";
 
         enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
