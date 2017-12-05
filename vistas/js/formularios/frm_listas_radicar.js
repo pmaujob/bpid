@@ -155,9 +155,9 @@ function validar(enviarInfo) {
     var nOpcionesSub = document.getElementById('nOpcionesSub').value;
     var totalArchivosReq = document.getElementById('totalArchivosReq');
     var totalArchivosSub = document.getElementById('totalArchivosSub');
-     var numeroProyecto = document.getElementById('numProyecto').value;
-     
-   
+    var numeroProyecto = document.getElementById('numProyecto').value;
+
+
 
     var reqData = new Array();
     var subData = new Array();
@@ -172,7 +172,9 @@ function validar(enviarInfo) {
             var reqArchivo = document.getElementById('REQFILE' + i);
 
             if (opcionSeleccionada == "SI" && reqArchivoExist == "" && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
-                alert('Se debe adjuntar un archivo en esta pregunta.');
+
+                document.getElementById('d_ingreso').innerHTML = '<p>DEBE ADJUNTAR UN ARCHIVO EN ESTA PREGUNTA</p>';
+                $("#d_error").dialog("open");
 
 //inii                $('.collapsible-header').removeClass('active');
 //                $('.collapsible-body').css('display','none');
@@ -199,7 +201,9 @@ function validar(enviarInfo) {
     }
 
     if (reqData.length == 0) {
-        alert("Debe cambiar el estado de al menos 1 item de la Lista General para guardar cambios.");
+
+        document.getElementById('d_ingreso').innerHTML = '<p>DEBE REALIZAR CAMBIOS EN LA LISTA GENERAL PARA GUARDAR</p>';
+        $("#d_error").dialog("open");
         return;
     }
 
@@ -211,7 +215,8 @@ function validar(enviarInfo) {
             var subArchivo = document.getElementById('SUBFILE' + i);
 
             if (opcionSeleccionada == "SI" && subArchivoExist == "" && subArchivo.value == '') {
-                alert('Se debe adjuntar un archivo en esta pregunta.');
+                document.getElementById('d_ingreso').innerHTML = '<p>DEBE ADJUNTAR UN ARCHIVO EN ESTA PREGUNTA</p>';
+                $("#d_error").dialog("open");
                 subArchivo.focus();
                 return;
             } else if (opcionSeleccionada == "SI" && subArchivo.value != '') {
@@ -240,9 +245,9 @@ function validar(enviarInfo) {
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
         async: true,
-        data: {numeroProyecto:numeroProyecto,idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
+        data: {numeroProyecto: numeroProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
-                                
+
             if (respuesta == 1) {
 
                 var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
@@ -253,7 +258,7 @@ function validar(enviarInfo) {
                     contentType: false,
                     processData: false,
                     success: function (datos) {
-                                    
+
 
                         var fallidosReq = datos.split('|')[0];
                         var fallidosSub = datos.split('|')[1];
@@ -344,7 +349,9 @@ function validarExtension(fileNombre) {
     var adjunto = document.getElementById(fileNombre);
     var extension = (adjunto.value.substring(adjunto.value.lastIndexOf("."))).toLowerCase();
     if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat' || extension === '.css') {
-        alert("El formato del archivo adjunto no es válido.");
+        
+         document.getElementById('d_ingreso').innerHTML = '<p>EL FORMATO DEL ARCHIVO ADJUNTO NO ES VALIDO</p>';
+               $("#d_error").dialog("open");
         adjunto.value = null;
         return;
     }
