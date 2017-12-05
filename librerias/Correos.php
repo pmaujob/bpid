@@ -1,4 +1,5 @@
 <?php
+
 @session_start();
 
 $raiz = $_SESSION['raiz'];
@@ -9,7 +10,7 @@ class Correos {
     private $phpMailer;
 
     public function inicializar() {
-        
+
         $this->phpMailer = new PHPMailer();
 
         $this->phpMailer->IsSMTP();
@@ -18,13 +19,12 @@ class Correos {
         $this->phpMailer->Username = "planeacionbpid@gmail.com";
         $this->phpMailer->Password = "bpid2017";
         $this->phpMailer->Port = 587;
-        $this->phpMailer->From = "planeacionbpid@gmail.com"; 
-        $this->phpMailer->FromName = "BPID"; 
-        $this->phpMailer->IsHTML(true); 
-
+        $this->phpMailer->From = "planeacionbpid@gmail.com";
+        $this->phpMailer->FromName = "BPID";
+        $this->phpMailer->IsHTML(true);
     }
-    
-    public function getMierda(){
+
+    public function getMierda() {
         return $this->phpMailer->From;
     }
 
@@ -34,8 +34,11 @@ class Correos {
 
     public function armarCorreo($asunto, $cuerpo, $altCuerpo) {
         $this->phpMailer->Subject = $asunto;
-        $this->phpMailer->Body = $cuerpo;
-        $this->phpMailer->AltBody = $altCuerpo;
+        ob_start();
+        include '../../vistas/correos/correoRadicacion.php';
+        $this->phpMailer->Body = ob_get_clean();
+//        
+//        $this->phpMailer->AltBody = $altCuerpo;
     }
 
     public function enviar() {

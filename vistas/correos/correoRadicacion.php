@@ -14,7 +14,7 @@ require_once $raiz . '/librerias/CambiarFormatos.php';
     <head>
         <meta charset="UTF-8">
         <title>BPID</title>
-        <?php require_once '../links.php'; ?>
+        <?php require_once $raiz . '/vistas/links.php'; ?>
         <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
     </head>
     <body>
@@ -24,7 +24,7 @@ require_once $raiz . '/librerias/CambiarFormatos.php';
             </div>
             <div class="col s4 m4 l4">
                 <div class="col s12 m8 l12 center-align">
-                    <div><img src="../img/logoajax.png" width="50%"></div>
+                    <div><img src="/img/logoajax.png" width="50%"></div>
                 </div>
             </div>
             <div class="col s4 m4 l4">
@@ -84,10 +84,11 @@ require_once $raiz . '/librerias/CambiarFormatos.php';
                 </label>
             </div>
             <div class="col s2 m3 l3 right-align">
-                <img src="../img/logo-client.png" width="20%">
+                <img src="../vistas/img/logo-client.png" width="20%">
             </div>                
             <div class="col s4 m3 l3">
             </div>        
         </div>
     </body>
 </html>
+
