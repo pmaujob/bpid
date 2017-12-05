@@ -1,6 +1,8 @@
 <?php
+@session_start();
 
-require_once '../librerias/PHPMailer/PHPMailerAutoload.php';
+$raiz = $_SESSION['raiz'];
+require_once $raiz . '/librerias/PHPMailer/PHPMailerAutoload.php';
 
 class Correos {
 
