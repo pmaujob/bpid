@@ -22,7 +22,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
         <body onload="tipoproyecto()">
             <div id="dario"></div>
-            <div id="cargando" class="frm_externo"><img src="../css/wait.gif"></div>
+            <div class="row">
+                <div class="col s12 m4"></div>
+                <div id="cargando" class="frm_externo col s12 m4 center-align"><img src="../css/wait.gif"></div>
+            </div>
             <div id="d_error" title="ALERTA"></div>
             <div id="d_ingreso" title="INFORMACION"></div>
             <?php require_once '../menu.php'; ?>

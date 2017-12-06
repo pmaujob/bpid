@@ -13,6 +13,7 @@ function quitar_pantalla()
     document.getElementById("cargando").style.display = "none";
     document.body.style.overflow = "scroll";
 }
+
 $(document).ready(function () {
 
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
@@ -159,13 +160,13 @@ function archivo_xml()
                                 document.getElementById('productos').value = cadena[14];
                                 document.getElementById('actividades').value = cadena[15];
                                 document.getElementById('resumen').value = cadena[16];
-                                //quitar_pantalla();
+                                quitar_pantalla();
                             }
                             if (datos == -1)
                             {
 
                                 $('#modal1').modal('close');
-                                //quitar_pantalla();
+                                quitar_pantalla();
                                 document.getElementById('d_ingreso').innerHTML = '<p>ERROR, EL ARCHIVO ESTA INCOMPLETO Y NO PUEDE SER RADICADO</p>';
                                 $("#d_ingreso").dialog("open");
                                 return false;
@@ -179,7 +180,7 @@ function archivo_xml()
                 if (existe == 1)
                 {
                     $('#modal1').modal('close');
-                    //quitar_pantalla();
+                    quitar_pantalla();
                     document.getElementById('d_ingreso').innerHTML = '<p> EL ARCHIVO YA SE ENCUENTRA RADICADO!, SELECCIONE UNO NUEVO</p>';
                     $("#d_ingreso").dialog("open");
                     return false;
@@ -188,7 +189,7 @@ function archivo_xml()
                 if (existe == 2)
                 {
                     $('#modal1').modal('close');
-                    //quitar_pantalla();
+                    quitar_pantalla();
                     document.getElementById('d_ingreso').innerHTML = '<p> ERROR!, EL ARCHIVO NO PUEDE SER RADICADO</p>';
                     $("#d_ingreso").dialog("open");
                     return false;
@@ -210,6 +211,7 @@ function Borrar() {
 //FUNCION PARA VALIDAR CAMPOS DE FORMULARIO
 function almacenar()
 {
+    bloquear_pantalla();
     //DATOS DEL PROYECTO DEL ARCHIVO XML
     var numero_proyecto = document.getElementById('frm_num_proyecto').value;
     var nombre_proyecto = document.getElementById('frm_nom_proyecto').value;
@@ -301,6 +303,7 @@ function almacenar()
 
             } else
             {
+                quitar_pantalla();
                 console.log(respuesta);
                 var mensaje = "Error, Intentelo Nuevamente";
                 document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
@@ -309,6 +312,7 @@ function almacenar()
             }
         },
         error: function () {
+            quitar_pantalla();
             alert("Error inesperado")
             window.top.location = "../index.html";
         }
