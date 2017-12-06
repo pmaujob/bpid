@@ -105,7 +105,7 @@ function archivo_xml()
         nombre_archivo.focus();
     } else
     {
-        bloquear_pantalla();
+        //bloquear_pantalla();
         var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
         $.ajax({
             url: '../../controlador/CConsutarExistenciasXml.php',
@@ -211,7 +211,7 @@ function Borrar() {
 //FUNCION PARA VALIDAR CAMPOS DE FORMULARIO
 function almacenar()
 {
-    bloquear_pantalla();
+  //  bloquear_pantalla();
     //DATOS DEL PROYECTO DEL ARCHIVO XML
     var numero_proyecto = document.getElementById('frm_num_proyecto').value;
     var nombre_proyecto = document.getElementById('frm_nom_proyecto').value;

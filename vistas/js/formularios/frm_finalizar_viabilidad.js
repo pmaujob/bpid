@@ -118,7 +118,8 @@ function encontrar() {
 function agregaru(cedula, nombres, apellidos, cargo) {
 
     if (document.getElementById(cargo).value.length === 0) {
-        alert("El cargo no puede estar vacio");
+        //alert("El cargo no puede estar vacio");
+        Materialize.toast('El cargo no puede estar vacio', 4000);
         return;
     }
 
