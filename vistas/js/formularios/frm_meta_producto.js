@@ -228,8 +228,9 @@ function insertarMetas() {
         success: function (respuesta) {
 
             if (respuesta == 1) {
-
-                alert("Las metas se guardaron con éxito.");
+                document.getElementById('d_ingreso').innerHTML = '<p> LAS METAS SE GUARDARON CON EXITO</p>';
+                $("#d_ingreso").dialog("open");
+                
                 $("#modalm").modal("close");
 
                 location.href = "../formularios/frm_meta_producto.php";
