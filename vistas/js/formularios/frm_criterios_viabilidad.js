@@ -174,6 +174,18 @@ function registrarCriterios(op) {
             if (respuesta.trim() == "1") {
                 document.getElementById('d_error').innerHTML = "Los criterios de viabilidad se han registrado con exito.";
                 $('#d_error').dialog("open");
+                $("#d_error").dialog({
+                            autoOpen: false,
+                            modal: true,
+                            buttons: {
+                                "Cerrar": function () {
+                                    $(this).dialog("close");
+                                    window.top.location = "../../vistas/formularios/frm_criterios_viabilidad.php";
+       
+
+                                }
+                            }
+                        });
             } else {
                 document.getElementById('d_error').innerHTML = "Los criterios de viabilidad no han podido ser registrados, por favor intentelo de nuevo mas tarde.";
                 $('#d_error').dialog("open");

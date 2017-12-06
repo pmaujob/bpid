@@ -219,7 +219,7 @@ function guardarMetas() {
 
         if (select.value == 0) {
             
-            document.getElementById('d_errormetas').innerHTML = '<p>Debe seleccionar una meta en este item.</p>';
+            document.getElementById('d_errormetas').innerHTML = '<p>DEBE SELECCIONAR UN ITEM EN ESTA META</p>';
             $("#d_errormetas").dialog("open");
             $("#d_errormetas").dialog({
                 autoOpen: false,
@@ -258,7 +258,7 @@ function guardarMetas() {
         }
 
         if (!found) {
-            document.getElementById('d_errormetas').innerHTML = '<p>No puede quedar ninguna meta sin actividades</p>';
+            document.getElementById('d_errormetas').innerHTML = '<p>NO SE PUEDE QUEDAR UNA META SIN ACTIVIDAD</p>';
             $("#d_errormetas").dialog({
                 autoOpen: false,
                 modal: true,
@@ -311,12 +311,12 @@ function guardarMetas() {
                    
             if (respuesta == 1) {
                         
-                document.getElementById('d_errormetas').innerHTML = '<p>Los datos se actualizaron con éxito.</p>';
+                document.getElementById('d_errormetas').innerHTML = '<p>LOS DATOS SE ACTUALIZARON CON EXITO.</p>';
                 $("#d_errormetas").dialog("open");
                 location.href = 'frm_viabilidad.php';
 
             } else {
-                document.getElementById('d_errormetas').innerHTML = '<p>No se pudo registrar las metas, por favor vuelva a intentarlo.</p>';
+                document.getElementById('d_errormetas').innerHTML = '<p>NO SE REGISTRARON LAS METAS, VUELVA A INTENTARLO</p>';
                 $("#d_errormetas").dialog("open");
 
             }
