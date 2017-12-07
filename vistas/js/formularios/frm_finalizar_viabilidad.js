@@ -177,7 +177,7 @@ function registrarResponsables() {
 
     var est = document.getElementById('estado').value;
 
-    alert(usuariosa);
+
 
     if (usuariosa.length > 0) {
 
@@ -188,8 +188,8 @@ function registrarResponsables() {
             data: {idRad: idRad, responsables: usuariosa, est: est, codBpid: codBpid},
             success: function (respuesta)
             {
-
-                // alert(respuesta);
+                alert("entro");
+                 alert(respuesta);
 
                 $('#modal1').modal('close');
 
