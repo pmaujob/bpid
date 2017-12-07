@@ -129,6 +129,9 @@ function mas(cod, bpid, numProyecto) {
                 $('.collapsible').collapsible();
             });
 
+            document.getElementById('modale').style.display = "block";
+            document.getElementById('modalg').style.display = "block";
+
             proyectoActual = numProyecto;
 
         }, error: function () {
