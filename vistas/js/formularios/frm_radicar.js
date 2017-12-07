@@ -344,10 +344,12 @@ function buscarUsuario(tipo)
                 if (respuesta.trim() === "NoData") {
                     waitGuardarProgreso.style.display = 'none';
                     Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000);
+                     toasts.style.background = "#008643";
+                    toasts.style.fontWeight = "400";
                     var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
                     //Cambiar el estilo de uno de todos los toasts
-                    toasts[0].style.background = "#008643";
-                    toasts[0].style.fontWeight = "400";
+                    toasts.style.background = "#008643";
+                    toasts.style.fontWeight = "400";
                     document.getElementById('frm_id_responsable').focus();
                     document.getElementById('frm_nom_responsable').value = '';
                     document.getElementById('frm_cargo_responsable').value = '';
