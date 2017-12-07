@@ -4,6 +4,7 @@
 
 $raiz = $_SESSION['raiz'];
 require_once $raiz . '/librerias/PHPMailer/PHPMailerAutoload.php';
+require_once $raiz . '/librerias/CambiarFormatos.php';
 
 class Correos {
 
@@ -13,7 +14,7 @@ class Correos {
 
         $this->phpMailer = new PHPMailer;
 
-        $this->phpMailer->IsSMTP();        
+        $this->phpMailer->IsSMTP();
         $this->SMTPDebug = 2;
         $this->Debugoutput = 'html';
         $this->SMTPSecure = 'tls';
@@ -29,11 +30,13 @@ class Correos {
         $this->phpMailer->addAddress($correoDestinatario);
     }
 
-    public function armarCorreo($asunto, $cuerpo, $altCuerpo) {
+    public function armarCorreo($asunto, $msg, $altCuerpo) {
         $this->phpMailer->Subject = $asunto;
-        ob_start();
-        include '../../vistas/correos/correoRadicacion.php';
-        $this->phpMailer->Body = ob_get_clean();
+
+        $body = str_replace('HORA_SISTEMA', CambiarFormatos::cambiarFecha(date("m/d/Y")), file_get_contents('../../vistas/correos/correoRadicacion.php'));
+        $body = str_replace('MSG_REPLACE', $msg, $body);
+
+        $this->phpMailer->msgHTML($body);
         $this->phpMailer->AltBody = $altCuerpo;
     }
 
