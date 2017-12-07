@@ -13,6 +13,7 @@ class RegistrarListasChequeo {
     private $requisitos;
     private $subRequisitos;
     private $numeroProyecto;
+    public $raiz;
 
     public function getIdRad() {
         return $this->idRad;
@@ -84,21 +85,27 @@ class RegistrarListasChequeo {
                 $asunto = utf8_decode("Radicación Proyecto Bpid");
                 ob_start();
                 ?>
-                <span><strong>Estimado <?php echo utf8_decode($datosCorreo[1]); ?></strong></span> 
+                <span><strong>Estimado <?php echo $datosCorreo[1]; ?></strong></span> 
                 <br>
-                <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo utf8_decode($datosCorreo[2]); ?></strong> 
-                    con número de radicación <strong><?php echo $datosCorreo[3] ?></strong> NO cumplió con 
+                <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo $datosCorreo[2] . " "; ?></strong> 
+                    con número de radicación <strong><?php echo $datosCorreo[3]; ?></strong> NO cumplió con 
                     algunos requisitos de las listas de chequeo, y por lo tanto, <strong>NO</strong> fue radicado.          
                 </p>
                 <br>
                 <p>Para más información por favor comunicarse con la entidad.</p>
                 <?php
                 $msg = ob_get_clean();
-                $altCuerpo = "Informamos que su proyecto ";
+                $altCuerpo = nl2br("Estimado $datosCorreo[1]."
+                        . "\n\nInformamos que su proyecto $datosCorreo[2] con número de radicación $datosCorreo[3] "
+                        . "NO cumplió con algunos requisitos de las listas de chequeo, y por lo tanto, NO fue radicado."
+                        . "\n\nPara más información por favor comunicarse con la entidad."
+                        . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
+                        . "\n\nSí no tiene conocimiento sobre el tema, por favor ignore este mensaje.");
 
-                enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo);
+                enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo, $this->raiz);
             }
         }
+
         return $resInsert;
     }
 
@@ -111,6 +118,7 @@ if (!isset($_POST['guardarEnviar'])) {
     $registrar->setRequisitos($_POST['reqData']);
     $registrar->setSubRequisitos($_POST['subData']);
     $registrar->setnumeroProyecto($_POST['numeroProyecto']);
+    $registrar->raiz = $raiz;
 
     echo $registrar->registrar();
 } else {//enviar correo proyecto radicado
@@ -127,33 +135,35 @@ if (!isset($_POST['guardarEnviar'])) {
             }
         }
 
-        $asunto = utf8_decode("Radicación Proyecto Bpid");
+        $asunto = utf8_encode("Radicación Proyecto Bpid");
         ob_start();
         ?>
-        <span><strong>Estimado <?php echo utf8_decode($datosCorreo[1]); ?></strong></span> 
+        <span><strong>Estimado <?php echo $datosCorreo[1]; ?></strong></span> 
         <br>
-        <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo utf8_decode($datosCorreo[2] . " "); ?></strong> 
+        <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo $datosCorreo[2] . " "; ?></strong> 
             con número de radicación <strong><?php echo $datosCorreo[3]; ?></strong> cumplió con 
             los requisitos de las listas de chequeo, y por ende, fue <strong>radicado con éxito.</strong>          
         </p>   
         <?php
         $msg = ob_get_clean();
-        $altCuerpo = nl2br("Informamos que su proyecto NOMBRE_PROYECTO_PHP "
-                . "con número de radicación NOMBRE_BPID_PHP cumplió "
+        $altCuerpo = nl2br("Estimado $datosCorreo[1]."
+                . "\n\nInformamos que su proyecto $datosCorreo[2]"
+                . "con número de radicación $datosCorreo[3] cumplió "
                 . "con los requisitos de las listas de chequeo, y por ende, fue radicado con éxito. "
                 . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
                 . "\n\nSí no tiene conocimiento sobre el tema, por favor ignore este mensaje.");
 
-        enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo);
+        enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo, $raiz);
     }
 
     echo $res;
 }
 
-function enviarCorreo($destino, $asunto, $msg, $altCuerpo) {
+function enviarCorreo($destino, $asunto, $msg, $altCuerpo, $raiz) {
 
     $correo = new Correos();
 
+    $correo->raiz = $raiz;
     $correo->inicializar();
     $correo->setDestinatario($destino);
     $correo->armarCorreo($asunto, $msg, $altCuerpo);

@@ -112,7 +112,6 @@ function mas(cod, bpid, numProyecto) {
 
     value = cod;
     var bpid = bpid;
-    nomProyecto = nom;
 
     jQuery.ajax({
         type: 'POST',
@@ -244,7 +243,7 @@ function validar(enviarInfo) {
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
         async: true,
-        data: {numeroProyecto: numeroProyecto, nomProyecto: nomProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
+        data: {numeroProyecto: numeroProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
 
             if (respuesta == 1) {
@@ -288,7 +287,7 @@ function validar(enviarInfo) {
                         } else if (enviarInfo && noCont > 0) {
 
                             mostrarMensaje('Se ha guardado el progreso con éxito. Sin embargo, hay items sin aprobar, '
-                                    + 'por lo tanto se enviará un informe a su correo registrado en bpid.', true);
+                                    + 'por lo tanto se le enviará un correo a su email registrado en bpid.', true);
 
                             noCont = 0;
                             $("#modal1").modal("close");
@@ -332,6 +331,8 @@ function validar(enviarInfo) {
                 msjInfo.style.color = "#e53935";
                 msjInfo.style.wordBreak = "break-all";
                 msjInfo.style.display = "";
+                
+                console.error("Error: "+respuesta);
 
             }
         },
@@ -384,8 +385,6 @@ function validarNo(idSelection) {
     } else if (selection.value != "NO" && noCont > 0) {
         noCont--;
     }
-
-    console.log("noCont: " + noCont);
 
 }
 
