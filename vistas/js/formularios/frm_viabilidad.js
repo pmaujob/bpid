@@ -113,7 +113,7 @@ function buscarProyectos(op, event) {
 
 function mas(idRad, bpid, numProyecto) {
 
-    bloquear_pantalla()
+    bloquear_pantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmViabilizados.php',
@@ -124,7 +124,7 @@ function mas(idRad, bpid, numProyecto) {
             //alert(respuesta);
 
 
-            quitar_pantalla()
+            quitar_pantalla();
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
             $('.collapsible').collapsible();
@@ -174,17 +174,19 @@ function mas(idRad, bpid, numProyecto) {
 }
 function guardarMetas() {
 
+    bloquear_pantalla();
+
     var acum = document.getElementById('frmacum').value;
     var idRad = document.getElementById('idRad').value;
     var contMeta = document.getElementById('contMeta').value;
     var contItemMeta = document.getElementById('contItemMeta');
-   
+
     for (var i = 1; i <= acum; i++) {
-      
+
         var unidadValor = document.getElementById('frm_unidad_' + i);
         var aux = i;
         if (unidadValor.value == "") {
-           
+
             document.getElementById('d_error').innerHTML = '<p>ERROR, DIGITE UNIDAD DE MEDIDA</p>';
             $("#d_error").dialog("open");
             $("#d_error").dialog({
@@ -192,24 +194,25 @@ function guardarMetas() {
                 modal: true,
                 buttons: {
                     "Cerrar": function () {
-                        ejecutar(aux,0);
-                         
+                        ejecutar(aux, 0);
+
                         $(this).dialog("close");
 
                     }
                 }
             });
-             //break;
-           
-            return ;
+            //break;
+            quitar_pantalla();
+            return;
         }
-        
+
     }
 
     if (contItemMeta.value > contMeta) {
         console.log("contItemMeta.value: " + contItemMeta.value + ", contMeta: " + contMeta);
         $("#d_errormetas").dialog("open");
-      
+        quitar_pantalla();
+
         return;
     }
 
@@ -218,7 +221,7 @@ function guardarMetas() {
         var collapsible = document.getElementById('frm_collapsible_' + i).value;
 
         if (select.value == 0) {
-            
+
             document.getElementById('d_errormetas').innerHTML = '<p>Debe seleccionar una meta en este item.</p>';
             $("#d_errormetas").dialog("open");
             $("#d_errormetas").dialog({
@@ -233,10 +236,10 @@ function guardarMetas() {
                 }
             });
             select.focus();
-            
 
-             return;
-            
+            quitar_pantalla();
+            return;
+
 
 
         }
@@ -270,7 +273,7 @@ function guardarMetas() {
                     }
                 }
             });
-           
+            quitar_pantalla();
             return;
         }
 
@@ -286,43 +289,46 @@ function guardarMetas() {
         metaAct.push(select);
         metaActividades.push(metaAct);
     }
-    var unidades=new Array();
-     for (var i = 1; i <= acum; i++) {
+    var unidades = new Array();
+    for (var i = 1; i <= acum; i++) {
         var datosprod = new Array();
         var proId = document.getElementById('frm_producto_id' + i).value;
         var pronum = document.getElementById('frm_producto_' + i).value;
         var nompro = document.getElementById('frm_unidad_' + i).value;
 
-        datosprod .push(proId);
-        datosprod .push(pronum);
-        datosprod .push(nompro);
+        datosprod.push(proId);
+        datosprod.push(pronum);
+        datosprod.push(nompro);
         unidades.push(datosprod);
     }
-    
-   
 
-    
+
+
+
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/ActualizarActividades.php',
         async: true,
-        data: {metaActividades: metaActividades, idRad: idRad,unidades:unidades},
+        data: {metaActividades: metaActividades, idRad: idRad, unidades: unidades},
         success: function (respuesta) {
-                   
+
             if (respuesta == 1) {
-                        
+
                 document.getElementById('d_errormetas').innerHTML = '<p>Los datos se actualizaron con éxito.</p>';
                 $("#d_errormetas").dialog("open");
                 location.href = 'frm_viabilidad.php';
+                quitar_pantalla();
 
             } else {
                 document.getElementById('d_errormetas').innerHTML = '<p>No se pudo registrar las metas, por favor vuelva a intentarlo.</p>';
                 $("#d_errormetas").dialog("open");
+                quitar_pantalla();
 
             }
 
         },
         error: function () {
+            quitar_pantalla();
             alert("Error inesperado");
         }
     });
@@ -373,16 +379,16 @@ function infoproductos(id)
 }
 function ejecutar(posicion, op)
 {
-    
+
     if (op == 0)
-    
+
     {
         var collapos = document.getElementById('frm_collapsible_' + posicion).value;
         var lugar = collapos - 1;
         $('.collapsible').collapsible('open', lugar);
         document.getElementById('frm_unidad_' + posicion).focus();
-       return ;
-       
+        return;
+
     }
     if (op == 1)
     {

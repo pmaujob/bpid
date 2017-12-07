@@ -129,6 +129,9 @@ function mas(cod, bpid, numProyecto) {
                 $('.collapsible').collapsible();
             });
 
+            document.getElementById('modale').style.display = "block";
+            document.getElementById('modalg').style.display = "block";
+
             proyectoActual = numProyecto;
 
         }, error: function () {
@@ -349,9 +352,9 @@ function validarExtension(fileNombre) {
     var adjunto = document.getElementById(fileNombre);
     var extension = (adjunto.value.substring(adjunto.value.lastIndexOf("."))).toLowerCase();
     if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat' || extension === '.css') {
-        
-         document.getElementById('d_ingreso').innerHTML = '<p>EL FORMATO DEL ARCHIVO ADJUNTO NO ES VALIDO</p>';
-               $("#d_error").dialog("open");
+
+        document.getElementById('d_ingreso').innerHTML = '<p>EL FORMATO DEL ARCHIVO ADJUNTO NO ES VALIDO</p>';
+        $("#d_error").dialog("open");
         adjunto.value = null;
         return;
     }

@@ -47,6 +47,17 @@ function onLoadBody() {
 
 }
 
+function bloquear_pantalla()
+{
+    document.getElementById("cargando").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+function quitar_pantalla()
+{
+    document.getElementById("cargando").style.display = "none";
+    document.body.style.overflow = "scroll";
+}
+
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
@@ -85,6 +96,9 @@ function buscarProyectos(op, event) {
 
 function mas(cod, bpid, numProyecto) {
 
+    document.getElementById('modalc1').style.display = "none";
+    document.getElementById('modalc2').style.display = "none";
+
     $('#modal1').modal('open');
 
     idRad = cod;
@@ -102,9 +116,13 @@ function mas(cod, bpid, numProyecto) {
             document.getElementById('collapsible').innerHTML = respuesta;
             document.getElementById('semaforo').style.display = "block";
             document.getElementById('semaforo').style.right = "0";
+            document.getElementById('modalc1').style.display = "block";
+            document.getElementById('modalc2').style.display = "block";
 
         }, error: function () {
-            alert("Error inesperado")
+            alert("Error inesperado");
+            document.getElementById('modalc1').style.display = "block";
+            document.getElementById('modalc2').style.display = "block";
             window.top.location = "../index.html";
         }
     });
@@ -112,6 +130,8 @@ function mas(cod, bpid, numProyecto) {
 }
 
 function registrarCriterios(op) {
+
+    bloquear_pantalla();
 
     var cont = document.getElementById('cont').value;
     var contDimensiones = document.getElementById('contDimensiones').value;
@@ -139,6 +159,28 @@ function registrarCriterios(op) {
         obsdimen[2] = res.toFixed(2);
 
         obsdimensiones.push(obsdimen);
+
+    }
+
+    for (var i = 0; i < obsdimensiones.length; i++) {
+
+        if (obsdimensiones[i][2] == 0) {
+            document.getElementById('d_error').innerHTML = "Debe haber por lo menos un critero por cada dimensión.";
+            $('#modal1').modal('close');
+            $('#d_error').dialog("open");
+            $("#d_error").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    "Cerrar": function () {
+                        $(this).dialog("close");
+                        $('#modal1').modal('open');
+                    }
+                }
+            });
+            quitar_pantalla();
+            return;
+        }
 
     }
 
@@ -179,8 +221,11 @@ function registrarCriterios(op) {
                 $('#d_error').dialog("open");
             }
 
+            quitar_pantalla();
+
         }, error: function () {
-            alert("Error inesperado")
+            alert("Error inesperado");
+            quitar_pantalla();
             window.top.location = "../index.html";
         }
     });
@@ -212,8 +257,6 @@ function semaforo(id) {
         document.getElementById('bonbilla').style.backgroundColor = "green";
 
     crearToast(texto + " (" + res.toFixed(2) + "%)");
-
-
 
 }
 

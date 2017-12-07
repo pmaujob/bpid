@@ -29,6 +29,17 @@ function onLoadBody() {
 
 }
 
+function bloquear_pantalla()
+{
+    document.getElementById("cargando").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+function quitar_pantalla()
+{
+    document.getElementById("cargando").style.display = "none";
+    document.body.style.overflow = "scroll";
+}
+
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
@@ -121,6 +132,8 @@ function listarDatosRadicacion(idRad, numProyecto) {
 
 function registrar() {
 
+    bloquear_pantalla();
+
     tipoReg = document.getElementById('tipo_reg').selectedIndex; //select
     conceptoPost = document.getElementById('concepto_post').selectedIndex; //select
     motivacion = document.getElementById('motivacion').value;
@@ -143,6 +156,8 @@ function registrar() {
                 var mensaje = "Se han registrado los datos de registro con exito.";
                 document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
                 $("#d_error").dialog("open");
+                
+                quitar_pantalla();
 
             }
         });
@@ -151,6 +166,7 @@ function registrar() {
         var mensaje = "Error, Verifique que todos los campos esten diligenciados correctamente.";
         document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
         $("#d_error").dialog("open");
+        quitar_pantalla();
     }
 
 }
