@@ -274,6 +274,7 @@ class CConsutarDatosXml {
         $this->indiceFuente = 0;
         $this->valFuente = 0;
         $count = count($this->getDatosProyecto()->FundingSource->Sources->Source);
+        $total=0;
         if ($this->correcto == 1 && $count > 0) {
             foreach ($this->getDatosProyecto()->FundingSource->Sources->Source as $tipo) {
 
