@@ -112,6 +112,7 @@ function mas(cod, bpid, numProyecto) {
 
     value = cod;
     var bpid = bpid;
+    nomProyecto = nom;
 
     jQuery.ajax({
         type: 'POST',
@@ -156,8 +157,6 @@ function validar(enviarInfo) {
     var totalArchivosReq = document.getElementById('totalArchivosReq');
     var totalArchivosSub = document.getElementById('totalArchivosSub');
     var numeroProyecto = document.getElementById('numProyecto').value;
-
-
 
     var reqData = new Array();
     var subData = new Array();
@@ -245,7 +244,7 @@ function validar(enviarInfo) {
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
         async: true,
-        data: {numeroProyecto: numeroProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
+        data: {numeroProyecto: numeroProyecto, nomProyecto: nomProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
 
             if (respuesta == 1) {
@@ -349,9 +348,9 @@ function validarExtension(fileNombre) {
     var adjunto = document.getElementById(fileNombre);
     var extension = (adjunto.value.substring(adjunto.value.lastIndexOf("."))).toLowerCase();
     if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat' || extension === '.css') {
-        
-         document.getElementById('d_ingreso').innerHTML = '<p>EL FORMATO DEL ARCHIVO ADJUNTO NO ES VALIDO</p>';
-               $("#d_error").dialog("open");
+
+        document.getElementById('d_ingreso').innerHTML = '<p>EL FORMATO DEL ARCHIVO ADJUNTO NO ES VALIDO</p>';
+        $("#d_error").dialog("open");
         adjunto.value = null;
         return;
     }

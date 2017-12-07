@@ -28,7 +28,11 @@ class MRegistrarListasChequeo {
 
     public static function getCorreoRad($idRad) {
 
-        $sql = 'select correo from get_correo_rad('.$idRad.') as ("correo" varchar);';
+        $sql = 'select correo, '//0
+                . 'nomres, '//1
+                . 'nompro, '//2
+                . 'numpro '//3
+                . 'from get_correo_rad('.$idRad.') as ("correo" varchar, "nomres" varchar, "nompro" varchar, "numpro" varchar);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");
