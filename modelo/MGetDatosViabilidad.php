@@ -10,7 +10,7 @@ class MGetDatosViabilidad {
 
     public static function getDatosViabilidad($idRad) {
 
-        $sql = 'select obs, des, por from get_datos_viabilidad_responsables('.$idRad.') as ("obs" varchar, "des" varchar, "por" varchar);';
+        $sql = 'select obs, des, por, por2 from get_datos_viabilidad_responsables('.$idRad.') as ("obs" varchar, "des" varchar, "por" varchar, "por2" numeric);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");

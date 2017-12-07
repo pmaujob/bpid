@@ -1,6 +1,10 @@
 <?php
 
-require_once "../librerias/ConexionPDO.php";
+@session_start();
+
+$raiz = $_SESSION['raiz'];
+
+require_once $raiz . '/librerias/ConexionPDO.php';
 
 class MRadicar {
 
@@ -12,7 +16,7 @@ class MRadicar {
     }
 
     public function ingresarRadicar($numero_proyecto, $nombre_proyecto, $sector, $localizacion, $valor, $eje, $programa, $subprograma, $poai, $entidad_proponente, $entidad_ejecutante, $num_id_responsable, $nom_responsable, $cargo_responsable, $direccion_responsable, $telefono_responsable, $cel_responsable, $correo_responsable, $id_usuario, $nombre_usuario, $observaciones, $cod_usuario_ingreso, $cod_secretaria, $cod_activacion, $objetivosEspecificos, $fuentesFinanciamiento, $problema, $poblacion, $objetivog, $productos, $actividades, $resumen, $tipo_proyecto, $numero_proyecto_inversion) {
-
+        
         $sql = "select from ing_radicacion($cod_activacion,$cod_usuario_ingreso,'$numero_proyecto','$sector','$localizacion','$valor','$programa','$subprograma',$poai,'$entidad_proponente','$entidad_ejecutante','$num_id_responsable',
                                     '$nom_responsable','$cargo_responsable','$direccion_responsable','$telefono_responsable','$cel_responsable','$correo_responsable','$id_usuario','$nombre_usuario','$observaciones',$cod_usuario_ingreso,'$nombre_proyecto','$eje',$cod_secretaria,$objetivosEspecificos,$fuentesFinanciamiento,'$problema',$poblacion,'$objetivog',$productos,$actividades,'$resumen','$tipo_proyecto',$numero_proyecto_inversion)";
 
@@ -23,7 +27,7 @@ class MRadicar {
         $resultado = $con->afectar($sql);
         $con->cerrarConexion();
         return $resultado;
-      //  return $sql;
+        //  return $sql;
     }
 
     public function getDatosUsuario($cedula) {
