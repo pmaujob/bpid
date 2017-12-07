@@ -118,14 +118,32 @@ function encontrar() {
 function agregaru(cedula, nombres, apellidos, cargo) {
 
     if (document.getElementById(cargo).value.length === 0) {
-        alert("El cargo no puede estar vacio");
+        //alert("El cargo no puede estar vacio");
+
+        if (document.getElementById('toast-container') != null) {
+            document.getElementById('toast-container').innerHTML = "";
+        }
+
+        Materialize.toast('El cargo no puede estar vacio', 4000);
+        var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
+        //Cambiar el estilo de uno de todos los toasts
+        toasts[0].style.background = "#008643";
+        toasts[0].style.fontWeight = "400";
         return;
     }
 
-    if (usuariosa.length > 0)
-        for (var i = 0; i < usuariosa.length; i++)
-            if (usuariosa[i][0] == cedula)
-                return;
+    Materialize.toast('Usuario Agregado', 4000);
+
+    var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
+
+    toasts[0].style.background = "#008643";
+    toasts[0].style.fontWeight = "400";
+
+    //Cambiar el estilo de uno de todos los toasts
+
+    for (var i = 0; i < usuariosa.length; i++)
+        if (usuariosa[i][0] == cedula)
+            return;
 
     var datosUsuario = new Array(4);
     datosUsuario [0] = cedula;
@@ -158,7 +176,7 @@ function eliminar(cedula) {
 function registrarResponsables() {
 
     var est = document.getElementById('estado').value;
-    
+
     alert(usuariosa);
 
     if (usuariosa.length > 0) {
@@ -170,8 +188,8 @@ function registrarResponsables() {
             data: {idRad: idRad, responsables: usuariosa, est: est, codBpid: codBpid},
             success: function (respuesta)
             {
-                
-                //alert(respuesta);
+
+                // alert(respuesta);
 
                 $('#modal1').modal('close');
 

@@ -1,5 +1,5 @@
 function buscarCertificaciones(estado, event) {
-    
+
     var buscarValue = document.getElementById("input_buscar").value;
     if (buscarValue.toString().trim().length == 0) {
         return;
@@ -19,7 +19,6 @@ function buscarCertificaciones(estado, event) {
             document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
 
         },
-
         error: function () {
             alert("Error inesperado")
             window.top.location = "../index.html";

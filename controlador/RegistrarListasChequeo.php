@@ -1,5 +1,4 @@
 <?php
-
 @session_start();
 
 $raiz = $_SESSION['raiz'];
@@ -75,15 +74,29 @@ class RegistrarListasChequeo {
         if ($_POST['noCont'] != null) {
             if ($_POST['noCont'] > 0 && $resInsert == 1) {//enviar correo proyecto con items desaprobados
                 $resCorreo = MRegistrarListasChequeo::getCorreoRad($this->getIdRad());
-                $destino = "";
+                $datosCorreo = array();
                 foreach ($resCorreo as $obj) {
-                    $destino = $obj[0];
-                }
-                $asunto = "Radicación Proyecto Bpid";
-                $cuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
-                $altCuerpo = "Su proyecto no fue radicado con éxito debido a que no se aprobaron " + $_POST['noCont'] + ", items.";
 
-                enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
+                    for ($i = 0; $i < count($obj); $i++) {
+                        $datosCorreo[] = $obj[$i];
+                    }
+                }
+                $asunto = utf8_decode("Radicación Proyecto Bpid");
+                ob_start();
+                ?>
+                <span><strong>Estimado <?php echo utf8_decode($datosCorreo[1]); ?></strong></span> 
+                <br>
+                <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo utf8_decode($datosCorreo[2]); ?></strong> 
+                    con número de radicación <strong><?php echo $datosCorreo[3] ?></strong> NO cumplió con 
+                    algunos requisitos de las listas de chequeo, y por lo tanto, <strong>NO</strong> fue radicado.          
+                </p>
+                <br>
+                <p>Para más información por favor comunicarse con la entidad.</p>
+                <?php
+                $msg = ob_get_clean();
+                $altCuerpo = "Informamos que su proyecto ";
+
+                enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo);
             }
         }
         return $resInsert;
@@ -99,37 +112,51 @@ if (!isset($_POST['guardarEnviar'])) {
     $registrar->setSubRequisitos($_POST['subData']);
     $registrar->setnumeroProyecto($_POST['numeroProyecto']);
 
-
     echo $registrar->registrar();
 } else {//enviar correo proyecto radicado
     $idRad = $_POST['idRad'];
     $res = MRegistrarListasChequeo::guardarEnviarListas($idRad);
-
     if ($res == 1) {
 
         $resCorreo = MRegistrarListasChequeo::getCorreoRad($idRad);
-        $destino = "";
+        $datosCorreo = array();
         foreach ($resCorreo as $obj) {
-            $destino = $obj[0];
-        }
-        
-        $asunto = utf8_decode("Radicación Proyecto Bpid") ;
-        $cuerpo = file_get_contents('../vistas/correos/correoRadicacion.php');
-        $altCuerpo = "Su proyecto ha sido radicado con éxito";
 
-        enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
+            for ($i = 0; $i < count($obj); $i++) {
+                $datosCorreo[] = $obj[$i];
+            }
+        }
+
+        $asunto = utf8_decode("Radicación Proyecto Bpid");
+        ob_start();
+        ?>
+        <span><strong>Estimado <?php echo utf8_decode($datosCorreo[1]); ?></strong></span> 
+        <br>
+        <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo utf8_decode($datosCorreo[2] . " "); ?></strong> 
+            con número de radicación <strong><?php echo $datosCorreo[3]; ?></strong> cumplió con 
+            los requisitos de las listas de chequeo, y por ende, fue <strong>radicado con éxito.</strong>          
+        </p>   
+        <?php
+        $msg = ob_get_clean();
+        $altCuerpo = nl2br("Informamos que su proyecto NOMBRE_PROYECTO_PHP "
+                . "con número de radicación NOMBRE_BPID_PHP cumplió "
+                . "con los requisitos de las listas de chequeo, y por ende, fue radicado con éxito. "
+                . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
+                . "\n\nSí no tiene conocimiento sobre el tema, por favor ignore este mensaje.");
+
+        enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo);
     }
 
     echo $res;
 }
 
-function enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo) {
+function enviarCorreo($destino, $asunto, $msg, $altCuerpo) {
 
     $correo = new Correos();
 
     $correo->inicializar();
     $correo->setDestinatario($destino);
-    $correo->armarCorreo($asunto, $cuerpo, $altCuerpo);
+    $correo->armarCorreo($asunto, $msg, $altCuerpo);
 
     $correoEnviado = $correo->enviar();
 
@@ -142,5 +169,4 @@ function enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo) {
 
     return $correoEnviado;
 }
-
 ?>

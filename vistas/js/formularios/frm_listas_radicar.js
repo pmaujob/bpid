@@ -112,6 +112,7 @@ function mas(cod, bpid, numProyecto) {
 
     value = cod;
     var bpid = bpid;
+    nomProyecto = nom;
 
     jQuery.ajax({
         type: 'POST',
@@ -159,8 +160,6 @@ function validar(enviarInfo) {
     var totalArchivosReq = document.getElementById('totalArchivosReq');
     var totalArchivosSub = document.getElementById('totalArchivosSub');
     var numeroProyecto = document.getElementById('numProyecto').value;
-
-
 
     var reqData = new Array();
     var subData = new Array();
@@ -248,7 +247,7 @@ function validar(enviarInfo) {
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
         async: true,
-        data: {numeroProyecto: numeroProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
+        data: {numeroProyecto: numeroProyecto, nomProyecto: nomProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
 
             if (respuesta == 1) {
