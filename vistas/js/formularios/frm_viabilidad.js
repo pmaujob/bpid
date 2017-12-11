@@ -7,9 +7,18 @@ var r = [];
 var idvidprod = [];
 $(document).ready(function () {
 
-
-
     $("#d_ingreso").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            "Aceptar": function () {
+                $(this).dialog("close");
+                window.self.location = "../formularios/frm_viabilidad.php";
+            }
+        }
+    });
+
+    $("#d_confirmacion").dialog({
         autoOpen: false,
         modal: true,
         width: "50%",
@@ -120,10 +129,7 @@ function mas(idRad, bpid, numProyecto) {
         async: true,
         data: {idRad: idRad, bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
-
-            //alert(respuesta);
-
-
+  
             quitar_pantalla()
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
@@ -208,7 +214,7 @@ function guardarMetas() {
 
     if (contItemMeta.value > contMeta) {
         console.log("contItemMeta.value: " + contItemMeta.value + ", contMeta: " + contMeta);
-        $("#d_errormetas").dialog("open");
+        $("#d_confirmacion").dialog("open");
       
         return;
     }
