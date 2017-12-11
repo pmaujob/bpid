@@ -3,7 +3,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>BPID</title>
-        <link type="text/css" rel="stylesheet" href="http://localhost/bpid/vistas/css/cssbpid/styles.css">
     </head>
     <body>
         <div style="margin-left: 100px; margin-right: 100px;">
@@ -21,15 +20,13 @@
             <br>
             <br>
             <div>
-
                 MSG_REPLACE
-
                 <br>
                 <p>* Este es un email que se ha generado automáticamente, por favor no lo responda *</p>
             </div>
             <br>
             <div>
-                <p style="color: #9E9E9E;">Sí no tiene conocimiento sobre el tema, por favor ignore este mensaje.</p>
+                <p>* Sí no tiene conocimiento sobre el tema, por favor ignore este mensaje. *</p>
             </div>
             <br>
         </div>

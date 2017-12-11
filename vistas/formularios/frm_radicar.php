@@ -342,13 +342,16 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                
                                 <button class="btn waves-effect waves-light" onclick="validarTipo()">Aceptar
                                     <i class="material-icons right">send</i> 
                                     
-                                    <button class="btn waves-effect waves-light" onclick="cerrarModal()">Cerrar
+                                    <button class="btn waves-effect waves-light" onclick="cerrarModal()" style="margin-right: 10px;">Cerrar
                                     <i class="material-icons right">highlight_off</i> 
                             </div>
                         </div>          
+                        
+                                
 
                     </div>
                 </div>

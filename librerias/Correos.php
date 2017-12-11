@@ -12,13 +12,11 @@ class Correos {
     public $raiz;
 
     public function inicializar() {
-
+        
         $this->phpMailer = new PHPMailer;
 
         $this->phpMailer->IsSMTP();
-        $this->SMTPDebug = 2;
-        $this->Debugoutput = 'html';
-        $this->SMTPSecure = 'tls';
+        $this->phpMailer->CharSet = 'UTF-8';
         $this->phpMailer->SMTPAuth = true;
         $this->phpMailer->Port = 587;
         $this->phpMailer->Host = "smtp.gmail.com";
