@@ -9,6 +9,7 @@ require_once $raiz . '/librerias/CambiarFormatos.php';
 class Correos {
 
     private $phpMailer;
+    public $raiz;
 
     public function inicializar() {
 
@@ -33,7 +34,7 @@ class Correos {
     public function armarCorreo($asunto, $msg, $altCuerpo) {
         $this->phpMailer->Subject = $asunto;
 
-        $body = str_replace('HORA_SISTEMA', CambiarFormatos::cambiarFecha(date("m/d/Y")), file_get_contents('../../vistas/correos/correoRadicacion.php'));
+        $body = str_replace('HORA_SISTEMA', CambiarFormatos::cambiarFecha(date("m/d/Y")), file_get_contents($this->raiz . '/vistas/correos/correoRadicacion.php'));
         $body = str_replace('MSG_REPLACE', $msg, $body);
 
         $this->phpMailer->msgHTML($body);

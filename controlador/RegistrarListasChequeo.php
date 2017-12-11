@@ -3,9 +3,9 @@
 
 $raiz = $_SESSION['raiz'];
 
-require_once '../librerias/CambiarFormatos.php';
-require_once '../modelo/MRegistrarListasChequeo.php';
-require_once '../librerias/Correos.php';
+require_once $raiz . '/librerias/CambiarFormatos.php';
+require_once $raiz . '/modelo/MRegistrarListasChequeo.php';
+require_once $raiz . '/librerias/Correos.php';
 
 class RegistrarListasChequeo {
 
@@ -13,6 +13,7 @@ class RegistrarListasChequeo {
     private $requisitos;
     private $subRequisitos;
     private $numeroProyecto;
+    public $raiz;
 
     public function getIdRad() {
         return $this->idRad;
@@ -73,11 +74,11 @@ class RegistrarListasChequeo {
         $resInsert = MRegistrarListasChequeo::registrarListasChequeo($this->getIdRad(), $reqJson, $subJson);
         if ($_POST['noCont'] != null) {
             if ($_POST['noCont'] > 0 && $resInsert == 1) {//enviar correo proyecto con items desaprobados
+                
                 $resCorreo = MRegistrarListasChequeo::getCorreoRad($this->getIdRad());
                 $datosCorreo = array();
                 foreach ($resCorreo as $obj) {
-
-                    for ($i = 0; $i < count($obj); $i++) {
+                    for ($i = 0; $i < 4; $i++) {
                         $datosCorreo[] = $obj[$i];
                     }
                 }
@@ -96,7 +97,7 @@ class RegistrarListasChequeo {
                 $msg = ob_get_clean();
                 $altCuerpo = "Informamos que su proyecto ";
 
-                enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo);
+                enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo, $this->raiz);
             }
         }
         return $resInsert;
@@ -107,6 +108,7 @@ class RegistrarListasChequeo {
 if (!isset($_POST['guardarEnviar'])) {
 
     $registrar = new RegistrarListasChequeo();
+    $registrar->raiz = $raiz;
     $registrar->setIdRad($_POST['idRad']);
     $registrar->setRequisitos($_POST['reqData']);
     $registrar->setSubRequisitos($_POST['subData']);
@@ -144,16 +146,16 @@ if (!isset($_POST['guardarEnviar'])) {
                 . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
                 . "\n\nSí no tiene conocimiento sobre el tema, por favor ignore este mensaje.");
 
-        enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo);
+        enviarCorreo($datosCorreo[0], $asunto, $msg, $altCuerpo, $raiz);
     }
 
     echo $res;
 }
 
-function enviarCorreo($destino, $asunto, $msg, $altCuerpo) {
+function enviarCorreo($destino, $asunto, $msg, $altCuerpo, $raiz) {
 
     $correo = new Correos();
-
+    $correo->raiz = $raiz;
     $correo->inicializar();
     $correo->setDestinatario($destino);
     $correo->armarCorreo($asunto, $msg, $altCuerpo);
