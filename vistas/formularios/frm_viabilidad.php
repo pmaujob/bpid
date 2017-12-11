@@ -53,8 +53,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
             <?php require_once '../menu.php'; ?>
             <form id='frm_viabilidad' name='frm_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
-
-
                 <div class="col s12 m11 l9">
                     <div class="bajar">
                         <div class="container-fluid" >

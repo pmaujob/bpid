@@ -20,7 +20,7 @@ function onLoadBody() {
         buttons: {
             "Aceptar": function () {
                 $(this).dialog("close");
-                window.self.location = "../formularios/frm_meta_producto.php";
+                location.href = "../formularios/frm_viabilidad.php";
             }
         }
     });
@@ -231,12 +231,9 @@ function insertarMetas() {
 
             if (respuesta == 1) {
 
-                document.getElementById('d_ingreso').innerHTML = '<p>Las metas guardaron con éxito</p>';
-                $("#d_ingreso").dialog("open");
-
                 $("#modalm").modal("close");
-
-                location.href = "../formularios/frm_viabilidad.php";
+                document.getElementById('d_ingreso').innerHTML = '<p>Las metas guardaron con éxito. Será redirigido a la siguiente etapa.</p>';
+                $("#d_ingreso").dialog("open");
 
             } else {
                 document.getElementById('d_error').innerHTML = '<p>No se pudo guardar los cambios, por favor intentelo nuevamente.</p>';
