@@ -92,8 +92,9 @@ class CFinalizarViabilidad {
 
         $asunto = "Estado Proyecto - Bpid";
 
+        $datosProyecto = CargarViabilizados::getViabilizados($this->getCodBpid(), 1)->fetch(PDO::FETCH_OBJ);
+
         if ($this->getEstado() === "A") {//no viable
-                    
             $cuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad desfavorable";
             $altCuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad no favorable.";
 
@@ -112,7 +113,6 @@ class CFinalizarViabilidad {
             $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
 
             $correos = MFinalizarViabilidad::getCorreosRegistro();
-            $datosProyecto = CargarViabilizados::getViabilizados($this->getCodBpid(), 1)->fetch(PDO::FETCH_OBJ);
 
             $cuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . " se encuetra disponible para el control psterior de la viabilidad.";
             $altCuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . " se encuetra disponible para el control psterior de la viabilidad.";

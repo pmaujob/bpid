@@ -10,7 +10,7 @@ function ingresar(event) {
         return;
     }
 
-    getIp();
+    //getIp();
 
     var ip = getIpAddress();
     var correo = document.getElementById("correo").value;

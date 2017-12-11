@@ -25,7 +25,7 @@ $viabilidad = CargarViabilizados::getViabilizados($codBpid, 1)->fetch(PDO::FETCH
 $viabilidadEjePro = MGetDatosCertificadoRegistro::getDatosProEjeSub($idRad)->fetch(PDO::FETCH_OBJ);
 $actividades = MGetDatosCertificadoRegistro::getDatosFuentesFinanciazion($codBpid);
 $nombre = MRegistrarResponsableEtapa::getResponsableEtapa($idRad, etapa)->fetch(PDO::FETCH_OBJ)->nombre;
-$cargoSecretario = MRegistrarResponsableEtapa::getResponsableEtapa($idRad, etapa)->fetch(PDO::FETCH_OBJ)->cargo;
+$cargoSecretario = MGetDatosCertificadoRegistro::getSecretarios($idRad)->fetch(PDO::FETCH_OBJ)->cargo;
 
 if(MGetDatosCertificadoRegistro::getSecretarios($idRad)->rowCount() > 0)
     $secretario = MGetDatosCertificadoRegistro::getSecretarios($idRad)->fetch(PDO::FETCH_OBJ)->nom;
@@ -124,9 +124,11 @@ $pdf->Ln(20);
 $pdf->Cell(106, 6, "_________________________________________", 0, 0);
 $pdf->Cell(0, 6, "___________________________________________", 0, 0);
 $pdf->Ln();
+$pdf->SetFont('Arial', '', 11);
 $pdf->Cell(106, 6, $secretario, 0, 0);
 $pdf->Cell(0, 6, $nombre, 0, 0);
 $pdf->Ln();
+$pdf->SetFont('Arial', 'B', 9);
 $pdf->Cell(106, 6, $cargoSecretario, 0, 0);
 $pdf->Cell(0, 6, "Funcionario Responsable", 0, 0);
 
