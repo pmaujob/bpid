@@ -3,9 +3,9 @@
 
 $raiz = $_SESSION['raiz'];
 
-require_once '../librerias/CambiarFormatos.php';
-require_once '../modelo/MRegistrarListasChequeo.php';
-require_once '../librerias/Correos.php';
+require_once $raiz . '/librerias/CambiarFormatos.php';
+require_once $raiz . '/modelo/MRegistrarListasChequeo.php';
+require_once $raiz . '/librerias/Correos.php';
 
 class RegistrarListasChequeo {
 
@@ -74,11 +74,11 @@ class RegistrarListasChequeo {
         $resInsert = MRegistrarListasChequeo::registrarListasChequeo($this->getIdRad(), $reqJson, $subJson);
         if ($_POST['noCont'] != null) {
             if ($_POST['noCont'] > 0 && $resInsert == 1) {//enviar correo proyecto con items desaprobados
+                
                 $resCorreo = MRegistrarListasChequeo::getCorreoRad($this->getIdRad());
                 $datosCorreo = array();
                 foreach ($resCorreo as $obj) {
-
-                    for ($i = 0; $i < count($obj); $i++) {
+                    for ($i = 0; $i < 4; $i++) {
                         $datosCorreo[] = $obj[$i];
                     }
                 }
@@ -114,11 +114,11 @@ class RegistrarListasChequeo {
 if (!isset($_POST['guardarEnviar'])) {
 
     $registrar = new RegistrarListasChequeo();
+    $registrar->raiz = $raiz;
     $registrar->setIdRad($_POST['idRad']);
     $registrar->setRequisitos($_POST['reqData']);
     $registrar->setSubRequisitos($_POST['subData']);
     $registrar->setnumeroProyecto($_POST['numeroProyecto']);
-    $registrar->raiz = $raiz;
 
     echo $registrar->registrar();
 } else {//enviar correo proyecto radicado
@@ -162,7 +162,6 @@ if (!isset($_POST['guardarEnviar'])) {
 function enviarCorreo($destino, $asunto, $msg, $altCuerpo, $raiz) {
 
     $correo = new Correos();
-
     $correo->raiz = $raiz;
     $correo->inicializar();
     $correo->setDestinatario($destino);

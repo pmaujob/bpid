@@ -317,7 +317,7 @@ function guardarMetas() {
                    
             if (respuesta == 1) {
                         
-                document.getElementById('d_errormetas').innerHTML = '<p>LOS DATOS SE ACTUALIZARON CON EXITO.</p>';
+                document.getElementById('d_errormetas').innerHTML = '<p>LOS DATOS SE GUARDARON CON EXITO.</p>';
                 $("#d_errormetas").dialog("open");
                 location.href = 'frm_viabilidad.php';
 

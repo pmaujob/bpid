@@ -233,7 +233,7 @@ function insertarMetas() {
                 
                 $("#modalm").modal("close");
 
-                location.href = "../formularios/frm_meta_producto.php";
+                location.href = "../formularios/frm_viabilidad.php";
 
             } else {
 

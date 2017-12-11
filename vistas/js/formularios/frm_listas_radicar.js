@@ -8,7 +8,7 @@ var $toastContent;
 function onLoadBody() {
 
     buscarProyectos(1, null);
-    
+
     $(document).ready(function () {
 
         $('.modal').modal({
@@ -62,10 +62,9 @@ function quitarPantalla() {
 }
 
 function buscarProyectos(op, event) {
-  
+
     var buscarValue = document.getElementById("input_buscar").value;
-    
-    if ( event != null && buscarValue.toString().trim().length == 0) {
+    if (buscarValue.toString().trim().length == 0) {
         return;
     }
 
@@ -74,7 +73,7 @@ function buscarProyectos(op, event) {
     }
 
     var resultado = document.getElementById('resultado');
-    
+
     //temporalmente
     resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
             + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
@@ -87,7 +86,6 @@ function buscarProyectos(op, event) {
         async: true,
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
-           // alert(respuesta);
             //quitarPantalla();
             resultado.innerHTML = '<p>' + respuesta + '</p>';
         },
@@ -229,7 +227,6 @@ function validar(enviarInfo) {
                 archivosSub.push(archivoSubRow);
             }
 
-
             var subRow = new Array(3);
             subRow[0] = document.getElementById('SUBH' + i).value;//id subequisito
             subRow[1] = document.getElementById('SUB' + i).value;//opcion seleccionada
@@ -243,6 +240,8 @@ function validar(enviarInfo) {
 
     var waitGuardarProgreso = document.getElementById('waitGuardarProgreso');
     waitGuardarProgreso.style.display = "";
+
+    disBotones(false);
 
     jQuery.ajax({
         type: 'POST',
@@ -292,7 +291,7 @@ function validar(enviarInfo) {
                         } else if (enviarInfo && noCont > 0) {
 
                             mostrarMensaje('Se ha guardado el progreso con éxito. Sin embargo, hay items sin aprobar, '
-                                    + 'por lo tanto se le enviará un correo a su email registrado en bpid.', true);
+                                    + 'por lo tanto se enviará un informe a su correo registrado en bpid.', true);
 
                             noCont = 0;
                             $("#modal1").modal("close");
@@ -337,13 +336,16 @@ function validar(enviarInfo) {
                 msjInfo.style.wordBreak = "break-all";
                 msjInfo.style.display = "";
                 
-                console.error("Error: "+respuesta);
-
+                console.log("Error: "+respuesta);
             }
+
+            disBotones(true);
+
         },
         error: function () {
             mostrarMensaje('Error Inesperado', false);
             noCont = 0;
+            disBotones(true);
         }
     });
 
@@ -390,6 +392,8 @@ function validarNo(idSelection) {
     } else if (selection.value != "NO" && noCont > 0) {
         noCont--;
     }
+
+    console.log("noCont: " + noCont);
 
 }
 
@@ -472,4 +476,9 @@ function mostrarSubtitulo(tituloSublista) {
     subToast.style.background = "white";
     subToast.style.fontWeight = "400";
 
+}
+
+function disBotones(disabled) {    
+    document.getElementById("modalg").style.pointerEvents = disabled ? "" : "none";
+    document.getElementById("modale").style.pointerEvents = disabled ? "" : "none";
 }
