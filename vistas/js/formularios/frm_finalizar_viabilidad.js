@@ -2,6 +2,19 @@ var idRad;
 var codBpid;
 var usuariosa = new Array();
 
+function bloquear_pantalla()
+{
+
+    document.getElementById("cargando").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+function quitar_pantalla()
+{
+
+    document.getElementById("cargando").style.display = "none";
+    document.body.style.overflow = "scroll";
+}
+
 function onLoadBody() {
 
     $(document).ready(function () {
@@ -131,13 +144,15 @@ function agregaru(cedula, nombres, apellidos, cargo) {
         toasts[0].style.fontWeight = "400";
         return;
     }
-
-    Materialize.toast('Usuario Agregado', 4000);
+    
+    Materialize.toast('Usuario Agregado', 2000);
 
     var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
 
-    toasts[0].style.background = "#008643";
-    toasts[0].style.fontWeight = "400";
+    for (var i = 0; i < toasts.length; i++) {
+        toasts[i].style.background = "#008643";
+        toasts[i].style.fontWeight = "400";
+    }
 
     //Cambiar el estilo de uno de todos los toasts
 
@@ -188,8 +203,6 @@ function registrarResponsables() {
             data: {idRad: idRad, responsables: usuariosa, est: est, codBpid: codBpid},
             success: function (respuesta)
             {
-                alert("entro");
-                 alert(respuesta);
 
                 $('#modal1').modal('close');
 
