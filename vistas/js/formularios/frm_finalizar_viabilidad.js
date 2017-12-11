@@ -189,6 +189,8 @@ function eliminar(cedula) {
 }
 
 function registrarResponsables() {
+    
+    bloquear_pantalla();
 
     var est = document.getElementById('estado').value;
 
@@ -223,11 +225,13 @@ function registrarResponsables() {
                     $('#d_error').dialog("open");
                 }
 
+                quitar_pantalla();
                 console.log(respuesta);
                 document.getElementById("modale").style.pointerEvents = "";
 
             },
             error: function () {
+                quitar_pantalla();
                 alert("Error inesperado");
                 document.getElementById("modale").style.pointerEvents = "";
             }
