@@ -219,6 +219,8 @@ function insertarMetas() {
         }
     }
 
+    disBotones(false);
+
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/RegistrarMetas.php',
@@ -228,19 +230,25 @@ function insertarMetas() {
         success: function (respuesta) {
 
             if (respuesta == 1) {
-                document.getElementById('d_ingreso').innerHTML = '<p> LAS METAS SE GUARDARON CON EXITO</p>';
+
+                document.getElementById('d_ingreso').innerHTML = '<p>Las metas guardaron con éxito</p>';
                 $("#d_ingreso").dialog("open");
-                
+
                 $("#modalm").modal("close");
 
                 location.href = "../formularios/frm_viabilidad.php";
 
             } else {
-
+                document.getElementById('d_error').innerHTML = '<p>No se pudo guardar los cambios, por favor intentelo nuevamente.</p>';
+                $("#d_error").dialog("open");
+                console.log("Error: " + respuesta);
             }
+
+            disBotones(true);
 
         }, error: function () {
             alert("Error inesperado");
+            disBotones(true);
         }
     });
 
@@ -255,4 +263,8 @@ function displayControles(idLogo, idDivSelect, reiniciar) {
 
 function cerrar() {
     $('#modalm').modal('close');
+}
+
+function disBotones(disabled) {
+    document.getElementById("modalg").style.pointerEvents = disabled ? "" : "none";
 }
