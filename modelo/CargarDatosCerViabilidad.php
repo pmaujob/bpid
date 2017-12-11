@@ -66,7 +66,7 @@ class CargarDatosCerViabilidad {
         $consulta = "SELECT id_producto,"//0
                 . "nom_producto,"//1
                 . "cantidad, "//2
-                . "'XXXXXX' "//3
+                . "unidad "//3
                 . "FROM radicacion_productos WHERE cod_radicacion = $codRadicacion;";
 
         return self::getDatos($consulta);

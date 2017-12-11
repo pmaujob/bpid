@@ -1,6 +1,4 @@
 loading = false;
-selectedId = 0;
-certType = 0;
 function onLoadBody() {
 
 }
@@ -53,17 +51,15 @@ function seleccionar(idRad, tipo, rowId) {
         document.getElementById("cerRow" + i).style.backgroundColor = "";
     }
 
-    document.getElementById('divCertificados').style.display = "";
-    document.getElementById('txtCertificate').innerHTML = tipo == 'A' ? "Certificado de NO Viabilidad" : "Certificado de Viabilidad";
     document.getElementById(rowId).style.backgroundColor = "#D2D2D2";
-    selectedId = idRad;
-    certType = tipo;
+    creteCertificate(tipo,idRad);
 
 }
 
-function creteCertificate() {
+function creteCertificate(certType, selectedId) {
 
     var mapForm = document.createElement("form");
+    mapForm.style.display = "none";
     mapForm.target = "Map";
     mapForm.method = "POST";
     mapForm.action = certType == 'R' ? "../certificados/certificadoViabilidad.php" : "../certificados/certificadoNoViabilidad.php";
