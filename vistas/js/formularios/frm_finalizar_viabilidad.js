@@ -144,7 +144,7 @@ function agregaru(cedula, nombres, apellidos, cargo) {
         toasts[0].style.fontWeight = "400";
         return;
     }
-    
+
     Materialize.toast('Usuario Agregado', 2000);
 
     var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
@@ -192,10 +192,9 @@ function registrarResponsables() {
 
     var est = document.getElementById('estado').value;
 
-
-
     if (usuariosa.length > 0) {
 
+        document.getElementById("modale").style.pointerEvents = "none";
         jQuery.ajax({
             type: 'POST',
             url: '../../controlador/CFinalizarViabilidad.php',
@@ -208,18 +207,29 @@ function registrarResponsables() {
 
                 if (respuesta.trim() == "1") {
                     document.getElementById('d_error').innerHTML = "Los responsables del proyecto han sido guardados con exito.";
-                    $('#d_error').dialog("open");
+                    $('#d_error').dialog({
+                        autoOpen: false,
+                        modal: true,
+                        buttons: {
+                            "Cerrar": function () {
+                                $(this).dialog("close");
+                                location.href = "../../vistas/formularios/frm_certificados_viabilidad.php";
+                            }
+                        }
+                    });
+
                 } else {
                     document.getElementById('d_error').innerHTML = "Los responsables del proyecto no han sido registrados, por favor intentelo de nuevo mas tarde.";
                     $('#d_error').dialog("open");
                 }
 
                 console.log(respuesta);
+                document.getElementById("modale").style.pointerEvents = "";
 
             },
             error: function () {
                 alert("Error inesperado");
-                window.top.location = "../index.html";
+                document.getElementById("modale").style.pointerEvents = "";
             }
         });
 

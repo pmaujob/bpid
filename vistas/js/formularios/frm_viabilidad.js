@@ -13,7 +13,7 @@ $(document).ready(function () {
         buttons: {
             "Aceptar": function () {
                 $(this).dialog("close");
-                window.self.location = "../formularios/frm_viabilidad.php";
+                location.href = 'frm_criterios_viabilidad.php';
             }
         }
     });
@@ -34,8 +34,6 @@ $(document).ready(function () {
                         async: true,
                         data: {op: 2, idRad: idRad},
                         success: function (respuesta) {
-
-                            $("#d_ingreso").dialog("close");
 
                             if (respuesta == 1) {
                                 alert("Su proyecto ha sido regresado a la etapa de Metas de Producto.");
@@ -97,7 +95,6 @@ function buscarProyectos(op, event) {
             + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
             + '</div>';
 
-    //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
@@ -105,31 +102,27 @@ function buscarProyectos(op, event) {
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
 
-            //quitarPantalla();
             document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
 
 
         },
         error: function () {
-            //quitarPantalla();
-            alert("Error inesperado")
-            window.top.location = "../index.html";
+            alert("Error inesperado");
         }
-
     });
 
 }
 
 function mas(idRad, bpid, numProyecto) {
 
-    bloquear_pantalla()
+    bloquear_pantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmViabilizados.php',
         async: true,
         data: {idRad: idRad, bpid: bpid, numProyecto: numProyecto},
         success: function (respuesta) {
-  
+
             quitar_pantalla()
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
@@ -172,8 +165,7 @@ function mas(idRad, bpid, numProyecto) {
 
         },
         error: function () {
-            alert("Error inesperado")
-            window.top.location = "../index.html";
+            alert("Error inesperado");
         }
     });
 
@@ -182,50 +174,49 @@ function guardarMetas() {
 
     var acum = document.getElementById('frmacum').value;
     var idRad = document.getElementById('idRad').value;
-    var contMeta = document.getElementById('contMeta').value;
+    var contActs = document.getElementById('contActs').value;
     var contItemMeta = document.getElementById('contItemMeta');
-   
+
     for (var i = 1; i <= acum; i++) {
-      
+
         var unidadValor = document.getElementById('frm_unidad_' + i);
         var aux = i;
         if (unidadValor.value == "") {
-           
-            document.getElementById('d_error').innerHTML = '<p>ERROR, DIGITE UNIDAD DE MEDIDA</p>';
+
+            document.getElementById('d_error').innerHTML = '<p>Debe digitar una unidad de medida.</p>';
             $("#d_error").dialog("open");
             $("#d_error").dialog({
                 autoOpen: false,
                 modal: true,
                 buttons: {
                     "Cerrar": function () {
-                        ejecutar(aux,0);
-                         
+                        ejecutar(aux, 0);
+
                         $(this).dialog("close");
 
                     }
                 }
             });
-             //break;
-           
-            return ;
+            return;
         }
-        
+
     }
 
-    if (contItemMeta.value > contMeta) {
-        console.log("contItemMeta.value: " + contItemMeta.value + ", contMeta: " + contMeta);
+    alert("asd");
+
+    if (parseInt(contItemMeta.value) > parseInt(contActs)) {
+        console.log("contItemMeta.value: " + contItemMeta.value + ", contActs: " + contActs);
         $("#d_confirmacion").dialog("open");
-      
         return;
     }
 
-    for (var i = 1; i <= contMeta; i++) {
+    for (var i = 1; i <= contActs; i++) {
         var select = document.getElementById('METASELECT' + i);
         var collapsible = document.getElementById('frm_collapsible_' + i).value;
 
         if (select.value == 0) {
-            
-            document.getElementById('d_errormetas').innerHTML = '<p>DEBE SELECCIONAR UN ITEM EN ESTA META</p>';
+
+            document.getElementById('d_errormetas').innerHTML = '<p>Debe seleccionar un item en esta meta.</p>';
             $("#d_errormetas").dialog("open");
             $("#d_errormetas").dialog({
                 autoOpen: false,
@@ -239,11 +230,8 @@ function guardarMetas() {
                 }
             });
             select.focus();
-            
 
-             return;
-            
-
+            return;
 
         }
     }
@@ -253,7 +241,7 @@ function guardarMetas() {
         var found = false;
         var option = options[i];
 
-        for (var j = 1; j <= contMeta; j++) {
+        for (var j = 1; j <= contActs; j++) {
             var select = document.getElementById('METASELECT' + (j));
 
             if (select.value == option.value) {
@@ -264,7 +252,7 @@ function guardarMetas() {
         }
 
         if (!found) {
-            document.getElementById('d_errormetas').innerHTML = '<p>NO SE PUEDE QUEDAR UNA META SIN ACTIVIDAD</p>';
+            document.getElementById('d_errormetas').innerHTML = '<p>No pueden quedar metas sin ser relacionadas a una actividad.</p>';
             $("#d_errormetas").dialog({
                 autoOpen: false,
                 modal: true,
@@ -272,18 +260,16 @@ function guardarMetas() {
                     "Cerrar": function () {
                         ejecutar(collapsible, 1);
                         $(this).dialog("close");
-
                     }
                 }
             });
-           
             return;
         }
 
     }
 
     var metaActividades = new Array();
-    for (var i = 1; i <= contMeta; i++) {
+    for (var i = 1; i <= contActs; i++) {
         var metaAct = new Array();
         var actId = document.getElementById('ACTID' + (i)).value;
         var select = document.getElementById('METASELECT' + (i)).value;
@@ -292,44 +278,48 @@ function guardarMetas() {
         metaAct.push(select);
         metaActividades.push(metaAct);
     }
-    var unidades=new Array();
-     for (var i = 1; i <= acum; i++) {
+
+    var unidades = new Array();
+    for (var i = 1; i <= acum; i++) {
         var datosprod = new Array();
         var proId = document.getElementById('frm_producto_id' + i).value;
         var pronum = document.getElementById('frm_producto_' + i).value;
         var nompro = document.getElementById('frm_unidad_' + i).value;
 
-        datosprod .push(proId);
-        datosprod .push(pronum);
-        datosprod .push(nompro);
+        datosprod.push(proId);
+        datosprod.push(pronum);
+        datosprod.push(nompro);
         unidades.push(datosprod);
     }
-    
-   
 
-    
+    var btnGuardar = document.getElementById("btnGuardar");
+    btnGuardar.disabled = true;
+
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/ActualizarActividades.php',
         async: true,
-        data: {metaActividades: metaActividades, idRad: idRad,unidades:unidades},
+        data: {metaActividades: metaActividades, idRad: idRad, unidades: unidades},
         success: function (respuesta) {
-                   
+
             if (respuesta == 1) {
-                        
-                document.getElementById('d_errormetas').innerHTML = '<p>LOS DATOS SE GUARDARON CON EXITO.</p>';
-                $("#d_errormetas").dialog("open");
-                location.href = 'frm_viabilidad.php';
 
+                document.getElementById('d_ingreso').innerHTML = '<p>Los datos se guardaron con éxito.</p>';
+                $("#d_ingreso").dialog("open");
+
+                btnGuardar.disabled = false;
             } else {
-                document.getElementById('d_errormetas').innerHTML = '<p>NO SE REGISTRARON LAS METAS, VUELVA A INTENTARLO</p>';
+                document.getElementById('d_errormetas').innerHTML = '<p>No fue posible registrar los datos, Por favor vuelva a intentarlo.</p>';
                 $("#d_errormetas").dialog("open");
+                console.log("Error: " + respuesta);
 
+                btnGuardar.disabled = false;
             }
 
         },
         error: function () {
             alert("Error inesperado");
+            btnGuardar.enabled = false;
         }
     });
 
@@ -356,8 +346,6 @@ function infoproductos(id)
     for (i = 0; i < idvidprod.length; i++)
     {
 
-
-
         if (elemento == idvidprod[i][0])
         {
             if (idvidprod[i][1] == false) {
@@ -367,31 +355,24 @@ function infoproductos(id)
                     toasts[1].style.background = "#FFCA04";
                     toasts[1].style.fontWeight = "400";
                 }
-
             }
-
             idvidprod[i][1] = !idvidprod[i][1];
-
-
         }
     }
 
 }
 function ejecutar(posicion, op)
 {
-    
-    if (op == 0)
-    
-    {
+
+    if (op == 0) {
         var collapos = document.getElementById('frm_collapsible_' + posicion).value;
         var lugar = collapos - 1;
         $('.collapsible').collapsible('open', lugar);
         document.getElementById('frm_unidad_' + posicion).focus();
-       return ;
-       
+        return;
+
     }
-    if (op == 1)
-    {
+    if (op == 1) {
         $('.collapsible').collapsible('open', posicion - 1);
     }
 }

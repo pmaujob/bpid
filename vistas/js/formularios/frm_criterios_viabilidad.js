@@ -123,7 +123,6 @@ function mas(cod, bpid, numProyecto) {
             alert("Error inesperado");
             document.getElementById('modalc1').style.display = "block";
             document.getElementById('modalc2').style.display = "block";
-            window.top.location = "../index.html";
         }
     });
 
@@ -202,8 +201,7 @@ function registrarCriterios(op) {
         j++;
 
     }
-
-    $('#modal1').modal('close');
+    disBotones(true);
 
     jQuery.ajax({
         type: 'POST',
@@ -217,28 +215,27 @@ function registrarCriterios(op) {
                 document.getElementById('d_error').innerHTML = "Los criterios de viabilidad se han registrado con exito.";
                 $('#d_error').dialog("open");
                 $("#d_error").dialog({
-                            autoOpen: false,
-                            modal: true,
-                            buttons: {
-                                "Cerrar": function () {
-                                    $(this).dialog("close");
-                                    window.top.location = "../../vistas/formularios/frm_criterios_viabilidad.php";
-       
-
-                                }
-                            }
-                        });
+                    autoOpen: false,
+                    modal: true,
+                    buttons: {
+                        "Cerrar": function () {
+                            $(this).dialog("close");
+                            location.href = "../../vistas/formularios/frm_finalizar_viabilidad.php";
+                        }
+                    }
+                });
+                $('#modal1').modal('close');
             } else {
                 document.getElementById('d_error').innerHTML = "Los criterios de viabilidad no han podido ser registrados, por favor intentelo de nuevo mas tarde.";
                 $('#d_error').dialog("open");
             }
 
+            disBotones(false);
             quitar_pantalla();
 
         }, error: function () {
             alert("Error inesperado");
-            quitar_pantalla();
-            window.top.location = "../index.html";
+            disBotones(false);
         }
     });
 
@@ -297,4 +294,9 @@ function cerrarModal() {
     $('#modal1').modal('close');
     document.getElementById('toast-container').innerHTML = "";
 
+}
+
+function disBotones(disabled) {
+    document.getElementById("modalc1").style.pointerEvents = disabled ? "" : "none";
+    document.getElementById("modalc2").style.pointerEvents = disabled ? "" : "none";
 }
