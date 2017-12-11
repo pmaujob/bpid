@@ -189,10 +189,10 @@ function eliminar(cedula) {
 }
 
 function registrarResponsables() {
+    
+    bloquear_pantalla();
 
     var est = document.getElementById('estado').value;
-
-
 
     if (usuariosa.length > 0) {
 
@@ -214,10 +214,12 @@ function registrarResponsables() {
                     $('#d_error').dialog("open");
                 }
 
+                quitar_pantalla();
                 console.log(respuesta);
 
             },
             error: function () {
+                quitar_pantalla();
                 alert("Error inesperado");
                 window.top.location = "../index.html";
             }
