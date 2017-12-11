@@ -27,6 +27,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         </head>
 
         <body onload="onLoadBody();">
+            <div class="row">
+                <div class="col s12 m4"></div>
+                <div id="cargando" class="frm_externo col s12 m4 center-align"><img src="../css/wait.gif"></div>
+            </div>
             <div id="semaforo" class="semaforo">
                 <div id="bonbilla" class="bonbilla">
 
@@ -49,8 +53,8 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(1);">Guardar y Enviar</a>
-                        <a id="modale" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(2);">Guardar Progreso</a>
+                        <a id="modalc1" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(1);">Guardar y Enviar</a>
+                        <a id="modalc2" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(2);">Guardar Progreso</a>
                     </div>
                 </div>
             </form>

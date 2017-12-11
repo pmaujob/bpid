@@ -26,6 +26,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         </head>
 
         <body onload="onLoadBody();">
+            <div class="row">
+                <div class="col s12 m4"></div>
+                <div id="cargando" class="frm_externo col s12 m4 center-align"><img src="../css/wait.gif"></div>
+            </div>
             <div id="modal1" class="modal modal-fixed-footer">
                 <div class="modal-content">
                     <a href="#!" onclick="cerrar();" style="margin-left: 95%; color: black;">

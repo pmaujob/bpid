@@ -20,7 +20,7 @@ foreach ($datosDimensiones as $fila) {
         $estado = false;
     echo $fila[2];
     ?>-text">brightness_1</i>
-            <span class="title" style="font-weight: bold;"><?php echo $fila[1]; ?></span>
+            <span class="title" style="font-weight: bold;"><?php echo $fila[1]. " (" . $fila[3] . "%)"; ?></span>
             <p>
     <?php echo $fila[0]; ?>
             </p>
