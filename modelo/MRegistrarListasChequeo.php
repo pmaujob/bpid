@@ -24,6 +24,7 @@ class MRegistrarListasChequeo {
     }
 
     public static function guardarEnviarListas($idRad) {
+        
         $sql = "select from guardar_enviar_listas($idRad);";
 
         $con = new ConexionPDO();

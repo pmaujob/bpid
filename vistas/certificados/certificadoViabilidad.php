@@ -138,7 +138,7 @@ foreach ($datosRadicacion as $row) {
 
         $pdf->Cell(58, 6, $p[2], 1);
         $pdf->Cell(58, 6, '$' . $total, 1);
-        $pdf->Cell(60, 6, $p[3], 1, 0, 'C');
+        $pdf->Cell(60, 6, utf8_decode($p[3]), 1, 0, 'C');
         $pdf->Ln();
 
         $pdf->SetFillColor(187, 208, 73);
@@ -186,10 +186,12 @@ foreach ($datosRadicacion as $row) {
     $pdf->Cell(60, 6, utf8_decode('Localización: ' . $row[12]));
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Motivación de la Viabilidad Departamental:'));
-    $pdf->Cell(0, 6, utf8_decode('Favorable'), 0, 0, 'R');
     $pdf->Ln(5);
-    $pdf->Cell(60, 6, utf8_decode('El proyecto es viable.'));
-    $pdf->Ln(10);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(utf8_decode('El proyecto dispone de revisión metodológica y viabilidad técnica FAVORABLE, por lo tanto '
+            . 'cumple con las condiciones y requisitos mínimos establecidos en el manual de procedimientos del BPID adoptado '
+            . 'mediante Resolución No. 022 de Septiembre 20 de 2007 y definidos por esta, para el otorgamiento del concepto '
+            . 'de viabilidad.')), 0.965, $pdf);
+    $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Funcionarios Responsables: '));
     $pdf->SetMargins(30, 15, 30);
     $pdf->Ln(20);

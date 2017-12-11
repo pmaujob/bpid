@@ -63,37 +63,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 </div>
                             </div>
                         </div>
-
-                        <div id="divCertificados" style="display: none;">
-                            <div class="row">
-                                <div class="col s2 m4 l4">
-
-                                </div>
-                                <div class="col s8 m4 l4 center-align">
-                                    <span id="txtCertificate">
-                                        Certificado de NO viabilidad
-                                    </span>
-                                </div>
-                                <div class="col s2 m2 l2">
-
-                                </div>                            
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col s2 m4 l4">
-
-                                </div>
-                                <div class="col s8 m4 l4 center-align">
-                                    <a href="#!" title="Ver Más" onclick="creteCertificate();">
-                                        <img style="width: 25%; height: 25%;" src="../../vistas/img/pdf.png">
-                                    </a>
-                                </div>
-                                <div class="col s2 m4 l4">
-
-                                </div>
-                            </div>
-                        </div>
-
                     </div>      
                 </div>
             </form>

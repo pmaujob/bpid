@@ -9,15 +9,14 @@ require_once $raiz . '/librerias/CambiarFormatos.php';
 class Correos {
 
     private $phpMailer;
+    public $raiz;
 
     public function inicializar() {
-
+        
         $this->phpMailer = new PHPMailer;
 
         $this->phpMailer->IsSMTP();
-        $this->SMTPDebug = 2;
-        $this->Debugoutput = 'html';
-        $this->SMTPSecure = 'tls';
+        $this->phpMailer->CharSet = 'UTF-8';
         $this->phpMailer->SMTPAuth = true;
         $this->phpMailer->Port = 587;
         $this->phpMailer->Host = "smtp.gmail.com";
@@ -33,7 +32,7 @@ class Correos {
     public function armarCorreo($asunto, $msg, $altCuerpo) {
         $this->phpMailer->Subject = $asunto;
 
-        $body = str_replace('HORA_SISTEMA', CambiarFormatos::cambiarFecha(date("m/d/Y")), file_get_contents('../../vistas/correos/correoRadicacion.php'));
+        $body = str_replace('HORA_SISTEMA', CambiarFormatos::cambiarFecha(date("m/d/Y")), file_get_contents($this->raiz . '/vistas/correos/correoRadicacion.php'));
         $body = str_replace('MSG_REPLACE', $msg, $body);
 
         $this->phpMailer->msgHTML($body);

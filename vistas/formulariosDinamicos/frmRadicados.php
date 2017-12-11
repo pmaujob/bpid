@@ -5,11 +5,13 @@ $raiz = $_SESSION['raiz'];
 require_once $raiz . '/modelo/CargarRadicados.php';
 require_once $raiz . '/librerias/Correos.php';
 
-if (!empty($_POST['value']) && !empty($_POST['op'])) {
-
+if ( !empty($_POST['op'])) {
+   
     $datos = $_POST['value'];
     $op = $_POST['op'];
+    
     $res = CargarRadicados::getRadicados($datos, $op);
+    
     ?>
     <table>
         <thead>

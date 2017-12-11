@@ -112,7 +112,6 @@ function mas(cod, bpid, numProyecto) {
 
     value = cod;
     var bpid = bpid;
-    nomProyecto = nom;
 
     jQuery.ajax({
         type: 'POST',
@@ -228,7 +227,6 @@ function validar(enviarInfo) {
                 archivosSub.push(archivoSubRow);
             }
 
-
             var subRow = new Array(3);
             subRow[0] = document.getElementById('SUBH' + i).value;//id subequisito
             subRow[1] = document.getElementById('SUB' + i).value;//opcion seleccionada
@@ -243,11 +241,13 @@ function validar(enviarInfo) {
     var waitGuardarProgreso = document.getElementById('waitGuardarProgreso');
     waitGuardarProgreso.style.display = "";
 
+    disBotones(false);
+
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',
         async: true,
-        data: {numeroProyecto: numeroProyecto, nomProyecto: nomProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
+        data: {numeroProyecto: numeroProyecto, idRad: idRad, reqData: reqData, subData: ((subData.length > 0) ? subData : null), noCont: (enviarInfo ? noCont : null)},
         success: function (respuesta) {
 
             if (respuesta == 1) {
@@ -335,12 +335,17 @@ function validar(enviarInfo) {
                 msjInfo.style.color = "#e53935";
                 msjInfo.style.wordBreak = "break-all";
                 msjInfo.style.display = "";
-
+                
+                console.log("Error: "+respuesta);
             }
+
+            disBotones(true);
+
         },
         error: function () {
             mostrarMensaje('Error Inesperado', false);
             noCont = 0;
+            disBotones(true);
         }
     });
 
@@ -471,4 +476,9 @@ function mostrarSubtitulo(tituloSublista) {
     subToast.style.background = "white";
     subToast.style.fontWeight = "400";
 
+}
+
+function disBotones(disabled) {    
+    document.getElementById("modalg").style.pointerEvents = disabled ? "" : "none";
+    document.getElementById("modale").style.pointerEvents = disabled ? "" : "none";
 }
