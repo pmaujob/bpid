@@ -465,11 +465,11 @@ function validarProyectoPadre(a)
             type: 'POST',
             url: '../../controlador/ControladorRadicar.php',
             async: true,
-            data: {op: 5},
+            data: {op: 4},
             
             success: function (datos)
             {
-                console.log(op);
+               
                 alert(datos);
                 $('#modal1').modal('close');
                 document.getElementById('d_ingreso').innerHTML = '<p>NO EXISTEN PROGRAMAS DE INVERSION PARA ESTE PROYECTO</p>';
