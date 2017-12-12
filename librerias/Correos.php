@@ -28,6 +28,10 @@ class Correos {
     public function setDestinatario($correoDestinatario) {
         $this->phpMailer->addAddress($correoDestinatario);
     }
+    
+    public function addCopia($correoCopia){
+        $this->phpMailer->addCC($correoCopia);
+    }
 
     public function armarCorreo($asunto, $msg, $altCuerpo) {
         $this->phpMailer->Subject = $asunto;

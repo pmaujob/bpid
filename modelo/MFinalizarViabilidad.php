@@ -25,7 +25,7 @@ class MFinalizarViabilidad {
 
     public static function getDatosUsuario($idRad) {
 
-        $sql = 'select correo from get_correo_responsable(' . $idRad . ') as ("correo" varchar);';
+        $sql = 'select nom, correo from get_correo_responsable(' . $idRad . ') as ("nom" varchar,"correo" varchar);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");

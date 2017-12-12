@@ -1,5 +1,4 @@
 <?php
-
 @session_start();
 
 $raiz = $_SESSION['raiz'];
@@ -17,7 +16,10 @@ class CFinalizarViabilidad {
     private $responsables = array(array());
     private $estado;
     private $responsable;
+    private $correoResponsable;
     private $usuario;
+    private $correoUsuario;
+    public $raiz;
 
     private function getIdRadicacion() {
         return $this->idRadicacion;
@@ -35,8 +37,12 @@ class CFinalizarViabilidad {
         return $this->responsable;
     }
 
-    private function getUsuario() {
-        return $this->usuario;
+    private function getCorreoResponsable() {
+        return $this->correoResponsable;
+    }
+
+    private function getCorreoUsuario() {
+        return $this->correoUsuario;
     }
 
     private function getCodBpid() {
@@ -51,16 +57,20 @@ class CFinalizarViabilidad {
         $this->responsables = $responsables;
     }
 
-    public function setEstado($estado) {
-        $this->estado = $estado;
-    }
-
     public function setResponsable($responsable) {
         $this->responsable = $responsable;
     }
 
-    public function setUsuario($usuario) {
-        $this->usuario = $usuario;
+    private function setCorreoResponsable($setCorreoResponsable) {
+        $this->setCorreoResponsable = $setCorreoResponsable;
+    }
+
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
+
+    public function setCorreoUsuario($correoUsuario) {
+        $this->correoUsuario = $correoUsuario;
     }
 
     public function setCodBpid($codBpid) {
@@ -87,48 +97,72 @@ class CFinalizarViabilidad {
     public function enviar() {
 
         $sess = new SessionVars();
-        $this->setUsuario($sess->getValue('correo'));
-        $this->setResponsable(MFinalizarViabilidad::getDatosUsuario($this->getIdRadicacion())->fetch(PDO::FETCH_OBJ)->correo);
+        $this->setCorreoUsuario($sess->getValue('correo'));
 
-        $asunto = "Estado Proyecto - Bpid";
+        $responsable = MFinalizarViabilidad::getDatosUsuario($this->getIdRadicacion());
+        $this->setResponsable($responsable->fetch(PDO::FETCH_OBJ)->nom);
+        $this->setCorreoResponsable($responsable->fetch(PDO::FETCH_OBJ)->correo);
 
         $datosProyecto = CargarViabilizados::getViabilizados($this->getCodBpid(), 1)->fetch(PDO::FETCH_OBJ);
 
-        if ($this->getEstado() === "A") {//no viable
-            $cuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad desfavorable";
-            $altCuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad no favorable.";
+        $asunto = utf8_decode("Estado Proyecto - Bpid");
 
-            $destino = $this->getResponsable();
+        ob_start();
+        ?>
+        <span><strong>Estimado <?php echo $this->getResponsable(); ?></strong></span> 
+        <br>
+        <p style="text-align: justify;">Informamos que el proyecto <strong><?php echo $datosProyecto->nompro . " "; ?></strong> 
+            con número BPID <strong><?php echo $datosProyecto->num ?></strong> tiene 
+            Viabilidad <strong><?php echo ($this->getEstado() === "A" ? "DESFAVORABLE" : "FAVORABLE"); ?></strong>.          
+        </p>
+        <br>
+        <p>Para más información por favor comunicarse con la entidad.</p>
+        <?php
+        $msg = ob_get_clean();
 
-            $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
-        } else {
-            $cuerpo = "El proyecto:" . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad favorable";
-            $altCuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . "Su proyecto tiene viabilidad favorable";
+        $altCuerpo = nl2br("Estimado " . $this->getResponsable() . "."
+                . "\n\nInformamos que su proyecto $datosProyecto->nompro con número BPID $datosProyecto->num "
+                . "tiene Viabilidad" . ($this->getEstado() === "A" ? "FAVORABLE." : "DESFAVORABLE.")
+                . "\n\nPara más información por favor comunicarse con la entidad."
+                . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
+                . "\n\nSí no tiene conocimiento sobre el tema, por favor ignore este mensaje.");
 
 
-            $destino = $this->getResponsable();
-            $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
+        $this->enviarCorreo($this->getCorreoResponsable(), $asunto, $msg, $altCuerpo, $this->raiz, ($this->getEstado() !== "A" ? $this->getCorreoUsuario() : ""));
 
-            $destino = $this->getUsuario();
-            $this->enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo);
 
+        if ($this->getEstado() !== "A") {//no viable
             $correos = MFinalizarViabilidad::getCorreosRegistro();
 
-            $cuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . " se encuetra disponible para el control psterior de la viabilidad.";
-            $altCuerpo = "El proyecto " . $datosProyecto->nompro . " con numero BPID: " . $datosProyecto->num . " se encuetra disponible para el control psterior de la viabilidad.";
+            ob_start();
+            ?>
+            <p style="text-align: justify;">Informamos que el proyecto <strong><?php echo $datosProyecto->nompro . " "; ?></strong> 
+                con número BPID <strong><?php echo $datosProyecto->num ?></strong> se encuetra disponible 
+                para el control posterior de la viabilidad.          
+            </p>
+            <br>
+            <?php
+            $msg = ob_get_clean();
 
+            $altCuerpo = nl2br("Informamos que su proyecto $datosProyecto->nompro con número BPID $datosProyecto->num "
+                    . "se encuetra disponible para el control posterior de la viabilidad."
+                    . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
+                    . "\n\nSí no tiene conocimiento sobre el tema, por favor ignore este mensaje.");
             foreach ($correos as $row) {
-                $this->enviarCorreo($row[0], $asunto, $cuerpo, $altCuerpo);
+                $this->enviarCorreo($row[0], $asunto, $msg, $altCuerpo, $this->raiz);
             }
         }
     }
 
-    private function enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo) {
+    private function enviarCorreo($destino, $asunto, $cuerpo, $altCuerpo, $raiz, $copia = "") {
 
         $correo = new Correos();
-
+        $correo->raiz = $raiz;
         $correo->inicializar();
         $correo->setDestinatario($destino);
+        if ($copia != "") {
+            $correo->addCopia($copia);
+        }
         $correo->armarCorreo($asunto, $cuerpo, $altCuerpo);
 
         $correoEnviado = $correo->enviar();
@@ -148,6 +182,7 @@ class CFinalizarViabilidad {
 if ((isset($_POST['idRad']) && isset($_POST['responsables'])) && (!empty($_POST['idRad']) && !empty($_POST['responsables']))) {
 
     $cFinalizarViabilidad = new CFinalizarViabilidad();
+    $cFinalizarViabilidad->raiz = $raiz;
     $cFinalizarViabilidad->setIdRadicacion($_POST['idRad']);
     $cFinalizarViabilidad->setResponsables($_POST['responsables']);
     $cFinalizarViabilidad->setEstado("'" . $_POST['est'] . "'");
