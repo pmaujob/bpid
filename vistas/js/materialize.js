@@ -2210,7 +2210,7 @@ if (jQuery) {
     }, false);
 
 })(window);
-;Materialize.toast = function (message, displayLength, className, completeCallback) {
+;Materialize.toast = function (colormp, message, displayLength, className, completeCallback) {
   className = className || "";
 
   var container = document.getElementById('toast-container');
@@ -2232,6 +2232,7 @@ if (jQuery) {
   }
 
   newToast.style.opacity = 0;
+  newToast.style.backgroundColor = colormp;
 
   // Animate toast in
   Vel(newToast, {translateY: '-35px',  opacity: 1 }, {duration: 300,
