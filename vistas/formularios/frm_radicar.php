@@ -331,7 +331,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <h5>TIPO DE PROYECTO A RADICAR</h5>
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <select id="frm_tipo" name="frm_tipo">
+                                        <select id="frm_tipo" name="frm_tipo" onchange="validarProyectoPadre(this.value)">
                                             <option value="1">PROYECTO</option>
                                             <option value="2"> PROGRAMA DE INVERSION</option>
                                             <option value="3"> PROYECTO PERTENECE A  PROGRAMA DE INVERSION</option>

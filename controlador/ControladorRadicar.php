@@ -159,12 +159,17 @@ if (isset($_POST['op']) && !empty($_POST['op'])) {
     } else if ($_POST['op'] == 3) {
         //consultar Datos Proyecto
         $radicar = new ControladorRadicar();
-        
-        echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'));
+          echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'));
+    }
+    else if ($_POST['op'] == 4) {
+        //consultar Datos Proyecto
+//        $radicar = new ControladorRadicar();
+//          echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'));
+        echo "hola";
     }
 }
  else {
-        echo "no entro".$_POST['op'];
+        echo "no entro";
 //    header('http://' . $_SERVER['SERVER_NAME']);
 }
 ?>
