@@ -34,6 +34,7 @@ function bloquear_pantalla()
     document.getElementById("cargando").style.display = "block";
     document.body.style.overflow = "hidden";
 }
+
 function quitar_pantalla()
 {
     document.getElementById("cargando").style.display = "none";
