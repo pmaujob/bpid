@@ -456,3 +456,8 @@ function validarTipo()
     toasts[0].style.fontWeight = "400";
 
 }
+
+function validarProyectoPadre()
+{
+    alert("Ingreso");
+}

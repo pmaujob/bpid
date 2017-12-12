@@ -2,9 +2,9 @@
 require_once '../../modelo/CargarViabilizados.php';
 require_once '../../modelo/CargarMetas.php';
 
-        const metaSelect = 'METASELECT';
-        const actId = 'ACTID';
-         const prodiv = 'PRODIV';
+const metaSelect = 'METASELECT';
+const actId = 'ACTID';
+const prodiv = 'PRODIV';
 
 if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
@@ -18,21 +18,21 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     $datosActividades = CargarViabilizados::getViabilizados($numBpid, 4);
 
     $proyectName = "";
-    $contMeta = 0;
+    $contActs = 0;
     $metasProyecto = CargarMetas::getProyectMetas($numProyecto)->fetchAll(PDO::FETCH_BOTH);
     ?>
     <div id="d_error" title="ALERTA"></div>
     <div id="d_errormetas" title="ALERTA"></div>
     <div id="modal2" class="modal" style="max-width: 250px;">
-            <div class="modal-content center-align">
-                <p>ERROR</p>
-                <i class="large material-icons green-text">info_outline</i>
+        <div class="modal-content center-align">
+            <p>ERROR</p>
+            <i class="large material-icons green-text">info_outline</i>
 
-            </div>
-            <div class="modal-footer">
-                <a class="waves-effect waves-light btn light-blue blueb" onclick="closeModa2()">Aceptar</a>
-            </div>
         </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn light-blue blueb" onclick="closeModa2()">Aceptar</a>
+        </div>
+    </div>
     <div class="contenedor_tabla"> 
         <table class="striped">
             <thead>
@@ -216,16 +216,14 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                 $aux = -1;
                 $acum = 0;
                 foreach ($datosActividades as $act) {
-
-
                     //echo "<br>aux:$aux-act:$act[1]<br>";
-                    $contMeta++;
+                    $contActs++;
                     if ($aux == -1) {
                         $acum++;
-                         $aux = $act[1];
+                        $aux = $act[1];
                         ?>  
                         <li>
-                            <div class="collapsible-header" onclick="infoproductos(this)" id="<?php echo prodiv.$acum; ?>"><i class="material-icons">add</i><strong>PRODUCTO : </strong><?php echo $rest = substr($act[3], 0, 80); ?></div>
+                            <div class="collapsible-header" onclick="infoproductos(this)" id="<?php echo prodiv . $acum; ?>"><i class="material-icons">add</i><strong>PRODUCTO : </strong><?php echo $rest = substr($act[3], 0, 80); ?></div>
                             <div class="collapsible-body">
                                 <table class="striped">
                                     <thead>
@@ -246,8 +244,8 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                             <th style=" text-align: center" >
                                                 <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text"  style="text-align: center" >
                                                 <label for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medida</strong></label>
-                                               <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
-                                               <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
+                                                <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
+                                                <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
                                             </th>
                                         </tr>
 
@@ -262,12 +260,14 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                         <?php
                                     } else if ($aux != $act[1]) {
                                         $acum++;
-                                         $aux = $act[1];
+                                        $aux = $act[1];
                                         ?>
-                                    </tbody></table>
-                            </div>                            </li>
+                                    </tbody>
+                                </table>
+                            </div>                            
+                        </li>
                         <li>
-                            <div class="collapsible-header" onclick="infoproductos(this)" id="<?php echo prodiv.$acum; ?>"><i class="material-icons" id="<?php echo $acum; ?>">add</i><strong>PRODUCTO : </strong><?php echo substr($act[3], 0, 80); ?></div>
+                            <div class="collapsible-header" onclick="infoproductos(this)" id="<?php echo prodiv . $acum; ?>"><i class="material-icons" id="<?php echo $acum; ?>">add</i><strong>PRODUCTO : </strong><?php echo substr($act[3], 0, 80); ?></div>
                             <div class="collapsible-body" >
                                 <table class="striped">
                                     <thead>
@@ -291,7 +291,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                                 <label for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medida</strong></label>
                                                 <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
                                                 <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
-                                                
+
                                             </th>
                                         </tr>
 
@@ -309,28 +309,27 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
                                     <tr>
                                         <td style="width: 40%;">
-                                            <input type="hidden" id="<?php echo actId . $contMeta ?>" value="<?php echo $act[5]; ?>">
+                                            <input type="hidden" id="<?php echo actId . $contActs ?>" value="<?php echo $act[5]; ?>">
                                             <p style="text-align: justify; margin-top: -4px;">
                                                 <?php echo $act[6]; ?>                                    
                                             </p>
                                         </td>
                                         <td style="text-align: center;" style="width: 30%;"><?php echo "$" . number_format($act[7]); ?></td>
                                         <td style="width: 30%;">    
-                                            <input  type="hidden" id="frm_collapsible_<?php echo $contMeta ?>"  value="<?php echo $acum ?>">
-                                                <select id="<?php echo metaSelect . $contMeta; ?>" class="browser-default">
+                                            <input  type="hidden" id="frm_collapsible_<?php echo $contActs ?>"  value="<?php echo $acum ?>">
+                                            <select id="<?php echo metaSelect . $contActs; ?>" class="browser-default">
                                                 <option value="0" selected disabled>Seleccione una Meta</option>                                    
                                                 <?php
                                                 for ($i = 0; $i < count($metasProyecto); $i++) {
-                                                    
+
                                                     $meta = $metasProyecto[$i];
-                                                    
                                                     ?>
-                                                    
+
                                                     <option value="<?php echo $meta[0]; ?>" style="" ><?php echo $meta[2] . " - " . $meta[1]; ?></option>
-                                                    
+
                                                     <?php
                                                 }
-                                                
+
                                                 unset($meta);
                                                 ?> 
                                             </select>
@@ -356,7 +355,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 }
 ?>
 
-<input type="hidden" id="contMeta" value="<?php echo $contMeta; ?>">
+<input type="hidden" id="contActs" value="<?php echo $contActs; ?>">
 <input type="hidden" id="contItemMeta" value="<?php echo count($metasProyecto); ?>">
 <input type="hidden" id="idRad" value="<?php echo $idRad; ?>">
 <input type="hidden" id="proyectName" value="<?php echo $proyectName; ?>">
@@ -365,7 +364,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     <thead>
         <tr>
             <th colspan="4" style="text-align:center;">
-                <button class="btn waves-effect waves-light" onclick="guardarMetas();">Guardar
+                <button id="btnGuardar" class="btn waves-effect waves-light" onclick="guardarMetas();">Guardar
                     <i class="material-icons right">send</i>
                 </button>
             </th>

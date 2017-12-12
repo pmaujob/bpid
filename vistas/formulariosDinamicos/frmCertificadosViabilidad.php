@@ -13,7 +13,7 @@ $contRow = 0;
 
 <table>
     <thead>
-        <tr><th>ID MGA</th><th>Código Bpid</th><th>Nombre del Proyecto</th><th>Generar</th></tr>
+        <tr><th>ID MGA</th><th>Código Bpid</th><th>Nombre del Proyecto</th><th class="center-align">Generar</th></tr>
     </thead>
     <tbody>
         <?php
@@ -25,7 +25,7 @@ $contRow = 0;
                     <td><?php echo $fila[5]; ?></td>
                     <td><?php echo $fila[1]; ?></td>
                     <td title="<?php echo $fila[2]; ?>"><?php echo $fila[3]; ?></td>
-                    <td>
+                    <td class="center-align">
                         <a href="#" title="<?php echo ($fila[6] == 'A' ? "Certificado NO Viabilidad" : "Certificado Viabilidad");?>">
                             <img style="width: 25%;" src="<?php echo "../../vistas/img/" . ($fila[6] == 'A' ? "cer_no_viabilidad" : "cer_viabilidad") . ".png" ?>" onclick="seleccionar(<?php echo $fila[0]; ?>, '<?php echo $fila[6]; ?>','<?php echo "cerRow" . $contRow; ?>');">
                         </a>

@@ -79,18 +79,15 @@ function buscarProyectos(op, event) {
             + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
             + '</div>';
 
-    //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
-            //quitarPantalla();
             resultado.innerHTML = '<p>' + respuesta + '</p>';
         },
         error: function () {
-            //quitarPantalla();
             mostrarMensaje('Error Inesperado', false);
         }
     });

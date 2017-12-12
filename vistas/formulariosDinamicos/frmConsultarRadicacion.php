@@ -17,7 +17,7 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
                 <th>ID MGA</th>
                 <th>Código Bpid</th>
                 <th>Nombre del Proyecto</th>
-                <th>Consultar</th>
+                <th class="center-align">Consultar</th>
             </tr>
         </thead>
         <tbody>
@@ -29,11 +29,9 @@ if (!empty($_POST['value']) && !empty($_POST['op'])) {
                         <td><?php echo $fila[5]; ?></td>
                         <td><?php echo $fila[1]; ?></td>
                         <td title="<?php echo $fila[2]; ?>"><?php echo $fila[3]; ?></td>
-                        <td>
+                        <td class="center-align">
                             <a href="#" title="Visualizar">
-                                <div onclick="listarDatosRadicacion(<?php echo $fila[0]; ?>,<?php echo $fila[5]; ?>);">
-                                    <img src="../../vistas/img/ver.png" style="width: 32px; height: 32px;">
-                                </div>
+                                <img src="../../vistas/img/ver.png" style="width: 32px; height: 32px;" onclick="listarDatosRadicacion(<?php echo $fila[0]; ?>,<?php echo $fila[5]; ?>);">
                             </a>
                         </td>
                     </tr>
