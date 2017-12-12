@@ -88,7 +88,7 @@ class RegistrarListasChequeo {
                 <span><strong>Estimado <?php echo $datosCorreo[1]; ?></strong></span> 
                 <br>
                 <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo $datosCorreo[2] . " "; ?></strong> 
-                    con número de radicación <strong><?php echo $datosCorreo[3]; ?></strong> NO cumplió con 
+                    con número BPID <strong><?php echo $datosCorreo[3]; ?></strong> NO cumplió con 
                     algunos requisitos de las listas de chequeo, y por lo tanto, <strong>NO</strong> fue radicado.          
                 </p>
                 <br>
@@ -96,7 +96,7 @@ class RegistrarListasChequeo {
                 <?php
                 $msg = ob_get_clean();
                 $altCuerpo = nl2br("Estimado $datosCorreo[1]."
-                        . "\n\nInformamos que su proyecto $datosCorreo[2] con número de radicación $datosCorreo[3] "
+                        . "\n\nInformamos que su proyecto $datosCorreo[2] con número BPID $datosCorreo[3] "
                         . "NO cumplió con algunos requisitos de las listas de chequeo, y por lo tanto, NO fue radicado."
                         . "\n\nPara más información por favor comunicarse con la entidad."
                         . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
@@ -141,14 +141,14 @@ if (!isset($_POST['guardarEnviar'])) {
         <span><strong>Estimado <?php echo $datosCorreo[1]; ?></strong></span> 
         <br>
         <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo $datosCorreo[2] . " "; ?></strong> 
-            con número de radicación <strong><?php echo $datosCorreo[3]; ?></strong> cumplió con 
+            con número BPID <strong><?php echo $datosCorreo[3]; ?></strong> cumplió con 
             los requisitos de las listas de chequeo, y por ende, fue <strong>radicado con éxito.</strong>          
         </p>   
         <?php
         $msg = ob_get_clean();
         $altCuerpo = nl2br("Estimado $datosCorreo[1]."
                 . "\n\nInformamos que su proyecto $datosCorreo[2]"
-                . "con número de radicación $datosCorreo[3] cumplió "
+                . "con número BPID $datosCorreo[3] cumplió "
                 . "con los requisitos de las listas de chequeo, y por ende, fue radicado con éxito. "
                 . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
                 . "\n\nSí no tiene conocimiento sobre el tema, por favor ignore este mensaje.");
