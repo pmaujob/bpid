@@ -80,6 +80,7 @@ foreach ($listasRequeridas as $filar) {
                                     </select>
                                 </p>
                             </td>
+                
                             <td style="width: 30%;">
                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
 
