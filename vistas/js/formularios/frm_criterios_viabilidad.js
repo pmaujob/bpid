@@ -1,6 +1,8 @@
 var idRad;
 
 function onLoadBody() {
+    
+    buscarProyectos(4, null);
 
     $(document).ready(function () {
 
@@ -61,7 +63,7 @@ function quitar_pantalla()
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
 

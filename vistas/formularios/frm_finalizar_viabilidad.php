@@ -52,7 +52,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             <div id="respuestainfo" class="collapsible-body"></div>
                         </li>
                         <li>
-                            <div class="collapsible-header" style="background: #F9C000; color: white;"><i class="material-icons">account_circle</i>Responsables</div>
+                            <div class="collapsible-header" style="background: #F9C000; color: white;"><i class="material-icons">account_circle</i>Responsables de Viabilidad</div>
                             <div class="collapsible-body">
                                 <div class="col s12">
                                     <br>
