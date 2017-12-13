@@ -1,4 +1,7 @@
 function onLoadBody() {
+    
+    buscarProyectosRadicados(-2, null);
+    
     $(document).ready(function () {
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
@@ -29,7 +32,7 @@ function onLoadBody() {
 function buscarProyectosRadicados(op,event) {
     
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
 

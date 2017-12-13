@@ -6,6 +6,8 @@ var totalfuentes = 0;
 var r = [];
 var idvidprod = [];
 $(document).ready(function () {
+    
+    buscarProyectos(3, null);
 
     $("#d_ingreso").dialog({
         autoOpen: false,
@@ -81,7 +83,7 @@ function onLoadBody() {
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
     if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
