@@ -34,7 +34,7 @@ $(document).ready(function () {
         buttons: {
             "Aceptar": function () {
                 $(this).dialog("close");
-                window.self.location = "../formularios/frm_radicar.php";
+                window.self.location = "../formularios/frm_listas_radicar.php";
             }
         }
     });
@@ -48,7 +48,7 @@ function validar() {
     {
         document.getElementById('d_error').innerHTML = '<p>POR FAVOR SELECCIONE EL ARCHIVO XML<p>';
         $("#d_error").dialog("open");
-        //alert("DEBE SELECCIONAR UN ARCHIVO XML ANTES");
+        
         return false;
         nombre_archivo.focus();
     } else
@@ -343,10 +343,11 @@ function buscarUsuario(tipo)
             {
                 if (respuesta.trim() === "NoData") {
                     waitGuardarProgreso.style.display = 'none';
+                      var toasts = document.getElementById('toast-container').getElementsByTagName("div");
                     Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000);
                     toasts.style.background = "#008643";
                     toasts.style.fontWeight = "400";
-                    var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer todos los toasts
+                  //traer todos los toasts
                     //Cambiar el estilo de uno de todos los toasts
                     toasts.style.background = "#008643";
                     toasts.style.fontWeight = "400";
@@ -470,11 +471,12 @@ function validarProyectoPadre(a)
             success: function (datos)
             {
                
-                alert(datos);
-                $('#modal1').modal('close');
+                if(parseInt(datos)==0){
+                $('#ventanatipo').modal('close');
                 document.getElementById('d_ingreso').innerHTML = '<p>NO EXISTEN PROGRAMAS DE INVERSION PARA ESTE PROYECTO</p>';
-                $("#d_ingreso").dialog("open");
-
+                $("#d_ingreso").dialog("open");   
+                }
+                
             }
         });
     }
