@@ -368,17 +368,18 @@ function ejecutar(posicion, op)
         var lugar = collapos.value - 1;
         var d=collapos.value;
        
-        
-        console.log("collapos.id: " + collapos.value);
-        if (!$("#PRODIV".d).hasClass("active")) {
-            $('.collapsible').collapsible('open', lugar);
+          console.log("frm_unidad_" + collapos.value);
+        if (!$("#PRODIV" +d).hasClass("active")) {
+            document.getElementById("PRODIV" + d).click();
+
         }
 
         document.getElementById('frm_unidad_' + posicion).focus();
         return;
 
     } else if (op == 1) {
-        $('.collapsible').collapsible('open', posicion - 1);
+       document.getElementById("PRODIV" + d).click();
+
     }
 
 }
