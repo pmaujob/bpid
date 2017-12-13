@@ -193,8 +193,7 @@ function validar(enviarInfo) {
             reqRow[0] = document.getElementById('REQH' + i).value;//id requisito
             reqRow[1] = document.getElementById('REQ' + i).value;//opción seleccionada        
             reqRow[2] = document.getElementById('REQOBS' + i).value.trim();//observación    
-            reqRow[4] = document.getElementById('REQDES' + i).value.trim();//descripción
-
+            reqRow[3] = document.getElementById('REQDES' + i).innerHTML.trim();//descripción
             reqData.push(reqRow);
         }
 
@@ -242,7 +241,7 @@ function validar(enviarInfo) {
             subRow[0] = document.getElementById('SUBH' + i).value;//id subequisito
             subRow[1] = document.getElementById('SUB' + i).value;//opcion seleccionada
             subRow[2] = document.getElementById('SUBOBS' + i).value.trim();//observacion
-            subRow[3] = document.getElementById('SUBDES' + i).value.trim();//descripción
+            subRow[3] = document.getElementById('SUBDES' + i).innerHTML.trim();//descripción
             subData.push(subRow);
         }
     }
@@ -273,7 +272,6 @@ function validar(enviarInfo) {
                     processData: false,
                     success: function (datos) {
 
-
                         var fallidosReq = datos.split('|')[0];
                         var fallidosSub = datos.split('|')[1];
                         var alerta = "";
@@ -295,7 +293,6 @@ function validar(enviarInfo) {
                             msjInforme("Se ha guardado el progreso con éxito.", false);
 
                         } else if (enviarInfo && noCont > 0) {
-
                             mostrarMensaje('Se ha guardado el progreso con éxito. Sin embargo, hay items sin aprobar, '
                                     + 'por lo tanto se enviará un informe a su correo registrado en bpid.', true);
 
@@ -359,7 +356,7 @@ function validarExtension(fileNombre) {
     if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat' || extension === '.css') {
 
         msjInforme("El formato del archivo adjunto no es válido", true);
-        
+
         //hacer focus
 
         adjunto.value = null;
@@ -410,7 +407,7 @@ function mostrarMensaje(mensaje, info) {
     }
 }
 
-function msjInforme(msj, error, tiempo = 3000) {
+function msjInforme(msj, error) {
 
     var msjInfo = document.getElementById('msjInfo');
 
@@ -418,7 +415,7 @@ function msjInforme(msj, error, tiempo = 3000) {
     msjInfo.style.color = error ? "#E53935" : "#000000";
     msjInfo.style.display = "";
 
-    setTimeout(quitarEtiqueta, tiempo);
+    setTimeout(quitarEtiqueta, 3000);
 
 }
 

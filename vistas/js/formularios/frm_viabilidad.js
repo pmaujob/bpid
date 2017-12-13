@@ -370,7 +370,7 @@ function ejecutar(posicion, op)
        
         
         console.log("collapos.id: " + collapos.value);
-        if (!$("#PRODIV".d).hasClass("active")) {
+        if (!$("#PRODIV").hasClass("active")) {
             $('.collapsible').collapsible('open', lugar);
         }
 
