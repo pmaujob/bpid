@@ -1,6 +1,9 @@
 var metaCount = 0;
 
 function onLoadBody() {
+    
+    buscarProyectos(2, null);
+    
     $(document).ready(function () {
         $('.modal').modal();
     });
@@ -30,7 +33,7 @@ function onLoadBody() {
 function buscarProyectos(idEtapa, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
 

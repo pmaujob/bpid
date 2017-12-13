@@ -21,7 +21,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
-        <body>
+        <body onload="onLoadBody()">
 
             <div id="mas" class="frm_externo">
                 <div class="cerrar" onclick="cerrarFrmExterno('mas');"></div>

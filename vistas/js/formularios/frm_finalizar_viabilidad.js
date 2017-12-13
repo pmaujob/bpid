@@ -16,6 +16,8 @@ function quitar_pantalla()
 }
 
 function onLoadBody() {
+    
+    buscarProyectos(5);
 
     $(document).ready(function () {
 

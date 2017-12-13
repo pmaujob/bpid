@@ -2,7 +2,7 @@
 require_once '../../modelo/CargarRadicados.php';
 require_once '../../modelo/MSysConf.php';
 
-if (!empty($_POST['value'])) {
+if (isset($_POST['value'])) {
 
     $op = $_POST['op'];
     $sysConf = new MSysConf();
