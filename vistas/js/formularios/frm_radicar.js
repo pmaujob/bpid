@@ -19,16 +19,20 @@ $(document).ready(function () {
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
     $('select').material_select();
+    
+
     $("#d_error").dialog({
         autoOpen: false,
         modal: true,
         buttons: {
             "Cerrar": function () {
                 $(this).dialog("close");
+                window.self.location = "../formularios/frm_radicar.php";
+                return;
             }
         }
     });
-    $("#d_ingreso").dialog({
+        $("#d_ingreso").dialog({
         autoOpen: false,
         modal: true,
         buttons: {
@@ -167,8 +171,8 @@ function archivo_xml()
 
                                 $('#modal1').modal('close');
                                 quitar_pantalla();
-                                document.getElementById('d_ingreso').innerHTML = '<p>ERROR, EL ARCHIVO ESTA INCOMPLETO Y NO PUEDE SER RADICADO</p>';
-                                $("#d_ingreso").dialog("open");
+                                document.getElementById('d_error').innerHTML = '<p>ERROR, EL ARCHIVO ESTA INCOMPLETO Y NO PUEDE SER RADICADO</p>';
+                                $("#d_error").dialog("open");
                                 return false;
                             }
                         }
@@ -181,18 +185,18 @@ function archivo_xml()
                 {
                     $('#modal1').modal('close');
                     quitar_pantalla();
-                    document.getElementById('d_ingreso').innerHTML = '<p> EL ARCHIVO YA SE ENCUENTRA RADICADO!, SELECCIONE UNO NUEVO</p>';
-                    $("#d_ingreso").dialog("open");
-                    return false;
+                    document.getElementById('d_error').innerHTML = '<p> EL ARCHIVO YA SE ENCUENTRA RADICADO!, SELECCIONE UNO NUEVO</p>';
+                    $("#d_error").dialog("open");
+                    return ;
 
                 }
                 if (existe == 2)
                 {
                     $('#modal1').modal('close');
                     quitar_pantalla();
-                    document.getElementById('d_ingreso').innerHTML = '<p> ERROR!, EL ARCHIVO NO PUEDE SER RADICADO</p>';
-                    $("#d_ingreso").dialog("open");
-                    return false;
+                    document.getElementById('d_error').innerHTML = '<p> ERROR!, EL ARCHIVO NO PUEDE SER RADICADO</p>';
+                    $("#d_error").dialog("open");
+                    return ;
 
                 }
 

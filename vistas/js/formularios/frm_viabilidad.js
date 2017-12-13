@@ -363,16 +363,28 @@ function ejecutar(posicion, op)
 {
 
     if (op == 0) {
-        var collapos = document.getElementById('frm_collapsible_' + posicion).value;
-        var lugar = collapos - 1;
-        $('.collapsible').collapsible('open', lugar);
+
+        var collapos = document.getElementById('frm_collapsible_' + posicion);
+        var lugar = collapos.value - 1;
+        var d=collapos.value;
+       
+        
+        console.log("collapos.id: " + collapos.value);
+        if (!$("#PRODIV".d).hasClass("active")) {
+            $('.collapsible').collapsible('open', lugar);
+        }
+
         document.getElementById('frm_unidad_' + posicion).focus();
         return;
 
-    }
-    if (op == 1) {
+    } else if (op == 1) {
         $('.collapsible').collapsible('open', posicion - 1);
     }
+
 }
+
+
+
+
 
 
