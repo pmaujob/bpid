@@ -6,6 +6,8 @@ const req = 'REQ'; // id de la opción de la pregunta seleccionada
 const sub = 'SUB';
 const reqh = 'REQH'; // id de la pregunta
 const subh = 'SUBH';
+const reqDes = 'REQDES'; // id de la descripción del requisito
+const subDes = 'SUBDES';
 const rTitLista = "RTITLISTA"; //id del titulo de la lista
 const sTitLista = "STITLISTA";
 const rlista = 'RLIS'; // id de la lista
@@ -66,7 +68,7 @@ foreach ($listasRequeridas as $filar) {
                         ?>
                         <tr class="cardview_checklist">
                             <td style="width: 55%;">
-                                <p style="text-align: justify; margin-top: -4px;">
+                                <p id="<?php echo reqDes . $nOpcionesReq; ?>" style="text-align: justify; margin-top: -4px;">
                                     <?php echo $filar1[1]; ?>                                    
                                 </p>
                             </td>
@@ -164,7 +166,7 @@ if (count($listasEspecificas) == 0) {
                                         ?>
                                         <tr class="cardview_checklist">
                                             <td style="width: 55%;">
-                                                <p style="text-align: justify; margin-top: -4px;">
+                                                <p id="<?php echo reqDes . $nOpcionesReq; ?>" style="text-align: justify; margin-top: -4px;">
                                                     <?php echo $filae1[1]; ?>
                                                 </p>
                                             </td>
@@ -248,7 +250,7 @@ if (count($listasEspecificas) == 0) {
                                                         ?>
                                                         <tr class="cardview_checklist">
                                                             <td style="width: 50%;">
-                                                                <p style="text-align: justify; margin-top: -4px;">
+                                                                <p id="<?php echo subDes . $nOpcionesReq; ?>" style="text-align: justify; margin-top: -4px;">
                                                                     <?php echo $filas[1]; ?>
                                                                 </p>
                                                             </td>

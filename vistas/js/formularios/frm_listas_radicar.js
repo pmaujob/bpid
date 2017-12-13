@@ -189,10 +189,11 @@ function validar(enviarInfo) {
                 archivosReq.push(archivoReqRow);
             }
 
-            var reqRow = new Array(3);
+            var reqRow = new Array(4);
             reqRow[0] = document.getElementById('REQH' + i).value;//id requisito
             reqRow[1] = document.getElementById('REQ' + i).value;//opción seleccionada        
-            reqRow[2] = document.getElementById('REQOBS' + i).value.trim();//observación
+            reqRow[2] = document.getElementById('REQOBS' + i).value.trim();//observación    
+            reqRow[4] = document.getElementById('REQDES' + i).value.trim();//descripción
 
             reqData.push(reqRow);
         }
@@ -237,10 +238,11 @@ function validar(enviarInfo) {
                 archivosSub.push(archivoSubRow);
             }
 
-            var subRow = new Array(3);
+            var subRow = new Array(4);
             subRow[0] = document.getElementById('SUBH' + i).value;//id subequisito
             subRow[1] = document.getElementById('SUB' + i).value;//opcion seleccionada
             subRow[2] = document.getElementById('SUBOBS' + i).value.trim();//observacion
+            subRow[3] = document.getElementById('SUBDES' + i).value.trim();//descripción
             subData.push(subRow);
         }
     }
