@@ -15,7 +15,6 @@ function onLoadBody() {
             complete: function () {
 
                 var toasts = new Array();
-
                 if (document.getElementById('toast-container') != null) {
                     toasts = document.getElementById('toast-container').getElementsByTagName("div");
                 }
@@ -64,7 +63,7 @@ function quitarPantalla() {
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
 
@@ -133,7 +132,6 @@ function mas(cod, bpid, numProyecto) {
 
         }, error: function () {
             mostrarMensaje('Error Inesperado', false);
-            window.top.location = "../index.html";
         }
     });
 
@@ -146,7 +144,7 @@ function focusearTituloLista(idBodyLista) {
 function validar(enviarInfo) {
 
     if (document.getElementById('nOpcionesReq') == null) {
-        console.log("No se han cargado los complementos");
+        msjInforme("No se han cargado los complementos", true);
         return;
     }
 
@@ -171,14 +169,17 @@ function validar(enviarInfo) {
 
             if (opcionSeleccionada == "SI" && reqArchivoExist == "" && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
 
-                document.getElementById('d_ingreso').innerHTML = '<p>DEBE ADJUNTAR UN ARCHIVO EN ESTA PREGUNTA</p>';
-                $("#d_error").dialog("open");
+                msjInforme("Debe adjuntar un archivo a esta item.", true);
 
-//inii                $('.collapsible-header').removeClass('active');
-//                $('.collapsible-body').css('display','none');
-//  fin              $('#REQFILE' + i).parents('div').parents('div').parents('div').css('display','block');
+                if (reqArchivo.getAttribute('data-listFatherId') != null && reqArchivo.getAttribute('data-listFatherId') != "" && !$("#" + reqArchivo.getAttribute('data-listFatherId')).hasClass("active")) {
+                    document.getElementById(reqArchivo.getAttribute('data-listFatherId')).click();
+                }
+
+                if (!$("#" + reqArchivo.getAttribute('data-listId')).hasClass("active")) {
+                    document.getElementById(reqArchivo.getAttribute('data-listId')).click();
+                }
+
                 reqArchivo.focus();
-
                 return;
 
             } else if (opcionSeleccionada == "SI" && reqArchivo.value != '') {
@@ -199,9 +200,7 @@ function validar(enviarInfo) {
     }
 
     if (reqData.length == 0) {
-
-        document.getElementById('d_ingreso').innerHTML = '<p>DEBE REALIZAR CAMBIOS EN LA LISTA GENERAL PARA GUARDAR</p>';
-        $("#d_error").dialog("open");
+        msjInforme("Debe realizar cambios la lista general para continuar.", true);
         return;
     }
 
@@ -213,10 +212,24 @@ function validar(enviarInfo) {
             var subArchivo = document.getElementById('SUBFILE' + i);
 
             if (opcionSeleccionada == "SI" && subArchivoExist == "" && subArchivo.value == '') {
-                document.getElementById('d_ingreso').innerHTML = '<p>DEBE ADJUNTAR UN ARCHIVO EN ESTA PREGUNTA</p>';
-                $("#d_error").dialog("open");
+
+                msjInforme("Debe adjuntar un archivo a este item.", true);
+
+                if (!$("#" + reqArchivo.getAttribute('data-listGFatherId')).hasClass("active")) {
+                    document.getElementById(subArchivo.getAttribute('data-listGFatherId')).click();
+                }
+
+                if (!$("#" + reqArchivo.getAttribute('data-listFatherId')).hasClass("active")) {
+                    document.getElementById(subArchivo.getAttribute('data-listFatherId')).click();
+                }
+
+                if (!$("#" + reqArchivo.getAttribute('data-listId')).hasClass("active")) {
+                    document.getElementById(subArchivo.getAttribute('data-listId')).click();
+                }
+
                 subArchivo.focus();
                 return;
+
             } else if (opcionSeleccionada == "SI" && subArchivo.value != '') {
                 var archivoSubRow = new Array(2);
                 archivoSubRow[0] = document.getElementById('SUBH' + i).value;//id requisito
@@ -267,7 +280,6 @@ function validar(enviarInfo) {
                             alerta += "Los archivos fueron subidos con éxito.\n"
                                     + "Excepto los pertenecientes a los requisitos con los códigos: " + fallidosReq;
                         }
-
                         if (fallidosSub.trim() != "" && alerta == "") {
                             alerta += "Los archivos fueron subidos con éxito.\n"
                                     + "Excepto los pertenecientes a los subrequisitos con los códigos: " + fallidosSub;
@@ -278,12 +290,7 @@ function validar(enviarInfo) {
                         if (!enviarInfo) {
 
                             waitGuardarProgreso.style.display = "none";
-
-                            var msjInfo = document.getElementById('msjInfo');
-                            msjInfo.innerHTML = "Se ha guardado el progreso con éxito.";
-                            msjInfo.style.display = "";
-
-                            setTimeout(quitarEtiqueta, 3000);
+                            msjInforme("Se ha guardado el progreso con éxito.", false);
 
                         } else if (enviarInfo && noCont > 0) {
 
@@ -326,14 +333,9 @@ function validar(enviarInfo) {
             } else {
 
                 waitGuardarProgreso.style.display = "none";
+                msjInforme("No se pudo guardar el progreso<br>vuelva a intentarlo.", true);
 
-                var msjInfo = document.getElementById('msjInfo');
-                msjInfo.innerHTML = "No se pudo guardar el progreso, vuelva a intentarlo.";
-                msjInfo.style.color = "#e53935";
-                msjInfo.style.wordBreak = "break-all";
-                msjInfo.style.display = "";
-                
-                console.log("Error: "+respuesta);
+                console.log("Error: " + respuesta);
             }
 
             disBotones(true);
@@ -354,8 +356,10 @@ function validarExtension(fileNombre) {
     var extension = (adjunto.value.substring(adjunto.value.lastIndexOf("."))).toLowerCase();
     if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat' || extension === '.css') {
 
-        document.getElementById('d_ingreso').innerHTML = '<p>EL FORMATO DEL ARCHIVO ADJUNTO NO ES VALIDO</p>';
-        $("#d_error").dialog("open");
+        msjInforme("El formato del archivo adjunto no es válido", true);
+        
+        //hacer focus
+
         adjunto.value = null;
         return;
     }
@@ -402,6 +406,18 @@ function mostrarMensaje(mensaje, info) {
         document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
         $("#d_error").dialog("open");
     }
+}
+
+function msjInforme(msj, error, tiempo = 3000) {
+
+    var msjInfo = document.getElementById('msjInfo');
+
+    msjInfo.innerHTML = msj;
+    msjInfo.style.color = error ? "#E53935" : "#000000";
+    msjInfo.style.display = "";
+
+    setTimeout(quitarEtiqueta, tiempo);
+
 }
 
 function quitarEtiqueta() {
@@ -475,7 +491,7 @@ function mostrarSubtitulo(tituloSublista) {
 
 }
 
-function disBotones(disabled) {    
+function disBotones(disabled) {
     document.getElementById("modalg").style.pointerEvents = disabled ? "" : "none";
     document.getElementById("modale").style.pointerEvents = disabled ? "" : "none";
 }
