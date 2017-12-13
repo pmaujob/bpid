@@ -6,8 +6,6 @@ var totalfuentes = 0;
 var r = [];
 var idvidprod = [];
 $(document).ready(function () {
-    
-    buscarProyectos(3, null);
 
     $("#d_ingreso").dialog({
         autoOpen: false,
@@ -83,7 +81,7 @@ function onLoadBody() {
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (event != null && buscarValue.toString().trim().length == 0) {
+    if (buscarValue.toString().trim().length == 0) {
         return;
     }
     if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
@@ -370,17 +368,18 @@ function ejecutar(posicion, op)
         var lugar = collapos.value - 1;
         var d=collapos.value;
        
-        
-        console.log("collapos.id: " + collapos.value);
-        if (!$("#PRODIV".d).hasClass("active")) {
-            $('.collapsible').collapsible('open', lugar);
+          console.log("frm_unidad_" + collapos.value);
+        if (!$("#PRODIV" +d).hasClass("active")) {
+            document.getElementById("PRODIV" + d).click();
+
         }
 
         document.getElementById('frm_unidad_' + posicion).focus();
         return;
 
     } else if (op == 1) {
-        $('.collapsible').collapsible('open', posicion - 1);
+       document.getElementById("PRODIV" + d).click();
+
     }
 
 }

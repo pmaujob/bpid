@@ -59,7 +59,6 @@ class RegistrarListasChequeo {
                 $noApReq[] = array($fila[3], $temporal);
             }
         }
-
         $reqJson = CambiarFormatos::convertirAJsonItems($reqArray);
         $subJson = null;
 
@@ -102,9 +101,8 @@ class RegistrarListasChequeo {
                 <?php
                 if (count($noApReq) > 0) {
                     ?>
-                    <span><strong>Requisitos:</strong></span>
-                    <br>                      
-                    <br>
+                    <h3>Requisitos:</h3>
+                    <br>                   
                     <ul>
                         <?php
                         for ($i = 0; $i < count($noApReq); $i++) {
@@ -113,23 +111,24 @@ class RegistrarListasChequeo {
                             <li>
                                 <span><?php echo $noAp[0]; ?></span>
                                 <br>
+                                <br>
                                 <span><strong>Observaciones: </strong><?php echo $noAp[1]; ?></span>
+                                <br>
+                                <br>
+                                <br>
                             </li>
                             <?php
                         }
                         ?>
                     </ul>
-                    <br>                      
-                    <br>
                     <?php
                 }
                 ?>
                 <?php
                 if (count($noApSub) > 0) {
                     ?>
-                    <span><strong>Subrequisitos:</strong></span>
-                    <br>                      
-                    <br>
+                    <h3>Subrequisitos:</h3>
+                    <br>                    
                     <ul>
                         <?php
                         for ($i = 0; $i < count($noApSub); $i++) {
@@ -138,14 +137,16 @@ class RegistrarListasChequeo {
                             <li>
                                 <span><?php echo $noAp[0]; ?></span>
                                 <br>
-                                <span><strong>Observaciones: </strong><?php echo $noAp[1]; ?></span>
+                                <br>
+                                <span><strong>Observaciones: </strong><?php echo $noAp[1]; ?></span>                                
+                                <br>
+                                <br>
+                                <br>
                             </li>
                             <?php
                         }
                         ?>
                     </ul>
-                    <br>                      
-                    <br>
                     <?php
                 }
                 ?>

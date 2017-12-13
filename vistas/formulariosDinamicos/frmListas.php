@@ -250,7 +250,7 @@ if (count($listasEspecificas) == 0) {
                                                         ?>
                                                         <tr class="cardview_checklist">
                                                             <td style="width: 50%;">
-                                                                <p id="<?php echo subDes . $nOpcionesReq; ?>" style="text-align: justify; margin-top: -4px;">
+                                                                <p id="<?php echo subDes . $nOpcionesSub; ?>" style="text-align: justify; margin-top: -4px;">
                                                                     <?php echo $filas[1]; ?>
                                                                 </p>
                                                             </td>
