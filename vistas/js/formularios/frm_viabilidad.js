@@ -202,8 +202,6 @@ function guardarMetas() {
 
     }
 
-    alert("asd");
-
     if (parseInt(contItemMeta.value) > parseInt(contActs)) {
         console.log("contItemMeta.value: " + contItemMeta.value + ", contActs: " + contActs);
         $("#d_confirmacion").dialog("open");
