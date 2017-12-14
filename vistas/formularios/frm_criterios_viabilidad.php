@@ -53,6 +53,8 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         </ul>
                     </div>
                     <div class="modal-footer">
+                        <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
+                        <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
                         <a id="modalc1" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(1);">Guardar y Enviar</a>
                         <a id="modalc2" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(2);">Guardar Progreso</a>
                     </div>
