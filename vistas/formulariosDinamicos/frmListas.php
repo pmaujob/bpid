@@ -269,7 +269,7 @@ if (count($listasEspecificas) == 0) {
                                                                 <div class="file-field input-field">
                                                                     <div class="btn">
                                                                         <span>Archivo</span>
-                                                                        <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" data-listGFatherId="RTITLISTAE" data-listFatherId="<?php echo rTitLista . $filae[0]; ?>" data-listId="<?php echo sTitLista . $filae2[0]; ?>" data-listName="<?php echo $filae2[1]; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
+                                                                        <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" data-listGFatherId="RTITLISTAE" data-listFatherId="<?php echo rTitLista . $filae[0]; ?>" data-listId="<?php echo sTitLista . $filae2[0]; ?>" data-listName="<?php echo $filae2[1]; ?>" data-listFatherName="<?php echo $filae[1]; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
                                                                     </div>
                                                                     <div class="file-path-wrapper">
                                                                         <input class="file-path validate" type="text">

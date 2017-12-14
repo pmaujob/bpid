@@ -244,7 +244,9 @@ function validar(enviarInfo) {
             subRow[1] = document.getElementById('SUB' + i).value;//opcion seleccionada
             subRow[2] = document.getElementById('SUBOBS' + i).value.trim();//observacion
             subRow[3] = document.getElementById('SUBDES' + i).innerHTML.trim();//descripción
-            subRow[4] = subArchivo.getAttribute('data-listName');//nombre Lista            
+            subRow[4] = subArchivo.getAttribute('data-listName');//nombre subLista            
+            subRow[5] = subArchivo.getAttribute('data-listFatherName');//nombre Lista Padre
+            
             subData.push(subRow);
         }
         
