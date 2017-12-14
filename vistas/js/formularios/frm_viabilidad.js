@@ -81,7 +81,7 @@ function onLoadBody() {
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
     if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
@@ -374,7 +374,7 @@ function ejecutar(posicion, op)
 
         }
 //        $('#frm_unidad_' + posicion).parent().find("label").addClass("active");
-//        $('#frm_unidad_' + posicion).focus();
+                $('#frm_unidad_' + posicion).focus();
         
         return;
 
