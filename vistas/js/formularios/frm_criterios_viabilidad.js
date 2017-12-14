@@ -2,7 +2,7 @@ var idRad;
 
 function onLoadBody() {
 
-    buscarProyectos(4, null);
+    buscarProyectos(-4, null);
 
     $(document).ready(function () {
 
@@ -133,7 +133,12 @@ function mas(cod, bpid, numProyecto) {
 
 function registrarCriterios(op) {
 
-    bloquear_pantalla();
+    disBotones(false);
+
+    var waitGuardarProgreso = document.getElementById('waitGuardarProgreso');
+    waitGuardarProgreso.style.display = "";
+
+    //bloquear_pantalla();
 
     var cont = document.getElementById('cont').value;
     var contDimensiones = document.getElementById('contDimensiones').value;
@@ -176,11 +181,16 @@ function registrarCriterios(op) {
                 buttons: {
                     "Cerrar": function () {
                         $(this).dialog("close");
+                        quitarEtiqueta();
+                        disBotones(true);
+                        waitGuardarProgreso.style.display = "none";
                         $('#modal1').modal('open');
                     }
                 }
             });
-            quitar_pantalla();
+            //quitar_pantalla();
+            quitarEtiqueta();
+            disBotones(true);
             return;
         }
 
@@ -215,30 +225,36 @@ function registrarCriterios(op) {
         success: function (respuesta) {
 
             if (respuesta.trim() == "1") {
-                document.getElementById('d_error').innerHTML = "Los criterios de viabilidad se han registrado con exito.";
-                $('#d_error').dialog("open");
-                $("#d_error").dialog({
-                    autoOpen: false,
-                    modal: true,
-                    buttons: {
-                        "Cerrar": function () {
-                            $(this).dialog("close");
-                            location.href = "../../vistas/formularios/frm_finalizar_viabilidad.php";
+
+                msjInforme("Criterios guardados exitosamente.", false);
+
+                if (op != 2) {
+                    document.getElementById('d_error').innerHTML = "Los criterios de viabilidad se han registrado con exito.";
+                    $('#d_error').dialog("open");
+                    $("#d_error").dialog({
+                        autoOpen: false,
+                        modal: true,
+                        buttons: {
+                            "Cerrar": function () {
+                                $(this).dialog("close");
+                                location.href = "../../vistas/formularios/frm_finalizar_viabilidad.php";
+                            }
                         }
-                    }
-                });
-                $('#modal1').modal('close');
+                    });
+                    $('#modal1').modal('close');
+                }
             } else {
-                document.getElementById('d_error').innerHTML = "Los criterios de viabilidad no han podido ser registrados, por favor intentelo de nuevo mas tarde.";
-                $('#d_error').dialog("open");
+                msjInforme("Error al guardar el proceso, intentelo de nuevo mas tarde.", true);
             }
 
-            disBotones(false);
-            quitar_pantalla();
+            waitGuardarProgreso.style.display = "none";
+            //quitar_pantalla();
+
+            disBotones(true);
 
         }, error: function () {
             alert("Error inesperado");
-            disBotones(false);
+            disBotones(true);
         }
     });
 
@@ -302,4 +318,20 @@ function cerrarModal() {
 function disBotones(disabled) {
     document.getElementById("modalc1").style.pointerEvents = disabled ? "" : "none";
     document.getElementById("modalc2").style.pointerEvents = disabled ? "" : "none";
+}
+
+function msjInforme(msj, error) {
+
+    var msjInfo = document.getElementById('msjInfo');
+
+    msjInfo.innerHTML = msj;
+    msjInfo.style.color = error ? "#E53935" : "#000000";
+    msjInfo.style.display = "";
+
+    setTimeout(quitarEtiqueta, 3000);
+
+}
+
+function quitarEtiqueta() {
+    document.getElementById('msjInfo').style.display = "none";
 }
