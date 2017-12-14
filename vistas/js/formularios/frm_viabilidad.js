@@ -373,8 +373,9 @@ function ejecutar(posicion, op)
             document.getElementById("PRODIV" + d).click();
 
         }
-
-        document.getElementById('frm_unidad_' + posicion).focus();
+//        $('#frm_unidad_' + posicion).parent().find("label").addClass("active");
+//        $('#frm_unidad_' + posicion).focus();
+        
         return;
 
     } else if (op == 1) {
