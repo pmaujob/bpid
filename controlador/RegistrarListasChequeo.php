@@ -71,7 +71,7 @@ class RegistrarListasChequeo {
                 $subArray[] = array("idSub" => $fila[0], "subOp" => $fila[1], "subObs" => $fila[2]);
 
                 if ($fila[1] == "NO") {
-                    $noApSub [] = array($fila[3], $temporal, $fila[4]);
+                    $noApSub [] = array($fila[3], $temporal, $fila[4], $fila[5]);
                 }
             }
 
@@ -100,21 +100,22 @@ class RegistrarListasChequeo {
                 <br>
                 <?php
                 if (count($noApReq) > 0) {
+                    $nomList = $noApReq[0][2];
                     ?>
                     <h3>Requisitos:</h3>
                     <br>                   
                     <ul>
+                        <h3><?php echo "* " . $nomList . ":"; ?></h3>
                         <?php
-                        $nomList = $noApReq[0][2];
-                        echo $nomList;
                         for ($i = 0; $i < count($noApReq); $i++) {
                             $noAp = $noApReq[$i];
 
                             if ($nomList != $noAp[2]) {
                                 ?>
                             </ul>
-                            <?php $nomList == $noAp[2]; ?>
+                            <?php $nomList = $noAp[2]; ?>
                             <ul>
+                                <h3><?php echo "* " . $nomList . ":"; ?></h3>
                                 <?php
                             }
                             ?>
@@ -122,7 +123,7 @@ class RegistrarListasChequeo {
                                 <span><?php echo $noAp[0]; ?></span>
                                 <br>
                                 <br>
-                                <span><strong>Observaciones: </strong><?php echo $noAp[1]; ?></span>
+                                <span>* Observaciones: <?php echo $noAp[1]; ?></span>
                                 <br>
                                 <br>
                                 <br>
@@ -136,26 +137,55 @@ class RegistrarListasChequeo {
                 ?>
                 <?php
                 if (count($noApSub) > 0) {
+                    $nomList = $noApSub[0][3];
+                    $nomSubList = $noApSub[0][2];
                     ?>
                     <h3>Subrequisitos:</h3>
                     <br>                    
                     <ul>
-                        <?php
-                        for ($i = 0; $i < count($noApSub); $i++) {
-                            $noAp = $noApSub[$i];
-                            ?>
-                            <li>
-                                <span><?php echo $noAp[0]; ?></span>
-                                <br>
-                                <br>
-                                <span><strong>Observaciones: </strong><?php echo $noAp[1]; ?></span>                                
-                                <br>
-                                <br>
-                                <br>
-                            </li>
-                            <?php
-                        }
-                        ?>
+                        <h3><?php echo "* " . $nomList . ":"; ?></h3>
+                        <li>
+                            <ul>
+                                <h4><?php echo $nomSubList; ?></h4>
+                                <?php
+                                for ($i = 0; $i < count($noApSub); $i++) {
+                                    $noAp = $noApSub[$i];
+
+                                    if ($nomSubList != $noAp[2]) {
+                                        ?>
+                                    </ul>
+                                </li>
+                                <?php
+                                if ($nomList != $noAp[3]) {
+                                    ?>
+                                </ul>
+                                <?php $nomList = $noAp[3]; ?>
+                                <ul>
+                                    <h3><?php echo "* " . $nomList . ":"; ?></h3>
+                                    <?php
+                                }
+                                $nomSubList = $noAp[2];
+                                ?>
+                                <li>
+                                    <ul> 
+                                        <h4><?php echo $nomSubList; ?></h4>
+                                        <?php
+                                    }
+                                    ?> 
+                                    <li>
+                                        <span><?php echo $noAp[0]; ?></span>
+                                        <br>
+                                        <br>
+                                        <span>* Observaciones: <?php echo $noAp[1]; ?></span>                                
+                                        <br>
+                                        <br>
+                                        <br>
+                                    </li>
+                                    <?php
+                                }
+                                ?>                            
+                            </ul>
+                        </li>
                     </ul>
                     <?php
                 }
