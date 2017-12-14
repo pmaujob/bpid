@@ -56,7 +56,7 @@ class RegistrarListasChequeo {
             $reqArray[] = array("idReq" => $fila[0], "reqOp" => $fila[1], "reqObs" => $temporal);
 
             if ($fila[1] == "NO") {
-                $noApReq[] = array($fila[3], $temporal);
+                $noApReq[] = array($fila[3], $temporal, $fila[4]);
             }
         }
         $reqJson = CambiarFormatos::convertirAJsonItems($reqArray);
@@ -71,7 +71,7 @@ class RegistrarListasChequeo {
                 $subArray[] = array("idSub" => $fila[0], "subOp" => $fila[1], "subObs" => $fila[2]);
 
                 if ($fila[1] == "NO") {
-                    $noApSub [] = array($fila[3], $temporal);
+                    $noApSub [] = array($fila[3], $temporal, $fila[4]);
                 }
             }
 
@@ -105,8 +105,18 @@ class RegistrarListasChequeo {
                     <br>                   
                     <ul>
                         <?php
+                        $nomList = $noApReq[0][2];
+                        echo $nomList;
                         for ($i = 0; $i < count($noApReq); $i++) {
                             $noAp = $noApReq[$i];
+
+                            if ($nomList != $noAp[2]) {
+                                ?>
+                            </ul>
+                            <?php $nomList == $noAp[2]; ?>
+                            <ul>
+                                <?php
+                            }
                             ?>
                             <li>
                                 <span><?php echo $noAp[0]; ?></span>
