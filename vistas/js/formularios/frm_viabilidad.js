@@ -182,13 +182,13 @@ function guardarMetas() {
         var unidadValor = document.getElementById('frm_unidad_' + i);
         var aux = i;
         if (unidadValor.value == "") {
-            
-            
+
+
             document.getElementById('d_error').innerHTML = '<p>Debe digitar una unidad de medida.</p>';
-                    
+
             $("#d_error").dialog("open");
-            
-             $("#d_error").dialog({
+
+            $("#d_error").dialog({
                 autoOpen: false,
                 modal: true,
                 buttons: {
@@ -196,7 +196,7 @@ function guardarMetas() {
                         $(this).dialog("close");
                         ejecutar(aux, 0);
 
-                        
+
 
                     }
                 }
@@ -351,12 +351,8 @@ function infoproductos(id)
         if (elemento == idvidprod[i][0])
         {
             if (idvidprod[i][1] == false) {
-                Materialize.toast('DIGITE UNIDAD DE MEDIDA', 4000);
-                if (toasts.length > 1)
-                {
-                    toasts[1].style.background = "#FFCA04";
-                    toasts[1].style.fontWeight = "400";
-                }
+                Materialize.toast('DIGITE UNIDAD DE MEDIDA', 4000,"yellow-toast");
+               
             }
             idvidprod[i][1] = !idvidprod[i][1];
         }
@@ -376,12 +372,12 @@ function ejecutar(posicion, op)
             document.getElementById("PRODIV" + d).click();
 
         }
-//        $('#frm_unidad_' + posicion).parent().find("label").addClass("active");
+
         $('#frm_unidad_' + posicion).focus();
-        
-       // document.getElementById('frm_unidad_'+ posicion).value="hola";
-        document.getElementById('frm_unidad_'+ posicion).focus();
-       // return;
+
+
+        document.getElementById('frm_unidad_' + posicion).focus();
+        return;
 
     } else if (op == 1) {
         document.getElementById("PRODIV" + d).click();
