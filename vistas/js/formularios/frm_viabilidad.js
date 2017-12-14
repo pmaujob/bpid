@@ -81,7 +81,7 @@ function onLoadBody() {
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
     if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
@@ -195,13 +195,10 @@ function guardarMetas() {
                     "Cerrar": function () {
                         $(this).dialog("close");
                         ejecutar(aux, 0);
-
-
-
                     }
                 }
             });
-            return //document.getElementById('frm_unidad_1').focus();
+            return;
         }
 
     }
@@ -214,7 +211,7 @@ function guardarMetas() {
 
     for (var i = 1; i <= contActs; i++) {
         var select = document.getElementById('METASELECT' + i);
-        var collapsible = document.getElementById('frm_collapsible_' + i).value;
+        var aux = i;
 
         if (select.value == 0) {
 
@@ -225,8 +222,8 @@ function guardarMetas() {
                 modal: true,
                 buttons: {
                     "Cerrar": function () {
-                        ejecutar(collapsible, 1);
                         $(this).dialog("close");
+                        ejecutar(aux, 1);
 
                     }
                 }
@@ -242,6 +239,7 @@ function guardarMetas() {
     for (var i = 1; i < options.length; i++) {
         var found = false;
         var option = options[i];
+        var aux = i;
 
         for (var j = 1; j <= contActs; j++) {
             var select = document.getElementById('METASELECT' + (j));
@@ -260,8 +258,8 @@ function guardarMetas() {
                 modal: true,
                 buttons: {
                     "Cerrar": function () {
-                        ejecutar(collapsible, 1);
                         $(this).dialog("close");
+                        ejecutar(aux, 1);
                     }
                 }
             });
@@ -351,36 +349,34 @@ function infoproductos(id)
         if (elemento == idvidprod[i][0])
         {
             if (idvidprod[i][1] == false) {
-                Materialize.toast('DIGITE UNIDAD DE MEDIDA', 4000,"yellow-toast");
-               
+                Materialize.toast('DIGITE UNIDAD DE MEDIDA', 4000, "yellow-toast");
+
             }
             idvidprod[i][1] = !idvidprod[i][1];
         }
     }
 
 }
-function ejecutar(posicion, op)
-{
+function ejecutar(posicion, op) {
+
+    var collapos = document.getElementById('frm_collapsible_' + posicion);
+    var d = collapos.value;
+
+    if (!$("#PRODIV" + d).hasClass("active")) {
+        document.getElementById("PRODIV" + d).click();
+    }
 
     if (op == 0) {
 
-        var collapos = document.getElementById('frm_collapsible_' + posicion);
-        var d = collapos.value;
-
-        console.log("frm_unidad_" + collapos.value);
-        if (!$("#PRODIV" + d).hasClass("active")) {
-            document.getElementById("PRODIV" + d).click();
-
-        }
-
         $('#frm_unidad_' + posicion).focus();
-
-
         document.getElementById('frm_unidad_' + posicion).focus();
+
         return;
 
     } else if (op == 1) {
-        document.getElementById("PRODIV" + d).click();
+
+        $('#METASELECT' + posicion).focus();
+        document.getElementById("METASELECT" + d).click();
 
     }
 
