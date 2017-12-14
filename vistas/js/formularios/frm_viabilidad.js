@@ -182,22 +182,26 @@ function guardarMetas() {
         var unidadValor = document.getElementById('frm_unidad_' + i);
         var aux = i;
         if (unidadValor.value == "") {
-
+            
+            
             document.getElementById('d_error').innerHTML = '<p>Debe digitar una unidad de medida.</p>';
+                    
             $("#d_error").dialog("open");
-            $("#d_error").dialog({
+            
+             $("#d_error").dialog({
                 autoOpen: false,
                 modal: true,
                 buttons: {
                     "Cerrar": function () {
+                        $(this).dialog("close");
                         ejecutar(aux, 0);
 
-                        $(this).dialog("close");
+                        
 
                     }
                 }
             });
-            return;
+            return //document.getElementById('frm_unidad_1').focus();
         }
 
     }
@@ -365,21 +369,22 @@ function ejecutar(posicion, op)
     if (op == 0) {
 
         var collapos = document.getElementById('frm_collapsible_' + posicion);
-        var lugar = collapos.value - 1;
-        var d=collapos.value;
-       
-          console.log("frm_unidad_" + collapos.value);
-        if (!$("#PRODIV" +d).hasClass("active")) {
+        var d = collapos.value;
+
+        console.log("frm_unidad_" + collapos.value);
+        if (!$("#PRODIV" + d).hasClass("active")) {
             document.getElementById("PRODIV" + d).click();
 
         }
 //        $('#frm_unidad_' + posicion).parent().find("label").addClass("active");
-//        $('#frm_unidad_' + posicion).focus();
+        $('#frm_unidad_' + posicion).focus();
         
-        return;
+       // document.getElementById('frm_unidad_'+ posicion).value="hola";
+        document.getElementById('frm_unidad_'+ posicion).focus();
+       // return;
 
     } else if (op == 1) {
-       document.getElementById("PRODIV" + d).click();
+        document.getElementById("PRODIV" + d).click();
 
     }
 

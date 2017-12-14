@@ -287,8 +287,8 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                                 <label for="first_name" style="text-align: center; color: #000"><strong>Costo</strong></label>
                                             </th>
                                             <th style=" text-align: center" >
-                                                <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text" style="text-align: center" >
-                                                <label  for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medid</strong></label>
+                                                <input placeholder="Unidad de Medida" name="frm_unidad_<?php echo $acum ?>" id="frm_unidad_<?php echo $acum ?>" type="text" style="text-align: center" >
+                                                <label  for="frm_unidad_<?php echo $acum ?>" style="text-align: center; color: #000"><strong>Unidad de Medid</strong></label>
                                                 <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
                                                 <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
 
