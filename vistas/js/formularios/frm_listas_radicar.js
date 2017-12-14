@@ -194,6 +194,8 @@ function validar(enviarInfo) {
             reqRow[1] = document.getElementById('REQ' + i).value;//opción seleccionada        
             reqRow[2] = document.getElementById('REQOBS' + i).value.trim();//observación    
             reqRow[3] = document.getElementById('REQDES' + i).innerHTML.trim();//descripción
+            reqRow[4] = reqArchivo.getAttribute('data-listName');//nombre Lista
+            
             reqData.push(reqRow);
         }
 
@@ -242,8 +244,10 @@ function validar(enviarInfo) {
             subRow[1] = document.getElementById('SUB' + i).value;//opcion seleccionada
             subRow[2] = document.getElementById('SUBOBS' + i).value.trim();//observacion
             subRow[3] = document.getElementById('SUBDES' + i).innerHTML.trim();//descripción
+            subRow[4] = subArchivo.getAttribute('data-listName');//nombre Lista            
             subData.push(subRow);
         }
+        
     }
 
     totalArchivosReq.value = archivosReq;

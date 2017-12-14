@@ -1,7 +1,7 @@
 var idRad;
 
 function onLoadBody() {
-    
+
     buscarProyectos(4, null);
 
     $(document).ready(function () {
@@ -120,6 +120,7 @@ function mas(cod, bpid, numProyecto) {
             document.getElementById('semaforo').style.right = "0";
             document.getElementById('modalc1').style.display = "block";
             document.getElementById('modalc2').style.display = "block";
+            document.getElementById('bonbilla').style.backgroundColor = "white";
 
         }, error: function () {
             alert("Error inesperado");
