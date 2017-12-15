@@ -209,30 +209,34 @@ function guardarMetas() {
         return;
     }
 
-    for (var i = 1; i <= contActs; i++) {
-        var select = document.getElementById('METASELECT' + i);
-        var aux = i;
+    for (var i = 1; i <= acum; i++) {
 
-        if (select.value == 0) {
+        for (var j = 1; j <= contActs; j++) {
+            var select = document.getElementById('METASELECT' + j);
+            var aux = i;
 
-            document.getElementById('d_errormetas').innerHTML = '<p>Debe seleccionar un item en esta meta.</p>';
-            $("#d_errormetas").dialog("open");
-            $("#d_errormetas").dialog({
-                autoOpen: false,
-                modal: true,
-                buttons: {
-                    "Cerrar": function () {
-                        $(this).dialog("close");
-                        ejecutar(aux, 1);
+            if (select.value == 0) {
 
+                document.getElementById('d_errormetas').innerHTML = '<p>Debe seleccionar un item en esta meta.</p>';
+                $("#d_errormetas").dialog("open");
+                $("#d_errormetas").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    buttons: {
+                        "Cerrar": function () {
+                            $(this).dialog("close");
+                            ejecutar(aux, 1);
+                            select.focus();
+
+                        }
                     }
-                }
-            });
-            select.focus();
+                });
 
-            return;
+                return;
 
+            }
         }
+
     }
 
     var options = select.getElementsByTagName('option');
@@ -370,13 +374,6 @@ function ejecutar(posicion, op) {
 
         $('#frm_unidad_' + posicion).focus();
         document.getElementById('frm_unidad_' + posicion).focus();
-
-        return;
-
-    } else if (op == 1) {
-
-        $('#METASELECT' + posicion).focus();
-        document.getElementById("METASELECT" + d).click();
 
     }
 
