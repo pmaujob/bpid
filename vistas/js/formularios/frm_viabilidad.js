@@ -78,6 +78,7 @@ function onLoadBody() {
     buscarProyectos(3, null);
 
 }
+
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
