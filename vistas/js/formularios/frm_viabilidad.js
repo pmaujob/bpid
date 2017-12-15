@@ -365,6 +365,7 @@ function ejecutar(posicion, op) {
 
     var collapos = document.getElementById('frm_collapsible_' + posicion);
     var d = collapos.value;
+    console.log(d);
 
     if (!$("#PRODIV" + d).hasClass("active")) {
         document.getElementById("PRODIV" + d).click();
