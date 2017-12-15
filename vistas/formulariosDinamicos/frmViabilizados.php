@@ -287,8 +287,8 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                                 <label for="first_name" style="text-align: center; color: #000"><strong>Costo</strong></label>
                                             </th>
                                             <th style=" text-align: center" >
-                                                <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text" style="text-align: center" >
-                                                <label  for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medid</strong></label>
+                                                <input placeholder="Unidad de Medida" name="frm_unidad_<?php echo $acum ?>" id="frm_unidad_<?php echo $acum ?>" type="text" style="text-align: center" >
+                                                <label  for="frm_unidad_<?php echo $acum ?>" style="text-align: center; color: #000"><strong>Unidad de Medid</strong></label>
                                                 <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
                                                 <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
 
@@ -316,7 +316,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                         </td>
                                         <td style="text-align: center;" style="width: 30%;"><?php echo "$" . number_format($act[7]); ?></td>
                                         <td style="width: 30%;">    
-                                            <input  type="hidden" id="frm_collapsible_<?php echo $contActs ?>"  value="<?php echo $acum ?>">
+                                            <input  type="hidden" id="frm_collapsible_<?php echo $contActs ?>" value="<?php echo $acum ?>">
                                             <select id="<?php echo metaSelect . $contActs; ?>" class="browser-default">
                                                 <option value="0" selected disabled>Seleccione una Meta</option>                                    
                                                 <?php
