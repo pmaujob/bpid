@@ -316,7 +316,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                         </td>
                                         <td style="text-align: center;" style="width: 30%;"><?php echo "$" . number_format($act[7]); ?></td>
                                         <td style="width: 30%;">    
-                                            <input  type="hidden" id="frm_collapsible_<?php echo $contActs ?>"  value="<?php echo $acum ?>">
+                                            <input  type="hidden" id="frm_collapsible_<?php echo $contActs ?>" value="<?php echo $acum ?>">
                                             <select id="<?php echo metaSelect . $contActs; ?>" class="browser-default">
                                                 <option value="0" selected disabled>Seleccione una Meta</option>                                    
                                                 <?php

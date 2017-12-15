@@ -181,11 +181,13 @@ function guardarMetas() {
 
         var unidadValor = document.getElementById('frm_unidad_' + i);
         var aux = i;
+        
         if (unidadValor.value == "") {
 
-
             document.getElementById('d_error').innerHTML = '<p>Debe digitar una unidad de medida.</p>';
-
+            
+            console.log("acum: "+aux);
+            
             $("#d_error").dialog("open");
 
             $("#d_error").dialog({
@@ -209,32 +211,28 @@ function guardarMetas() {
         return;
     }
 
-    for (var i = 1; i <= acum; i++) {
+    for (var j = 1; j <= contActs; j++) {
+        var select = document.getElementById('METASELECT' + j);        
+        var aux = document.getElementById("frm_collapsible_" + j).value;
+        
+        if (select.value == 0) {
 
-        for (var j = 1; j <= contActs; j++) {
-            var select = document.getElementById('METASELECT' + j);
-            var aux = i;
-
-            if (select.value == 0) {
-
-                document.getElementById('d_errormetas').innerHTML = '<p>Debe seleccionar un item en esta meta.</p>';
-                $("#d_errormetas").dialog("open");
-                $("#d_errormetas").dialog({
-                    autoOpen: false,
-                    modal: true,
-                    buttons: {
-                        "Cerrar": function () {
-                            $(this).dialog("close");
-                            ejecutar(aux, 1);
-                            select.focus();
-
-                        }
+            document.getElementById('d_errormetas').innerHTML = '<p>Debe seleccionar un item en esta meta.</p>';
+            $("#d_errormetas").dialog("open");
+            $("#d_errormetas").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    "Cerrar": function () {
+                        $(this).dialog("close");
+                        ejecutar(aux, 1);
+                        select.focus();
                     }
-                });
+                }
+            });
 
-                return;
+            return;
 
-            }
         }
 
     }
@@ -263,7 +261,6 @@ function guardarMetas() {
                 buttons: {
                     "Cerrar": function () {
                         $(this).dialog("close");
-                        ejecutar(aux, 1);
                     }
                 }
             });
@@ -330,8 +327,7 @@ function guardarMetas() {
 
 
 }
-function verarchivoMga(opcion)
-{
+function verarchivoMga(opcion) {
 
     fila = document.getElementById("fila_mga");
     if (opcion == 1) {
@@ -344,11 +340,7 @@ function verarchivoMga(opcion)
 function infoproductos(id)
 {
     var elemento = id.id;
-    var acum = document.getElementById('frmacum').value;
-    var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer
-
-    for (i = 0; i < idvidprod.length; i++)
-    {
+    for (i = 0; i < idvidprod.length; i++) {
 
         if (elemento == idvidprod[i][0])
         {
@@ -363,19 +355,12 @@ function infoproductos(id)
 }
 function ejecutar(posicion, op) {
 
-    var collapos = document.getElementById('frm_collapsible_' + posicion);
-    var d = collapos.value;
-    console.log(d);
-
-    if (!$("#PRODIV" + d).hasClass("active")) {
-        document.getElementById("PRODIV" + d).click();
+    if (!$("#PRODIV" + posicion).hasClass("active")) {
+        document.getElementById("PRODIV" + posicion).click();
     }
 
     if (op == 0) {
-
-        $('#frm_unidad_' + posicion).focus();
         document.getElementById('frm_unidad_' + posicion).focus();
-
     }
 
 }
