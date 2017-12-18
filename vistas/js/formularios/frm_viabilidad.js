@@ -127,6 +127,7 @@ function mas(idRad, bpid, numProyecto) {
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
             $('.collapsible').collapsible();
+             $('.modal').modal();
             $("#d_errormetas").dialog({
                 autoOpen: false,
                 modal: true,
@@ -327,13 +328,22 @@ function guardarMetas() {
 
 
 }
-function verarchivoMga(opcion) {
+//function verarchivoMga(opcion) {
+//
+//    fila = document.getElementById("fila_mga");
+//    if (opcion == 1) {
+//        fila.style.display = 'none';
+//    } else {
+//        fila.style.display = '';
+//    }
+//}
 
-    fila = document.getElementById("fila_mga");
+function verarchivoMga()
+{
     if (opcion == 1) {
-        fila.style.display = 'none';
+       $('#ventanamga').modal('open');
     } else {
-        fila.style.display = '';
+        $('#ventanamga').modal('close');
     }
 }
 
