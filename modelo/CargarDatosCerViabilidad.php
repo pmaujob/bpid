@@ -35,6 +35,8 @@ class CargarDatosCerViabilidad {
                 . "WHERE r.cod_radicacion = $idRad "
                 . "GROUP BY nb.numero_completo,upper(r.nombre_proyecto),r.entidad_proponente,r.entidad_ejecutante,e.descripcion,r.problema,r.objetivo,r.cod_bpid,r.resumen,r.poblacion,r.localizacion,r.cod_radicacion,r.fecha_viabilidad;";
 
+        
+        
         return self::getDatos($consulta);
     }
 

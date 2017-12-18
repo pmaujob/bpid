@@ -78,6 +78,7 @@ function onLoadBody() {
     buscarProyectos(3, null);
 
 }
+
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
@@ -127,6 +128,7 @@ function mas(idRad, bpid, numProyecto) {
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
             $('.collapsible').collapsible();
+             $('.modal').modal();
             $("#d_errormetas").dialog({
                 autoOpen: false,
                 modal: true,
@@ -327,14 +329,23 @@ function guardarMetas() {
 
 
 }
-function verarchivoMga(opcion) {
+//function verarchivoMga(opcion) {
+//
+//    fila = document.getElementById("fila_mga");
+//    if (opcion == 1) {
+//        fila.style.display = 'none';
+//    } else {
+//        fila.style.display = '';
+//    }
+//}
 
-    fila = document.getElementById("fila_mga");
-    if (opcion == 1) {
-        fila.style.display = 'none';
-    } else {
-        fila.style.display = '';
-    }
+function verarchivoMga()
+{
+//    if (opcion == 1) {
+//       $('#ventanamga').modal('open');
+//    } else {
+//        $('#ventanamga').modal('close');
+//    }
 }
 
 function infoproductos(id)

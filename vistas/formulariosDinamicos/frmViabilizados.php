@@ -50,7 +50,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                             <label for="test1">SI</label>
                         </p>
                         <p style="margin-left: 44px;">
-                            <input name="group1" type="radio" id="test2" value="1" onclick="verarchivoMga(this.value)"/>
+                            <input name="group1" type="radio" id="test2" value="1" onclick="verarchivoMga(this.value)" checked/>
                             <label for="test2">NO</label>
                         </p>
                     <td>
@@ -372,3 +372,31 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     </thead>  
     <tbody>
 </table>
+
+ <!-- Modal  -->
+
+                        <div id="ventanamga" class="modal" style=" max-width: 650px; max-height: 750px; height:250px">
+                          
+                            <div class="modal-content">
+                                <h5>TIPO DE PROYECTO A RADICAR</h5>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <select id="frm_tipo" name="frm_tipo" onchange="validarProyectoPadre(this.value)">
+                                            <option value="1">PROYECTO</option>
+                                            <option value="2"> PROGRAMA DE INVERSION</option>
+                                            <option value="3"> PROYECTO PERTENECE A  PROGRAMA DE INVERSION</option>
+                                        </select>
+                                        <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
+                                        <div id="d_frm_poai"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn waves-effect waves-light" onclick="validarTipo()">Aceptar
+                                    <i class="material-icons right">send</i> 
+                                    
+                                    <button class="btn waves-effect waves-light" onclick="cerrarModal()" style="margin-right: 10px;">Cerrar
+                                    <i class="material-icons right">highlight_off</i> 
+                            </div>
+                        </div>   
