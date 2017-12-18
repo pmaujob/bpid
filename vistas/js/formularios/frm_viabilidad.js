@@ -341,11 +341,11 @@ function guardarMetas() {
 
 function verarchivoMga()
 {
-    if (opcion == 1) {
-       $('#ventanamga').modal('open');
-    } else {
-        $('#ventanamga').modal('close');
-    }
+//    if (opcion == 1) {
+//       $('#ventanamga').modal('open');
+//    } else {
+//        $('#ventanamga').modal('close');
+//    }
 }
 
 function infoproductos(id)
