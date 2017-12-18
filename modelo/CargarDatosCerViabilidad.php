@@ -96,7 +96,6 @@ class CargarDatosCerViabilidad {
                 . "apellidos,"//2
                 . "cargo "//3
                 . "FROM radicacion_responsables WHERE cod_radicacion = $codRadicacion;";
-
         return self::getDatos($consulta);
     }
 
