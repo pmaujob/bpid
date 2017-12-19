@@ -48,14 +48,16 @@ $(document).ready(function () {
  */
 function validar() {
     var nombre_archivo = document.getElementById('frm_archivo').value;
+    var tipo= document.getElementById('frm_tipo').value;
     if (nombre_archivo == "")
     {
         document.getElementById('d_error').innerHTML = '<p>POR FAVOR SELECCIONE EL ARCHIVO XML<p>';
         $("#d_error").dialog("open");
         
-        return false;
+        return ;
         nombre_archivo.focus();
-    } else
+    } 
+    if(tipo==3)
     {
         //codigo para llenar combo de programa
 
@@ -65,6 +67,7 @@ function validar() {
             async: true,
             data: {op: 3},
             success: function (datos) {
+                alert(datos);
                 $("#frm_programa_inversion").empty();
                 var content = JSON.parse(datos);
                 for (var i = 0; i < content.length; i++) {
@@ -79,9 +82,10 @@ function validar() {
             }
         });
         //abrir ventana modal
-        $('#modal1').modal('open');
+        
 
     }
+    $('#modal1').modal('open');
 }
 
 //FUNCION PARA CARGAR LOS DATOS BASICOS DEL ARCHIVO XML DE FORMA TEMPORAL
@@ -283,7 +287,7 @@ function almacenar()
         data: {value: value, op: 1},
         success: function (respuesta) {
 
-            // alert(respuesta);
+             alert(respuesta);
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
@@ -347,14 +351,9 @@ function buscarUsuario(tipo)
             {
                 if (respuesta.trim() === "NoData") {
                     waitGuardarProgreso.style.display = 'none';
-                      var toasts = document.getElementById('toast-container').getElementsByTagName("div");
-                    Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000);
-                    toasts.style.background = "#008643";
-                    toasts.style.fontWeight = "400";
-                  //traer todos los toasts
-                    //Cambiar el estilo de uno de todos los toasts
-                    toasts.style.background = "#008643";
-                    toasts.style.fontWeight = "400";
+                     var toasts = document.getElementById('toast-container').getElementsByTagName("div");
+                    Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000,"Weight-toast");
+                    
                     document.getElementById('frm_id_responsable').focus();
                     document.getElementById('frm_nom_responsable').value = '';
                     document.getElementById('frm_cargo_responsable').value = '';
@@ -477,8 +476,8 @@ function validarProyectoPadre(a)
                
                 if(parseInt(datos)==0){
                 $('#ventanatipo').modal('close');
-                document.getElementById('d_ingreso').innerHTML = '<p>NO EXISTEN PROGRAMAS DE INVERSION PARA ESTE PROYECTO</p>';
-                $("#d_ingreso").dialog("open");   
+                document.getElementById('d_error').innerHTML = '<p>NO EXISTEN PROGRAMAS DE INVERSION PARA ESTE PROYECTO</p>';
+                $("#d_error").dialog("open");   
                 }
                 
             }

@@ -72,7 +72,8 @@ class ControladorRadicar {
         $this->numero_proyecto = $valores[0];
         $this->nombre_proyecto = $valores[1];
         $this->sector = $valores[2];
-        $this->localizacion = $valores[3];
+        //$this->localizacion = $valores[3];
+        $this->localizacion =str_replace("'","''",$valores[3]) ;
         $this->valor = $valores[4];
         $this->eje = $valores[5];
         $this->programa = $valores[6];
@@ -159,11 +160,12 @@ if (isset($_POST['op']) && !empty($_POST['op'])) {
     } else if ($_POST['op'] == 3) {
         //consultar Datos Proyecto
         $radicar = new ControladorRadicar();
-          echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'),0);
+         echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'),0);
     }
     else if ($_POST['op'] == 4) {
          $radicar = new ControladorRadicar();
-          echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'),1);
+        
+         echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'),1);
     }
 }
  else {

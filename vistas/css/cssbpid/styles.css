@@ -202,4 +202,9 @@ select:focus {
 }
 .green-toast{
     background-color:#008643 ;
+    
+}
+.Weight-toast{
+    background-color:#008643 ;
+    font-weight: 400;
 }
