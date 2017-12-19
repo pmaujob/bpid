@@ -4,7 +4,7 @@ require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
 const idFormulario = 14;
-const idEtapa = -3;
+const idEtapa = -7;
 $sess = new SessionVars();
 $sess->init();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
