@@ -105,7 +105,6 @@ function buscarProyectos(op, event) {
 
             document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
 
-
         },
         error: function () {
             alert("Error inesperado");
