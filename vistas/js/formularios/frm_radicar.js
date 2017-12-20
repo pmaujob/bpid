@@ -106,7 +106,7 @@ function archivo_xml()
     var extension = (nombre_archivo.substring(nombre_archivo.lastIndexOf("."))).toLowerCase();
 
     if (extension !== '.xml') {
-        document.getElementById('d_error').innerHTML = '<p>EL ARCHIVO DEBE TENER EXTENCION XML<p>';
+        document.getElementById('d_error').innerHTML = '<p>EL ARCHIVO DEBE TENER FORMATO XML<p>';
         $("#d_error").dialog("open");
         //alert("DEBE SELECCIONAR UN ARCHIVO XML ANTES");
         return false;
