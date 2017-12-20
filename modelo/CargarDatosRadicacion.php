@@ -16,6 +16,7 @@ class CargarDatosRadicacion {
         $con->cerrarConexion();
 
         return $res;
+         
     }
 
     public static function getDatosRequisitos($idRad, $codList) {

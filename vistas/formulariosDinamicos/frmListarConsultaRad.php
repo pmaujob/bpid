@@ -72,6 +72,7 @@ foreach ($sublistas as $sublista) {
                        <div style="padding-bottom: 10px">
                             <?php
                             $subitems = CargarDatosRadicacion::getDatosSubrequisitos($idRad, $requisito[0], 1);
+                           
                             foreach ($subitems as $subitem) {
                                 ?>
                                 <div class="cardview_checklist">
