@@ -195,7 +195,7 @@ function validar(enviarInfo) {
             reqRow[2] = document.getElementById('REQOBS' + i).value.trim();//observación    
             reqRow[3] = document.getElementById('REQDES' + i).innerHTML.trim();//descripción
             reqRow[4] = reqArchivo.getAttribute('data-listName');//nombre Lista
-            
+
             reqData.push(reqRow);
         }
 
@@ -246,10 +246,10 @@ function validar(enviarInfo) {
             subRow[3] = document.getElementById('SUBDES' + i).innerHTML.trim();//descripción
             subRow[4] = subArchivo.getAttribute('data-listName');//nombre subLista            
             subRow[5] = subArchivo.getAttribute('data-listFatherName');//nombre Lista Padre
-            
+
             subData.push(subRow);
         }
-        
+
     }
 
     totalArchivosReq.value = archivosReq;
@@ -315,7 +315,19 @@ function validar(enviarInfo) {
                                 success: function (respuesta2) {
 
                                     if (respuesta2) {
-                                        mostrarMensaje('Su proyecto ha sido radicado con éxito.', true);
+
+                                        document.getElementById('d_ingreso').innerHTML = '<p>Su proyecto ha sido radicado con éxito.</p>';
+                                        $("#d_ingreso").dialog({
+                                            autoOpen: false,
+                                            modal: true,
+                                            buttons: {
+                                                "Aceptar": function () {
+                                                    $(this).dialog("close");
+                                                    location.href = "../formularios/frm_consultar_radicacion.php";
+                                                }
+                                            }
+                                        });
+                                        $("#d_ingreso").dialog("open");
                                     } else {
                                         mostrarMensaje('No fue posible radicar el proyecto, sus cambios serán guardados.', false);
                                     }
@@ -327,6 +339,7 @@ function validar(enviarInfo) {
                                     mostrarMensaje('No fue posible radicar el proyecto, sus cambios serán guardados.', false);
                                 }
                             });
+
                         }
 
                     }, error: function () {
@@ -340,7 +353,6 @@ function validar(enviarInfo) {
                 waitGuardarProgreso.style.display = "none";
                 msjInforme("No se pudo guardar el progreso<br>vuelva a intentarlo.", true);
 
-                console.log("Error: " + respuesta);
             }
 
             disBotones(true);
@@ -406,7 +418,7 @@ function validarNo(idSelection) {
 function mostrarMensaje(mensaje, info) {
     if (info) {
         document.getElementById('d_ingreso').innerHTML = '<p>' + mensaje + '</p>';
-        $("#d_ingreso").dialog("open");
+        $("#d_ingreso").dialog('open');
     } else {
         document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
         $("#d_error").dialog("open");
@@ -499,4 +511,6 @@ function mostrarSubtitulo(tituloSublista) {
 function disBotones(disabled) {
     document.getElementById("modalg").style.pointerEvents = disabled ? "" : "none";
     document.getElementById("modale").style.pointerEvents = disabled ? "" : "none";
+
+    console.log(disabled ? "Habilitó" : "Deshabilitó");
 }
