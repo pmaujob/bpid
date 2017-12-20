@@ -171,6 +171,13 @@ function validar(enviarInfo) {
 
                 msjInforme("Debe adjuntar un archivo a esta item.", true);
 
+                $('.collapsible').collapsible({
+                    accordion: false,
+                    onOpen: function (el) {
+                        document.getElementById('REQFILE' + i).focus();
+                    }
+                });
+
                 if (reqArchivo.getAttribute('data-listFatherId') != null && reqArchivo.getAttribute('data-listFatherId') != "" && !$("#" + reqArchivo.getAttribute('data-listFatherId')).hasClass("active")) {
                     document.getElementById(reqArchivo.getAttribute('data-listFatherId')).click();
                 }
@@ -179,7 +186,8 @@ function validar(enviarInfo) {
                     document.getElementById(reqArchivo.getAttribute('data-listId')).click();
                 }
 
-                reqArchivo.focus();
+                document.getElementById('REQFILE' + i).parentElement.className += " red";
+
                 return;
 
             } else if (opcionSeleccionada == "SI" && reqArchivo.value != '') {
@@ -269,7 +277,7 @@ function validar(enviarInfo) {
 
             if (respuesta == 1) {
 
-                var formData = new FormData($("#frm_listas")[0]);  //lo hago por la validacion
+                var formData = new FormData($("#frm_listas")[0]);
                 $.ajax({
                     url: '../../controlador/ControladorArchivosRadicacion.php',
                     type: "POST",
@@ -298,12 +306,16 @@ function validar(enviarInfo) {
                             waitGuardarProgreso.style.display = "none";
                             msjInforme("Se ha guardado el progreso con éxito.", false);
 
+                            disBotones(true);
+
                         } else if (enviarInfo && noCont > 0) {
                             mostrarMensaje('Se ha guardado el progreso con éxito. Sin embargo, hay items sin aprobar, '
                                     + 'por lo tanto se enviará un informe a su correo registrado en bpid.', true);
 
                             noCont = 0;
                             $("#modal1").modal("close");
+
+                            disBotones(true);
 
                         } else if (enviarInfo && noCont == 0) {
 
@@ -335,16 +347,23 @@ function validar(enviarInfo) {
                                     noCont = 0;
                                     $("#modal1").modal("close");
 
+                                    disBotones(true);
+
                                 }, error: function () {
                                     mostrarMensaje('No fue posible radicar el proyecto, sus cambios serán guardados.', false);
+                                    $("#modal1").modal("close");
+                                    disBotones(true);
                                 }
                             });
-
                         }
 
                     }, error: function () {
+
                         mostrarMensaje('Se ha guardado el progreso con éxito, '
                                 + 'pero hubo un error en la subida de archivos, vuelta a intentarlo.', true);
+                        $("#modal1").modal("close");
+
+                        disBotones(true);
                     }
                 });
 
@@ -352,14 +371,14 @@ function validar(enviarInfo) {
 
                 waitGuardarProgreso.style.display = "none";
                 msjInforme("No se pudo guardar el progreso<br>vuelva a intentarlo.", true);
+                disBotones(true);
 
             }
-
-            disBotones(true);
 
         },
         error: function () {
             mostrarMensaje('Error Inesperado', false);
+            $("#modal1").modal("close");
             noCont = 0;
             disBotones(true);
         }
@@ -374,11 +393,10 @@ function validarExtension(fileNombre) {
     if (extension === '.php' || extension === '.js' || extension === '.sql' || extension === '.java' || extension === '.html' || extension === '.exe' || extension === '.bat' || extension === '.css') {
 
         msjInforme("El formato del archivo adjunto no es válido", true);
-
-        //hacer focus
-
         adjunto.value = null;
         return;
+    } else{
+        document.getElementById(fileNombre).parentElement.classList.remove("red");
     }
 
 }
