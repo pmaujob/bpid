@@ -67,7 +67,7 @@ function validar() {
             async: true,
             data: {op: 3},
             success: function (datos) {
-                alert(datos);
+                //alert(datos);
                 $("#frm_programa_inversion").empty();
                 var content = JSON.parse(datos);
                 for (var i = 0; i < content.length; i++) {
