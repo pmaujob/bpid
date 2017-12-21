@@ -242,7 +242,9 @@ if (!isset($_POST['guardarEnviar'])) {
     $registrar->setnumeroProyecto($_POST['numeroProyecto']);
 
     echo $registrar->registrar();
+    
 } else {//enviar correo proyecto radicado
+    
     $idRad = $_POST['idRad'];
     $res = MRegistrarListasChequeo::guardarEnviarListas($idRad);
     if ($res == 1) {
