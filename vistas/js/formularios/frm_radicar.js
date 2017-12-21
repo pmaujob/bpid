@@ -19,7 +19,7 @@ $(document).ready(function () {
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
     $('select').material_select();
-    
+
 
     $("#d_error").dialog({
         autoOpen: false,
@@ -32,7 +32,7 @@ $(document).ready(function () {
             }
         }
     });
-        $("#d_ingreso").dialog({
+    $("#d_ingreso").dialog({
         autoOpen: false,
         modal: true,
         buttons: {
@@ -48,25 +48,26 @@ $(document).ready(function () {
  */
 function validar() {
     var nombre_archivo = document.getElementById('frm_archivo').value;
-    var tipo= document.getElementById('frm_tipo').value;
+    var tipo = document.getElementById('frm_tipo').value;
     if (nombre_archivo == "")
     {
         document.getElementById('d_error').innerHTML = '<p>POR FAVOR SELECCIONE EL ARCHIVO XML<p>';
         $("#d_error").dialog("open");
-        
-        return ;
+
+        return;
         nombre_archivo.focus();
-    } 
-    if(tipo==3)
+    }
+    if (tipo == 3)
     {
         //codigo para llenar combo de programa
-
+    
         $.ajax({
             type: "POST",
             url: '../../controlador/ControladorRadicar.php',
             async: true,
             data: {op: 3},
             success: function (datos) {
+                
                 alert(datos);
                 $("#frm_programa_inversion").empty();
                 var content = JSON.parse(datos);
@@ -82,7 +83,7 @@ function validar() {
             }
         });
         //abrir ventana modal
-        
+
 
     }
     $('#modal1').modal('open');
@@ -191,7 +192,7 @@ function archivo_xml()
                     quitar_pantalla();
                     document.getElementById('d_error').innerHTML = '<p> EL ARCHIVO YA SE ENCUENTRA RADICADO!, SELECCIONE UNO NUEVO</p>';
                     $("#d_error").dialog("open");
-                    return ;
+                    return;
 
                 }
                 if (existe == 2)
@@ -200,7 +201,7 @@ function archivo_xml()
                     quitar_pantalla();
                     document.getElementById('d_error').innerHTML = '<p> ERROR!, EL ARCHIVO NO PUEDE SER RADICADO</p>';
                     $("#d_error").dialog("open");
-                    return ;
+                    return;
 
                 }
 
@@ -222,15 +223,40 @@ function almacenar()
     //  bloquear_pantalla();
     //DATOS DEL PROYECTO DEL ARCHIVO XML
     var numero_proyecto = document.getElementById('frm_num_proyecto').value;
+    if (numero_proyecto == "") {
+        numero_proyecto = null;
+    }
     var nombre_proyecto = document.getElementById('frm_nom_proyecto').value;
+    if (nombre_proyecto == "") {
+        nombre_proyecto = null;
+    }
     var sector = document.getElementById('frm_sector').value;
+    if (sector == "") {
+        sector = null;
+    }
     var localizacion = document.getElementById('frm_localizacion').value;
+    if (localizacion == "") {
+        localizacion = null;
+    }
     var valor = document.getElementById('frm_valor').value;
+    if (valor == "") {
+        valor = null;
+    }
     var eje = document.getElementById('frm_eje').value;
+    if (eje == "") {
+        eje = null;
+    }
     var programa = document.getElementById('frm_programa').value;
+    if (programa == "") {
+        programa = null;
+    }
     var subprograma = document.getElementById('frm_subprograma').value;
+    if (subprograma == "") {
+        subprograma = null;
+    }
     var poai = document.getElementById('frm_poai').value;
     var entidad_proponente = document.getElementById('frm_entidad').value;
+
     var entidad_ejecutante = document.getElementById('frm_entidad_ejecuta').value;
     var nom_responsable = document.getElementById('frm_nom_responsable').value;
     var num_id_responsable = document.getElementById('frm_id_responsable').value;
@@ -287,7 +313,7 @@ function almacenar()
         data: {value: value, op: 1},
         success: function (respuesta) {
 
-             alert(respuesta);
+            alert(respuesta);
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
@@ -351,9 +377,9 @@ function buscarUsuario(tipo)
             {
                 if (respuesta.trim() === "NoData") {
                     waitGuardarProgreso.style.display = 'none';
-                     var toasts = document.getElementById('toast-container').getElementsByTagName("div");
-                    Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000,"Weight-toast");
-                    
+                    var toasts = document.getElementById('toast-container').getElementsByTagName("div");
+                    Materialize.toast('Usuario no Registrado, Por favor Digite los Datos', 4000, "Weight-toast");
+
                     document.getElementById('frm_id_responsable').focus();
                     document.getElementById('frm_nom_responsable').value = '';
                     document.getElementById('frm_cargo_responsable').value = '';
@@ -463,23 +489,24 @@ function validarTipo()
 
 function validarProyectoPadre(a)
 {
+
     if (parseInt(a) == 3)
     {
+        alert("si entro");
         $.ajax({
             type: 'POST',
             url: '../../controlador/ControladorRadicar.php',
             async: true,
             data: {op: 4},
-            
             success: function (datos)
             {
-               
-                if(parseInt(datos)==0){
-                $('#ventanatipo').modal('close');
-                document.getElementById('d_error').innerHTML = '<p>NO EXISTEN PROGRAMAS DE INVERSION PARA ESTE PROYECTO</p>';
-                $("#d_error").dialog("open");   
+                alert(datos);  
+                if (parseInt(datos) == 0) {
+                    $('#ventanatipo').modal('close');
+                    document.getElementById('d_error').innerHTML = '<p>NO EXISTEN PROGRAMAS DE INVERSION PARA ESTE PROYECTO</p>';
+                    $("#d_error").dialog("open");
                 }
-                
+
             }
         });
     }
