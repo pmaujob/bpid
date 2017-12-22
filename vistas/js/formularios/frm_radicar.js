@@ -287,7 +287,7 @@ function almacenar()
         data: {value: value, op: 1},
         success: function (respuesta) {
 
-             alert(respuesta);
+             //alert(respuesta);
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
