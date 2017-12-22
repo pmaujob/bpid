@@ -69,6 +69,7 @@ class ControladorRadicar {
     public function asignar($valores, $cedulaSession) {
         $sess = new SessionVars();
         $sess->init();
+           
         $this->numero_proyecto = $valores[0];
         $this->nombre_proyecto = $valores[1];
         $this->sector = $valores[2];
@@ -104,8 +105,9 @@ class ControladorRadicar {
         $this->numero_proyecto_inversion = $valores[30];
         $this->cod_usuario_ingreso = $cedulaSession; //variable de sesion
         $this->cod_activacion = 1;
-
-        $this->cod_secretaria = $sess->getValue('idSec');
+        $sec=$sess->getValue('idSec');
+        if($sec==""){$sec="NULL";}
+        $this->cod_secretaria = $sec;
     }
 
     public function validarVacios($valores) {
@@ -160,12 +162,15 @@ if (isset($_POST['op']) && !empty($_POST['op'])) {
     } else if ($_POST['op'] == 3) {
         //consultar Datos Proyecto
         $radicar = new ControladorRadicar();
-         echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'),0);
+        $sec=$sess->getValue('idSec');
+        if($sec==""){$sec="NULL";}
+         echo $radicar->getDatosProyectoPadre($sec,0);
     }
     else if ($_POST['op'] == 4) {
-         $radicar = new ControladorRadicar();
-        
-         echo $radicar->getDatosProyectoPadre($sess->getValue('idSec'),1);
+        $sec=$sess->getValue('idSec');
+        if($sec==""){$sec="NULL";}
+        $radicar = new ControladorRadicar();
+         echo $radicar->getDatosProyectoPadre($sec,1);
     }
 }
  else {
