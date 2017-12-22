@@ -343,7 +343,7 @@ function validar(enviarInfo) {
                                             buttons: {
                                                 "Aceptar": function () {
                                                     $(this).dialog("close");
-                                                    location.href = "../formularios/frm_consultar_radicacion.php";
+                                                    location.href = "../formularios/frm_certificado_radicar.php";
                                                 }
                                             }
                                         });
