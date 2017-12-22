@@ -20,18 +20,18 @@ class MRadicar {
 
         $sess = new SessionVars();
         $cedula = $sess->getValue('cedula');
-        
+
         $sql = "select from ing_radicacion($cod_activacion,$cod_usuario_ingreso,'$numero_proyecto','$sector','$localizacion','$valor','$programa','$subprograma',$poai,'$entidad_proponente','$entidad_ejecutante','$num_id_responsable',
                                     '$nom_responsable','$cargo_responsable','$direccion_responsable','$telefono_responsable','$cel_responsable','$correo_responsable','$id_usuario','$nombre_usuario','$observaciones',$cod_usuario_ingreso,'$nombre_proyecto','$eje',$cod_secretaria,$objetivosEspecificos,$fuentesFinanciamiento,'$problema',$poblacion,'$objetivog',$productos,$actividades,'$resumen','$tipo_proyecto',$numero_proyecto_inversion,'$cedula')";
 
-
+        
 
         $con = new ConexionPDO();
         $con->conectar("PG");
         $resultado = $con->afectar($sql);
         $con->cerrarConexion();
         return $resultado;
-       //  return $sql;
+       // return $sql;
     }
 
     public function getDatosUsuario($cedula) {
@@ -79,7 +79,7 @@ class MRadicar {
         }
     }
 
-    public function getDatosProyectoPadre($secretaria,$op) {
+    public function getDatosProyectoPadre($secretaria, $op) {
 
         $sql = 'select cod,nom from get_datos_proyecto_inversion(' . $secretaria . ')as ("cod" integer, "nom" varchar);';
 
@@ -87,15 +87,17 @@ class MRadicar {
         $con->conectar("PG");
         $res = $con->consultar($sql);
         $con->cerrarConexion();
-        if($op==0)
-        {
-        return json_encode($res->fetchAll(PDO::FETCH_OBJ));
-        }
-        else
-        {
-            return $res->rowCount();
+        // return $sql;
+        if ($op == 0) {
+            return (string) json_encode($res->fetchAll(PDO::FETCH_OBJ));
+
+            
+        } else {
+            return count($res);
         }
     }
+
+    
 
 }
 
