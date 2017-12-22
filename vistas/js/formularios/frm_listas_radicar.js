@@ -169,7 +169,7 @@ function validar(enviarInfo) {
 
             if (opcionSeleccionada == "SI" && reqArchivoExist == "" && reqArchivo.value == '') {//preguntar si el archivo es obligatorio
 
-                msjInforme("Debe adjuntar un archivo a esta item.", true);
+                msjInforme("Debe adjuntar un archivo a este item.", true);
 
                 $('.collapsible').collapsible({
                     accordion: false,
@@ -225,6 +225,13 @@ function validar(enviarInfo) {
 
                 msjInforme("Debe adjuntar un archivo a este item.", true);
 
+                $('.collapsible').collapsible({
+                    accordion: false,
+                    onOpen: function (el) {
+                        document.getElementById('SUBFILE' + i).focus();
+                    }
+                });
+
                 if (!$("#" + reqArchivo.getAttribute('data-listGFatherId')).hasClass("active")) {
                     document.getElementById(subArchivo.getAttribute('data-listGFatherId')).click();
                 }
@@ -236,8 +243,9 @@ function validar(enviarInfo) {
                 if (!$("#" + reqArchivo.getAttribute('data-listId')).hasClass("active")) {
                     document.getElementById(subArchivo.getAttribute('data-listId')).click();
                 }
+                
+                document.getElementById('SUBFILE' + i).parentElement.className += " red";
 
-                subArchivo.focus();
                 return;
 
             } else if (opcionSeleccionada == "SI" && subArchivo.value != '') {
