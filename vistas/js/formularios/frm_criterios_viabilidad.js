@@ -2,7 +2,7 @@ var idRad;
 
 function onLoadBody() {
 
-    buscarProyectos(-4, null);
+    buscarProyectos(4, null);
 
     $(document).ready(function () {
 

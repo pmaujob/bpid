@@ -165,7 +165,7 @@ function registrar() {
                 quitar_pantalla();
 
                 if (datos == 0)
-                    window.self.location = "../formularios/frm_.php";
+                    window.location = "../formularios/frm_codigo_bpin.php";
 
             }
         });
