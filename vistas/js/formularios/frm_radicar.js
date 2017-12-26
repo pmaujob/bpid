@@ -473,7 +473,7 @@ function validarProyectoPadre(a)
             
             success: function (datos)
             {
-               
+              // alert(datos);
                 if(parseInt(datos)==0){
                 $('#ventanatipo').modal('close');
                 document.getElementById('d_error').innerHTML = '<p>NO EXISTEN PROGRAMAS DE INVERSION PARA ESTE PROYECTO</p>';

@@ -88,12 +88,13 @@ class MRadicar {
         $res = $con->consultar($sql);
         $con->cerrarConexion();
         // return $sql;
+         
         if ($op == 0) {
             return (string) json_encode($res->fetchAll(PDO::FETCH_OBJ));
 
             
         } else {
-            return count($res);
+            return $res->rowCount();
         }
     }
 
