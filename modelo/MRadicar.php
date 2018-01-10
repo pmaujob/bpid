@@ -97,6 +97,18 @@ class MRadicar {
             return $res->rowCount();
         }
     }
+    
+    public function getControlSecretaria($secretaria)
+    {
+        
+         $sql = 'select cod from  get_secretaria_dato_proyecto(' . $secretaria . ')as ("cod" integer);';
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->consultar($sql);
+        $con->cerrarConexion();
+         return $res;
+    }
 
     
 
