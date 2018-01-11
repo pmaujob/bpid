@@ -164,8 +164,8 @@ function registrar() {
                 $("#d_error").dialog("open");
                 quitar_pantalla();
 
-                if (datos == 0)
-                    window.self.location = "../formularios/frm_.php";
+                if (datos == 1)
+                    location.href = "../../vistas/formularios/frm_codigo_bpin.php";
 
             }
         });

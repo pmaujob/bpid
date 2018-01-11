@@ -33,7 +33,7 @@ class ConexionPDO {
 //        $this->pass = '123456';
 //        $this->host = 'localhost';
 //        $this->db = 'bpidpruebas';
-       
+//       
         
     }
 

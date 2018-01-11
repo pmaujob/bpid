@@ -2,10 +2,10 @@
 session_start();
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
-
-        const idFormulario = 1;
+const idFormulario = 1;
 $sess = new SessionVars();
 $sess->init();
+
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
 

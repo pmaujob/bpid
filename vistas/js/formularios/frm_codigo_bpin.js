@@ -120,6 +120,16 @@ function registrarCodigoBpin() {
                 document.getElementById('d_error').innerHTML = "El código BPIN ha sido guardado con exito.";
                 $('#modal1').modal('close');
                 $('#d_error').dialog("open");
+                $("#d_error").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    buttons: {
+                        "Cerrar": function () {
+                            $(this).dialog("close");
+                            location.href = "../../vistas/formularios/frm_codigo_bpin.php";
+                        }
+                    }
+                });
 
             } else {
                 document.getElementById('d_error').innerHTML = "El código BPIN no ha podido ser registrado, por favor intentelo de nuevo mas tarde.";

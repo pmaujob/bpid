@@ -139,10 +139,16 @@ class ControladorRadicar {
         $rad = new MRadicar();
         return $rad->getDatosUsuario($cedula);
     }
+    
     public function getDatosProyectoPadre($secretaria,$op) {
 
         $rad = new MRadicar();
         return $rad->getDatosProyectoPadre($secretaria,$op);
+    }
+       public function getControlSecretaria($secretaria) {
+
+        $rad = new MRadicar();
+        return $rad->getControlSecretaria($secretaria)->fetch(PDO::FETCH_BOTH)[0];
     }
 
 }
@@ -171,6 +177,12 @@ if (isset($_POST['op']) && !empty($_POST['op'])) {
         if($sec==""){$sec="NULL";}
         $radicar = new ControladorRadicar();
          echo $radicar->getDatosProyectoPadre($sec,1);
+    }
+    else if ($_POST['op'] == 5) {
+        $sec=$sess->getValue('idSec');
+        //if($sec==""){$sec="NULL";}
+        $radicar = new ControladorRadicar();
+        echo $radicar->getControlSecretaria($sec);
     }
 }
  else {

@@ -16,7 +16,7 @@ function quitar_pantalla()
 }
 
 function onLoadBody() {
-    
+
     buscarProyectos(5);
 
     $(document).ready(function () {
@@ -191,7 +191,7 @@ function eliminar(cedula) {
 }
 
 function registrarResponsables() {
-    
+
     bloquear_pantalla();
 
     var est = document.getElementById('estado').value;
@@ -206,11 +206,13 @@ function registrarResponsables() {
             data: {idRad: idRad, responsables: usuariosa, est: est, codBpid: codBpid},
             success: function (respuesta)
             {
-
+                quitar_pantalla();
                 $('#modal1').modal('close');
 
                 if (respuesta.trim() == "1") {
+                    
                     document.getElementById('d_error').innerHTML = "Los responsables del proyecto han sido guardados con exito.";
+                    $('#d_error').dialog("open");
                     $('#d_error').dialog({
                         autoOpen: false,
                         modal: true,
@@ -240,8 +242,20 @@ function registrarResponsables() {
         });
 
     } else {
+        quitar_pantalla();
         document.getElementById('d_error').innerHTML = "Debe haber por lo menos un responsable.";
+        $('#modal1').modal('close');
         $('#d_error').dialog("open");
+        $('#d_error').dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                "Cerrar": function () {
+                    $(this).dialog("close");
+                    $('#modal1').modal('open');
+                }
+            }
+        });
     }
 
 }
