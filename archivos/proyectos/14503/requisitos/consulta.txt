@@ -1,0 +1,60 @@
+CREATE OR REPLACE FUNCTION ing_archivos(
+    pruta character varying,
+    pnombre_archivo character varying,
+    pnombre_real character varying,
+    pnumero_programa character varying,
+    pnumero_proyecto character varying,
+    phash character varying,
+    pradicacion integer)
+  RETURNS SETOF record AS
+$BODY$
+   declare 
+   num_bpid bigint;	
+   num_completo record;
+   
+    begin
+    num_bpid =(select cod_bpid from radicacion where num_proyecto=pnumero_proyecto::varchar and cod_activacion=1);
+
+        insert into archivos(
+				ruta,
+				nombre_archivo,
+				nombre_real_archivo,
+				numero_programa,
+				numero_proyecto,
+			        cod_bpid,
+			        fecha_creacion,
+			        hora_creacion,
+			        hash_num,
+			        cod_etapa,
+			        tipo_etapa,
+			        cod_radicacion
+			       )
+		        values(
+			       pruta,
+			       pnombre_archivo,
+			       pnombre_real,
+			       pnumero_programa,
+			       pnumero_proyecto,	
+			       num_bpid,
+			       current_date,
+			       localtime,
+			       phash,
+			       null,
+			       1,
+			       pradicacion			       
+			      ) ;
+
+			      for num_completo in
+				    select numero_completo from numero_bpid where cod_numero_bpid=num_bpid and cod_activacion=1
+			      loop
+			          return next num_completo;
+			      end loop;    
+			
+        return;
+    end
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION ing_archivos(character varying, character varying, character varying, character varying, character varying, character varying, integer)
+  OWNER TO postgres;

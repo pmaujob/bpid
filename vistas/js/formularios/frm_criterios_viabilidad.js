@@ -121,6 +121,7 @@ function mas(cod, bpid, numProyecto) {
             document.getElementById('modalc1').style.display = "block";
             document.getElementById('modalc2').style.display = "block";
             document.getElementById('bonbilla').style.backgroundColor = "white";
+            $('.collapsible-header').css("backgroundColor","#CBD773");
 
         }, error: function () {
             alert("Error inesperado");
@@ -274,6 +275,11 @@ function semaforo(id) {
         if ($(this).prop('checked'))
             contChequeados++;
     });
+
+    if (contChequeados > 0)
+        $('#' + id).children('div')[0].style.backgroundColor = "#008643";
+    else
+        $('#' + id).children('div')[0].style.backgroundColor = "#CBD773";
 
     res = (contChequeados * 100) / (contTotal - 1);
 
