@@ -33,7 +33,7 @@ else
     $secretario = '';
 
 $informacion = utf8_encode('El programa o proyecto denominado ') . utf8_decode($viabilidad->nompro)
-        . utf8_decode(' se encuentra registrado con código BPI ') . $viabilidad->num
+        . utf8_decode(' se encuentra registrado con código BPIN ') . $viabilidad->num
         . utf8_decode(', otorgado por el Banco de Programas y Proyectos de inversión Pública del Departamento de nariño.');
 
 $informacion2 = utf8_decode('Cuenta con concepto de vibilidad técnica favorable expedida por ' . $sess->getValue('secretaria')) . ' '
@@ -86,20 +86,20 @@ $pdf->SetTextColor(255);
 $pdf->Cell(176, 6, "ACTIVIDADES", 1, 0, 'C', true);
 $pdf->Ln();
 
-$pdf->Cell(35, 4, "Tipo de Recursos", 1, 0, 'C', true);
-$pdf->Cell(35, 4, "Valor", 1, 0, 'C', true);
-$pdf->Cell(35, 4, "Periodo", 1, 0, 'C', true);
-$pdf->Cell(36, 4, "Tipo Entidad", 1, 0, 'C', true);
-$pdf->Cell(35, 4, "Nombre Entidad", 1, 0, 'C', true);
+$pdf->Cell(44, 4, "Tipo de Recursos", 1, 0, 'C', true);
+$pdf->Cell(44, 4, "Valor", 1, 0, 'C', true);
+//$pdf->Cell(35, 4, "Periodo", 1, 0, 'C', true);
+$pdf->Cell(44, 4, "Tipo Entidad", 1, 0, 'C', true);
+$pdf->Cell(44, 4, "Nombre Entidad", 1, 0, 'C', true);
 $pdf->SetFillColor(255, 255, 255);
 $pdf->SetTextColor(0);
 $pdf->Ln();
 
 foreach ($actividades as $row) {
 
-    $rowLines = $pdf->getNumberLn(35, 4, utf8_decode($row[0]));
-    $rowLines2 = $pdf->getNumberLn(35, 4, utf8_decode($row[3]));
-    $rowLines3 = $pdf->getNumberLn(35, 4, utf8_decode($row[4]));
+    $rowLines = $pdf->getNumberLn(44, 4, utf8_decode($row[0]));
+    $rowLines2 = $pdf->getNumberLn(44, 4, utf8_decode($row[2]));
+    $rowLines3 = $pdf->getNumberLn(44, 4, utf8_decode($row[3]));
 
     $aux = [$rowLines, $rowLines2, $rowLines3];
     $mayor = $aux[0];
@@ -111,13 +111,12 @@ foreach ($actividades as $row) {
 
     $mayor *= 4;
 
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[0]), 4.855, $pdf, 1, $mayor / $rowLines);
-    $pdf->backLn(55, $mayor);
-    $pdf->Cell(35, $mayor, utf8_decode($row[1]), 1, 0, 'C');
-    $pdf->Cell(35, $mayor, utf8_decode($row[2]), 1, 0, 'C');
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[3]), 4.725, $pdf, 1, $mayor / $rowLines2);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[0]), 3.868, $pdf, 1, $mayor / $rowLines);
+    $pdf->backLn(64, $mayor);
+    $pdf->Cell(44, $mayor, utf8_decode($row[1]), 1, 0, 'C');
+    $pdf->Cell(44, $mayor, utf8_decode($row[2]), 1, 0, 'C');
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[3]), 3.868, $pdf, 1, $mayor / $rowLines2);
     $pdf->backLn(161, $mayor);
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[4]), 4.855, $pdf, 1, $mayor / $rowLines3);
 }
 
 $pdf->Ln(20);
