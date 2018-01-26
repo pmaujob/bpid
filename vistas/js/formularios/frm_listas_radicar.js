@@ -85,11 +85,12 @@ function buscarProyectos(op, event) {
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
             resultado.innerHTML = '<p>' + respuesta + '</p>';
-        },
-        error: function () {
+        }, error: function () {
             mostrarMensaje('Error Inesperado', false);
         }
     });
+
+
 }
 
 function mas(cod, bpid, numProyecto) {
@@ -243,7 +244,7 @@ function validar(enviarInfo) {
                 if (!$("#" + reqArchivo.getAttribute('data-listId')).hasClass("active")) {
                     document.getElementById(subArchivo.getAttribute('data-listId')).click();
                 }
-                
+
                 document.getElementById('SUBFILE' + i).parentElement.className += " red";
 
                 return;
@@ -403,7 +404,7 @@ function validarExtension(fileNombre) {
         msjInforme("El formato del archivo adjunto no es válido", true);
         adjunto.value = null;
         return;
-    } else{
+    } else {
         document.getElementById(fileNombre).parentElement.classList.remove("red");
     }
 

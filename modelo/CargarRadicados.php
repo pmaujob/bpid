@@ -14,8 +14,7 @@ class CargarRadicados {
         $codSecretaria = $sess->getValue('idSec');
         $cedula = $sess->getValue('cedula');
         $datos = "'" . $datos . "'";
-        
-    
+            
         $consulta = 'select cod, '//0
                 . 'num, '//1
                 . 'nombre, '//2
