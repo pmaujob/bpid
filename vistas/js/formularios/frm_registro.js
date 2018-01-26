@@ -1,7 +1,7 @@
 var idRad;
 
 function onLoadBody() {
-    
+
     buscarProyectos(6, null);
 
     $(document).ready(function () {
@@ -155,12 +155,17 @@ function registrar() {
             processData: false,
             success: function (datos)
             {
-
-                var mensaje = "Se han registrado los datos de registro con exito.";
+                if (datos == 1) {
+                    var mensaje = "Se han registrado los datos de registro con exito.";
+                } else {
+                    var mensaje = "Error al registrar los datos intentelo de nuevo.";
+                }
                 document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
                 $("#d_error").dialog("open");
-                
                 quitar_pantalla();
+
+                if (datos == 1)
+                    location.href = "../../vistas/formularios/frm_codigo_bpin.php";
 
             }
         });

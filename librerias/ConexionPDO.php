@@ -32,8 +32,8 @@ class ConexionPDO {
 //        $this->user = 'postgres';
 //        $this->pass = '123456';
 //        $this->host = 'localhost';
-//        $this->db = 'bpiddario';
-       
+//        $this->db = 'bpidpruebas';
+//       
         
     }
 

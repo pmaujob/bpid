@@ -60,15 +60,14 @@ function validar() {
     if (tipo == 3)
     {
         //codigo para llenar combo de programa
-    
+
         $.ajax({
             type: "POST",
             url: '../../controlador/ControladorRadicar.php',
             async: true,
             data: {op: 3},
             success: function (datos) {
-                
-                alert(datos);
+                //alert(datos);
                 $("#frm_programa_inversion").empty();
                 var content = JSON.parse(datos);
                 for (var i = 0; i < content.length; i++) {
@@ -223,40 +222,15 @@ function almacenar()
     //  bloquear_pantalla();
     //DATOS DEL PROYECTO DEL ARCHIVO XML
     var numero_proyecto = document.getElementById('frm_num_proyecto').value;
-    if (numero_proyecto == "") {
-        numero_proyecto = null;
-    }
     var nombre_proyecto = document.getElementById('frm_nom_proyecto').value;
-    if (nombre_proyecto == "") {
-        nombre_proyecto = null;
-    }
     var sector = document.getElementById('frm_sector').value;
-    if (sector == "") {
-        sector = null;
-    }
     var localizacion = document.getElementById('frm_localizacion').value;
-    if (localizacion == "") {
-        localizacion = null;
-    }
     var valor = document.getElementById('frm_valor').value;
-    if (valor == "") {
-        valor = null;
-    }
     var eje = document.getElementById('frm_eje').value;
-    if (eje == "") {
-        eje = null;
-    }
     var programa = document.getElementById('frm_programa').value;
-    if (programa == "") {
-        programa = null;
-    }
     var subprograma = document.getElementById('frm_subprograma').value;
-    if (subprograma == "") {
-        subprograma = null;
-    }
     var poai = document.getElementById('frm_poai').value;
     var entidad_proponente = document.getElementById('frm_entidad').value;
-
     var entidad_ejecutante = document.getElementById('frm_entidad_ejecuta').value;
     var nom_responsable = document.getElementById('frm_nom_responsable').value;
     var num_id_responsable = document.getElementById('frm_id_responsable').value;
@@ -313,7 +287,7 @@ function almacenar()
         data: {value: value, op: 1},
         success: function (respuesta) {
 
-            alert(respuesta);
+            //alert(respuesta);
 
             if (respuesta == 1) {
                 var formData = new FormData($("#frm_radicar")[0]);  //lo hago por la validacion
@@ -451,10 +425,28 @@ function verpro(opcion)
 
 function tipoproyecto()
 {
-    $('#ventanatipo').modal('open');
+    
+    $.ajax({
+        type: 'POST',
+        url: '../../controlador/ControladorRadicar.php',
+        async: true,
+        data: {op: 5},
+        success: function (datos)
+        {
+             //alert(datos);
+            if (parseInt(datos) == 1) {
+               document.getElementById("cambiartipo").style.display = ''; 
+              $('#ventanatipo').modal('open'); 
+            }
+            
+
+        }
+    });
 }
 function validarTipo()
 {
+
+
     if (document.getElementById('toast-container') != null) {
         toasts = document.getElementById('toast-container').getElementsByTagName("div");
         for (var i = toasts.length - 1; i >= 0; i--) {
@@ -489,10 +481,8 @@ function validarTipo()
 
 function validarProyectoPadre(a)
 {
-
     if (parseInt(a) == 3)
     {
-        alert("si entro");
         $.ajax({
             type: 'POST',
             url: '../../controlador/ControladorRadicar.php',
@@ -500,7 +490,7 @@ function validarProyectoPadre(a)
             data: {op: 4},
             success: function (datos)
             {
-                alert(datos);  
+                // alert(datos);
                 if (parseInt(datos) == 0) {
                     $('#ventanatipo').modal('close');
                     document.getElementById('d_error').innerHTML = '<p>NO EXISTEN PROGRAMAS DE INVERSION PARA ESTE PROYECTO</p>';

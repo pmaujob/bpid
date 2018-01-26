@@ -2,10 +2,10 @@
 session_start();
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
-
-        const idFormulario = 1;
+const idFormulario = 1;
 $sess = new SessionVars();
 $sess->init();
+
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
 
@@ -174,7 +174,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         </div>
                         <p><p>
 
-                        <div class="row">
+                        <div class="row" id="cambiartipo" style="display: none">
                             <div class="col s2 m2 l2"></div>
                             <div class="col s8 m8 l12 center-align">
                                 <br>

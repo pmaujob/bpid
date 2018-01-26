@@ -88,13 +88,26 @@ class MRadicar {
         $res = $con->consultar($sql);
         $con->cerrarConexion();
         // return $sql;
+         
         if ($op == 0) {
             return (string) json_encode($res->fetchAll(PDO::FETCH_OBJ));
 
             
         } else {
-            return count($res);
+            return $res->rowCount();
         }
+    }
+    
+    public function getControlSecretaria($secretaria)
+    {
+        
+         $sql = 'select cod from  get_secretaria_dato_proyecto(' . $secretaria . ')as ("cod" integer);';
+
+        $con = new ConexionPDO();
+        $con->conectar("PG");
+        $res = $con->consultar($sql);
+        $con->cerrarConexion();
+         return $res;
     }
 
     
