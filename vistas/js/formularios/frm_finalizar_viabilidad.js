@@ -50,7 +50,16 @@ function onLoadBody() {
 
 }
 
-function buscarProyectos(op) {
+function buscarProyectos(op, event) {
+
+    var buscarValue = document.getElementById("input_buscar").value;
+    if (event != null && buscarValue.toString().trim().length == 0) {
+        return;
+    }
+
+    if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
+        return;
+    }
 
     var resultado = document.getElementById('resultado');
 
@@ -108,9 +117,22 @@ function mas(cod, bpid, numProyecto) {
 
 }
 
-function encontrar() {
+function encontrar(event) {
 
-    value = document.getElementById('txtBuscarUsuarios').value;
+    var value = document.getElementById('txtBuscarUsuarios').value;
+    if (value.toString().trim().length == 0) {
+        return;
+    }
+
+    if (event.keyCode != 13) {
+        return;
+    }
+
+    var respuestab = document.getElementById('respuestab');
+    respuestab.style.display = "none";
+    var esperarListas = document.getElementById('esperarListas');
+
+    esperarListas.style.display = "";
 
     jQuery.ajax({
         type: 'POST',
@@ -119,12 +141,16 @@ function encontrar() {
         data: {value: value},
         success: function (respuesta)
         {
-            document.getElementById('respuestab').innerHTML = "<p>" + respuesta + "</p>";
+            respuestab.style.display = "";
+            respuestab.innerHTML = "<p>" + respuesta + "</p>";
 
         },
         error: function () {
             alert("Error inesperado");
             window.top.location = "../index.html";
+        },
+        complete: function () {
+            esperarListas.style.display = "none";
         }
     });
 
@@ -133,8 +159,7 @@ function encontrar() {
 function agregaru(cedula, nombres, apellidos, cargo) {
 
     if (document.getElementById(cargo).value.length === 0) {
-        //alert("El cargo no puede estar vacio");
-
+        
         if (document.getElementById('toast-container') != null) {
             document.getElementById('toast-container').innerHTML = "";
         }
@@ -210,7 +235,7 @@ function registrarResponsables() {
                 $('#modal1').modal('close');
 
                 if (respuesta.trim() == "1") {
-                    
+
                     document.getElementById('d_error').innerHTML = "Los responsables del proyecto han sido guardados con exito.";
                     $('#d_error').dialog("open");
                     $('#d_error').dialog({
