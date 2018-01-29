@@ -290,15 +290,6 @@ function enviarCorreo($destino, $asunto, $msg, $altCuerpo, $raiz) {
     $correo->setDestinatario($destino);
     $correo->armarCorreo($asunto, $msg, $altCuerpo);
 
-    $correoEnviado = $correo->enviar();
-
-    $intentos = 1;
-    while ((!$correoEnviado) && ($intentos < 3)) {
-        sleep(5);
-        $correoEnviado = $correo->enviar();
-        $intentos++;
-    }
-
-    return $correoEnviado;
+    return $correo->enviar();
 }
 ?>

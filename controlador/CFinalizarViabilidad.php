@@ -166,16 +166,7 @@ class CFinalizarViabilidad {
         }
         $correo->armarCorreo($asunto, $cuerpo, $altCuerpo);
 
-        $correoEnviado = $correo->enviar();
-
-        $intentos = 1;
-        while ((!$correoEnviado) && ($intentos < 3)) {
-            sleep(5);
-            $correoEnviado = $correo->enviar();
-            $intentos++;
-        }
-
-        return $correoEnviado;
+        return $correo->enviar();
     }
 
 }

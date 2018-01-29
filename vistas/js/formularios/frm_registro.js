@@ -1,4 +1,6 @@
 var idRad;
+var num;
+var bp;
 
 function onLoadBody() {
 
@@ -153,8 +155,8 @@ function registrar() {
             data: formData,
             contentType: false,
             processData: false,
-            success: function (datos)
-            {
+            success: function (datos) {
+
                 if (datos == 1) {
                     var mensaje = "Se han registrado los datos de registro con exito.";
                 } else {

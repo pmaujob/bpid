@@ -3,7 +3,7 @@
 require_once '../../librerias/ConexionPDO.php';
 
 class CargarDatosRadicacion {
-
+    
     public static function getDatosListas($idRad, $tipo) {//tipo principal o sub
         $sql = 'select cod, '//0
                 . 'des '//1
