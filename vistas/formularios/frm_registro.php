@@ -6,8 +6,8 @@ $raiz = $_SESSION['raiz'];
 require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
-        const idFormulario = 7;
-        const idEtapa = 6; //7
+const idFormulario = 7;
+const idEtapa = 6; //7
 
 $sess = new SessionVars();
 
@@ -84,10 +84,14 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                             </div>
                                         </div>
                                     </div>
-
                                     <div id="resultado" class="row">
 
                                     </div>
+
+                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
