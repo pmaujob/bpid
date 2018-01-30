@@ -84,7 +84,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                             </div>
                                         </div>
                                     </div>
-
                                     <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
                                         <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
                                     </div>
