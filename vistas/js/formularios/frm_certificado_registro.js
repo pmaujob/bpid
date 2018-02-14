@@ -1,7 +1,7 @@
 function onLoadBody() {
-    
+
     buscarCertificaciones(-7, null);
-    
+
 }
 
 function buscarCertificaciones(estado, event) {
@@ -15,6 +15,12 @@ function buscarCertificaciones(estado, event) {
         return;
     }
 
+    var resultado = document.getElementById('resultado');
+    var wait = document.getElementById('wait');
+
+    resultado.style.display = "none";
+    wait.style.display = "";
+
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
@@ -22,12 +28,13 @@ function buscarCertificaciones(estado, event) {
         data: {value: buscarValue, op: estado},
         success: function (respuesta) {
 
-            document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
+            resultado.innerHTML = '<p>' + respuesta + '</p>';
 
-        },
-        error: function () {
-            alert("Error inesperado")
-            window.top.location = "../index.html";
+        },error: function () {
+            alert("Error inesperado");
+        }, complete: function () {
+            resultado.style.display = "";
+            wait.style.display = "none";
         }
 
     });

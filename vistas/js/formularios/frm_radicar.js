@@ -435,6 +435,7 @@ function tipoproyecto()
         {
              //alert(datos);
             if (parseInt(datos) == 1) {
+               document.getElementById("cambiartipo").style.display = ''; 
               $('#ventanatipo').modal('open'); 
             }
             

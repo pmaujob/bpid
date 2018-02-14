@@ -20,10 +20,12 @@ function buscarProyectos(idEtapa, event) {
         return;
     }
 
+    var resultado = document.getElementById('resultado');
     var esperarListas = document.getElementById('esperarListas');
+       
+    resultado.style.display = "none";
     esperarListas.style.display = "";
 
-    var resultado = document.getElementById('resultado');
 
     loading = true;
 
@@ -33,13 +35,18 @@ function buscarProyectos(idEtapa, event) {
         async: true,
         data: {value: buscarValue, op: idEtapa},
         success: function (respuesta) {
+            
             resultado.innerHTML = '<p>' + respuesta + '</p>';
+            esperarListas.style.display = "none";     
+            
+        }, error: function () {
+            alert("Error inesperado");
+        }, complete: function () {
+            
+            resultado.style.display = "";
             esperarListas.style.display = "none";
             loading = false;
-        },
-        error: function () {
-            alert("Error inesperado");
-            loading = false;
+            
         }
     });
 
