@@ -34,7 +34,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         </div>
     </div>
     <div class="contenedor_tabla"> 
-        <table class="striped">
+<!--        <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
                     <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?</th>
@@ -74,7 +74,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
 
             </tbody>
-        </table> 
+        </table> -->
         <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
@@ -117,7 +117,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                             <td><?php echo $fila[3]; ?></td>
                         </tr> 
                         <tr>
-                            <th>Desicion:</th>
+                            <th>Decisión:</th>
                             <td style="text-align:justify"><?php echo $fila[10]; ?></td>
                         </tr> 
                         <?php
