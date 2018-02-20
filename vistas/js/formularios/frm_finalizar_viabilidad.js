@@ -62,27 +62,23 @@ function buscarProyectos(op, event) {
     }
 
     var resultado = document.getElementById('resultado');
+    var wait = document.getElementById('wait');
 
-    //temporalmente
-    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
-            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
-            + '</div>';
+    resultado.style.display = "none";
+    wait.style.display = "";
 
-    value = document.getElementById("input_buscar").value;
-    //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
-        data: {value: value, op: op},
+        data: {value: buscarValue, op: op},
         success: function (respuesta) {
-            //quitarPantalla();
             resultado.innerHTML = '<p>' + respuesta + '</p>';
-        },
-        error: function () {
-            //quitarPantalla();
+        }, error: function () {
             alert("Error inesperado");
-            window.top.location = "../index.html";
+        }, complete: function () {
+            resultado.style.display = "";
+            wait.style.display = "none";
         }
     });
 }
@@ -159,7 +155,7 @@ function encontrar(event) {
 function agregaru(cedula, nombres, apellidos, cargo) {
 
     if (document.getElementById(cargo).value.length === 0) {
-        
+
         if (document.getElementById('toast-container') != null) {
             document.getElementById('toast-container').innerHTML = "";
         }

@@ -72,11 +72,10 @@ function buscarProyectos(op, event) {
     }
 
     var resultado = document.getElementById('resultado');
+    var wait = document.getElementById('wait');
 
-    //temporalmente
-    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
-            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
-            + '</div>';
+    resultado.style.display = "none";
+    wait.style.display = "";
 
     jQuery.ajax({
         type: 'POST',
@@ -84,9 +83,12 @@ function buscarProyectos(op, event) {
         async: true,
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
-            resultado.innerHTML = '<p>' + respuesta + '</p>';
+            resultado.innerHTML = '<p>' + respuesta + '</p>';            
         }, error: function () {
             mostrarMensaje('Error Inesperado', false);
+        }, complete: function () {
+            resultado.style.display = "";
+            wait.style.display = "none";
         }
     });
 

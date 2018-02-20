@@ -261,7 +261,7 @@ if (!isset($_POST['guardarEnviar'])) {
         $asunto = utf8_encode("Radicación Proyecto Bpid");
         ob_start();
         ?>
-        <span><strong>Estimado <?php echo $datosCorreo[1]; ?></strong></span> 
+        <span><strong>Estimado(a) <?php echo $datosCorreo[1]; ?></strong></span> 
         <br>
         <p style="text-align: justify;">Informamos que su proyecto <strong><?php echo $datosCorreo[2] . " "; ?></strong> 
             con número BPID <strong><?php echo $datosCorreo[3]; ?></strong> cumplió con 

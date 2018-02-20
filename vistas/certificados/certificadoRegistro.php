@@ -19,7 +19,7 @@ $sess = new SessionVars();
 
 $idRad = $_GET['idRad'];
 $codBpid = $_GET['codBpid'];
-const etapa = 6;
+        const etapa = 6;
 
 $viabilidad = CargarViabilizados::getViabilizados($codBpid, 1)->fetch(PDO::FETCH_OBJ);
 $viabilidadEjePro = MGetDatosCertificadoRegistro::getDatosProEjeSub($idRad)->fetch(PDO::FETCH_OBJ);
@@ -27,7 +27,7 @@ $actividades = MGetDatosCertificadoRegistro::getDatosFuentesFinanciazion($codBpi
 $nombre = MRegistrarResponsableEtapa::getResponsableEtapa($idRad, etapa)->fetch(PDO::FETCH_OBJ)->nombre;
 $cargoSecretario = MGetDatosCertificadoRegistro::getSecretarios($idRad)->fetch(PDO::FETCH_OBJ)->cargo;
 
-if(MGetDatosCertificadoRegistro::getSecretarios($idRad)->rowCount() > 0)
+if (MGetDatosCertificadoRegistro::getSecretarios($idRad)->rowCount() > 0)
     $secretario = MGetDatosCertificadoRegistro::getSecretarios($idRad)->fetch(PDO::FETCH_OBJ)->nom;
 else
     $secretario = '';
@@ -114,9 +114,10 @@ foreach ($actividades as $row) {
     DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[0]), 3.868, $pdf, 1, $mayor / $rowLines);
     $pdf->backLn(64, $mayor);
     $pdf->Cell(44, $mayor, utf8_decode($row[1]), 1, 0, 'C');
-    $pdf->Cell(44, $mayor, utf8_decode($row[2]), 1, 0, 'C');
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[3]), 3.868, $pdf, 1, $mayor / $rowLines2);
-    $pdf->backLn(161, $mayor);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[2]), 3.868, $pdf, 1, $mayor / $rowLines2);
+    $pdf->backLn(152, $mayor);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode($row[3]), 3.868, $pdf, 1, $mayor / $rowLines3);
+    
 }
 
 $pdf->Ln(20);

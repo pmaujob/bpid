@@ -90,11 +90,10 @@ function buscarProyectos(op, event) {
     }
 
     var resultado = document.getElementById('resultado');
+    var wait = document.getElementById('wait');
 
-    //temporalmente
-    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
-            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
-            + '</div>';
+    resultado.style.display = "none";
+    wait.style.display = "";
 
     jQuery.ajax({
         type: 'POST',
@@ -103,12 +102,15 @@ function buscarProyectos(op, event) {
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
 
-            document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
+            resultado.innerHTML = '<p>' + respuesta + '</p>';
 
-        },
-        error: function () {
+        }, error: function () {
             alert("Error inesperado");
+        }, complete: function () {
+            resultado.style.display = "";
+            wait.style.display = "none";
         }
+        
     });
 
 }
@@ -127,7 +129,7 @@ function mas(idRad, bpid, numProyecto) {
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
             $('.collapsible').collapsible();
-             $('.modal').modal();
+            $('.modal').modal();
             $("#d_errormetas").dialog({
                 autoOpen: false,
                 modal: true,
@@ -182,13 +184,13 @@ function guardarMetas() {
 
         var unidadValor = document.getElementById('frm_unidad_' + i);
         var aux = i;
-        
+
         if (unidadValor.value == "") {
 
             document.getElementById('d_error').innerHTML = '<p>Debe digitar una unidad de medida.</p>';
-            
-            console.log("acum: "+aux);
-            
+
+            console.log("acum: " + aux);
+
             $("#d_error").dialog("open");
 
             $("#d_error").dialog({
@@ -213,9 +215,9 @@ function guardarMetas() {
     }
 
     for (var j = 1; j <= contActs; j++) {
-        var select = document.getElementById('METASELECT' + j);        
+        var select = document.getElementById('METASELECT' + j);
         var aux = document.getElementById("frm_collapsible_" + j).value;
-        
+
         if (select.value == 0) {
 
             document.getElementById('d_errormetas').innerHTML = '<p>Debe seleccionar un item en esta meta.</p>';

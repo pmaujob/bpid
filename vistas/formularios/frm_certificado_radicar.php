@@ -3,8 +3,8 @@ session_start();
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
-        const idFormulario = 3;
-        const idEtapa = -2;
+const idFormulario = 3;
+const idEtapa = -2;
 $sess = new SessionVars();
 $sess->init();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
@@ -74,6 +74,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;">
                                     </div>
 
                                     <div id="resultado" class="row">
