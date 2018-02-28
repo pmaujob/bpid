@@ -3,8 +3,8 @@ session_start();
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
-        const idFormulario = 4; //id 2 pertenece a lista de checkeo
-        const idEtapa = 3;
+const idFormulario = 4; //id 2 pertenece a lista de checkeo
+const idEtapa = 3;
 $sess = new SessionVars();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
@@ -27,15 +27,13 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 <div id="cargando" class="frm_externo col s12 m4 center-align"><img src="../css/wait.gif"></div>
             </div>
             <div id="d_ingreso" title="Información" style="display:none">
-           
-            </div>
-            
-            <div id="d_confirmacion" title="Información" style="display:none">
-                <pre>El número de metas no puede ser mayor al número de actividades. 
-                ¿Desea regresar a la etapa de Metas de Producto?</pre>             
+
             </div>
 
-            <!-- Modal Trigger -->
+            <div id="d_confirmacion" title="Información" style="display:none">
+                <pre>El número de metas no puede ser mayor al número de actividades. 
+                    ¿Desea regresar a la etapa de Metas de Producto?</pre>             
+            </div>
 
             <div id="modal1" class="modal">
                 <div class="modal-content" id="titulo">
@@ -49,7 +47,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                     <a  class="modal-action waves-effect waves-green btn-flat " onclick="guardarActividades()">Enviar</a>
                 </div>
             </div>
-            <!-- Modal Structure -->
 
             <?php require_once '../menu.php'; ?>
             <form id='frm_viabilidad' name='frm_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
@@ -84,11 +81,14 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
+                                    </div>
 
-                                    <div id="resultado" class="row"></div>
-                                    <!--div class="col s12 m12 l12">
-                                    <?php require_once "footer.php"; ?>
-                                    </div-->
+                                    <div id="resultado" class="row">
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -6,8 +6,8 @@ $raiz = $_SESSION['raiz'];
 require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
-const idFormulario = 7;
-const idEtapa = 6; //7
+        const idFormulario = 19;
+        const idEtapa = 7;
 
 $sess = new SessionVars();
 
@@ -20,8 +20,9 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <meta charset="UTF-8">
             <title>BPID</title>
             <?php require_once '../links.php'; ?>
-            <script type="text/javascript" src="../js/formularios/frm_registro.js"></script>
+            <script type="text/javascript" src="../js/formularios/frm_codigo_bpin.js"></script>
             <script type="text/javascript" src="../../modelo/fun_propias/validacion_campos.js"></script>
+
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
@@ -30,45 +31,60 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                 <div class="col s12 m4"></div>
                 <div id="cargando" class="frm_externo col s12 m4 center-align"><img src="../css/wait.gif"></div>
             </div>
-            <div id="modal1" class="modal modal-fixed-footer">
-                <div class="modal-content">
-                    <a href="#!" onclick="cerrar();" style="margin-left: 95%; color: black;">
-                        <i class="material-icons">close</i>                            
-                    </a>
-                    <h4>Información del Proyecto</h4>
-                    <p>A continuación se mostrará la información de radicación del proyecto</p>
-                    <ul id="collapsible" class="collapsible" data-collapsible="accordion"> 
-                        <div style="text-align: center; margin-left: auto; margin-right: auto;">
-                            <img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >
-                        </div>
-                    </ul>
-                </div>
-                <div class="modal-footer">          
-                    <a id="modalg" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="cerrar();">Cerrar</a>
+            <div id="semaforo" class="semaforo">
+                <div id="bonbilla" class="bonbilla">
+
                 </div>
             </div>
             <div id="d_error" title="ALERTA"></div>
             <div id="d_ingreso" title="INFORMACION"></div>
+            <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
+                <div id="modal1" class="modal modal-fixed-footer" style="max-width: 600px;">
+                    <a href="#!" onclick="cerrarModal();" style="margin-left: 95%; color: black;">
+                        <i class="material-icons" style="margin-top: 16px;">close</i>                            
+                    </a>
+                    <div class="modal-content" style="padding-left: 46px; padding-right: 46px;">
+                        <h4>Código BPIN</h4>
+                        <p>Registre el Código BPIN.</p>
+                        <input id="frm_numero" type="number" readonly>
+                        <label for="frm_numer">Número del Proyecto</label>
+                        <textarea id="frm_nombre" class="materialize-textarea" style="height: auto;" readonly></textarea>
+                        <label for="frm_nombre">Nombre del Proyecto</label>
+                        <br><br>
+                        <div style="border: 1px solid green; height: 100px; padding: 16px;">
+                            <div class="input-field col s6">
+                                <input id="frm_codigo" type="number">
+                                <label for="frm_cpdigo">Digite el Código BPIN</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
+                        <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
+                        <a id="modalc1" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCodigoBpin();">Guardar y Enviar</a>
+                    </div>
+                </div>
+            </form>
 
             <?php require_once '../menu.php'; ?>
-            <form id='frm_registro' name='frm_registro' onSubmit="return false"  enctype="multipart/form-data">
+            <form id='frm_radicar_listas' name='frm_criterios_viabilidad' onSubmit="return false"  enctype="multipart/form-data">
 
                 <div class="col s12 m11 l9">
                     <div class="bajar">
-                        <div class="container-fluid">
+                        <div id="container" class="container-fluid">
                             <div class="row">
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
                                 <div class="col s12 m12 l12 center-align">
                                     <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
-                                        <i class="material-icons small left">insert_chart</i>
-                                        Informe Control Posterior de Viabilidad
+                                        <i class="material-icons small left">keyboard_hide</i>
+                                        Código BPIN
                                     </div>
                                 </div>
                                 <br>
                                 <br>
                             </div>
                             <div class="row">
-                                <div id="container" class="col s12 m12 l12">
+                                <div class="col s12 m12 l12">
                                     <div class="row">
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">
@@ -84,14 +100,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                             </div>
                                         </div>
                                     </div>
+
                                     <div id="resultado" class="row">
 
                                     </div>
-
-                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
-                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

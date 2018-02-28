@@ -4,7 +4,7 @@ $raiz = $_SESSION['raiz'];
 require_once '../../modelo/CargarRadicados.php';
 
 
-if (!empty($_POST['value']) && !empty($_POST['op'])) {
+if (isset($_POST['value']) && isset($_POST['op'])) {
 
     $datos = $_POST['value'];
     $op = $_POST['op'];

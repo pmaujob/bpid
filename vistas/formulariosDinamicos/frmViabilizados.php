@@ -34,7 +34,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
         </div>
     </div>
     <div class="contenedor_tabla"> 
-        <table class="striped">
+<!--        <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
                     <th colspan="2" style="color: #ffffff">¿DESEA ACTUALIZAR EL ARCHIVO MGA WEB?</th>
@@ -50,7 +50,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                             <label for="test1">SI</label>
                         </p>
                         <p style="margin-left: 44px;">
-                            <input name="group1" type="radio" id="test2" value="1" onclick="verarchivoMga(this.value)"/>
+                            <input name="group1" type="radio" id="test2" value="1" onclick="verarchivoMga(this.value)" checked/>
                             <label for="test2">NO</label>
                         </p>
                     <td>
@@ -74,7 +74,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
 
 
             </tbody>
-        </table> 
+        </table> -->
         <table class="striped">
             <thead>
                 <tr style="background-color: #008643">
@@ -117,7 +117,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                             <td><?php echo $fila[3]; ?></td>
                         </tr> 
                         <tr>
-                            <th>Desicion:</th>
+                            <th>Decisión:</th>
                             <td style="text-align:justify"><?php echo $fila[10]; ?></td>
                         </tr> 
                         <?php
@@ -287,8 +287,8 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                                 <label for="first_name" style="text-align: center; color: #000"><strong>Costo</strong></label>
                                             </th>
                                             <th style=" text-align: center" >
-                                                <input placeholder="Unidad de Medida" id="frm_unidad_<?php echo $acum ?>" type="text" style="text-align: center" >
-                                                <label for="first_name" style="text-align: center; color: #000"><strong>Unidad de Medida</strong></label>
+                                                <input placeholder="Unidad de Medida" name="frm_unidad_<?php echo $acum ?>" id="frm_unidad_<?php echo $acum ?>" type="text" style="text-align: center" >
+                                                <label  for="frm_unidad_<?php echo $acum ?>" style="text-align: center; color: #000"><strong>Unidad de Medid</strong></label>
                                                 <input  id="frm_producto_<?php echo $acum ?>" type="hidden"  value="<?php echo $act[1]; ?>" >
                                                 <input  id="frm_producto_id<?php echo $acum ?>" type="hidden"  value="<?php echo $act[0]; ?>" >
 
@@ -316,7 +316,7 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
                                         </td>
                                         <td style="text-align: center;" style="width: 30%;"><?php echo "$" . number_format($act[7]); ?></td>
                                         <td style="width: 30%;">    
-                                            <input  type="hidden" id="frm_collapsible_<?php echo $contActs ?>"  value="<?php echo $acum ?>">
+                                            <input  type="hidden" id="frm_collapsible_<?php echo $contActs ?>" value="<?php echo $acum ?>">
                                             <select id="<?php echo metaSelect . $contActs; ?>" class="browser-default">
                                                 <option value="0" selected disabled>Seleccione una Meta</option>                                    
                                                 <?php
@@ -372,3 +372,31 @@ if (!empty($_POST['bpid']) && !empty($_POST['numProyecto'])) {
     </thead>  
     <tbody>
 </table>
+
+ <!-- Modal  -->
+
+                        <div id="ventanamga" class="modal" style=" max-width: 650px; max-height: 750px; height:250px">
+                          
+                            <div class="modal-content">
+                                <h5>TIPO DE PROYECTO A RADICAR</h5>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <select id="frm_tipo" name="frm_tipo" onchange="validarProyectoPadre(this.value)">
+                                            <option value="1">PROYECTO</option>
+                                            <option value="2"> PROGRAMA DE INVERSION</option>
+                                            <option value="3"> PROYECTO PERTENECE A  PROGRAMA DE INVERSION</option>
+                                        </select>
+                                        <label>PERTENECE A UN PROGRAMA DE INVERSION</label>
+                                        <div id="d_frm_poai"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn waves-effect waves-light" onclick="validarTipo()">Aceptar
+                                    <i class="material-icons right">send</i> 
+                                    
+                                    <button class="btn waves-effect waves-light" onclick="cerrarModal()" style="margin-right: 10px;">Cerrar
+                                    <i class="material-icons right">highlight_off</i> 
+                            </div>
+                        </div>   

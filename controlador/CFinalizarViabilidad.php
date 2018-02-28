@@ -149,6 +149,7 @@ class CFinalizarViabilidad {
                     . "\n\n* Este es un email que se ha generado automáticamente, por favor no lo responda *"
                     . "\n\nSí no tiene conocimiento sobre el tema, por favor ignore este mensaje.");
             foreach ($correos as $row) {
+
                 $this->enviarCorreo($row[0], $asunto, $msg, $altCuerpo, $this->raiz);
             }
         }
@@ -165,16 +166,7 @@ class CFinalizarViabilidad {
         }
         $correo->armarCorreo($asunto, $cuerpo, $altCuerpo);
 
-        $correoEnviado = $correo->enviar();
-
-        $intentos = 1;
-        while ((!$correoEnviado) && ($intentos < 3)) {
-            sleep(5);
-            $correoEnviado = $correo->enviar();
-            $intentos++;
-        }
-
-        return $correoEnviado;
+        return $correo->enviar();
     }
 
 }

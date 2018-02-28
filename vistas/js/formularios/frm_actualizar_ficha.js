@@ -72,10 +72,11 @@ function buscarProyectos(op, event) {
     }
 
     var resultado = document.getElementById('resultado');
-    var wait = document.getElementById('wait');
 
-    resultado.style.display = "none";
-    wait.style.display = "";
+    //temporalmente
+    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
+            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
+            + '</div>';
 
     jQuery.ajax({
         type: 'POST',
@@ -83,12 +84,9 @@ function buscarProyectos(op, event) {
         async: true,
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
-            resultado.innerHTML = '<p>' + respuesta + '</p>';            
+            resultado.innerHTML = '<p>' + respuesta + '</p>';
         }, error: function () {
             mostrarMensaje('Error Inesperado', false);
-        }, complete: function () {
-            resultado.style.display = "";
-            wait.style.display = "none";
         }
     });
 
@@ -96,6 +94,7 @@ function buscarProyectos(op, event) {
 }
 
 function mas(cod, bpid, numProyecto) {
+    alert("1");
 
     $('#modal1').modal('open');
 
@@ -145,6 +144,7 @@ function focusearTituloLista(idBodyLista) {
 }
 
 function validar(enviarInfo) {
+    alert("1");
 
     if (document.getElementById('nOpcionesReq') == null) {
         msjInforme("No se han cargado los complementos", true);
@@ -278,7 +278,7 @@ function validar(enviarInfo) {
     waitGuardarProgreso.style.display = "";
 
     disBotones(false);
-
+    alert("3");
     jQuery.ajax({
         type: 'POST',
         url: '../../controlador/RegistrarListasChequeo.php',

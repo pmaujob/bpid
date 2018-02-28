@@ -25,7 +25,7 @@ class MArchivos
                                     $codigoControl)
    {
 
-   //$sql="select from ing_archivos6('$ruta','$nombreArchivo','$nombreReal','$numeroPrograma','$numeroProyecto')";
+   
    $sql="select numero_completo from ing_archivos('$ruta','$nombreArchivo','$nombreReal','$numeroPrograma','$numeroProyecto','$codigoControl') 
    as (".'"numero_completo"'." varchar)";  
    $con=new ConexionPDO(); 

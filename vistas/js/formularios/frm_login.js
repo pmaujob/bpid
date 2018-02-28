@@ -35,7 +35,7 @@ function ingresar(event) {
 
                 } else if (respuesta === "No") {
 
-                    Materialize.toast("El Usuario o la contraseña son incorrectos.", 3000, "bluemp");
+                    Materialize.toast("El Usuario o la contraseña son incorrectos.", 3000, "green-toast");
 
 
                 } else {

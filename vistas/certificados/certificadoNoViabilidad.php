@@ -59,7 +59,7 @@ foreach ($datosRadicacion as $row) {
     $pdf->Cell(0, 6, utf8_decode('CERTIFICADO DE NO VIABILIDAD'), 0, 0, 'C');
     $pdf->Ln(10);
     DisenoCertificacionesPDF::justificarParrafo(utf8_decode("El programa o proyecto denominado " . $row[1] . ", radicado el día " . CambiarFormatos::cambiarFecha($row[2]) . ", identificado con código de radicación: " . $row[3] . "."), 0.965, $pdf);
-    $pdf->Ln(15);
+    $pdf->Ln(5);
     $pdf->Cell(0, 4, utf8_decode('Cuenta con viabilidad DESFAVORABLE por ' . (count($observaciones) > 1 ? 'las siguientes observaciones:' : 'la siguiente observación:')));
     $pdf->Ln(10);
 
@@ -103,12 +103,15 @@ foreach ($datosRadicacion as $row) {
         $pdf->Ln(15);
     }
 
-    $pos2 = (($i - 1) % 2 == 0 ? 'R' : 'L');
-    $pdf->Cell(0, 6, utf8_decode('________________________________________'), 0, 0, $pos2);
+    $pos = (count($responsables) % 2 == 0 ? 'L' : 'R');
+    if ($pos == 'R') {
+        $pdf->backLn(0, 29);
+    }
+    $pdf->Cell(0, 6, utf8_decode('________________________________________'), 0, 0, $pos);
     $pdf->Ln(4);
-    $pdf->Cell(0, 6, utf8_decode($sess->getValue('usuario')), 0, 0, $pos2);
+    $pdf->Cell(0, 6, utf8_decode($sess->getValue('usuario')), 0, 0, $pos);
     $pdf->Ln(4);
-    $pdf->Cell(0, 6, utf8_decode("Funcionario Responsable"), 0, 0, $pos2);
+    $pdf->Cell(0, 6, utf8_decode("Funcionario Responsable"), 0, 0, $pos);
     $pdf->Ln();
 
     break;

@@ -54,7 +54,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <div class="col s12 m12 l12 center-align">
                                     <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
                                         <i class="material-icons small left">description</i>
-                                        Radicar Nuevo Proyecto
+                                       Actualizar Datos de Archivo Xml
                                     </div>
                                 </div>
                                 <br><br>

@@ -1,7 +1,7 @@
 function onLoadBody() {
-
-    buscarCertificaciones(-2, null);
-
+    
+    buscarCertificaciones(-7, null);
+    
 }
 
 function buscarCertificaciones(estado, event) {
@@ -15,12 +15,6 @@ function buscarCertificaciones(estado, event) {
         return;
     }
 
-    var resultado = document.getElementById('resultado');
-    var wait = document.getElementById('wait');
-
-    resultado.style.display = "none";
-    wait.style.display = "";
-
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
@@ -28,13 +22,12 @@ function buscarCertificaciones(estado, event) {
         data: {value: buscarValue, op: estado},
         success: function (respuesta) {
 
-            resultado.innerHTML = '<p>' + respuesta + '</p>';
+            document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
 
-        }, error: function () {
-            alert("Error inesperado");
-        }, complete: function () {
-            resultado.style.display = "";
-            wait.style.display = "none";
+        },
+        error: function () {
+            alert("Error inesperado")
+            window.top.location = "../index.html";
         }
 
     });
@@ -42,10 +35,9 @@ function buscarCertificaciones(estado, event) {
 }
 
 function mas(codRadicacion, codBpid, c) {
-
-    value = codBpid;
-    direccion = '../certificados/certificadoRadicar.php';
-    window.open(direccion + '?value=' + value);
+    
+    value = codRadicacion;
+    direccion = '../certificados/certificadoControlPosterior.php';
+    window.open(direccion + '?idRad=' + value + '&codBpid=' + codBpid);
 
 }
-

@@ -6,6 +6,8 @@ const req = 'REQ'; // id de la opción de la pregunta seleccionada
 const sub = 'SUB';
 const reqh = 'REQH'; // id de la pregunta
 const subh = 'SUBH';
+const reqDes = 'REQDES'; // id de la descripción del requisito
+const subDes = 'SUBDES';
 const rTitLista = "RTITLISTA"; //id del titulo de la lista
 const sTitLista = "STITLISTA";
 const rlista = 'RLIS'; // id de la lista
@@ -66,7 +68,7 @@ foreach ($listasRequeridas as $filar) {
                         ?>
                         <tr class="cardview_checklist">
                             <td style="width: 55%;">
-                                <p style="text-align: justify; margin-top: -4px;">
+                                <p id="<?php echo reqDes . $nOpcionesReq; ?>" style="text-align: justify; margin-top: -4px;">
                                     <?php echo $filar1[1]; ?>                                    
                                 </p>
                             </td>
@@ -80,14 +82,13 @@ foreach ($listasRequeridas as $filar) {
                                     </select>
                                 </p>
                             </td>
-                
                             <td style="width: 30%;">
                                 <input type="hidden" id="<?php echo reqFilePre . $nOpcionesReq; ?>" value="<?php echo $filar1[0]; ?>" />
 
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>Archivo</span>
-                                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
+                                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" data-listId="<?php echo rTitLista . $filar[0]; ?>" data-listName="<?php echo $filar[1]; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text">
@@ -132,7 +133,7 @@ if (count($listasEspecificas) == 0) {
 }
 ?>    
 <li>
-    <div class="collapsible-header item_lista_especifica" style="background: #F9C000; color: white;"><span><?php echo "Diligencie una Lista Específica"; ?></span></div>
+    <div id="RTITLISTAE" class="collapsible-header item_lista_especifica" style="background: #F9C000; color: white;"><span><?php echo "Diligencie una Lista Específica"; ?></span></div>
     <div class="collapsible-body">
         <ul id="collapsible2" class="collapsible" data-collapsible="accordion">
             <?php
@@ -164,7 +165,7 @@ if (count($listasEspecificas) == 0) {
                                         ?>
                                         <tr class="cardview_checklist">
                                             <td style="width: 55%;">
-                                                <p style="text-align: justify; margin-top: -4px;">
+                                                <p id="<?php echo reqDes . $nOpcionesReq; ?>" style="text-align: justify; margin-top: -4px;">
                                                     <?php echo $filae1[1]; ?>
                                                 </p>
                                             </td>
@@ -184,7 +185,7 @@ if (count($listasEspecificas) == 0) {
                                                 <div class="file-field input-field">
                                                     <div class="btn">
                                                         <span>Archivo</span>
-                                                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
+                                                        <input type="file" id="<?php echo reqFile . $nOpcionesReq; ?>" name="<?php echo reqFile . $nOpcionesReq; ?>" data-listFatherId="RTITLISTAE" data-listId="<?php echo rTitLista . $filae[0]; ?>" data-listName="<?php echo $filae[1]; ?>" onchange="validarExtension('<?php echo reqFile . $nOpcionesReq; ?>')">
                                                     </div>
                                                     <div class="file-path-wrapper">
                                                         <input class="file-path validate" type="text">
@@ -248,7 +249,7 @@ if (count($listasEspecificas) == 0) {
                                                         ?>
                                                         <tr class="cardview_checklist">
                                                             <td style="width: 50%;">
-                                                                <p style="text-align: justify; margin-top: -4px;">
+                                                                <p id="<?php echo subDes . $nOpcionesSub; ?>" style="text-align: justify; margin-top: -4px;">
                                                                     <?php echo $filas[1]; ?>
                                                                 </p>
                                                             </td>
@@ -268,7 +269,7 @@ if (count($listasEspecificas) == 0) {
                                                                 <div class="file-field input-field">
                                                                     <div class="btn">
                                                                         <span>Archivo</span>
-                                                                        <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
+                                                                        <input type="file" id="<?php echo subFile . $nOpcionesSub; ?>" name="<?php echo subFile . $nOpcionesSub; ?>" data-listGFatherId="RTITLISTAE" data-listFatherId="<?php echo rTitLista . $filae[0]; ?>" data-listId="<?php echo sTitLista . $filae2[0]; ?>" data-listName="<?php echo $filae2[1]; ?>" data-listFatherName="<?php echo $filae[1]; ?>" onchange="validarExtension('<?php echo subFile . $nOpcionesSub; ?>')">
                                                                     </div>
                                                                     <div class="file-path-wrapper">
                                                                         <input class="file-path validate" type="text">
@@ -277,7 +278,8 @@ if (count($listasEspecificas) == 0) {
 
                                                                 <input type="hidden" id="<?php echo subFileExist . $nOpcionesSub; ?>" value="<?php echo $filas[3]; ?>">
                                                             </td>
-                                                        </tr>                                                                                                                <?php
+                                                        </tr>      
+                                                        <?php
                                                         if ($filas[3] != "") {
                                                             ?>
                                                             <tr>

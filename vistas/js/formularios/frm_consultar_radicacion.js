@@ -1,4 +1,7 @@
 function onLoadBody() {
+
+    buscarProyectosRadicados(-2, null);
+
     $(document).ready(function () {
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
@@ -26,10 +29,10 @@ function onLoadBody() {
 
 }
 
-function buscarProyectosRadicados(op,event) {
-    
+function buscarProyectosRadicados(op, event) {
+
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
 
@@ -37,37 +40,33 @@ function buscarProyectosRadicados(op,event) {
         return;
     }
 
-    var resultado = document.getElementById('resultado');   
+    var resultado = document.getElementById('resultado');
+    var wait = document.getElementById('wait');
 
-    //temporalmente
-    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
-            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
-            + '</div>';
-    
-    var valorBusqueda = document.getElementById("input_buscar").value;
-    
+    resultado.style.display = "none";
+    wait.style.display = "";
+
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmConsultarRadicacion.php',
         async: true,
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
-            //quitarPantalla();
             resultado.innerHTML = '<p>' + respuesta + '</p>';
-        },
-        error: function () {
-            //quitarPantalla();
+        }, error: function () {
             alert("Error inesperado");
-            window.top.location = "../index.html";
+        }, complete: function () {
+            resultado.style.display = "";
+            wait.style.display = "none";
         }
     });
 
 }
 
-function listarDatosRadicacion(idRad,numProyecto){
-    
+function listarDatosRadicacion(idRad, numProyecto) {
+
     $('#modal1').modal('open');
-    
+
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmListarConsultaRad.php',
@@ -75,17 +74,17 @@ function listarDatosRadicacion(idRad,numProyecto){
         timeout: 0,
         data: {idRad: idRad, numProyecto: numProyecto},
         success: function (respuesta) {
-            
+
             document.getElementById('collapsible').innerHTML = respuesta;
-            
+
         }, error: function () {
             alert("Error inesperado")
             window.top.location = "../index.html";
         }
     });
-    
+
 }
 
-function cerrar(){
+function cerrar() {
     $('#modal1').modal('close');
 }

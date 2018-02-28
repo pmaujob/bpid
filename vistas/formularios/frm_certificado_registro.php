@@ -4,7 +4,7 @@ require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
 const idFormulario = 14;
-const idEtapa = -3;
+const idEtapa = -7;
 $sess = new SessionVars();
 $sess->init();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
@@ -21,7 +21,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
-        <body>
+        <body onload="onLoadBody()">
 
             <div id="mas" class="frm_externo">
                 <div class="cerrar" onclick="cerrarFrmExterno('mas');"></div>
@@ -78,6 +78,10 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
 
                                     <div id="resultado" class="row">
 
+                                    </div>
+
+                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
                                     </div>
 
                                 </div>

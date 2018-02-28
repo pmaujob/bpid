@@ -6,8 +6,8 @@ $raiz = $_SESSION['raiz'];
 require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
-        const idFormulario = 7;
-        const idEtapa = 4;
+const idFormulario = 7;
+const idEtapa = 4;
 
 $sess = new SessionVars();
 
@@ -53,6 +53,8 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                         </ul>
                     </div>
                     <div class="modal-footer">
+                        <span id="msjInfo" style="display: none; margin: 10px; color: #616161"></span>
+                        <img id="waitGuardarProgreso" src="./../css/wait.gif" style="width: 68px; height: 43px; display: none" >
                         <a id="modalc1" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(1);">Guardar y Enviar</a>
                         <a id="modalc2" href="#!" class="modal-action waves-effect waves-green btn-flat " onclick="registrarCriterios(2);">Guardar Progreso</a>
                     </div>
@@ -94,9 +96,14 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         </div>
                                     </div>
 
+                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
+                                    </div>
+
                                     <div id="resultado" class="row">
 
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>

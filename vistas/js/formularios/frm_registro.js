@@ -1,6 +1,10 @@
 var idRad;
+var num;
+var bp;
 
 function onLoadBody() {
+
+    buscarProyectos(6, null);
 
     $(document).ready(function () {
         $('.modal').modal();
@@ -44,7 +48,7 @@ function quitar_pantalla()
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
 
@@ -53,26 +57,23 @@ function buscarProyectos(op, event) {
     }
 
     var resultado = document.getElementById('resultado');
+    var wait = document.getElementById('wait');
 
-    //temporalmente
-    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
-            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
-            + '</div>';
+    resultado.style.display = "none";
+    wait.style.display = "";
 
-    //bloquearPantalla();
     jQuery.ajax({
         type: 'POST',
         url: '../../vistas/formulariosDinamicos/frmRadicados.php',
         async: true,
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
-            //quitarPantalla();
             resultado.innerHTML = '<p>' + respuesta + '</p>';
-        },
-        error: function () {
-            //quitarPantalla();
+        }, error: function () {
             alert("Error inesperado");
-            window.top.location = "../index.html";
+        }, complete: function () {
+            resultado.style.display = "";
+            wait.style.display = "none";
         }
     });
 }
@@ -103,7 +104,6 @@ function mas(cod, bpid, numProyecto) {
 
         }, error: function () {
             alert("Error inesperado");
-            window.top.location = "../index.html";
         }
     });
 
@@ -124,8 +124,7 @@ function listarDatosRadicacion(idRad, numProyecto) {
             document.getElementById('collapsible').innerHTML = respuesta;
 
         }, error: function () {
-            alert("Error inesperado")
-            window.top.location = "../index.html";
+            alert("Error inesperado");
         }
     });
 
@@ -151,14 +150,19 @@ function registrar() {
             data: formData,
             contentType: false,
             processData: false,
-            success: function (datos)
-            {
+            success: function (datos) {
 
-                var mensaje = "Se han registrado los datos de registro con exito.";
+                if (datos == 1) {
+                    var mensaje = "Se han registrado los datos de registro con exito.";
+                } else {
+                    var mensaje = "Error al registrar los datos intentelo de nuevo.";
+                }
                 document.getElementById('d_error').innerHTML = '<p>' + mensaje + '</p>';
                 $("#d_error").dialog("open");
-                
                 quitar_pantalla();
+
+                if (datos == 1)
+                    location.href = "../../vistas/formularios/frm_codigo_bpin.php";
 
             }
         });

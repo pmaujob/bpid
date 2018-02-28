@@ -3,8 +3,8 @@
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
-        const idFormulario = 4; //id 4 pertenece a consultar radicacion
-        const idEtapa = -2; //id 2 pertenece a los archivos ya radicados
+const idFormulario = 4; //id 4 pertenece a consultar radicacion
+const idEtapa = -2; //id 2 pertenece a los archivos ya radicados
 $sess = new SessionVars();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
     ?>
@@ -76,10 +76,13 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         </div>
                                     </div>
 
+                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
+                                    </div>
+
                                     <div id="resultado" class="row">
 
                                     </div>
-
                                 </div>
                             </div>
                         </div>

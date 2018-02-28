@@ -78,10 +78,11 @@ function onLoadBody() {
     buscarProyectos(3, null);
 
 }
+
 function buscarProyectos(op, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
     if (event != null && ((event.keyCode != 13) && ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90)))) {
@@ -89,11 +90,10 @@ function buscarProyectos(op, event) {
     }
 
     var resultado = document.getElementById('resultado');
+    var wait = document.getElementById('wait');
 
-    //temporalmente
-    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
-            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
-            + '</div>';
+    resultado.style.display = "none";
+    wait.style.display = "";
 
     jQuery.ajax({
         type: 'POST',
@@ -102,13 +102,15 @@ function buscarProyectos(op, event) {
         data: {value: buscarValue, op: op},
         success: function (respuesta) {
 
-            document.getElementById('resultado').innerHTML = '<p>' + respuesta + '</p>';
+            resultado.innerHTML = '<p>' + respuesta + '</p>';
 
-
-        },
-        error: function () {
+        }, error: function () {
             alert("Error inesperado");
+        }, complete: function () {
+            resultado.style.display = "";
+            wait.style.display = "none";
         }
+        
     });
 
 }
@@ -127,6 +129,7 @@ function mas(idRad, bpid, numProyecto) {
             document.getElementById('buscador').innerHTML = '';
             document.getElementById('resultado').innerHTML = respuesta;
             $('.collapsible').collapsible();
+            $('.modal').modal();
             $("#d_errormetas").dialog({
                 autoOpen: false,
                 modal: true,
@@ -181,19 +184,22 @@ function guardarMetas() {
 
         var unidadValor = document.getElementById('frm_unidad_' + i);
         var aux = i;
+
         if (unidadValor.value == "") {
 
             document.getElementById('d_error').innerHTML = '<p>Debe digitar una unidad de medida.</p>';
+
+            console.log("acum: " + aux);
+
             $("#d_error").dialog("open");
+
             $("#d_error").dialog({
                 autoOpen: false,
                 modal: true,
                 buttons: {
                     "Cerrar": function () {
-                        ejecutar(aux, 0);
-
                         $(this).dialog("close");
-
+                        ejecutar(aux, 0);
                     }
                 }
             });
@@ -202,17 +208,15 @@ function guardarMetas() {
 
     }
 
-    alert("asd");
-
     if (parseInt(contItemMeta.value) > parseInt(contActs)) {
         console.log("contItemMeta.value: " + contItemMeta.value + ", contActs: " + contActs);
         $("#d_confirmacion").dialog("open");
         return;
     }
 
-    for (var i = 1; i <= contActs; i++) {
-        var select = document.getElementById('METASELECT' + i);
-        var collapsible = document.getElementById('frm_collapsible_' + i).value;
+    for (var j = 1; j <= contActs; j++) {
+        var select = document.getElementById('METASELECT' + j);
+        var aux = document.getElementById("frm_collapsible_" + j).value;
 
         if (select.value == 0) {
 
@@ -223,23 +227,24 @@ function guardarMetas() {
                 modal: true,
                 buttons: {
                     "Cerrar": function () {
-                        ejecutar(collapsible, 1);
                         $(this).dialog("close");
-
+                        ejecutar(aux, 1);
+                        select.focus();
                     }
                 }
             });
-            select.focus();
 
             return;
 
         }
+
     }
 
     var options = select.getElementsByTagName('option');
     for (var i = 1; i < options.length; i++) {
         var found = false;
         var option = options[i];
+        var aux = i;
 
         for (var j = 1; j <= contActs; j++) {
             var select = document.getElementById('METASELECT' + (j));
@@ -258,7 +263,6 @@ function guardarMetas() {
                 modal: true,
                 buttons: {
                     "Cerrar": function () {
-                        ejecutar(collapsible, 1);
                         $(this).dialog("close");
                     }
                 }
@@ -326,55 +330,55 @@ function guardarMetas() {
 
 
 }
-function verarchivoMga(opcion)
-{
+//function verarchivoMga(opcion) {
+//
+//    fila = document.getElementById("fila_mga");
+//    if (opcion == 1) {
+//        fila.style.display = 'none';
+//    } else {
+//        fila.style.display = '';
+//    }
+//}
 
-    fila = document.getElementById("fila_mga");
-    if (opcion == 1) {
-        fila.style.display = 'none';
-    } else {
-        fila.style.display = '';
-    }
+function verarchivoMga()
+{
+//    if (opcion == 1) {
+//       $('#ventanamga').modal('open');
+//    } else {
+//        $('#ventanamga').modal('close');
+//    }
 }
 
 function infoproductos(id)
 {
     var elemento = id.id;
-    var acum = document.getElementById('frmacum').value;
-    var toasts = document.getElementById('toast-container').getElementsByTagName("div");//traer
-
-    for (i = 0; i < idvidprod.length; i++)
-    {
+    for (i = 0; i < idvidprod.length; i++) {
 
         if (elemento == idvidprod[i][0])
         {
             if (idvidprod[i][1] == false) {
-                Materialize.toast('DIGITE UNIDAD DE MEDIDA', 4000);
-                if (toasts.length > 1)
-                {
-                    toasts[1].style.background = "#FFCA04";
-                    toasts[1].style.fontWeight = "400";
-                }
+                Materialize.toast('DIGITE UNIDAD DE MEDIDA', 4000, "yellow-toast");
+
             }
             idvidprod[i][1] = !idvidprod[i][1];
         }
     }
 
 }
-function ejecutar(posicion, op)
-{
+function ejecutar(posicion, op) {
+
+    if (!$("#PRODIV" + posicion).hasClass("active")) {
+        document.getElementById("PRODIV" + posicion).click();
+    }
 
     if (op == 0) {
-        var collapos = document.getElementById('frm_collapsible_' + posicion).value;
-        var lugar = collapos - 1;
-        $('.collapsible').collapsible('open', lugar);
         document.getElementById('frm_unidad_' + posicion).focus();
-        return;
+    }
 
-    }
-    if (op == 1) {
-        $('.collapsible').collapsible('open', posicion - 1);
-    }
 }
+
+
+
+
 
 

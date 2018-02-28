@@ -3,8 +3,8 @@ session_start();
 require_once '../../librerias/SessionVars.php';
 require_once '../../modelo/MPermisos.php';
 
-const idFormulario = 3;
-const idEtapa = -2;
+const idFormulario = 20;
+const idEtapa = -7;
 $sess = new SessionVars();
 $sess->init();
 if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess->getValue('cedula'), idFormulario)) {
@@ -16,12 +16,12 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <meta charset="UTF-8">
             <title>BPID</title>
             <?php require_once '../links.php'; ?>
-            <script type="text/javascript" src="../js/formularios/frm_certificado_radicar.js"></script>
+            <script type="text/javascript" src="../js/formularios/frm_informe_control_posterior.js"></script>
             <script type="text/javascript" src="../../modelo/fun_propias/validacion_campos.js"></script>
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
         </head>
 
-        <body onload="onLoadBody();">
+        <body onload="onLoadBody()">
 
             <div id="mas" class="frm_externo">
                 <div class="cerrar" onclick="cerrarFrmExterno('mas');"></div>
@@ -51,7 +51,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                     <div class="col s12 m12 l12 center-align">
                                         <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
                                             <i class="material-icons small left">library_books</i>
-                                            Generar Ficha Radicación
+                                            Generar Certificado de Registro
                                         </div>
                                     </div>
                                 </div>
@@ -74,10 +74,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
-                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;">
                                     </div>
 
                                     <div id="resultado" class="row">

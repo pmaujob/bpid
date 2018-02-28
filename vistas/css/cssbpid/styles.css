@@ -195,3 +195,27 @@ select:focus {
     font-family: Verdana,Arial,sans-serif;
     font-size: .8em;
 }
+
+/* Toast Style */
+.yellow-toast{
+    background-color:#FFCA04 ;
+}
+.green-toast{
+    background-color:#008643 ;
+
+}
+.Weight-toast{
+    background-color:#008643 ;
+    font-weight: 400;
+}
+
+.btnRojo input[type=file]:focus + label {
+    color: #000;
+    background-color: #000;
+}
+
+.btnRojo input[type=file]:focus {
+    background-color: #000;
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+}

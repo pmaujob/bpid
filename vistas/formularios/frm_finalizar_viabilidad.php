@@ -6,8 +6,8 @@ $raiz = $_SESSION['raiz'];
 require_once $raiz . '/librerias/SessionVars.php';
 require_once $raiz . '/modelo/MPermisos.php';
 
-        const idFormulario = 9;
-        const idEtapa = 5;
+const idFormulario = 9;
+const idEtapa = 5;
 
 $sess = new SessionVars();
 
@@ -52,18 +52,23 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                             <div id="respuestainfo" class="collapsible-body"></div>
                         </li>
                         <li>
-                            <div class="collapsible-header" style="background: #F9C000; color: white;"><i class="material-icons">account_circle</i>Responsables</div>
+                            <div class="collapsible-header" style="background: #F9C000; color: white;"><i class="material-icons">account_circle</i>Responsables de Viabilidad</div>
                             <div class="collapsible-body">
                                 <div class="col s12">
                                     <br>
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">search</i>
-                                        <input id="txtBuscarUsuarios" type="text" class="validate" onkeyup="encontrar();">
+                                        <input id="txtBuscarUsuarios" type="text" class="validate" onkeyup="encontrar(event);">
                                         <label for="txtSearchUsers">Realice la búsqueda por nombre o número de cedula.</label><br><br><br>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div style="margin-left: 16px; max-height: 140px; max-width: 96%; overflow: scroll; overflow-x: hidden;" id="respuestab" class="col s12">
+
+                                    <div id="esperarListas" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                        <img src="./../css/wait.gif" style="width: 15%; height: 15%;" >
+                                    </div>
+
+                                    <div style="margin-left: 16px; max-height: 140px; max-width: 96%; overflow: scroll; overflow-x: hidden; display: none;" id="respuestab" class="col s12">
 
                                     </div>
                                 </div>
@@ -108,16 +113,20 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                         <div class="input-field col s12 m12 l12">
                                             <div class="opcionesbtn">
                                                 <div class="file-field input-field">
-                                                    <div class="btn" onclick="buscarProyectos('<?php echo idEtapa; ?>');">
+                                                    <div class="btn" onclick="buscarProyectos('<?php echo idEtapa; ?>', null);">
                                                         <span>Buscar proyecto</span>
                                                     </div>
                                                     <div class="file-path-wrapper">
-                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos('<?php echo idEtapa; ?>');">
+                                                        <input id="input_buscar" class="file-path validate" type="text" placeholder="Buscar..." onkeydown="buscarProyectos('<?php echo idEtapa; ?>', event);">
                                                     </div>
                                                 </div>
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
+                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
                                     </div>
 
                                     <div id="resultado" class="row">

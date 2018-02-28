@@ -72,6 +72,7 @@ foreach ($sublistas as $sublista) {
                        <div style="padding-bottom: 10px">
                             <?php
                             $subitems = CargarDatosRadicacion::getDatosSubrequisitos($idRad, $requisito[0], 1);
+                           
                             foreach ($subitems as $subitem) {
                                 ?>
                                 <div class="cardview_checklist">
@@ -80,14 +81,14 @@ foreach ($sublistas as $sublista) {
                                     </p>   
                                     <p>
                                         <label>Observaciones:</label>
-                                        <textarea class="materialize-textarea" disabled style="color: #000000" ><?php echo $subitem[5]; ?></textarea>
+                                        <textarea class="materialize-textarea" disabled style="color: #000000" ><?php echo $subitem[4]; ?></textarea>
                                     </p>
                                     <p>
                                         <?php
-                                        if ($subitem[4] != "") {
+                                        if ($subitem[3] != "") {
                                             ?>
                                             <label>Archivo adjunto: </label>
-                                            <a href="../../archivos/proyectos/<?php echo $numProyecto; ?>/subrequisitos/<?php echo $subitem[4]; ?>" target="_blank" style="text-decoration: underline"><?php echo $subitem[4]; ?></a>
+                                            <a href="../../archivos/proyectos/<?php echo $numProyecto; ?>/subrequisitos/<?php echo $subitem[3]; ?>" target="_blank" style="text-decoration: underline"><?php echo $subitem[3]; ?></a>
                                             <?php
                                         } else {
                                             ?>

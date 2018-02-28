@@ -1,6 +1,9 @@
 var metaCount = 0;
 
 function onLoadBody() {
+
+    buscarProyectos(2, null);
+
     $(document).ready(function () {
         $('.modal').modal();
     });
@@ -30,7 +33,7 @@ function onLoadBody() {
 function buscarProyectos(idEtapa, event) {
 
     var buscarValue = document.getElementById("input_buscar").value;
-    if (buscarValue.toString().trim().length == 0) {
+    if (event != null && buscarValue.toString().trim().length == 0) {
         return;
     }
 
@@ -39,10 +42,10 @@ function buscarProyectos(idEtapa, event) {
     }
 
     var resultado = document.getElementById('resultado');
-    //temporalmente
-    resultado.innerHTML = '<div style="text-align: center; margin-left: auto; margin-right: auto;">'
-            + '<img id="esperarListas" src="./../css/wait.gif" style="width: 275px; height: 174,5px;" >'
-            + '</div>';
+    var wait = document.getElementById('wait');
+
+    resultado.style.display = "none";
+    wait.style.display = "";
 
     jQuery.ajax({
         type: 'POST',
@@ -50,12 +53,12 @@ function buscarProyectos(idEtapa, event) {
         async: true,
         data: {value: buscarValue, op: idEtapa},
         success: function (respuesta) {
-            //quitarPantalla();                       
             resultado.innerHTML = '<p>' + respuesta + '</p>';
-        },
-        error: function () {
-            //quitarPantalla();
+        }, error: function () {
             alert("Error inesperado");
+        }, complete: function () {
+            resultado.style.display = "";
+            wait.style.display = "none";
         }
     });
 }
@@ -104,7 +107,7 @@ function traerMetas(idSec) {
         timeout: 0,
         data: {idSecretaria: idSec, idRad: idRad},
         success: function (respuesta) {
-
+           
             var metaArray = JSON.parse(respuesta);
 
             var divTit = document.createElement('span');

@@ -76,7 +76,7 @@ foreach ($datosRadicacion as $row) {
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Entidad Proponente:'));
     $pdf->Cell(60, 6, utf8_decode($row[2]), 0, 0);
-    $pdf->Ln(10);
+    $pdf->Ln(4);
     $pdf->Cell(60, 6, utf8_decode('Entidad Ejecutora:'));
     $pdf->Cell(60, 6, utf8_decode($row[3]), 0, 0);
     $pdf->Ln(10);
@@ -87,7 +87,7 @@ foreach ($datosRadicacion as $row) {
     $strPrograma = ucfirst(substr($row[5], 2, strlen($row[5]) - 4));
     DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strPrograma), 1.46, $pdf);
     $pdf->Cell(60, 6, utf8_decode('Subprograma:'));
-    $strSub = ucfirst(substr($row[6], 2, strlen($row[6]) - 4));
+    $strSub = ucfirst(substr($row[6], 1, strlen($row[6]) - 2));
     DisenoCertificacionesPDF::justificarParrafo(utf8_decode($strSub), 1.46, $pdf);
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Problema central o necesidad:'));
@@ -136,8 +136,8 @@ foreach ($datosRadicacion as $row) {
         $pdf->Cell(60, 8, 'Unidad de Medida', 1, 0, 'C');
         $pdf->Ln();
 
-        $pdf->Cell(58, 6, $p[2], 1);
-        $pdf->Cell(58, 6, '$' . $total, 1);
+        $pdf->Cell(58, 6, (int) $p[2], 1, 0, 'C');
+        $pdf->Cell(58, 6, '$' . number_format($total, 2, ',', '.'), 1, 0, 'C');
         $pdf->Cell(60, 6, utf8_decode($p[3]), 1, 0, 'C');
         $pdf->Ln();
 
@@ -169,7 +169,7 @@ foreach ($datosRadicacion as $row) {
             DisenoCertificacionesPDF::justificarParrafo($textDes, 2.615, $pdf, 1, $aMost / $aNameLines);
             $pdf->backLn(96, $aMost);
             $actVal = 0 + $a[1]; //para quitar las decimales si no hay
-            $pdf->Cell(35, $aMost, "$" . $actVal, 1);
+            $pdf->Cell(35, $aMost, "$" . number_format($actVal, 2, ',', '.'), 1, 0, 'C');
             DisenoCertificacionesPDF::justificarParrafo($textMeta, 2.615, $pdf, 1, $aMost / $aMetaLines);
 
             $n++;
@@ -180,17 +180,16 @@ foreach ($datosRadicacion as $row) {
     $pdf->Cell(60, 6, utf8_decode('Descripción del programa o proyecto:'));
     $pdf->Ln(5);
     DisenoCertificacionesPDF::justificarParrafo(utf8_decode(ucfirst($row[10])), 0.965, $pdf);
-    $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Número estimado de beneficiarios (Población): ' . $row[11]));
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Localización: ' . $row[12]));
     $pdf->Ln(10);
     $pdf->Cell(60, 6, utf8_decode('Motivación de la Viabilidad Departamental:'));
     $pdf->Ln(5);
-    DisenoCertificacionesPDF::justificarParrafo(utf8_decode(utf8_decode('El proyecto dispone de revisión metodológica y viabilidad técnica FAVORABLE, por lo tanto '
-            . 'cumple con las condiciones y requisitos mínimos establecidos en el manual de procedimientos del BPID adoptado '
-            . 'mediante Resolución No. 022 de Septiembre 20 de 2007 y definidos por esta, para el otorgamiento del concepto '
-            . 'de viabilidad.')), 0.965, $pdf);
+    DisenoCertificacionesPDF::justificarParrafo(utf8_decode('El proyecto dispone de revisión metodológica y viabilidad técnica FAVORABLE, por lo tanto '
+                    . 'cumple con las condiciones y requisitos mínimos establecidos en el manual de procedimientos del BPID adoptado '
+                    . 'mediante Resolución No. 022 de Septiembre 20 de 2007 y definidos por esta, para el otorgamiento del concepto '
+                    . 'de viabilidad.'), 0.965, $pdf);
     $pdf->Ln(5);
     $pdf->Cell(60, 6, utf8_decode('Funcionarios Responsables: '));
     $pdf->SetMargins(30, 15, 30);
@@ -207,7 +206,7 @@ foreach ($datosRadicacion as $row) {
         $pdf->Cell(0, 6, utf8_decode($r[3]));
         $pdf->Ln();
 
-        if ($responsables[$i + 1] != null) {
+        if (isset($responsables[$i + 1])) {
 
             $r2 = $responsables[$i + 1];
 
@@ -219,10 +218,14 @@ foreach ($datosRadicacion as $row) {
             $pdf->Cell(0, 6, utf8_decode($r2[3]), 0, 0, 'R');
             $pdf->Ln();
         }
+
         $pdf->Ln(15);
     }
 
-    $pos = (($i - 1) % 2 == 0 ? 'R' : 'L');
+    $pos = (count($responsables) % 2 == 0 ? 'L' : 'R');
+    if ($pos == 'R') {
+        $pdf->backLn(0, 29);
+    }
     $pdf->Cell(0, 6, utf8_decode('________________________________________'), 0, 0, $pos);
     $pdf->Ln(4);
     $pdf->Cell(0, 6, utf8_decode($sess->getValue('usuario')), 0, 0, $pos);

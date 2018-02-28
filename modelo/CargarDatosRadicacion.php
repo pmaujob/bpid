@@ -3,7 +3,7 @@
 require_once '../../librerias/ConexionPDO.php';
 
 class CargarDatosRadicacion {
-
+    
     public static function getDatosListas($idRad, $tipo) {//tipo principal o sub
         $sql = 'select cod, '//0
                 . 'des '//1
@@ -16,6 +16,7 @@ class CargarDatosRadicacion {
         $con->cerrarConexion();
 
         return $res;
+         
     }
 
     public static function getDatosRequisitos($idRad, $codList) {
@@ -46,11 +47,11 @@ class CargarDatosRadicacion {
             $sql = 'select cod, '//0
                     . 'des, '//1
                     . 'estado, '//2
-                    . 'a, '//3
                     . 'nomarc, '//4
                     . 'obs '//5
                     . 'from get_datos_sub_requisitos('.$idRad.','.$codReq.', 1) '
-                    . 'as ("cod" integer, "des" varchar, "estado" varchar, "a" integer, "nomarc" varchar, "obs" varchar);';
+                    . 'as ("cod" integer, "des" varchar, "estado" varchar, "nomarc" varchar, "obs" varchar);';
+        
         }
 
         $con = new ConexionPDO();

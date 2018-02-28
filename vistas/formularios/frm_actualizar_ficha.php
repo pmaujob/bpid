@@ -15,7 +15,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
             <meta charset="UTF-8">
             <title>BPID</title>
             <?php require_once '../links.php'; ?>
-            <script type="text/javascript" src="../js/formularios/frm_listas_radicar.js"></script>
+            <script type="text/javascript" src="../js/formularios/frm_actualizar_ficha.js"></script>
             <script type="text/javascript" src="../../modelo/fun_propias/validacion_campos.js"></script>
 
             <link type="text/css" rel="stylesheet" href="../css/cssbpid/styles.css">
@@ -24,7 +24,7 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
         <body onload="onLoadBody();">
             <div id="d_error" title="ALERTA"></div>
             <div id="d_ingreso" title="INFORMACION"></div>
-            <form id="frm_listas" action="../../controlador/ControladorArchivosRadicacion.php" method="POST" enctype="multipart/form-data">
+            <form id='frm_act_ficha' name='frm_act_ficha' onSubmit="return false"  enctype="multipart/form-data">    
                 <div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
 
@@ -60,8 +60,8 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                 <div class="col s12 m12 l12 center-align" style="height: 100px;"></div>
                                 <div class="col s12 m12 l12 center-align">
                                     <div class="chip white-text" style="background-color: #008643; font-size: 16px; height: 36px; margin-top: -16px; padding-top: 4px; padding-left: 46px; padding-right: 46px;">
-                                        <i class="material-icons small left">check_box</i>
-                                        Listas de Chequeo
+                                        <i class="material-icons small left">update</i>
+                                        Actualizar Datos Ficha de Radicacíon
                                     </div>
                                 </div>
                                 <br>
@@ -83,9 +83,6 @@ if ($sess->exist() && $sess->varExist('cedula') && MPermisos::tienePermiso($sess
                                                 <div class="descripcion">&nbsp;&nbsp;&nbsp;Realice la búsqueda por número o nombre del proyecto.</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div id="wait" style="text-align: center; margin-left: auto; margin-right: auto; display: none;">
-                                        <img src="./../css/wait.gif" style="width: 25%; height: 25%;" >
                                     </div>
 
                                     <div id="resultado" class="row">

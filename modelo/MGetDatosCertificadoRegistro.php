@@ -10,7 +10,7 @@ class MGetDatosCertificadoRegistro {
 
     public static function getDatosFuentesFinanciazion($idRad) {
 
-        $sql = 'select origen, valor, per, tip, noment from get_datos_fuentes(' . $idRad . ') as ("origen" varchar, "valor" numeric, "per" integer, "tip" varchar, "noment" varchar);';
+        $sql = 'select origen, valor, tip, noment from get_datos_fuentes(' . $idRad . ') as ("origen" varchar, "valor" numeric, "tip" varchar, "noment" varchar);';
 
         $con = new ConexionPDO();
         $con->conectar("PG");
