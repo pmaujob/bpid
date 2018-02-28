@@ -79,7 +79,7 @@ class MRadicar {
         }
     }
 
-    public function getDatosProyectoPadre($secretaria) {
+    public function getDatosProyectoPadre($secretaria,$op) {
 
         $sql = 'select cod,nom from get_datos_proyecto_inversion(' . $secretaria . ')as ("cod" integer, "nom" varchar);';
 
@@ -87,8 +87,14 @@ class MRadicar {
         $con->conectar("PG");
         $res = $con->consultar($sql);
         $con->cerrarConexion();
-
+        if($op==0)
+        {
         return json_encode($res->fetchAll(PDO::FETCH_OBJ));
+        }
+        else
+        {
+            return $res->rowCount();
+        }
     }
 
 }
